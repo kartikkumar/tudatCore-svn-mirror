@@ -59,10 +59,10 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 #add_definitions(-DTUDAT_CUSTOM_ROOT_PATH="C:\My\Custom\Path\To\Tudat\trunk")
 
 # Set root-directory for code to current source directory.
-set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
+set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/.")
 
 # Deine the basic input (trunk) and output (lib & include) directories.
-set(SRCROOT "${CODEROOT}/trunk")
+set(SRCROOT "${CODEROOT}/.")
 
 # Set CMake build-type.
 set(CMAKE_BUILD_TYPE Debug)
@@ -74,14 +74,14 @@ enable_testing()
 if (WIN32)
   if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -g -D_SCL_SECURE_NO_WARNINGS")
-    set(LIBROOT "${CODEROOT}/lib_msvc")
+    set(LIBROOT "${CODEROOT}/lib")
     set(INCLUDEROOT "${CODEROOT}/include")
-    set(BINROOT "${CODEROOT}/bin_msvc")
+    set(BINROOT "${CODEROOT}/bin")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-    set(LIBROOT "${CODEROOT}/lib_w32")
+    set(LIBROOT "${CODEROOT}/lib")
     set(INCLUDEROOT "${CODEROOT}/include")
-    set(BINROOT "${CODEROOT}/bin_w32")
+    set(BINROOT "${CODEROOT}/bin")
   endif()
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
@@ -116,6 +116,8 @@ endmacro(setup_headers)
 
 # Set the main sub-directories
 set(INPUTOUTPUTDIR "/InputOutput")
+set(ASTRODYNAMICSDIR "/Astrodynamics")
+set(MATHEMATICSDIR "/Mathematics")
 
 # Include the top-level directories.
 include_directories(AFTER
@@ -157,7 +159,7 @@ else()
 endif()
 
 # Set sub-directories.
-set(SUBDIRS ${INPUTOUTPUTDIR})
+set(SUBDIRS ${ASTRODYNAMICSDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR} )
 
 # Add sub-directories to CMake process.
 foreach(CURRENT_SUBDIR ${SUBDIRS})
