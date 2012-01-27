@@ -59,10 +59,10 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 #add_definitions(-DTUDAT_CUSTOM_ROOT_PATH="C:\My\Custom\Path\To\Tudat\trunk")
 
 # Set root-directory for code to current source directory.
-set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/.")
+set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
-# Deine the basic input (trunk) and output (lib & include) directories.
-set(SRCROOT "${CODEROOT}/.")
+# Define the basic input (trunk) and output (lib & include) directories.
+set(SRCROOT "${CODEROOT}/trunk")
 
 # Set CMake build-type.
 set(CMAKE_BUILD_TYPE Debug)
@@ -144,7 +144,7 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 
 # Find Boost libraries on local system.
-find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework REQUIRED)
+find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework regex REQUIRED)
 # If Boost is not found, use the following to manually set the path to the Boost include and
 # library directories.
 #SET(Boost_INCLUDE_DIRS "C:\My\Custom\Path\To\Boost\Include\Directory")
