@@ -1,16 +1,15 @@
 /*! \file basicMathematicsFunctions.cpp
- *    Source file that defines the basicMathematicsFunctions namespace,
- *    containing all basic functions contained in Tudat.
+ *    Source file that implements all the basic mathematics functions contained in Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 12
+ *    Version           : 14
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : K.Kumar@tudelft.nl
  *
- *    Author            : D. Dirkx
+ *    Author/Checker    : D. Dirkx
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : d.dirkx@tudelft.nl
  *
@@ -21,10 +20,6 @@
  *    Checker           : L. Abdulkadir
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : L.Abdulkadir@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
  *
  *    Date created      : 3 September, 2010
  *    Last modified     : 27 January, 2012
@@ -61,23 +56,23 @@
  *      110707    K. Kumar          Added computeSampleMean(), computeSampleVariance() functions.
  *      110905    S. Billemont      Reorganized includes.
  *                                  Moved (con/de)structors and getter/setters to header.
- *      120127    D. Dirkx          First version of basic mathematics in Tudat core.
+ *      120127    D. Dirkx          First version of basic mathematics in Tudat Core.
+ *      120127    K. Kumar          Minor comment edits; added modulo-0 case, which should yield
+ *                                  equality.
  */
 
 // Include statements.
 #include <cmath>
 #include "Mathematics/basicMathematicsFunctions.h"
 
-namespace tudat
-{
-namespace mathematics
-{
-
 //! Compute modulo of double.
-double computeModulo( const double dividend, const double divisor )
+double tudat::mathematics::computeModulo( const double dividend, const double divisor )
 {
+    // If the divisor is 0.0, the congruence modulo returns equality.
+    if ( divisor == 0.0 )
+    { return dividend; }
+
     return dividend - divisor * std::floor( dividend / divisor );
 }
 
-} // namespace mathematics
-} // namespace tudat
+// End of file.

@@ -1,9 +1,8 @@
 /*! \file linearAlgebra.cpp
- *    This file contains include statements for common Eigen components,
- *    typedef for vectors and a number of useful vector operation definitions.
+ *    Source file that implements a number of useful linear algebra operation definitions.
  *
  *    Path              : /Mathematics/LinearAlgebra/
- *    Version           : 4
+ *    Version           : 6
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -40,25 +39,20 @@
  *                                  changes.
  *      110905    S. Billemont      Reorganized includes.
  *                                  Moved (con/de)structors and getter/setters to header.
- *      120127    D. Dirkx          Moved to Tudat core.
+ *      120127    D. Dirkx          Moved to Tudat Core.
+ *      120127    K. Kumar          Minor edits.
  */
 
 // Include statements.
 #include <cmath>
 #include "Mathematics/linearAlgebra.h"
 
-namespace tudat
-{
-namespace mathematics
-{
-namespace linear_algebra
-{
-
-//! Determine the cosine of the angle between two vectors.
-double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
-                                           const Eigen::VectorXd& vector1 )
+//! Compute cosine of the angle between two vectors.
+double tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors(
+        const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
 {
     assert( vector0.size( ) == vector1.size( ) );
+
     // Determine the length of the vectors.
     double normOfVector0 = vector0.norm( );
     double normOfVector1 = vector1.norm( );
@@ -87,8 +81,9 @@ double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
     }
 }
 
-//! Determine the angle between two vectors.
-double computeAngleBetweenVectors( const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
+//! Compute angle between two vectors.
+double tudat::mathematics::linear_algebra::computeAngleBetweenVectors(
+        const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
 {
     // Determine the cosine of the angle by using another routine.
     double dotProductOfNormalizedVectors = computeCosineOfAngleBetweenVectors( vector0, vector1 );
@@ -96,9 +91,5 @@ double computeAngleBetweenVectors( const Eigen::VectorXd& vector0, const Eigen::
     // Return arccosine of the above, which is effectively the angle.
     return std::acos( dotProductOfNormalizedVectors );
 }
-
-} // namespace linear_algebra
-} // namespace mathematics
-} // namespace tudat
 
 // End of file.

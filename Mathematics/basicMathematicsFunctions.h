@@ -1,16 +1,15 @@
 /*! \file basicMathematicsFunctions.h
- *    Header file that defines the basicMathematicsFunctions namespace,
- *    containing all basic functions contained in Tudat.
+ *    Header file that defines all basic mathematics functions contained in Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 13
+ *    Version           : 15
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : K.Kumar@tudelft.nl
  *
- *    Author            : D. Dirkx
+ *    Author/Checker    : D. Dirkx
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : d.dirkx@tudelft.nl
  *
@@ -21,10 +20,6 @@
  *    Checker           : L. Abdulkadir
  *    Affiliation       : Delft University of Technology
  *    E-mail address    : L.Abdulkadir@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
  *
  *    Date created      : 3 September, 2010
  *    Last modified     : 27 January, 2012
@@ -66,8 +61,9 @@
  *      110824    J. Leloux         Corrected doxygen documentation.
  *      110905    S. Billemont      Reorganized includes.
  *                                  Moved (con/de)structors and getter/setters to header.
- *      120127    D. Dirkx          First version of basic mathematics in Tudat core, coordinate
+ *      120127    D. Dirkx          First version of basic mathematics in Tudat Core, coordinate
  *                                  conversions put in separate file.
+ *      120127    K. Kumar          Minor comment edits.
  */
 
 #ifndef TUDAT_BASIC_MATHEMATICS_FUNCTIONS_H
@@ -76,9 +72,17 @@
 // Include statements.
 #include <boost/random/mersenne_twister.hpp>
 
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
 
+//! Mathematics namespace.
+/*!
+ * The mathematics namespace, containing free functions and classes.
+ */
 namespace mathematics
 {
 
@@ -95,7 +99,7 @@ double computeModulo( const double dividend, const double divisor );
 //! Random number generator typedef.
 /*!
  * Random number generator typedef. This can be modified to any other Boost random number
- * generator type (http://www.boost.org/doc/libs/1_47_0/doc/html/boost_random/reference.html)
+ * generator type (http://www.boost.org/doc/libs/1_47_0/doc/html/boost_random/reference.html).
  */
 typedef boost::mt19937 GlobalRandomNumberGeneratorType;
 
@@ -106,7 +110,10 @@ typedef boost::mt19937 GlobalRandomNumberGeneratorType;
  */
 GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
 
-} // namespace mathematics
-} // namespace tudat
+} // Namespace mathematics.
 
-#endif // BASICMATHEMATICSFUNCTION_H
+} // Namespace tudat.
+
+#endif // TUDAT_BASIC_MATHEMATICS_FUNCTIONS_H
+
+// End of file.

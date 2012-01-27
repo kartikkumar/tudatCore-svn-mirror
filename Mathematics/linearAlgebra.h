@@ -1,9 +1,8 @@
 /*! \file linearAlgebra.h
- *    This file contains include statements for common Eigen components,
- *    typedef for vectors and a number of useful vector operation definitions.
+ *    Header file that defines a number of useful linear algebra operation definitions.
  *
  *    Path              : /Mathematics/LinearAlgebra/
- *    Version           : 3
+ *    Version           : 5
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -38,15 +37,15 @@
  *      100930    D. Dirkx          Modified to comply with Tudat standards.
  *      100930    J. Melman         Implemented namespace, minor comment changes.
  *      120127    D. Dirkx          Moved to Tudat core, added doxygen param and return.
+ *      120127    K. Kumar          Minor edits.
  */
 
 #ifndef TUDAT_LINEAR_ALGEBRA_H
 #define TUDAT_LINEAR_ALGEBRA_H
 
-// Notice that coefficient access methods in Eigen have assertions
-// checking the ranges. So if you do a lot of coefficient access,
-// these assertions can have an important cost. If you want to
-// save cost, define EIGEN_NO_DEBUG, and it won't check assertions.
+// Notice that coefficient access methods in Eigen have assertions checking the ranges.
+// So if you do a lot of coefficient access, these assertions can have an important cost.
+// If you want to save cost, define EIGEN_NO_DEBUG, and it won't check assertions.
 //#ifndef EIGEN_NO_DEBUG
 //#define EIGEN_NO_DEBUG
 //#endif
@@ -54,17 +53,31 @@
 // Include statements.
 #include <Eigen/Core>
 
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
+
+//! Mathematics namespace.
+/*!
+ * The mathematics namespace, containing free functions and classes.
+ */
 namespace mathematics
 {
+
+//! Linear algebra namespace.
+/*!
+ * The linear algebra namespace contains free functions to perform basic operations, such as
+ * determining the angle between two vectors.
+ */
 namespace linear_algebra
 {
 
-//! Determine the cosine of the angle between two vectors.
+//! Compute cosine of the angle between two vectors.
 /*!
- * Function to compute the cosine of the angle between two vectors;
- * both vectors must have non-zero norm.
+ * Computes the cosine of the angle between two vectors; both vectors must have non-zero norm.
  * \param vector0 First vector.
  * \param vector1 Second vector.
  * \return Cosine of angle between vectors.
@@ -72,10 +85,9 @@ namespace linear_algebra
 double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
                                            const Eigen::VectorXd& vector1 );
 
-//! Determine the angle between two vectors.
+//! Compute angle between two vectors.
 /*!
- * Function to compute the angle between two vectors;
- * both vectors must have non-zero norm.
+ * Computes the angle between two vectors; both vectors must have non-zero norm.
  * \param vector0 First vector.
  * \param vector1 Second vector.
  * \return Angle between vectors.
@@ -83,8 +95,12 @@ double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
 double computeAngleBetweenVectors( const Eigen::VectorXd& vector0,
                                    const Eigen::VectorXd& vector1 );
 
-} // namespace linear_algebra
-} // namespace mathematics
-} // namespace tudat
+} // Namespace linear_algebra.
+
+} // Namespace mathematics.
+
+} // Namespace tudat.
 
 #endif // TUDAT_LINEAR_ALGEBRA_H
+
+// End of file.

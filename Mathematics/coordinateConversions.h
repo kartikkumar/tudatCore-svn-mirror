@@ -1,9 +1,8 @@
-/*! \file basicMathematicsFunctions.h
- *    Header file that defines the basicMathematicsFunctions namespace,
- *    containing all basic functions contained in Tudat.
+/*! \file coordinateConversions.h
+ *    Header file that defines the coordinate conversion functions contained in Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 13
+ *    Version           : 15
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
@@ -66,7 +65,8 @@
  *      110824    J. Leloux         Corrected doxygen documentation.
  *      110905    S. Billemont      Reorganized includes.
  *                                  Moved (con/de)structors and getter/setters to header.
- *      120127    D. Dirkx          First version branched from basic mathematics in Tudat core.
+ *      120127    D. Dirkx          First version branched from basic mathematics in Tudat Core.
+ *      120127    K. Kumar          Minor comment edits.
  */
 
 #ifndef TUDAT_COORDINATE_CONVERSIONS_H
@@ -75,68 +75,87 @@
 // Include statements.
 #include <Eigen/Core>
 
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
+
+//! Mathematics namespace.
+/*!
+ * The mathematics namespace, containing free functions and classes.
+ */
 namespace mathematics
 {
+
+//! Coordinate conversions namespace.
+/*!
+ * The coordinate conversions namespace contains free functions to convert between standard
+ * coordinate frames, e.g, spherical-to-Cartesian, cylindrical-to-Cartesian etc.
+ */
 namespace coordinate_conversions
 {
 
 //! Convert spherical (radius, zenith, azimuth) to cartesian (x,y,z) coordinates.
 /*!
-* Function to convert spherical to cartesian coordinates.
-* Schematic representation can be found on, e.g.,
-* http://mathworld.wolfram.com/SphericalCoordinates.html.
-* The transformation equations are the following, with \f$ r \f$ the radius,
-* \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the zenith angle:
-* \f{eqnarray*}{
-*      x &=& r\cos\theta\sin\phi \\
-*      y &=& r\sin\theta\sin\phi \\
-*      z &=& r\cos\phi \\
-* \f}
-* \param sphericalCoordinates Vector containing radius, zenith and azimuth (in that order).
-* \return Vector containing Cartesian coordinates, as calculated from sphericalCoordinates.
+ * Function to convert spherical to cartesian coordinates.
+ * Schematic representation can be found on, e.g.,
+ * http://mathworld.wolfram.com/SphericalCoordinates.html.
+ * The transformation equations are the following, with \f$ r \f$ the radius,
+ * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the zenith angle:
+ * \f{eqnarray*}{
+ *      x &=& r\cos\theta\sin\phi \\
+ *      y &=& r\sin\theta\sin\phi \\
+ *      z &=& r\cos\phi \\
+ * \f}
+ * \param sphericalCoordinates Vector containing radius, zenith and azimuth (in that order).
+ * \return Vector containing Cartesian coordinates, as calculated from sphericalCoordinates.
 */
 Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoordinates );
 
 //! Convert Cartesian (x,y,z) to spherical (radius, zenith, azimuth) coordinates.
 /*!
-* Converts Cartesian to spherical coordinates.
-* Schematic representation can be found on, e.g.,
-* http://mathworld.wolfram.com/SphericalCoordinates.html.
-* The transformation equations are the following, with \f$ r \f$ the radius,
-* \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the azimuth angle:
-* \f{eqnarray*}{
-*      r &=& \sqrt{ x^{ 2 } + y^{ 2 } + z^{ 2 } } \\
-*      \theta &=& \arctan\frac{ y }{ x } \\
-*      \phi &=& \arccos\frac{ z }{ r } \\
-* \f}
-* \param cartesianCoordinates Vector containing Cartesian coordinates.
-* \return Vector containing sphericalCoordinates radius, zenith and azimuth (in that
-* order), as calculated from sphericalCoordinates.
+ * Converts Cartesian to spherical coordinates.
+ * Schematic representation can be found on, e.g.,
+ * http://mathworld.wolfram.com/SphericalCoordinates.html.
+ * The transformation equations are the following, with \f$ r \f$ the radius,
+ * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the azimuth angle:
+ * \f{eqnarray*}{
+ *      r &=& \sqrt{ x^{ 2 } + y^{ 2 } + z^{ 2 } } \\
+ *      \theta &=& \arctan\frac{ y }{ x } \\
+ *      \phi &=& \arccos\frac{ z }{ r } \\
+ * \f}
+ * \param cartesianCoordinates Vector containing Cartesian coordinates.
+ * \return Vector containing sphericalCoordinates radius, zenith and azimuth (in that
+ *          order), as calculated from sphericalCoordinates.
 */
 Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates );
 
 //! Convert cylindrical (radius, azimuth, z) to Cartesian coordinates (x,y,z), z value unaffected.
 /*!
-* Function to convert cylindrical to Cartesian coordinates.
-* Schematic representation can be found on, e.g.,
-* http://mathworld.wolfram.com/CylindricalCoordinates.html.
-* The transformation equations are the following, with \f$ r \f$  the radius and
-* \f$ \theta \f$ the azimuth angle:
-* \f{eqnarray*}{
-*      x &=& r\cos\theta \\
-*      y &=& r\sin\theta \\
-*      z &=& z \\
-* \f}
-* The value of z is left unaffected by this transformation.
-* \param cylindricalCoordinates Vector containing radius, azimuth and z (in that order).
-* \return Vector containing Cartesian coordinates, as calculated from cylindricalCoordinates.
+ * Function to convert cylindrical to Cartesian coordinates.
+ * Schematic representation can be found on, e.g.,
+ * http://mathworld.wolfram.com/CylindricalCoordinates.html.
+ * The transformation equations are the following, with \f$ r \f$  the radius and
+ * \f$ \theta \f$ the azimuth angle:
+ * \f{eqnarray*}{
+ *      x &=& r\cos\theta \\
+ *      y &=& r\sin\theta \\
+ *      z &=& z \\
+ * \f}
+ * The value of z is left unaffected by this transformation.
+ * \param cylindricalCoordinates Vector containing radius, azimuth and z (in that order).
+ * \return Vector containing Cartesian coordinates, as calculated from cylindricalCoordinates.
 */
 Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates );
 
-} // namespace coordinate_conversions
-} // namespace mathematics
-} // namespace tudat
+} // Namespace coordinate_conversions.
+
+} // Namespace mathematics.
+
+} // Namespace tudat.
 
 #endif // TUDAT_COORDINATECONVERSIONS_H
+
+// End of file.
