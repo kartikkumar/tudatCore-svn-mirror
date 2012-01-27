@@ -1,8 +1,8 @@
-/*! \file unitTestphysical_constants.cpp
- *    This unit test will test the physical constants that are defined in physical_constants.h.
+/*! \file unitTestPhysicalconstants.cpp
+ *    This unit test will test the physical constants that are defined in physicalConstants.h.
  *
  *    Path              : /Astrodynamics/
- *    Version           : 4
+ *    Version           : 6
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -14,14 +14,11 @@
  *    E-mail address    : d.dirkx@tudelft.nl
  *
  *    Date created      : 10 September, 2010
- *    Last modified     : 27 January, 2011
+ *    Last modified     : 27 January, 2012
  *
  *    References
  *
  *    Notes
- *      Test runs code and verifies result against expected value.
- *      If the tested code is erroneous, the test function returns a boolean
- *      true; if the code is correct, the function returns a boolean false.
  *
  *    Copyright (c) 2010-2011 Delft University of Technology.
  *
@@ -42,201 +39,79 @@
  *      110201    J. Melman         Made the tests for obliquity and astronomical unit more
  *                                  accurate.
  *      120127    D. Dirkx          Moved to Tudat core.
+ *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  */
 
+// Required Boost unit test framework define.
+#define BOOST_TEST_MAIN
+
 // Include statements.
+#include <boost/test/unit_test.hpp>
 #include <cmath>
-#include <iostream>
-#include <iomanip>
 #include <limits>
 #include "Astrodynamics/physicalConstants.h"
 
-//! Check if the physical constants have the correct relations (ratios/offsets)
-/**
- * \param Return true if the test fail to meet the required test accuracy 
- *               (something does not work as expected)
- */
-bool testRelationsBetweenPhysicalConstant( )
-{
-    // Using declarations.
-    using std::cerr;
-    using std::endl;
-    using std::fabs;
+// Define Boost test suite.
+BOOST_AUTO_TEST_SUITE( test_physical_constants )
 
-    bool isPhysicalConstantErroneous = false;
+//! Test if the physical constants have the correct relations (ratios/offsets).
+BOOST_AUTO_TEST_CASE( testRelationsBetweenPhysicalConstant )
+{    
+    // Test for the number of seconds in a year.
+    BOOST_CHECK( std::fabs( ( tudat::physical_constants::JULIAN_YEAR
+                              - tudat::physical_constants::JULIAN_DAY
+                              * tudat::physical_constants::JULIAN_YEAR_IN_DAYS ) /
+                            ( tudat::physical_constants::JULIAN_DAY *
+                              tudat::physical_constants::JULIAN_YEAR_IN_DAYS ) )
+                 < std::numeric_limits< double >::epsilon( ) );
 
-    {
-        // Test for the number of seconds in a year.
-        if ( fabs( ( tudat::physical_constants::JULIAN_YEAR - tudat::physical_constants::JULIAN_DAY
-                   * tudat::physical_constants::JULIAN_YEAR_IN_DAYS ) /
-                   ( tudat::physical_constants::JULIAN_DAY *
-                     tudat::physical_constants::JULIAN_YEAR_IN_DAYS ) )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The Julian year in seconds does not correspond to the Julian "
-                 << "day in seconds multiplied with the number of days per year."
-                 << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    {
-        // Test for the number of seconds in a year.
-        if ( fabs( ( tudat::physical_constants::SIDEREAL_YEAR -
-                     tudat::physical_constants::JULIAN_DAY
-                   * tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS ) /
-                   ( tudat::physical_constants::JULIAN_DAY
-                   * tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS ) )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The sidereal year in seconds does not correspond to the julian "
-                 << "day in seconds multiplied with the number of sidereal days per year."<< endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    return isPhysicalConstantErroneous;
+    // Test for the number of seconds in a year.
+    BOOST_CHECK( std::fabs( ( tudat::physical_constants::SIDEREAL_YEAR -
+                              tudat::physical_constants::JULIAN_DAY
+                              * tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS ) /
+                            ( tudat::physical_constants::JULIAN_DAY
+                              * tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS ) )
+                 < std::numeric_limits< double >::epsilon( ) );
 }
 
-//! Check if physical constants have the expected value
-/**
- * \param Return true if the test fail to meet the required test accuracy 
- *               (something does not work as expected)
- */
-bool testOtherConstants( )
+//! Test if physical constants have the expected value.
+BOOST_AUTO_TEST_CASE( testOtherConstants )
 {
-    // Using declarations.
-    using std::cerr;
-    using std::endl;
+    // Test for gravitational constant.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::GRAVITATIONAL_CONSTANT - 6.67259e-11 ) /
+                       6.67259e-11 ) < std::numeric_limits< double >::epsilon( ) );
 
-    bool isPhysicalConstantErroneous = false;
+    // Test for astronomical unit.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::SPEED_OF_LIGHT - 299792458.0 ) / 299792458.0 )
+                 < std::numeric_limits< double >::epsilon( ) );
 
-    {
-        // Test for gravitational constant.
-        if ( fabs( ( tudat::physical_constants::GRAVITATIONAL_CONSTANT - 6.67259e-11 ) /
-             6.67259e-11 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The gravitational constant is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    {
-        // Test for astronomical unit.
-        // As expected, indeed approximately equal to 150 million kilometers.
-        if ( fabs( ( tudat::physical_constants::SPEED_OF_LIGHT - 299792458.0 ) / 299792458.0 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The speed of light is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    {
-        // Test for astronomical unit.
-        // As expected, indeed approximately equal to 150 million kilometers.
-        if ( fabs( ( tudat::physical_constants::ASTRONOMICAL_UNIT - 1.49597870691e11 ) /
-                   1.49597870691e11 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The astronomical unit is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-    return isPhysicalConstantErroneous;
+    // Test for astronomical unit.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::ASTRONOMICAL_UNIT - 1.49597870691e11 ) /
+                       1.49597870691e11 )
+                 < std::numeric_limits< double >::epsilon( ) );
 }
 
-//! Check if the time constants have the expected values
-/**
- * \param Return true if the test fail to meet the required test accuracy 
- *               (something does not work as expected)
- */
-bool testTimeConstants( )
+//! Check if the time constants have the expected values.
+BOOST_AUTO_TEST_CASE( testTimeConstants )
 {
-    // Using declarations.
-    using std::cerr;
-    using std::endl;
+    // Test for the number of Julian days in a year.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::JULIAN_YEAR_IN_DAYS - 365.25 ) / 365.25 )
+                 < std::numeric_limits< double >::epsilon( ) );
 
-    bool isPhysicalConstantErroneous = false;
+    // Test for the number of sidereal days in a year.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS - 365.25636 )
+                       / 365.25636 ) < std::numeric_limits< double >::epsilon( ) );
 
-    {
-        // Test for the number of Julian days in a year.
-        if ( fabs( ( tudat::physical_constants::JULIAN_YEAR_IN_DAYS - 365.25 ) / 365.25 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The Julian year in days is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
+    // Test for the Julian day length.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::SIDEREAL_DAY - 86164.09054 ) / 86164.09054 )
+                 < std::numeric_limits< double >::epsilon( ) );
 
-    {
-        // Test for the number of sidereal days in a year.
-        if ( fabs( ( tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS - 365.25636 ) / 365.25636 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The sidereal year in days is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    {
-        // Test for the Julian day length.
-        if ( fabs( ( tudat::physical_constants::SIDEREAL_DAY - 86164.09054 ) / 86164.09054 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The sidereal day is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-
-    {
-        // Test for the sidereal day length.
-        if ( fabs( ( tudat::physical_constants::JULIAN_DAY - 86400.0 ) / 86400.0 )
-             > std::numeric_limits< double >::epsilon( ) )
-        {
-            cerr << "The Julian day is not set correctly." << endl;
-            isPhysicalConstantErroneous = true;
-        }
-    }
-    
-    return isPhysicalConstantErroneous;
+    // Test for the sidereal day length.
+    BOOST_CHECK( fabs( ( tudat::physical_constants::JULIAN_DAY - 86400.0 ) / 86400.0 )
+                 < std::numeric_limits< double >::epsilon( ) );
 }
 
-
-
-//! Test physical constants header file.
-int main( )
-{
-    // Using declarations.
-    using std::cerr;
-    using std::endl;
-
-    // Test result initialised to false.
-    bool isPhysicalConstantsErroneous = false;
-
-    if ( testRelationsBetweenPhysicalConstant( ) )
-    {
-        isPhysicalConstantsErroneous = true;
-    }
-
-    if ( testTimeConstants( ) )
-    {
-        isPhysicalConstantsErroneous = true;
-    }
-
-    if ( testOtherConstants( ) )
-    {
-        isPhysicalConstantsErroneous = true;
-    }
-
-    // Return a message if a test has failed.
-    if ( isPhysicalConstantsErroneous )
-    {
-        cerr << "testphysical_constants failed!" << endl;
-    }
-    // Return a non-zero exit code if any test failed.
-    return isPhysicalConstantsErroneous;
-}
+// Close Boost test suite.
+BOOST_AUTO_TEST_SUITE_END( )
 
 // End of file.

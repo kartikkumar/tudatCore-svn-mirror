@@ -2,7 +2,7 @@
  *    This unit test will test general astrodynamics functions defined in astrodynamicsFunctions.h.
  *
  *    Path              : /Astrodynamics/
- *    Version           : 5
+ *    Version           : 6
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
@@ -23,9 +23,6 @@
  *          last accessed: 6th December, 2011, last modified: 18th November, 2011.
  *
  *    Notes
- *      Test runs code and verifies result against expected value.
- *        If the tested code is erroneous, the test function returns a boolean
- *        true; if the code is correct, the function returns a boolean false.
  *
  *      The tests need to be updated to check benchmark values from literature.
  *
@@ -57,7 +54,6 @@
 // Include statements.
 #include <boost/test/unit_test.hpp>
 #include <cmath>
-#include <iostream>
 #include <limits>
 #include "Astrodynamics/astrodynamicsFunctions.h"
 #include "Astrodynamics/physicalConstants.h"
