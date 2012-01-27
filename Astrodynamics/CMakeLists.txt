@@ -60,12 +60,12 @@ setup_tudat_library_target(tudat_astrodynamics "${SRCROOT}${ASTRODYNAMICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")
 
 # Add unit tests.
-add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/unitTestPhysicalConstants.cpp")
+add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestPhysicalConstants.cpp")
 setup_custom_test_program(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_PhysicalConstants tudat_astrodynamics ${Boost_LIBRARIES})
 
 # Add unit tests.
-add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTestAstrodynamicsFunctions.cpp")
+add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestAstrodynamicsFunctions.cpp")
 setup_custom_test_program(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_AstrodynamicsFunctions tudat_astrodynamics ${Boost_LIBRARIES})
 
