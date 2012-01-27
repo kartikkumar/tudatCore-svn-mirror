@@ -18,7 +18,7 @@
  #    E-mail address    : mikael.s.persson@gmail.com
  #
  #    Date created      : 20 August, 2011
- #    Last modified     : 26 October, 2011
+ #    Last modified     : 27 January, 2012
  #
  #    References
  #
@@ -40,6 +40,7 @@
  #      110820    S.M. Persson      File created.
  #      111025    K. Kumar          Adapted file to work with Revision 194.
  #      111026    K. Kumar          Adapted file so all headers show in project tree in Qt Creator.
+ #      120127    K. Kumar          Added Boost libraries to unit tests.
  #/
 
 # Add source files.
@@ -61,11 +62,11 @@ setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")
 # Add unit tests.
 add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/unitTestPhysicalConstants.cpp")
 setup_custom_test_program(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_PhysicalConstants tudat_astrodynamics)
+target_link_libraries(test_PhysicalConstants tudat_astrodynamics ${Boost_LIBRARIES})
 
 # Add unit tests.
 add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTestAstrodynamicsFunctions.cpp")
 setup_custom_test_program(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_AstrodynamicsFunctions tudat_astrodynamics)
+target_link_libraries(test_AstrodynamicsFunctions tudat_astrodynamics ${Boost_LIBRARIES})
 
 # End of file.
