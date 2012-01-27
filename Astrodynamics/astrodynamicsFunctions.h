@@ -44,9 +44,17 @@
 // Include statements.
 #include "Astrodynamics/physicalConstants.h"
 
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
 
+//! Astrodynamics namespace.
+/*!
+ * The astrodynamics namespace, which includes general free functions and classes.
+ */
 namespace astrodynamics
 {
 
@@ -117,9 +125,9 @@ double computeKeplerEnergy( const double semiMajorAxis,
  */
 double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbitalPeriodBody2 );
 
-}
+} // Namespace astrodynamics.
 
-}
+} // Namespace tudat.
 
 #endif // TUDAT_ASTRODYNAMICS_FUNCTIONS_H
 

@@ -1,8 +1,8 @@
 /*! \file physicalConstants.h
- *    This file contains a class with selected constants commonly used in astrodynamics.
+ *    This file contains a namespace with selected constants commonly used in astrodynamics.
  *
  *    Path              : /Astrodynamics/
- *    Version           : 3
+ *    Version           : 4
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -49,9 +49,17 @@
 #ifndef TUDAT_PHYSICAL_CONSTANTS_H
 #define TUDAT_PHYSICAL_CONSTANTS_H
 
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
 
+//! Physical constants namespace.
+/*!
+ * The physical constants namespace includes selected constants commonly used in astrodynamics.
+ */
 namespace physical_constants
 {
 
@@ -124,9 +132,10 @@ const static double GRAVITATIONAL_CONSTANT = 6.67259e-11;
  */
 const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
 
+} // Namespace physical_constants.
 
-}
-
-}
+} // Namespace tudat.
 
 #endif // TUDAT_PHYSICAL_CONSTANTS_H
+
+// End of file.
