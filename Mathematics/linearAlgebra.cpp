@@ -2,7 +2,7 @@
  *    Source file that implements a number of useful linear algebra operation definitions.
  *
  *    Path              : /Mathematics/LinearAlgebra/
- *    Version           : 6
+ *    Version           : 7
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -14,7 +14,7 @@
  *    E-mail address    : d.dirkx@tudelft.nl
  *
  *    Date created      : 7 August, 2009
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 28 January, 2012
  *
  *    References
  *
@@ -41,6 +41,8 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    D. Dirkx          Moved to Tudat Core.
  *      120127    K. Kumar          Minor edits.
+ *      120128    K. Kumar          Corrected computeCosineOfAngleBetweenVectors() to work with
+ *                                  vectors of arbitrary length.
  */
 
 // Include statements.
@@ -53,16 +55,8 @@ double tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors(
 {
     assert( vector0.size( ) == vector1.size( ) );
 
-    // Determine the length of the vectors.
-    double normOfVector0 = vector0.norm( );
-    double normOfVector1 = vector1.norm( );
-
-    // Normalize both vectors.
-    Eigen::Vector3d vector0Normalized = vector0 / normOfVector0;
-    Eigen::Vector3d vector1Normalized = vector1 / normOfVector1;
-
     // Get the cosine of the angle by dotting the normalized vectors.
-    double dotProductOfNormalizedVectors = vector0Normalized.dot( vector1Normalized );
+    double dotProductOfNormalizedVectors = vector0.normalized( ).dot( vector1.normalized( ) );
 
     // Explicitly define the extreme cases, which can give problems with the acos function.
     if ( dotProductOfNormalizedVectors >= 1.0 )
