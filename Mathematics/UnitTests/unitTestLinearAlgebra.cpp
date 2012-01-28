@@ -3,7 +3,7 @@
  *    Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 2
+ *    Version           : 3
  *    Check status      : Checked
  *
  *    Author            : D.Dirkx
@@ -15,7 +15,7 @@
  *    E-mail address    : simon@angelcorp.be
  *
  *    Date created      : 27 January, 2012
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 28 January, 2012
  *
  *    References
  *
@@ -36,16 +36,17 @@
  *      YYMMDD    Author            Comment
  *      120127    D. Dirkx          File created.
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
+ *      120128    K. Kumar          Changed some BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
+ *                                  BOOST_CHECK_SMALL for unit test comparisons.
  */
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 // Include statements.
+#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
-#include <iostream>
-#include <vector>
 #include "Mathematics/linearAlgebra.h"
 
 // Define Boost test suite.
@@ -56,7 +57,6 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
 {
     // Using declarations.
     using std::cos;
-    using std::fabs;
     using tudat::mathematics::linear_algebra::computeAngleBetweenVectors;
     using tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors;
 
@@ -73,13 +73,12 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
         double angle = computeAngleBetweenVectors( testVector1_, testVector2_ );
         double cosineOfAngle = computeCosineOfAngleBetweenVectors( testVector1_, testVector2_ );
 
-        BOOST_CHECK( fabs( cos( angle ) - cosineOfAngle )
-                     < std::numeric_limits< double >::epsilon( ) &&
-                     cosineOfAngle > std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( cosineOfAngle - 1.0 ) < std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( angle ) < std::numeric_limits< double >::epsilon( ) );
+        // Check if computed angle and cosine-of-angle are correct.
+        BOOST_CHECK_SMALL( cos( angle ) - cosineOfAngle,
+                           std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK( cosineOfAngle > std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cosineOfAngle - 1.0, std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK( angle < std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 2: Test values for two equal, but opposite vectors.
@@ -90,13 +89,12 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
         double angle = computeAngleBetweenVectors( testVector1_, testVector2_ );
         double cosineOfAngle = computeCosineOfAngleBetweenVectors( testVector1_, testVector2_ );
 
-        BOOST_CHECK( fabs( cos( angle ) - cosineOfAngle )
-                     < std::numeric_limits< double >::epsilon( ) &&
-                     cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( cosineOfAngle + 1.0 ) < std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( angle - M_PI ) / M_PI < std::numeric_limits< double >::epsilon( ) );
+        // Check if computed angle and cosine-of-angle are correct.
+        BOOST_CHECK_SMALL( cos( angle ) - cosineOfAngle,
+                           std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK( cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cosineOfAngle + 1.0, std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( angle, M_PI, std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 3: Test values for two equal vectors, benchmark values computed using Matlab.
@@ -107,15 +105,14 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
         double angle = computeAngleBetweenVectors( testVector1_, testVector2_ );
         double cosineOfAngle = computeCosineOfAngleBetweenVectors( testVector1_, testVector2_ );
 
-        BOOST_CHECK( fabs( cos( angle ) - cosineOfAngle )
-                     < std::numeric_limits< double >::epsilon( ) &&
-                     cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( ( cosineOfAngle + 0.387790156029810 ) / 0.387790156029810 )
-                     < std::numeric_limits< double >::epsilon( ) );
-
-        BOOST_CHECK( fabs( ( angle - 1.969029256915446 ) / 1.969029256915446 )
-                     < std::numeric_limits< double >::epsilon( ) );
+        // Check if computed angle and cosine-of-angle are correct.
+        BOOST_CHECK_SMALL( cos( angle ) - cosineOfAngle,
+                           std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK( cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cosineOfAngle, -0.387790156029810,
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( angle, 1.969029256915446,
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 }
 

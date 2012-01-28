@@ -2,7 +2,7 @@
  *    This unit test will test general astrodynamics functions defined in astrodynamicsFunctions.h.
  *
  *    Path              : /Astrodynamics/
- *    Version           : 6
+ *    Version           : 7
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
@@ -14,7 +14,7 @@
  *    E-mail address    : J.C.P.Melman@tudelft.nl
  *
  *    Date created      : 11 November, 2011
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 28 January, 2012
  *
  *    References
  *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
@@ -46,12 +46,15 @@
  *      111206    K. Kumar          Updated synodic period test and comments.
  *      120127    D. Dirkx          Moved to Tudat core.
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
+ *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
+ *                                  comparisons.
  */
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 // Include statements.
+#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <limits>
@@ -82,8 +85,7 @@ BOOST_AUTO_TEST_CASE( testKeplerOrbitalPeriod )
     double expectedOrbitalPeriod = 86164.09054;
 
     // Check if computed orbital period matches expected orbital period.
-    BOOST_CHECK( std::fabs( ( orbitalPeriod - expectedOrbitalPeriod )
-                            / expectedOrbitalPeriod ) < 1.0e-5 );
+    BOOST_CHECK_CLOSE_FRACTION( orbitalPeriod, expectedOrbitalPeriod, 1.0e-5 );
 }
 
 //! Test if the orbital angular momentum of a kepler orbit is computed correctly.
@@ -116,9 +118,8 @@ BOOST_AUTO_TEST_CASE( testKeplerAngularMomentum )
             * std::sqrt( earthGravitationalParameter / distanceBetweenSatelliteAndEarth );
 
     // Check if computed angular momentum matches expected angular momentum.
-    BOOST_CHECK( std::fabs( ( angularMomentum - expectedAngularMomentum )
-                            / expectedAngularMomentum )
-                 < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( angularMomentum, expectedAngularMomentum,
+                                std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test if the mean motion of a kepler orbit is computed correctly.
@@ -142,7 +143,7 @@ BOOST_AUTO_TEST_CASE( testMeanMotion )
     double expectedMeanMotion = 7.2921e-5;
 
     // Check if computed mean motion matches expected mean motion.
-    BOOST_CHECK( std::fabs( ( meanMotion - expectedMeanMotion ) / expectedMeanMotion ) < 1.0e-7 );
+    BOOST_CHECK_CLOSE_FRACTION( meanMotion, expectedMeanMotion, 1.0e-7 );
 }
 
 //! Test if the orbital energy of a Kepler orbit is computed correctly.
@@ -171,8 +172,8 @@ BOOST_AUTO_TEST_CASE( testKeplerEnergy )
                 -  earthGravitationalParameter / distanceBetweenSatelliteAndEarth );
 
     // Check if computed orbital energy matches expected orbital energy.
-    BOOST_CHECK( std::fabs( ( orbitalEnergy - expectedOrbitalEnergy ) / expectedOrbitalEnergy )
-                 < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( orbitalEnergy, expectedOrbitalEnergy,
+                                std::numeric_limits< double >::epsilon( ) );
 
 }
 
@@ -186,8 +187,8 @@ BOOST_AUTO_TEST_CASE( testSynodicPeriod )
     double expectedSynodicPeriod = 779.9746457736733;
 
     // Check if computed synodic period matches expected synodic period.
-    BOOST_CHECK( std::fabs( ( synodicPeriod - expectedSynodicPeriod ) / expectedSynodicPeriod )
-                 < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( synodicPeriod, expectedSynodicPeriod,
+                                std::numeric_limits< double >::epsilon( ) );
 }
 
 // Close Boost test suite.

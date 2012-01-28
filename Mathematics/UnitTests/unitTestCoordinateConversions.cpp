@@ -3,7 +3,7 @@
  *    contained in Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 9
+ *    Version           : 10
  *    Check status      : Checked
  *
  *    Author            : B. Romgens
@@ -15,7 +15,7 @@
  *    E-mail address    : K.Kumar@tudelft.nl
  *
  *    Date created      : 7 February, 2011
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 28 January, 2012
  *
  *    References
  *
@@ -50,18 +50,19 @@
  *      120127    D. Dirkx          Moved unit to separate file from basic mathematics test; moved
  *                                  tests to separate functions; moved to Tudat Core.
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
+ *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
+ *                                  BOOST_CHECK_SMALL for unit test comparisons.
  */
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 // Include statements.
+#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <Eigen/Core>
-#include <iostream> 
 #include <limits>
-#include <vector>
 #include "Mathematics/coordinateConversions.h"
 
 // Define Boost test suite.
@@ -71,7 +72,6 @@ BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
 BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
 {
     // Using declarations.
-    using std::fabs;
     using tudat::mathematics::coordinate_conversions::convertCylindricalToCartesian;
 
     // Test 1: Test conversion of ( 2.0, 0.0 ).
@@ -83,8 +83,10 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
         // Convert cylindrical coordinates to Cartesian elements.
         cartesianCoordinates_ = convertCylindricalToCartesian( cylindricalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) - 2.0 ) / 2.0 < 1.0e-15 ||
-                     fabs( cartesianCoordinates_( 1 ) - 0.0 ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), 2.0,
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 2: Test conversion of ( 2.0, pi ).
@@ -96,8 +98,9 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
         // Convert cylindrical coordinates to Cartesian elements.
         cartesianCoordinates_ = convertCylindricalToCartesian( cylindricalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) + 2.0 ) < 1.0e-15 ||
-                     fabs( cartesianCoordinates_( 1 ) - 0.0 ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), -2.0, 1.0e-15 );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), 1.0e-15 );
     }
 
     // Test 3: Test conversion of ( 2.0, -2pi ).
@@ -109,8 +112,10 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
         // Convert cylindrical coordinates to Cartesian elements.
         cartesianCoordinates_ = convertCylindricalToCartesian( cylindricalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) - 2.0 ) < 1.0e-15 ||
-                     fabs( cartesianCoordinates_( 1 ) - 0.0 ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), 2.0,
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), 1.0e-15 );
     }
 
     // Test 4: Test conversion of ( 2.0, 225 deg ).
@@ -122,9 +127,11 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
         // Convert cylindrical coordinates to Cartesian elements.
         cartesianCoordinates_ = convertCylindricalToCartesian( cylindricalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) + sqrt( 2.0 ) )
-                     < std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 1 ) + sqrt( 2.0 ) ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), -std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), -std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 5: Test conversion of ( 2.0, -225 deg ).
@@ -136,9 +143,11 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
         // Convert cylindrical coordinates to Cartesian elements.
         cartesianCoordinates_ = convertCylindricalToCartesian( cylindricalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) + sqrt( 2.0 ) ) <
-                     std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 1 ) - sqrt( 2.0 ) ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), -std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 }
 
@@ -146,7 +155,6 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
 BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 {
     // Using declarations.
-    using std::fabs;
     using tudat::mathematics::coordinate_conversions::convertSphericalToCartesian;
     
     // Test 1: Test conversion of: ( 0.0, 0.0, 0.0 ).
@@ -158,12 +166,10 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
         // Convert spherical coordinates to Cartesian coordinates.
         cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) + 0.0 ) <
-                     std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 1 ) - 0.0 ) <
-                     std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 2 ) - 0.0 ) <
-                     std::numeric_limits< double >::epsilon( ) );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 0 ), std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 2 ), std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 2: Test conversion of: ( 2.0, 225, 225 ).
@@ -176,11 +182,12 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
         // Convert spherical coordinates to Cartesian coordinates.
         cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) - 1.0 )
-                     < std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 1 ) - 1.0 )
-                     < std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 2 ) + sqrt( 2.0 ) ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), 1.0,
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), 1.0, 1.0e-15 );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 3: Test conversion of: ( 2.0, -225, -225 ).
@@ -193,11 +200,12 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
         // Convert spherical coordinates to Cartesian coordinates.
         cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) + 1.0 )
-                     < std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 1 ) - 1.0 )
-                     < std::numeric_limits< double >::epsilon( ) ||
-                     fabs( cartesianCoordinates_( 2 ) + sqrt( 2.0 ) ) < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), -1.0,
+                                    std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), 1.0, 1.0e-15 );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -std::sqrt( 2.0 ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 4: Test conversion of: ( 2.0, 180, 180 ).
@@ -209,9 +217,11 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
         // Convert spherical coordinates to Cartesian coordinates.
         cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
 
-        BOOST_CHECK( fabs( cartesianCoordinates_( 0 ) - 0.0 ) < 1.0e-15 ||
-                     fabs( cartesianCoordinates_( 1 ) - 0.0 ) < 1.0e-15 ||
-                     fabs( cartesianCoordinates_( 2 ) + 2.0 ) / 2.0 < 1.0e-15 );
+        // Check if converted Cartesian coordinates are correct.
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 0 ), 1.0e-15 );
+        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -2.0,
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 }
 
@@ -221,7 +231,6 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     // Using declarations.
     using std::acos;
     using std::atan2;
-    using std::fabs;
     using std::pow;
     using std::sqrt;
     using tudat::mathematics::coordinate_conversions::convertCartesianToSpherical;
@@ -239,10 +248,9 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
         // Compute conversions.
         sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
 
-        // Check if relative error is too large.
-        BOOST_CHECK( fabs( sphericalCoordinates_.norm( )
-                           - expectedSphericalCoordinates_.norm( ) )
-                     < std::numeric_limits< double >::epsilon( ) );
+        // Check if converted spherical coordinates are correct.
+        BOOST_CHECK_SMALL( sphericalCoordinates_.norm( ) - expectedSphericalCoordinates_.norm( ),
+                           std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 2: Test conversion of: ( 2.0, 3.5, -4.1 ).
@@ -263,11 +271,10 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
         // Compute conversions.
         sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
 
-        // Check if relative error is too large.
-        BOOST_CHECK( fabs( sphericalCoordinates_.norm( )
-                           - expectedSphericalCoordinates_.norm( ) )
-                     / expectedSphericalCoordinates_.norm( )
-                     < std::numeric_limits< double >::epsilon( ) );
+        // Check if converted spherical coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
+                                    expectedSphericalCoordinates_.norm( ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 3: Test conversion of: ( 5.2, -6.3, 0.0 ).
@@ -288,11 +295,10 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
         // Compute conversions.
         sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
 
-        // Check if relative error is too large.
-        BOOST_CHECK( fabs( sphericalCoordinates_.norm( )
-                           - expectedSphericalCoordinates_.norm( ) )
-                     / expectedSphericalCoordinates_.norm( )
-                     < std::numeric_limits< double >::epsilon( ) );
+        // Check if converted spherical coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
+                                    expectedSphericalCoordinates_.norm( ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 4: Test conversion of: ( 0.0, 12.2, -0.9 ).
@@ -313,11 +319,10 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
         // Compute conversions.
         sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
 
-        // Check if relative error is too large.
-        BOOST_CHECK( fabs( sphericalCoordinates_.norm( )
-                           - expectedSphericalCoordinates_.norm( ) )
-                     / expectedSphericalCoordinates_.norm( )
-                     < std::numeric_limits< double >::epsilon( ) );
+        // Check if converted spherical coordinates are correct.
+        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
+                                    expectedSphericalCoordinates_.norm( ),
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 }
 

@@ -2,7 +2,7 @@
  #    This is the CMake file for the InputOutput sub-directory.
  #
  #    Path              : /Basics/
- #    Version           : 1
+ #    Version           : 2
  #    Check status      : Checked
  #
  #    Author            : S.M. Persson
@@ -34,17 +34,19 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      110820    S.M. Persson      File created.
- #      120127    K. Kumar          Adaped for Tudat Core.
+ #      120127    K. Kumar          Adapted for Tudat Core.
+ #      120127    K. Kumar          Added stream filter code and unit test.
  #/
 
 # Add source files.
 set(INPUTOUTPUT_SOURCES
-  "${SRCROOT}${INPUTOUTPUTDIR}/dummySourceFile.cpp"
+  "${SRCROOT}${INPUTOUTPUTDIR}/streamFilters.cpp"
 )
 
 # Add header files.
 set(INPUTOUTPUT_HEADERS 
   "${SRCROOT}${INPUTOUTPUTDIR}/basicInputOutput.h"
+  "${SRCROOT}${INPUTOUTPUTDIR}/streamFilters.h"
 )
 
 # Add static libraries.
@@ -53,8 +55,12 @@ setup_tudat_library_target(tudat_input_output "${SRCROOT}${INPUTOUTPUTDIR}")
 setup_headers("${INPUTOUTPUT_HEADERS}" "${INPUTOUTPUTDIR}")
 
 # Add unit tests.
-add_executable(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}/unitTestBasicInputOutput.cpp")
+add_executable(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp")
 setup_custom_test_program(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}")
 target_link_libraries(test_BasicInputOutput tudat_input_output ${Boost_LIBRARIES})
+
+add_executable(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp")
+setup_custom_test_program(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}")
+target_link_libraries(test_StreamFilters tudat_input_output ${Boost_LIBRARIES})
 
 # End of file.

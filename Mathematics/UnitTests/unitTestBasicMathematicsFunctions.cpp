@@ -3,7 +3,7 @@
  *    Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 9
+ *    Version           : 10
  *    Check status      : Checked
  *
  *    Author            : B. Romgens
@@ -15,7 +15,7 @@
  *    E-mail address    : K.Kumar@tudelft.nl
  *
  *    Date created      : 7 February, 2011
- *    Last modified     : 27 January, 2011
+ *    Last modified     : 28 January, 2011
  *
  *    References
  *
@@ -50,14 +50,17 @@
  *      120127    D. Dirkx          Moved unit conversions test to separate file; moved separate
  *                                  tests to separate functions; moved to Tudat core.
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
+ *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
+ *                                  comparisons.
  */
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 // Include statements.
+#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
-#include <cmath>
+#include <limits>
 #include "Mathematics/basicMathematicsFunctions.h"
 
 // Define Boost test suite.
@@ -67,29 +70,28 @@ BOOST_AUTO_TEST_SUITE( test_basic_mathematics_functions )
 BOOST_AUTO_TEST_CASE( testModuloFunction )
 {
      // Using declarations.
-     using std::fabs;
      using tudat::mathematics::computeModulo;
 
-     // Test modulo function.
-     // Test 1: Test 0.0 mod 0.0.
-     BOOST_CHECK( fabs( computeModulo( 0.0, 0.0 ) - 0.0 )
-                  < std::numeric_limits< double >::epsilon( ) );
+    // Test modulo function.
+    // Test 1: Test 0.0 mod 0.0.
+    BOOST_CHECK_CLOSE_FRACTION( computeModulo( 0.0, 0.0 ), 0.0,
+                                std::numeric_limits< double >::epsilon( ) );
 
      // Test 2: Test 2.0 mod 0.0.
-     BOOST_CHECK( fabs( computeModulo( 2.0, 0.0 ) - 2.0 )
-                  < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( computeModulo( 2.0, 0.0 ), 2.0,
+                                std::numeric_limits< double >::epsilon( ) );
 
      // Test 3: Test 2.0 mod 2.0.
-     BOOST_CHECK( fabs( computeModulo( 2.0, 2.0 ) - 0.0 )
-                  < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( computeModulo( 2.0, 2.0 ), 0.0,
+                                std::numeric_limits< double >::epsilon( ) );
 
      // Test 4: Test 3.0 mod 2.5.
-     BOOST_CHECK( fabs( computeModulo( 3.0, 2.5 ) - 0.5 )
-                  < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( computeModulo( 3.0, 2.5 ), 0.5,
+                                std::numeric_limits< double >::epsilon( ) );
 
      // Test 5: Test 3.0 mod -2.5.
-     BOOST_CHECK( fabs( computeModulo( 3.0, -2.5 ) + 2.0 )
-                  < std::numeric_limits< double >::epsilon( ) );
+    BOOST_CHECK_CLOSE_FRACTION( computeModulo( 3.0, -2.5 ), -2.0,
+                                std::numeric_limits< double >::epsilon( ) );
  }
 
 // Close Boost test suite.
