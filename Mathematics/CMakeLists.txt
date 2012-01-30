@@ -63,10 +63,6 @@ setup_tudat_library_target(tudat_mathematics "${SRCROOT}${MATHEMATICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${MATHEMATICSDIR}")
 
 # Add unit tests.
-add_executable(test_BasicMathematicsFunctions "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
-setup_custom_test_program(test_BasicMathematicsFunctions "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_BasicMathematicsFunctions tudat_mathematics tudat_astrodynamics ${Boost_LIBRARIES})
-
 add_executable(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp")
 setup_custom_test_program(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}")
 target_link_libraries(test_CoordinateConversions tudat_mathematics tudat_astrodynamics ${Boost_LIBRARIES})
