@@ -2,7 +2,7 @@
  *    Source file that implements all the basic mathematics functions contained in Tudat.
  *
  *    Path              : /Mathematics/
- *    Version           : 14
+ *    Version           : 15
  *    Check status      : Checked
  *
  *    Author            : K. Kumar
@@ -22,7 +22,7 @@
  *    E-mail address    : L.Abdulkadir@student.tudelft.nl
  *
  *    Date created      : 3 September, 2010
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 30 January, 2012
  *
  *    References
  *
@@ -59,20 +59,34 @@
  *      120127    D. Dirkx          First version of basic mathematics in Tudat Core.
  *      120127    K. Kumar          Minor comment edits; added modulo-0 case, which should yield
  *                                  equality.
+ *      120130    K. Kumar          Added missing implementation of
+ *                                  getGlobalRandomNumberGenerator().
  */
 
 // Include statements.
 #include <cmath>
+#include <limits>
 #include "Mathematics/basicMathematicsFunctions.h"
 
-//! Compute modulo of double.
-double tudat::mathematics::computeModulo( const double dividend, const double divisor )
-{
-    // If the divisor is 0.0, the congruence modulo returns equality.
-    if ( divisor == 0.0 )
-    { return dividend; }
 
-    return dividend - divisor * std::floor( dividend / divisor );
+#include <iostream>
+
+namespace tudat
+{
+
+namespace mathematics
+{
+
+//! Get global random number generator.
+GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
+{
+  static GlobalRandomNumberGeneratorType globalRandomNumberGenerator(
+              static_cast< unsigned int >( std::time( 0 ) ) );
+  return globalRandomNumberGenerator;
 }
+
+} // Namespace mathematics.
+
+} // Namespace tudat.
 
 // End of file.

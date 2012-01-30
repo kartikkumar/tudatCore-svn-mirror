@@ -86,16 +86,6 @@ namespace tudat
 namespace mathematics
 {
 
-//! Compute modulo of double.
-/*!
- * Computes the remainder after division of one number by another.
- * The remainder is in the range [ 0, divisor ].
- * \param dividend Number to be divided.
- * \param divisor Number that is divided by.
- * \return Remainder of division of dividend by divisor.
- */
-double computeModulo( const double dividend, const double divisor );
-
 //! Random number generator typedef.
 /*!
  * Random number generator typedef. This can be modified to any other Boost random number
