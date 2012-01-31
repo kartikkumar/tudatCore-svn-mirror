@@ -65,6 +65,7 @@
 
 // Include statements.
 #include <cmath>
+#include <ctime>
 #include <limits>
 #include "Mathematics/basicMathematicsFunctions.h"
 
