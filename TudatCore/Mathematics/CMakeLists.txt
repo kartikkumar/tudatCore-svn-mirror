@@ -58,17 +58,17 @@ set(MATHEMATICS_HEADERS
 )
 
 # Add static libraries.
-add_library(tudat_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS})
-setup_tudat_library_target(tudat_mathematics "${SRCROOT}${MATHEMATICSDIR}")
+add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS})
+setup_tudat_library_target(tudat_core_mathematics "${SRCROOT}${MATHEMATICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${MATHEMATICSDIR}")
 
 # Add unit tests.
 add_executable(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp")
 setup_custom_test_program(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_CoordinateConversions tudat_mathematics tudat_astrodynamics ${Boost_LIBRARIES})
+target_link_libraries(test_CoordinateConversions tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
 
 add_executable(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestLinearAlgebra.cpp")
 setup_custom_test_program(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_LinearAlgebra tudat_mathematics tudat_astrodynamics ${Boost_LIBRARIES})
+target_link_libraries(test_LinearAlgebra tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
 
 # End of file.

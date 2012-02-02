@@ -50,17 +50,17 @@ set(INPUTOUTPUT_HEADERS
 )
 
 # Add static libraries.
-add_library(tudat_input_output STATIC ${INPUTOUTPUT_SOURCES} ${INPUTOUTPUT_HEADERS})
-setup_tudat_library_target(tudat_input_output "${SRCROOT}${INPUTOUTPUTDIR}")
+add_library(tudat_core_input_output STATIC ${INPUTOUTPUT_SOURCES} ${INPUTOUTPUT_HEADERS})
+setup_tudat_library_target(tudat_core_input_output "${SRCROOT}${INPUTOUTPUTDIR}")
 setup_headers("${INPUTOUTPUT_HEADERS}" "${INPUTOUTPUTDIR}")
 
 # Add unit tests.
 add_executable(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp")
 setup_custom_test_program(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}")
-target_link_libraries(test_BasicInputOutput tudat_input_output ${Boost_LIBRARIES})
+target_link_libraries(test_BasicInputOutput tudat_core_input_output ${Boost_LIBRARIES})
 
 add_executable(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp")
 setup_custom_test_program(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}")
-target_link_libraries(test_StreamFilters tudat_input_output ${Boost_LIBRARIES})
+target_link_libraries(test_StreamFilters tudat_core_input_output ${Boost_LIBRARIES})
 
 # End of file.

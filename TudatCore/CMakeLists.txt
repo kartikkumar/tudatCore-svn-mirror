@@ -86,20 +86,20 @@ if (WIN32)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
-    set(LIBROOT "${CODEROOT}/lib")
-    set(INCLUDEROOT "${CODEROOT}/include")
-    set(BINROOT "${CODEROOT}/bin")
+    set(LIBROOT "${SRCROOT}/lib")
+    set(INCLUDEROOT "${SRCROOT}/include")
+    set(BINROOT "${SRCROOT}/bin")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-    set(LIBROOT "${CODEROOT}/lib")
-    set(INCLUDEROOT "${CODEROOT}/include")
-    set(BINROOT "${CODEROOT}/bin")
+    set(LIBROOT "${SRCROOT}/lib")
+    set(INCLUDEROOT "${SRCROOT}/include")
+    set(BINROOT "${SRCROOT}/bin")
   endif()
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-  set(LIBROOT "${CODEROOT}/lib")
-  set(INCLUDEROOT "${CODEROOT}/include")
-  set(BINROOT "${CODEROOT}/bin")
+  set(LIBROOT "${SRCROOT}/lib")
+  set(INCLUDEROOT "${SRCROOT}/include")
+  set(BINROOT "${SRCROOT}/bin")
 endif()
 
 # Set the global macros for setting up targets.
@@ -178,5 +178,14 @@ set(SUBDIRS ${BASICSDIR} ${ASTRODYNAMICSDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR}
 foreach(CURRENT_SUBDIR ${SUBDIRS})
 add_subdirectory("${SRCROOT}${CURRENT_SUBDIR}")
 endforeach(CURRENT_SUBDIR)
+
+# Build the Tudat core library
+get_target_property(ASTRODYNAMICS_SOURCES tudat_core_astrodynamics SOURCES)
+get_target_property(INPUTOUTPUT_SOURCES tudat_core_input_output SOURCES)
+get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)
+
+
+add_library(tudat_core STATIC ${ASTRODYNAMICS_SOURCES} ${INPUTOUTPUT_SOURCES} ${MATHEMATICS_SOURCES})
+setup_tudat_library_target(tudat_core "${SRCROOT}")
 
 # End of file.
