@@ -62,7 +62,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 # Define the basic input (trunk) and output (lib & include) directories.
-set(SRCROOT "${CODEROOT}/trunk")
+set(SRCROOT "${CODEROOT}/Core")
 
 # Set CMake build-type.
 set(CMAKE_BUILD_TYPE Debug)
