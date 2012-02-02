@@ -65,8 +65,8 @@
 #include <boost/test/output/compiler_log_formatter.hpp>
 #include <boost/test/framework.hpp>
 #include <boost/test/detail/suppress_warnings.hpp>
-
 #include <Eigen/Core>
+#include <iostream>
 #include "Basics/testMacros.h"
 #include "InputOutput/basicInputOutput.h"
 

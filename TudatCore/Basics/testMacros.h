@@ -95,4 +95,5 @@
  *   % row % col % L.coeff(row, col) % R.coeff(row, col) ),                      \
  *   CHECK, CHECK_MSG, (L.coeff(row, col))(R.coeff(row, col))                        \
  *   (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
+ *
  */

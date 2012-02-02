@@ -50,7 +50,7 @@
 cmake_minimum_required( VERSION 2.6 )
 
 # Specific Tudat project name.
-project( Tudat )
+project( TudatCore )
 
 # Set module path to local CMake scripts.
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
@@ -67,8 +67,8 @@ set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 set(SRCROOT "${CODEROOT}/TudatCore")
 
 # Set CMake build-type.
-set(CMAKE_BUILD_TYPE Debug)
-#set(CMAKE_BUILD_TYPE Release)
+#set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
 # Set testing options based on platform.
 enable_testing()
