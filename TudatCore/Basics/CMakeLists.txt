@@ -40,6 +40,7 @@ set(BASICSDIR_SOURCES
 # Add header files.
 set(BASICSDIR_HEADERS 
   "${SRCROOT}${BASICSDIR}/testMacros.h"
+  "${SRCROOT}${BASICSDIR}/utilityMacros.h"
 )
 
 # Add static libraries.
