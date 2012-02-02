@@ -2,7 +2,7 @@
  #    This is the main CMake file for the Tudat project.
  #
  #    Path              : /
- #    Version           : 7
+ #    Version           : 8
  #    Check status      : Checked
  #
  #    Author/Checker    : S.M. Persson
@@ -14,7 +14,7 @@
  #    E-mail address    : K.Kumar@tudelft.nl
  #
  #    Date created      : 20 August, 2011
- #    Last modified     : 27 January, 2011
+ #    Last modified     : 2 February, 2012
  #
  #    References
  #
@@ -42,6 +42,8 @@
  #      111103    K. Kumar          Updated CMake directory name in module path.
  #      111117    K. Kumar          Added system and filesystem Boost components.
  #      120127    K. Kumar          Adapted for Tudat Core.
+ #      120202    K. Kumar          Updated path to TudatCore; added MSVC static runtime fix for
+ #                                  use of Boost libraries.
  #/
 
 # Specify minimum CMake version required to compile Tudat.
@@ -62,7 +64,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 # Define the basic input (trunk) and output (lib & include) directories.
-set(SRCROOT "${CODEROOT}/Core")
+set(SRCROOT "${CODEROOT}/TudatCore")
 
 # Set CMake build-type.
 set(CMAKE_BUILD_TYPE Debug)
@@ -73,7 +75,17 @@ enable_testing()
 
 if (WIN32)
   if (MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -g -D_SCL_SECURE_NO_WARNINGS")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
+    # Because we are using static boost libraries, with static runtime, we need to force MSVC to
+    # also use static runtime: (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace)
+    foreach(flag_var
+          CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+          CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+      # Find all dynamic runtime (MD) references and replace with static (MT)
+      if(${flag_var} MATCHES "/MD")
+        string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
+      endif(${flag_var} MATCHES "/MD")
+    endforeach(flag_var)
     set(LIBROOT "${CODEROOT}/lib")
     set(INCLUDEROOT "${CODEROOT}/include")
     set(BINROOT "${CODEROOT}/bin")
