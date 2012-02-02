@@ -44,17 +44,19 @@
  *    Be sure that all tests behave as they should and do the following:
  *  <ul>
  *    <li>Replace the entry for the two actual test cases: TEST_CASE => BOOST_AUTO_TEST_CASE</li>
+ *    <li>Near the end of the file in the function 
+ *              'test_suite* init_unit_test_suite( int, char** )',
+ *        enable the section 
+ *              'unit_test_log.set_formatter( new logMessageFormatter )'
+ *        so that the test generates the same type of output.
  *    <li>Run the test and save the result: 
-            ./unitTest_testMacros.exe > unitTest_testMacros.match.pattern</li>
- *    <li>Remove the first line, filename and the brackets from the line number:
-            sed -e '1d' -e 's|^.*(||g' -e 's|): |: |g' -i unitTest_testMacros.match.pattern</li>
+ *          ./unitTest_testMacros.exe > unitTest_testMacros.match.pattern</li>
+ *    <li>Remove the first line:
+ *          sed -e '1d' -i unitTest_testMacros.match.pattern</li>
  *    <li>Overwrite the old unitTest_testMacros.match.pattern with the new one</li>
  *    <li>Replace back: BOOST_AUTO_TEST_CASE => TEST_CASE</li>
  * </ul>
  */
-
-// Defining BOOST_TEST_MAIN creates a main in this file to run the test cases
-#define BOOST_TEST_MAIN
 
 // Include statements.
 #include <boost/test/unit_test.hpp>
@@ -76,13 +78,15 @@
 using namespace boost::unit_test;
 using namespace boost::test_tools;
 
-//! New prefix for test cases (so that filename is no longer shown)
-struct shorten_lf : public boost::unit_test::output::compiler_log_formatter
-{
-    void print_prefix( std::ostream& output, boost::unit_test::const_string, std::size_t line )
+//! New formatter for the boost test messages;
+struct logMessageFormatter : public output::compiler_log_formatter
+{   // Suppress the file and log level:
+    void log_entry_start( std::ostream& output, log_entry_data const& entry_data, log_entry_types )
     {
-        output << line << ": ";
+        // Don't suppress line nr! Otherwise validation can be skipped!
+        output << entry_data.m_line_num << ": ";
     }
+    void print_prefix( std::ostream& , boost::unit_test::const_string, std::size_t ) { }
 };
 //! Location of the file which contains the exact output which has to be produced for test to succeed
 std::string match_file_name( tudat::input_output::getRootPath() + "Basics/UnitTests/unitTest_testMacros.match.pattern" );
@@ -100,7 +104,6 @@ boost::test_tools::output_test_stream& outputTestStream()
     }
     return *inst;
 }
-
 //! Define a new type of test to test the test cases
 //  see Boost.test: boost/libs/test/test/test_tools_test.cpp
 #define TEST_CASE( name )                                       \
@@ -113,7 +116,7 @@ BOOST_AUTO_TEST_CASE( name )                                    \
                                                                 \
     unit_test_log.set_stream( outputTestStream() );             \
     unit_test_log.set_threshold_level( log_nothing );           \
-    unit_test_log.set_formatter( new shorten_lf );              \
+    unit_test_log.set_formatter( new logMessageFormatter );     \
     framework::run( impl );                                     \
                                                                 \
     unit_test_log.set_threshold_level(                          \
@@ -205,4 +208,16 @@ TEST_CASE( test_TUDAT_CHECK_MATRIX_CLOSE_elements ) {
         (Eigen::MatrixXd(2, 2) << 0.123456, 0.123456, 1.23456e28, 1.23456e-10).finished(), 
         (Eigen::MatrixXd(2, 2) << 0.123457, -0.123457, 1.23457e28, 1.23457e-10).finished(), 
         1e-3);
+}
+
+// Entry point for the test, like  '#define BOOST_TEST_MAIN' but allows for some additional logic
+test_suite* init_unit_test_suite( int argc, char* argv[] ) 
+{   
+    // Switch to 1 when generating the 'unitTest_testMacros.match.pattern' with BOOST_AUTO_TEST_CASE
+    // This way the same type of output is generated
+#if 0
+    // Bind a new log formatter so no file
+    unit_test_log.set_formatter( new logMessageFormatter );
+#endif
+    return 0;
 }
