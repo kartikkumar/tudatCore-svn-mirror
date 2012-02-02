@@ -1,0 +1,16 @@
+152: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 6 != 5
+153: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 6 != 5
+155: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 6 != 1
+155: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of columns not equal: 1 != 6
+156: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 6 != 1
+156: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of columns not equal: 1 != 6
+161: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 2 != 3
+161: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of columns not equal: 2 != 3
+162: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of rows not equal: 2 != 3
+162: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_size": Matrix number of columns not equal: 2 != 3
+182: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [0, 0] not within expected tolerance: expected 0.000000e+000, was -1.000000e-010, tolerance . 0.1
+186: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [0, 0] not within expected tolerance: expected 0.000000e+000, was -1.000000e-010, tolerance . 0.1
+192: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [2, 0] not within expected tolerance: expected 1.000000e+000, was 1.000200e+000, tolerance . 0.011
+197: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [2, 0] not within expected tolerance: expected 1.000000e+000, was 1.000200e+000, tolerance . 0.011
+203: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [0, 1] not within expected tolerance: expected 1.234560e-001, was -1.234570e-001, tolerance . 0.001
+207: error: in "test_TUDAT_CHECK_MATRIX_CLOSE_elements": Element [0, 1] not within expected tolerance: expected 1.234560e-001, was -1.234570e-001, tolerance . 0.001

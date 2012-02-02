@@ -127,6 +127,7 @@ macro(setup_headers HEADER_FILES HEADER_PATH)
 endmacro(setup_headers)
 
 # Set the main sub-directories
+set(BASICSDIR "/Basics")
 set(INPUTOUTPUTDIR "/InputOutput")
 set(ASTRODYNAMICSDIR "/Astrodynamics")
 set(MATHEMATICSDIR "/Mathematics")
@@ -171,7 +172,7 @@ else()
 endif()
 
 # Set sub-directories.
-set(SUBDIRS ${ASTRODYNAMICSDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR} )
+set(SUBDIRS ${BASICSDIR} ${ASTRODYNAMICSDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR} )
 
 # Add sub-directories to CMake process.
 foreach(CURRENT_SUBDIR ${SUBDIRS})
