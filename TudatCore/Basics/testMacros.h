@@ -1,4 +1,4 @@
-/*! \file testMacros.cpp
+/*! \file testMacros.h
  *
  *    Path              : /
  *    Version           : 1
@@ -58,12 +58,16 @@
     if (equalRows.p_predicate_value && equalCols.p_predicate_value)                             \
         for (signed int row=0; row < L.rows(); row++ )                                          \
         for (signed int col=0; col < L.cols(); col++ )                                          \
-            BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format(\
-                "Element [%d, %d] not within expected tolerance: expected %e, was %e, tolerance ")\
-                    % row % col % L.coeff(row, col) % R.coeff(row, col) ),                      \
-                CHECK, CHECK_MSG, (L.coeff(row, col))(R.coeff(row, col))                        \
-                (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
+            BOOST_CHECK_CLOSE(L.coeff(row, col), R.coeff(row, col), T);                                                         \
 }
+/*
+ * Use the following instead of BOOST_CHECK_CLOSE(L, R, T); on boost 1_49 or newer (inside the loop)
+ * BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format(\
+ *   "Element [%d, %d] not within expected tolerance: expected %e, was %e, tolerance ")\
+ *   % row % col % L.coeff(row, col) % R.coeff(row, col) ),                      \
+ *   CHECK, CHECK_MSG, (L.coeff(row, col))(R.coeff(row, col))                        \
+ *   (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
+ */
 
 //! Same as BOOST_CHECK_CLOSE_FRACTION, but operates on Eigen vectors/matrices
 /**
@@ -82,9 +86,13 @@
     if (equalRows.p_predicate_value && equalCols.p_predicate_value)                             \
         for (signed int row=0; row < L.rows(); row++ )                                          \
         for (signed int col=0; col < L.cols(); col++ )                                          \
-            BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format(\
-                "Element [%d, %d] not within expected tolerance: expected %e, was %e, tolerance ")\
-                    % row % col % L.coeff(row, col) % R.coeff(row, col) ),                      \
-                CHECK, CHECK_MSG, (L.coeff(row, col))(R.coeff(row, col))                        \
-                (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
+            BOOST_CHECK_CLOSE_FRACTION(L.coeff(row, col), R.coeff(row, col), T);                                                \
 }
+/* 
+ * Use the following instead of BOOST_CHECK_CLOSE(L, R, T); on boost 1_49 or newer (inside the loop)
+ * BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format(\
+ *   "Element [%d, %d] not within expected tolerance: expected %e, was %e, tolerance ")\
+ *   % row % col % L.coeff(row, col) % R.coeff(row, col) ),                      \
+ *   CHECK, CHECK_MSG, (L.coeff(row, col))(R.coeff(row, col))                        \
+ *   (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
+ */
