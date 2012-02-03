@@ -1,0 +1,15 @@
+155: Matrix number of rows not equal: 6 != 5
+156: Matrix number of rows not equal: 6 != 5
+158: Matrix number of rows not equal: 6 != 1
+158: Matrix number of columns not equal: 1 != 6
+159: Matrix number of rows not equal: 6 != 1
+159: Matrix number of columns not equal: 1 != 6
+164: Matrix number of rows not equal: 2 != 3
+164: Matrix number of columns not equal: 2 != 3
+165: Matrix number of rows not equal: 2 != 3
+165: Matrix number of columns not equal: 2 != 3
+185: difference{100%} between Eigen::Vector2d(0, 1.112e-10).coeff(row, col){0} and Eigen::Vector2d(-1e-10, 1.111e-10).coeff(row, col){-1e-10} exceeds 0.10000000000000001%
+189: difference{1} between Eigen::Vector2d(0, 1.112e-10).coeff(row, col){0} and Eigen::Vector2d(-1e-10, 1.111e-10).coeff(row, col){-1e-10} exceeds 0.10000000000000001
+195: difference{0.019996%} between Eigen::Vector3d(1, 1.0002, 1).coeff(row, col){1} and Eigen::Vector3d(1.0001, 1.0001, 1.0002).coeff(row, col){1.0002} exceeds 0.010999999999999999%
+206: difference{199.999%} between (Eigen::MatrixXd(2, 2) << 0.123456, 0.123456, 1.23456e28, 1.23456e-10).finished().coeff(row, col){0.123456} and (Eigen::MatrixXd(2, 2) << 0.123457, -0.123457, 1.23457e28, 1.23457e-10).finished().coeff(row, col){-0.123457} exceeds 0.001%
+210: difference{1.99999} between (Eigen::MatrixXd(2, 2) << 0.123456, 0.123456, 1.23456e28, 1.23456e-10).finished().coeff(row, col){0.123456} and (Eigen::MatrixXd(2, 2) << 0.123457, -0.123457, 1.23457e28, 1.23457e-10).finished().coeff(row, col){-0.123457} exceeds 0.001

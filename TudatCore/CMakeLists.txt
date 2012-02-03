@@ -185,7 +185,7 @@ get_target_property(INPUTOUTPUT_SOURCES tudat_core_input_output SOURCES)
 get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)
 
 
-add_library(tudat_core STATIC ${ASTRODYNAMICS_SOURCES} ${INPUTOUTPUT_SOURCES} ${MATHEMATICS_SOURCES})
+add_library(tudat_core STATIC ${BASICSDIR} ${ASTRODYNAMICS_SOURCES} ${INPUTOUTPUT_SOURCES} ${MATHEMATICS_SOURCES})
 setup_tudat_library_target(tudat_core "${SRCROOT}")
 
 # End of file.

@@ -89,9 +89,9 @@ struct logMessageFormatter : public output::compiler_log_formatter
     void print_prefix( std::ostream& , boost::unit_test::const_string, std::size_t ) { }
 };
 //! Location of the file which contains the exact output which has to be produced for test to succeed
-std::string match_file_name( tudat::input_output::getRootPath() + "Basics/UnitTests/unitTest_testMacros.match.pattern" );
+std::string match_file_name;
 //! Location to save the output of this test
-std::string save_file_name( "unitTest_testMacros.save.pattern" );
+std::string save_file_name("unitTest_testMacros.pattern");
 //! Get the output test stream, stream of the test output to the test output content file
 boost::test_tools::output_test_stream& outputTestStream()
 {   // Singleton output stream
@@ -215,9 +215,23 @@ test_suite* init_unit_test_suite( int argc, char* argv[] )
 {   
     // Switch to 1 when generating the 'unitTest_testMacros.match.pattern' with BOOST_AUTO_TEST_CASE
     // This way the same type of output is generated
-#if 0
-    // Bind a new log formatter so no file
-    unit_test_log.set_formatter( new logMessageFormatter );
-#endif
+    #if 0
+        // Bind a new log formatter so no file
+        unit_test_log.set_formatter( new logMessageFormatter );
+    #endif
+
+    // Make sure we have a BOOST_VERSION
+    #ifndef BOOST_VERSION
+        // Mark boost version as an old boost version 1_45 or prior
+        #define BOOST_VERSION 104500
+    #endif // BOOST_VERSION
+
+    // Check if we have a new or and old version of boost and select the output accordingly:
+    match_file_name = tudat::input_output::getRootPath();
+    if ( BOOST_VERSION / 100 % 1000 > 48 ) // Minor version
+        match_file_name += "Basics/UnitTests/unitTest_testMacros.newBoost.pattern";
+    else
+        match_file_name += "Basics/UnitTests/unitTest_testMacros.oldBoost.pattern";
+
     return 0;
 }
