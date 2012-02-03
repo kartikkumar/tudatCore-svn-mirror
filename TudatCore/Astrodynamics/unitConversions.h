@@ -71,6 +71,7 @@
 #define TUDAT_UNIT_CONVERSIONS_H
 
 // Include statements.
+#include <cmath>
 #include "TudatCore/Astrodynamics/physicalConstants.h"
 
 //! Tudat library namespace.
