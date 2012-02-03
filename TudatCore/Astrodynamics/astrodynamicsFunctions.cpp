@@ -40,8 +40,8 @@
 
 // Include statements.
 #include <cmath>
-#include "Astrodynamics/astrodynamicsFunctions.h"
-#include "Astrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/astrodynamicsFunctions.h"
+#include "TudatCore/Astrodynamics/physicalConstants.h"
 
 //! Compute Kepler orbital period.
 double tudat::astrodynamics::computeKeplerOrbitalPeriod(

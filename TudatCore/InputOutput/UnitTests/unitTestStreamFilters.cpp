@@ -44,7 +44,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <sstream>
-#include "InputOutput/streamFilters.h"
+#include "TudatCore/InputOutput/streamFilters.h"
 
 //! Test fixture for stream filters.
 /*!

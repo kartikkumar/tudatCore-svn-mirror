@@ -69,8 +69,8 @@
 #include <boost/test/detail/suppress_warnings.hpp>
 #include <Eigen/Core>
 #include <iostream>
-#include "Basics/testMacros.h"
-#include "InputOutput/basicInputOutput.h"
+#include "TudatCore/Basics/testMacros.h"
+#include "TudatCore/InputOutput/basicInputOutput.h"
 
 /************************************************************************/
 /* Prepare for the test cases                                           */

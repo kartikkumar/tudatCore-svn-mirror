@@ -63,7 +63,7 @@
 #include <cmath>
 #include <Eigen/Core>
 #include <limits>
-#include "Mathematics/coordinateConversions.h"
+#include "TudatCore/Mathematics/coordinateConversions.h"
 
 // Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )

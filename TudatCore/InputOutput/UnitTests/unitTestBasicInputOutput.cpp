@@ -42,7 +42,7 @@
 // Include statements.
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
-#include "InputOutput/basicInputOutput.h"
+#include "TudatCore/InputOutput/basicInputOutput.h"
 
 //! Check if the Tudat rootpath is detected correctly.
 BOOST_AUTO_TEST_CASE( test_getRootPath )

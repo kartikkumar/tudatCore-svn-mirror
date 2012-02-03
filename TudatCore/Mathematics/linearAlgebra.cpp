@@ -47,7 +47,7 @@
 
 // Include statements.
 #include <cmath>
-#include "Mathematics/linearAlgebra.h"
+#include "TudatCore/Mathematics/linearAlgebra.h"
 
 //! Compute cosine of the angle between two vectors.
 double tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors(

@@ -42,7 +42,7 @@
 #include <boost/assign.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <vector>
-#include "InputOutput/streamFilters.h"
+#include "TudatCore/InputOutput/streamFilters.h"
 
 //! Remove comments in a single line.
 std::string tudat::input_output::stream_filters::RemoveComment::do_filter(

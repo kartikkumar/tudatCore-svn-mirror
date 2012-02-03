@@ -42,7 +42,7 @@
 #define TUDAT_ASTRODYNAMICS_FUNCTIONS_H
 
 // Include statements.
-#include "Astrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/physicalConstants.h"
 
 //! Tudat library namespace.
 /*!

@@ -134,7 +134,7 @@ set(MATHEMATICSDIR "/Mathematics")
 
 # Include the top-level directories.
 include_directories(AFTER
-  "${SRCROOT}"
+  "${CODEROOT}"
 )
 
 # Find Eigen3 library on local system.

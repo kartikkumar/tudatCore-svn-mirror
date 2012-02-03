@@ -1,6 +1,6 @@
 
 // Include statements.
-#include "Basics/testMacros.h"
-#include "Basics/utilityMacros.h"
+#include "TudatCore/Basics/testMacros.h"
+#include "TudatCore/Basics/utilityMacros.h"
 
 // End of file.
