@@ -96,6 +96,7 @@
 #include <Eigen/Core>
 #include <limits>
 #include "TudatCore/Astrodynamics/orbitalElementConversions.h"
+#include "TudatCore/Basics/testMacros.h"
 
 // Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_orbital_element_conversions )
@@ -136,32 +137,9 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
-        // Check if computed x-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xPositionIndex ),
-                                    computedCartesianElements( xPositionIndex ), 1.0e-15 );
-
-        // Check if computed y-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yPositionIndex ),
-                                    computedCartesianElements( yPositionIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed z-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( zPositionIndex ),
-                                    computedCartesianElements( zPositionIndex ), 1.0e-15 );
-
-        // Check if computed x-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xVelocityIndex ),
-                                    computedCartesianElements( xVelocityIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed y-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yVelocityIndex ),
-                                    computedCartesianElements( yVelocityIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed z-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( zVelocityIndex ),
-                                    computedCartesianElements( zVelocityIndex ), 1.0e-15 );
+        // Check if computed Cartesian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedCartesianElements,
+                                           computedCartesianElements, 1.0e-15 );
     }
 
     // Case 2: Equatorial, circular orbit around Mars.
@@ -197,31 +175,9 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      marsGravitationalParameter );
 
-        // Check if computed x-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xPositionIndex ),
-                                    computedCartesianElements( xPositionIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed y-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yPositionIndex ),
-                                    computedCartesianElements( yPositionIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed z-position matches the expected value.
-        BOOST_CHECK_SMALL( computedCartesianElements( zPositionIndex ),
-                           std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed x-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xVelocityIndex ),
-                                    computedCartesianElements( xVelocityIndex ), 1.0e-15 );
-
-        // Check if computed y-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yVelocityIndex ),
-                                    computedCartesianElements( yVelocityIndex ), 1.0e-15 );
-
-        // Check if computed z-velocity matches the expected value.
-        BOOST_CHECK_SMALL( computedCartesianElements( zVelocityIndex ),
-                           std::numeric_limits< double >::epsilon( ) );
+        // Check if computed Cartesian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedCartesianElements,
+                                           computedCartesianElements, 1.0e-15 );
     }
 
     // Case 3: Hyperbolic orbit around the Sun.
@@ -257,30 +213,9 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      sunGravitationalParameter );
 
-        // Check if computed x-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xPositionIndex ),
-                                    computedCartesianElements( xPositionIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed y-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yPositionIndex ),
-                                    computedCartesianElements( yPositionIndex ), 1.0e-15 );
-
-        // Check if computed z-position matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( zPositionIndex ),
-                                    computedCartesianElements( zPositionIndex ), 1.0e-13 );
-
-        // Check if computed x-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( xVelocityIndex ),
-                                    computedCartesianElements( xVelocityIndex ), 1.0e-15 );
-
-        // Check if computed y-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( yVelocityIndex ),
-                                    computedCartesianElements( yVelocityIndex ), 1.0e-15 );
-
-        // Check if computed z-velocity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedCartesianElements( zVelocityIndex ),
-                                    computedCartesianElements( zVelocityIndex ), 1.0e-13 );
+        // Check if computed Cartesian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedCartesianElements,
+                                           computedCartesianElements, 1.0e-15 );
     }
 }
 
@@ -320,32 +255,9 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      earthGravitationalParameter );
 
-        // Check if computed semi-major axis matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( semiMajorAxisIndex ),
-                                    computedKeplerianElements( semiMajorAxisIndex ), 1.0e-14 );
-
-        // Check if computed eccentricity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( eccentricityIndex ),
-                                    computedKeplerianElements( eccentricityIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed inclination matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( inclinationIndex ),
-                                    computedKeplerianElements( inclinationIndex ), 1.0e-15 );
-
-        // Check if computed argument of periapsis matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( argumentOfPeriapsisIndex ),
-                                    computedKeplerianElements( argumentOfPeriapsisIndex ),
-                                    1.0e-15 );
-
-        // Check if computed right ascension of ascending node matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION(
-                    expectedKeplerianElements( rightAscensionOfAscendingNodeIndex ),
-                    computedKeplerianElements( rightAscensionOfAscendingNodeIndex ), 1.0e-15 );
-
-        // Check if computed true anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( trueAnomalyIndex ),
-                                    computedKeplerianElements( trueAnomalyIndex ), 1.0e-15 );
+        // Check if computed Keplerian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedKeplerianElements,
+                                           computedKeplerianElements, 1.0e-14 );
     }
 
     // Case 2: Equatorial, circular orbit around Venus.
@@ -439,33 +351,9 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      sunGravitationalParameter );
 
-        // Check if computed semi-major axis matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( semiMajorAxisIndex ),
-                                    computedKeplerianElements( semiMajorAxisIndex ), 1.0e-15 );
-
-        // Check if computed eccentricity matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( eccentricityIndex ),
-                                    computedKeplerianElements( eccentricityIndex ), 1.0e-15 );
-
-        // Check if computed inclination matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( inclinationIndex ),
-                                    computedKeplerianElements( inclinationIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
-
-        // Check if computed argument of periapsis matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( argumentOfPeriapsisIndex ),
-                                    computedKeplerianElements( argumentOfPeriapsisIndex ),
-                                    1.0e-15 );
-
-        // Check if computed right ascension of ascending node matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION(
-                    expectedKeplerianElements( rightAscensionOfAscendingNodeIndex ),
-                    computedKeplerianElements( rightAscensionOfAscendingNodeIndex ), 1.0e-15 );
-
-        // Check if computed true anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedKeplerianElements( trueAnomalyIndex ),
-                                    computedKeplerianElements( trueAnomalyIndex ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        // Check if computed Keplerian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedKeplerianElements,
+                                           computedKeplerianElements, 1.0e-15 );
     }
 }
 
