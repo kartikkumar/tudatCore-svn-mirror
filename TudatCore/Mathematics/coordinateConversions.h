@@ -69,8 +69,8 @@
  *      120127    K. Kumar          Minor comment edits.
  */
 
-#ifndef TUDAT_COORDINATE_CONVERSIONS_H
-#define TUDAT_COORDINATE_CONVERSIONS_H
+#ifndef TUDAT_CORE_COORDINATE_CONVERSIONS_H
+#define TUDAT_CORE_COORDINATE_CONVERSIONS_H
 
 // Include statements.
 #include <Eigen/Core>
@@ -156,6 +156,6 @@ Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindrica
 
 } // Namespace tudat.
 
-#endif // TUDAT_COORDINATECONVERSIONS_H
+#endif // TUDAT_CORE_COORDINATECONVERSIONS_H
 
 // End of file.

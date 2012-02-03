@@ -38,6 +38,9 @@
  *      120127    K. Kumar          Added missing comments and clarified variable-naming.
  */
 
+#ifndef TUDAT_CORE_STREAMFILTERS_H
+#define TUDAT_CORE_STREAMFILTERS_H
+
 // Include statements.
 #include <boost/iostreams/filter/line.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
@@ -262,5 +265,7 @@ private:
 } // Namespace input_output.
 
 } // Namespace tudat.
+
+#endif // TUDAT_CORE_STREAMFILTERS_H
 
 // End of file.

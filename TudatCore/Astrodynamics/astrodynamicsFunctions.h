@@ -38,8 +38,8 @@
  *      120127    D. Dirkx          Moved file to Tudat core.
  */
 
-#ifndef TUDAT_ASTRODYNAMICS_FUNCTIONS_H
-#define TUDAT_ASTRODYNAMICS_FUNCTIONS_H
+#ifndef TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H
+#define TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H
 
 // Include statements.
 #include "TudatCore/Astrodynamics/physicalConstants.h"
@@ -129,6 +129,6 @@ double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbit
 
 } // Namespace tudat.
 
-#endif // TUDAT_ASTRODYNAMICS_FUNCTIONS_H
+#endif // TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H
 
 // End of file.

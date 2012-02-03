@@ -46,8 +46,8 @@
  *                                  obliquity of ecliptic.
  */
 
-#ifndef TUDAT_PHYSICAL_CONSTANTS_H
-#define TUDAT_PHYSICAL_CONSTANTS_H
+#ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
+#define TUDAT_CORE_PHYSICAL_CONSTANTS_H
 
 //! Tudat library namespace.
 /*!
@@ -136,6 +136,6 @@ const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
 
 } // Namespace tudat.
 
-#endif // TUDAT_PHYSICAL_CONSTANTS_H
+#endif // TUDAT_CORE_PHYSICAL_CONSTANTS_H
 
 // End of file.

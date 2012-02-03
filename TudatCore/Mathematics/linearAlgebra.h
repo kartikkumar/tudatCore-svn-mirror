@@ -40,8 +40,8 @@
  *      120127    K. Kumar          Minor edits.
  */
 
-#ifndef TUDAT_LINEAR_ALGEBRA_H
-#define TUDAT_LINEAR_ALGEBRA_H
+#ifndef TUDAT_CORE_LINEAR_ALGEBRA_H
+#define TUDAT_CORE_LINEAR_ALGEBRA_H
 
 // Notice that coefficient access methods in Eigen have assertions checking the ranges.
 // So if you do a lot of coefficient access, these assertions can have an important cost.
@@ -101,6 +101,6 @@ double computeAngleBetweenVectors( const Eigen::VectorXd& vector0,
 
 } // Namespace tudat.
 
-#endif // TUDAT_LINEAR_ALGEBRA_H
+#endif // TUDAT_CORE_LINEAR_ALGEBRA_H
 
 // End of file.

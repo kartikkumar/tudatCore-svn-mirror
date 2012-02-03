@@ -59,8 +59,8 @@
  *      120127    K. Kumar          Adapted for Tudat Core.
  */
 
-#ifndef TUDAT_BASICINPUTOUTPUT_H
-#define TUDAT_BASICINPUTOUTPUT_H
+#ifndef TUDAT_CORE_BASICINPUTOUTPUT_H
+#define TUDAT_CORE_BASICINPUTOUTPUT_H
 
 // Include statements.
 #include <string>
@@ -103,6 +103,6 @@ static std::string getRootPath( )
 
 } // namespace tudat
 
-#endif // TUDAT_BASICINPUTOUTPUT_H
+#endif // TUDAT_CORE_BASICINPUTOUTPUT_H
 
 // End of file.

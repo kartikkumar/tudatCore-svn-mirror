@@ -66,8 +66,8 @@
  *      120127    K. Kumar          Minor comment edits.
  */
 
-#ifndef TUDAT_BASIC_MATHEMATICS_FUNCTIONS_H
-#define TUDAT_BASIC_MATHEMATICS_FUNCTIONS_H
+#ifndef TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
+#define TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
 
 // Include statements.
 #include <boost/random/mersenne_twister.hpp>
@@ -104,6 +104,6 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
 
 } // Namespace tudat.
 
-#endif // TUDAT_BASIC_MATHEMATICS_FUNCTIONS_H
+#endif // TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
 
 // End of file.

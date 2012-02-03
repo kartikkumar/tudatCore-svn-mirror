@@ -35,6 +35,9 @@
  *      120202    S. Billemont      File created.
  */
 
+#ifndef TUDAT_CORE_TESTMACROS_H
+#define TUDAT_CORE_TESTMACROS_H
+
 // Include Eigen for the matrix operations, format to generate a fancy error message and unit_test
 // to delegate the actual tests to
 #include <Eigen/Core>
@@ -97,3 +100,5 @@
  *   (::boost::math::fpc::percent_tolerance(T)), BOOST_PP_EMPTY() );                 \
  *
  */
+
+#endif // TUDAT_CORE_TESTMACROS_H
