@@ -227,7 +227,7 @@ test_suite* init_unit_test_suite( int argc, char* argv[] )
     #endif // BOOST_VERSION
 
     // Check if we have a new or and old version of boost and select the output accordingly:
-    match_file_name = tudat::input_output::getRootPath();
+    match_file_name = tudat::input_output::getCoreRootPath();
     if ( BOOST_VERSION / 100 % 1000 > 48 ) // Minor version
         match_file_name += "Basics/UnitTests/unitTest_testMacros.newBoost.pattern";
     else

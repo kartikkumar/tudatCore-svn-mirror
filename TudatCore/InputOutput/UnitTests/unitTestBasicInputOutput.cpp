@@ -49,13 +49,13 @@ BOOST_AUTO_TEST_CASE( test_getRootPath )
 {
     // Check if the rootpath is a folder which contains the 'External' subdirectory.
     BOOST_CHECK( boost::filesystem::is_directory(
-                    tudat::input_output::getRootPath( ) ) );
+                    tudat::input_output::getCoreRootPath( ) ) );
     BOOST_CHECK( boost::filesystem::is_directory(
-                     tudat::input_output::getRootPath( ) + "External" ) );
+                     tudat::input_output::getCoreRootPath( ) + "External" ) );
 
     // If using a TUDAT_CUSTOM_ROOT_PATH define, check if it matches the macro value.
     #ifdef TUDAT_CUSTOM_ROOT_PATH
-        BOOST_CHECK(std::string( TUDAT_CUSTOM_ROOT_PATH ).compare( tio::getRootPath( ) == 0 );
+        BOOST_CHECK(std::string( TUDAT_CUSTOM_ROOT_PATH ).compare( tio::getCoreRootPath( ) == 0 );
     #endif
 }
 
