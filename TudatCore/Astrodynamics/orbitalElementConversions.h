@@ -59,8 +59,8 @@
  *                                  only Keplerian <-> Cartesian conversions included.
  */
 
-#ifndef TUDAT_ORBITALELEMENTCONVERSIONS_H
-#define TUDAT_ORBITALELEMENTCONVERSIONS_H
+#ifndef TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
+#define TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
 
 // Include statements.
 #include <Eigen/Core>
@@ -301,6 +301,6 @@ double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
 
 } // Namespace tudat.
 
-#endif // TUDAT_ORBITALELEMENTCONVERSIONS_H
+#endif // TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
 
 // End of file.

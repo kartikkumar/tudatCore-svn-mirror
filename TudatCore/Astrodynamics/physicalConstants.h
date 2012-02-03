@@ -2,7 +2,7 @@
  *    This file contains a namespace with selected constants commonly used in astrodynamics.
  *
  *    Path              : /Astrodynamics/
- *    Version           : 4
+ *    Version           : 5
  *    Check status      : Checked
  *
  *    Author            : J. Melman
@@ -14,7 +14,7 @@
  *    E-mail address    : d.dirkx@tudelft.nl
  *
  *    Date created      : 3 September, 2010
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 3 February, 2012
  *
  *    References
  *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical
@@ -22,6 +22,8 @@
  *          Table 1, Kluwer Academic Publishers, Dordrecht.
  *      Standish, E.M. (1998) "JPL Planetary and Lunar Ephemerides,
  *          DE405/LE405", JPL IOM 312.F-98-048.
+ *      Anderson, J.D. Jr. Hypersonic and High-Temperature Gas Dynamics
+ *          Second Edition, p469.
  *
  *    Notes
  *      The reference for the sidereal day and year should be updated.
@@ -44,6 +46,7 @@
  *      110629    F.M. Engelen      Added specific gas constants.
  *      120127    D. Dirkx          Moved to Tudat core, removed variables related to
  *                                  obliquity of ecliptic.
+ *      120203    K. Kumar          Added missing specific gas constant value; need unit test.
  */
 
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
@@ -131,6 +134,14 @@ const static double GRAVITATIONAL_CONSTANT = 6.67259e-11;
  *            JPL IOM 312.F-98-048. http://iau-comm4.jpl.nasa.gov/de405iom/de405iom.pdf.
  */
 const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
+
+//! Specific gas constant of air.
+/*!
+ * The specific gas constant of air in J per kg Kelvin (J/kg K).
+ * Reference: Hypersonic and High-Temperature Gas Dynamics Second Edition,
+ *            John D. Anderson Jr., p469.
+ */
+const static double SPECIFIC_GAS_CONSTANT_AIR = 2.87e2;
 
 } // Namespace physical_constants.
 
