@@ -57,8 +57,16 @@ set(MATHEMATICS_HEADERS
   "${SRCROOT}${MATHEMATICSDIR}/coordinateConversions.h"
 )
 
+
+# Add sub-directories.
+add_subdirectory("${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
+
+# Get target properties for static libraries.
+get_target_property(NUMERICALINTEGRATORSSOURCES tudat_core_numerical_integrators SOURCES)
+
+
 # Add static libraries.
-add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS})
+add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS} ${NUMERICALINTEGRATORS_SOURCES} ${NUMERICALINTEGRATORS_HEADERS})
 setup_tudat_library_target(tudat_core_mathematics "${SRCROOT}${MATHEMATICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${MATHEMATICSDIR}")
 
