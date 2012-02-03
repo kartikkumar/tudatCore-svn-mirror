@@ -23,7 +23,7 @@
  *    E-mail address    : B.TongMinh@student.tudelft.nl
  *
  *    Date created      : 3 December, 2010
- *    Last modified     : 31 January, 2012
+ *    Last modified     : 3 February, 2012
  *
  *    References
  *      NASA, Goddard Spaceflight Center. Orbit Determination Toolbox (ODTBX), NASA - GSFC Open
@@ -83,6 +83,7 @@
  *                                  Only these two conversions are tested for Tudat Core. Unit
  *                                  tests use ODTBX as benchmark.
  *      120201    K. Kumar          Added unit tests for conversions transferred to Tudat Core.
+ *      120203    K. Kumar          Changed orbital element defines to enum.
  */
 
 // Required Boost unit test framework define.
@@ -504,7 +505,7 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         // Set expected eccentric anomaly.
         double expectedEccentricAnomaly = 2.800031718974503;
 
-        // Compute converted eccentric anomaly.
+        // Compute eccentric anomaly.
         double computedEccentricAnomaly = tudat::orbital_element_conversions::
                 convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricity );
 
@@ -516,8 +517,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
     // Case 3: Circular orbit at periapsis.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.0;
+        // Set eccentricity.
+        double eccentricity = 0.0;
 
         // Set true anomaly.
         double trueAnomaly = 0.0;
@@ -525,9 +526,9 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         // Set expected eccentric anomaly.
         double expectedEccentricAnomaly = 0.0;
 
-        // Compute converted eccentric anomaly.
+        // Compute eccentric anomaly.
         double computedEccentricAnomaly = tudat::orbital_element_conversions::
-                convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricityIndex );
+                convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed eccentric anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedEccentricAnomaly, computedEccentricAnomaly,
@@ -541,8 +542,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
     // Case 1: General elliptical orbit.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.639;
+        // Set eccentricity.
+        double eccentricity = 0.639;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = 239.45 / 180.0 * M_PI;
@@ -550,12 +551,12 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Set expected true anomaly.
         double expectedTrueAnomaly = 3.665218735816221;
 
-        // Compute converted true anomaly, modulo 2*pi.
+        // Compute true anomaly, modulo 2*pi.
         double convertedTrueAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricityIndex )
+                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricity )
                 + 2.0 * M_PI;
 
-        // Check if computed eccentric anomaly matches the expected value.
+        // Check if computed trie anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
@@ -563,8 +564,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
     // Case 2: Circular orbit.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.0;
+        // Set eccentricity.
+        double eccentricity = 0.0;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = -99.54 / 180.0 * M_PI;
@@ -572,12 +573,12 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Set expected true anomaly.
         double expectedTrueAnomaly = 4.545884569744431;
 
-        // Compute converted true anomaly.
+        // Compute true anomaly.
         double convertedTrueAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricityIndex )
+                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricity )
                 + 2.0 * M_PI;
 
-        // Check if computed eccentric anomaly matches the expected value.
+        // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
@@ -585,8 +586,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
     // Case 3: Circular orbit at periapsis.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.0;
+        // Set eccentricity.
+        double eccentricity = 0.0;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = 0.0;
@@ -594,11 +595,11 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Set expected true anomaly.
         double expectedTrueAnomaly = 0.0;
 
-        // Compute converted true anomaly.
+        // Compute true anomaly.
         double convertedTrueAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricityIndex );
+                ::convertEccentricAnomalyToTrueAnomaly( eccentricAnomaly, eccentricity );
 
-        // Check if computed eccentric anomaly matches the expected value.
+        // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
@@ -611,8 +612,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToHyperbolicEccentricAnomalyConversion )
     // Case 1: General hyperbolic orbit.
     // The benchmark data is obtained from (Fortescue, 2003).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 3.0;
+        // Set eccentricity.
+        double eccentricity = 3.0;
 
         // Set true anomaly.
         double trueAnomaly = 0.5291;
@@ -620,11 +621,11 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToHyperbolicEccentricAnomalyConversion )
         // Set expected hyperbolic eccentric anomaly.
         double expectedHyperbolicEccentricAnomaly = 0.3879;
 
-        // Compute converted hyperbolic eccentric anomaly.
+        // Compute hyperbolic eccentric anomaly.
         double convertedHyperbolicEccentricAnomaly = tudat::orbital_element_conversions
-                ::convertTrueAnomalyToHyperbolicEccentricAnomaly( trueAnomaly, eccentricityIndex );
+                ::convertTrueAnomalyToHyperbolicEccentricAnomaly( trueAnomaly, eccentricity );
 
-        // Check if computed eccentric anomaly matches the expected value.
+        // Check if computed hyperbolic eccentric anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedHyperbolicEccentricAnomaly,
                                     convertedHyperbolicEccentricAnomaly, 1.0e-5 );
     }
@@ -636,8 +637,8 @@ BOOST_AUTO_TEST_CASE( testHyperbolicEccentricAnomalyToTrueAnomalyConversion )
     // Case 1: General hyperbolic orbit.
     // The benchmark data is obtained from (Fortescue, 2003).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 3.0;
+        // Set eccentricity.
+        double eccentricity = 3.0;
 
         // Set hyperbolic eccentric anomaly.
         double hyperbolicEccentricAnomaly = 0.3879;
@@ -645,10 +646,10 @@ BOOST_AUTO_TEST_CASE( testHyperbolicEccentricAnomalyToTrueAnomalyConversion )
         // Set expected true anomaly.
         double expectedTrueAnomaly = 0.5291;
 
-        // Compute converted true anomaly.
+        // Compute true anomaly.
         double convertedTrueAnomaly = tudat::orbital_element_conversions
                 ::convertHyperbolicEccentricAnomalyToTrueAnomaly(
-                    hyperbolicEccentricAnomaly, eccentricityIndex );
+                    hyperbolicEccentricAnomaly, eccentricity );
 
         // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly, 1.0e-5 );
@@ -661,8 +662,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
     // Case 1: General elliptical orbit.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.541;
+        // Set eccentricity.
+        double eccentricity = 0.541;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = 176.09 / 180.0 * M_PI;
@@ -670,20 +671,20 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 3.036459804491048;
 
-        // Compute converted mean anomaly.
-        double convertedMeanAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricityIndex );
+        // Compute mean anomaly.
+        double computedMeanAnomaly = tudat::orbital_element_conversions
+                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricity );
 
         // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, convertedMeanAnomaly,
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, computedMeanAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
 
     // Case 2: Circular orbit.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.0;
+        // Set eccentricity.
+        double eccentricity = 0.0;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = 320.12 / 180.0 * M_PI;
@@ -691,20 +692,20 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 5.587148001484247;
 
-        // Compute converted mean anomaly.
-        double convertedMeanAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricityIndex );
+        // Compute mean anomaly.
+        double computedMeanAnomaly = tudat::orbital_element_conversions
+                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricity );
 
         // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, convertedMeanAnomaly,
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, computedMeanAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
 
     // Case 3: Circular orbit at periapsis.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 0.0;
+        // Set eccentricity.
+        double eccentricity = 0.0;
 
         // Set eccentric anomaly.
         double eccentricAnomaly = 0.0;
@@ -712,12 +713,12 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 0.0;
 
-        // Compute converted mean anomaly.
-        double convertedMeanAnomaly = tudat::orbital_element_conversions
-                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricityIndex );
+        // Compute mean anomaly.
+        double computedMeanAnomaly = tudat::orbital_element_conversions
+                ::convertEccentricAnomalyToMeanAnomaly( eccentricAnomaly, eccentricity );
 
         // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, convertedMeanAnomaly,
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, computedMeanAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
     }
 }
@@ -728,8 +729,8 @@ BOOST_AUTO_TEST_CASE( testHyperbolicEccentricAnomalyToMeanAnomalyConversion )
     // Case 1: General hyperbolic orbit.
     // The benchmark data is obtained from (Vallado, 2004).
     {
-        // Set eccentricityIndex.
-        double eccentricityIndex = 2.4;
+        // Set eccentricity.
+        double eccentricity = 2.4;
 
         // Set hyperbolic eccentric anomaly.
         double hyperbolicEccentricAnomaly = 1.6013761449;
@@ -737,13 +738,13 @@ BOOST_AUTO_TEST_CASE( testHyperbolicEccentricAnomalyToMeanAnomalyConversion )
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 235.4 / 180.0 * M_PI;
 
-        // Compute converted mean anomaly.
-        double convertedMeanAnomaly = tudat::orbital_element_conversions
+        // Compute mean anomaly.
+        double computedMeanAnomaly = tudat::orbital_element_conversions
                 ::convertHyperbolicEccentricAnomalyToMeanAnomaly( hyperbolicEccentricAnomaly,
-                                                                  eccentricityIndex );
+                                                                  eccentricity );
 
         // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, convertedMeanAnomaly, 1.0e-8 );
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomaly, computedMeanAnomaly, 1.0e-8 );
     }
 }
 
@@ -768,13 +769,13 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         // Set expected mean anomaly change [rad].
         double expectedMeanAnomalyChange = 2.580579656848906 - 1.950567148859647;
 
-        // Compute converted mean anomaly change [rad].
-        double convertedMeanAnomalyChange = tudat::orbital_element_conversions
+        // Compute mean anomaly change [rad].
+        double computedMeanAnomalyChange = tudat::orbital_element_conversions
                 ::convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
                     elapsedTime, earthGravitationalParameter, semiMajorAxis );
 
-        // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, convertedMeanAnomalyChange,
+        // Check if computed mean anomaly change matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, computedMeanAnomalyChange,
                                     1.0e-14 );
     }
 
@@ -796,13 +797,13 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         // Set expected mean anomaly change [rad].
         double expectedMeanAnomalyChange = 0.0;
 
-        // Compute converted mean anomaly change [rad].
-        double convertedMeanAnomalyChange = tudat::orbital_element_conversions
+        // Compute mean anomaly change [rad].
+        double computedMeanAnomalyChange = tudat::orbital_element_conversions
                 ::convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
                     elapsedTime, earthGravitationalParameter, semiMajorAxis );
 
-        // Check if computed mean anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, convertedMeanAnomalyChange,
+        // Check if computed mean anomaly change matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, computedMeanAnomalyChange,
                                     std::numeric_limits< double >::epsilon( ) );
     }
 }
@@ -819,7 +820,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         // Set mean anomaly change [rad].
         double meanAnomalyChange = 3.210592164838165 - 1.950567148859647;
 
-        // Set Earth gravitational parameter.
+        // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 398600.4415;
 
         // Set semi-major axis [m].
@@ -828,13 +829,13 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         // Set expected elapsed time [s].
         double expectedElapsedTime = 17280.0;
 
-        // Compute converted elapsed time [s].
-        double convertedElapsedTime = tudat::orbital_element_conversions
+        // Compute elapsed time [s].
+        double computedElapsedTime = tudat::orbital_element_conversions
                 ::convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
                     meanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
         // Check if computed elapsed time matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, convertedElapsedTime, 1.0e-15 );
+        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime, 1.0e-15 );
     }
 
     // Case 2: Earth-orbiting satellite with no mean anomaly change.
@@ -846,7 +847,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         // Set mean anomaly change [rad].
         double meanAnomalyChange = 0.0;
 
-        // Set Earth gravitational parameter.
+        // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 398600.4415;
 
         // Set semi-major axis [m].
@@ -855,13 +856,13 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         // Set expected elapsed time [s].
         double expectedElapsedTime = 0.0;
 
-        // Compute converted elapsed time [s].
-        double convertedElapsedTime = tudat::orbital_element_conversions
+        // Compute elapsed time [s].
+        double computedElapsedTime = tudat::orbital_element_conversions
                 ::convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
                     meanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
         // Check if computed elapsed time matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, convertedElapsedTime,
+        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime,
                                     std::numeric_limits< double >::epsilon( ) );
     }
 }
@@ -875,18 +876,18 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
         // Set mean motion [rad/s].
         double meanMotion = 7.2921e-5;
 
-        // Set Earth gravitational parameter.
+        // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 5.9736e24 * 6.67428e-11;
 
         // Set expected semi-major axis [m].
         double expectedSemiMajorAxis = 42164.0e3;
 
-        // Compute converted semi-major axis [s].
-        double convertedSemiMajorAxis = tudat::orbital_element_conversions
+        // Compute semi-major axis [s].
+        double computedSemiMajorAxis = tudat::orbital_element_conversions
                 ::convertMeanMotionToSemiMajorAxis( meanMotion, earthGravitationalParameter );
 
-        // Check if computed elapsed time matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, convertedSemiMajorAxis, 1.0e-4 );
+        // Check if computed semi-major axis matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, computedSemiMajorAxis, 1.0e-4 );
     }
 
     // Case 2: Geostationary satellite around Mars.
@@ -901,12 +902,12 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
         // Set expected semi-major axis [m].
         double expectedSemiMajorAxis = 20427.0e3;
 
-        // Compute converted semi-major axis [m].
-        double convertedSemiMajorAxis = tudat::orbital_element_conversions
+        // Compute semi-major axis [m].
+        double computedSemiMajorAxis = tudat::orbital_element_conversions
                 ::convertMeanMotionToSemiMajorAxis( meanMotion, marsGravitationalParameter );
 
-        // Check if computed elapsed time matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, convertedSemiMajorAxis, 1.0e-4 );
+        // Check if computed semi-major axis matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, computedSemiMajorAxis, 1.0e-4 );
     }
 }
 
@@ -925,12 +926,12 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         // Set expected mean motion [rad/s].
         double expectedMeanMotion = 7.2921e-5;
 
-        // Compute converted mean motion [rad/s].
-        double convertedMeanMotion = tudat::orbital_element_conversions
+        // Compute mean motion [rad/s].
+        double computedMeanMotion = tudat::orbital_element_conversions
                 ::convertSemiMajorAxisToMeanMotion( semiMajorAxis, earthGravitationalParameter );
 
         // Check if computed mean motion matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, convertedMeanMotion, 1.0e-3 );
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, computedMeanMotion, 1.0e-3 );
     }
 
     // Case 2: Geostationary satellite around Mars.
@@ -945,12 +946,12 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         // Set expected mean motion [rad/s].
         double expectedMeanMotion = 7.088218e-5;
 
-        // Compute converted mean motion [rad/s].
-        double convertedMeanMotion = tudat::orbital_element_conversions
+        // Compute mean motion [rad/s].
+        double computedMeanMotion = tudat::orbital_element_conversions
                 ::convertSemiMajorAxisToMeanMotion( semiMajorAxis, marsGravitationalParameter );
 
         // Check if computed mean motion matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, convertedMeanMotion, 1.0e-4 );
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, computedMeanMotion, 1.0e-4 );
     }
 }
 

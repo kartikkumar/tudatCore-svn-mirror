@@ -63,19 +63,19 @@ setup_tudat_library_target(tudat_core_astrodynamics "${SRCROOT}${ASTRODYNAMICSDI
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")
 
 # Add unit tests.
-add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestPhysicalConstants.cpp")
+add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestPhysicalConstants.cpp")
 setup_custom_test_program(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_PhysicalConstants tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
 
-add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestAstrodynamicsFunctions.cpp")
+add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestAstrodynamicsFunctions.cpp")
 setup_custom_test_program(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_AstrodynamicsFunctions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
 
-add_executable(test_OrbitalElementConversions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestOrbitalElementConversions.cpp")
+add_executable(test_OrbitalElementConversions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestOrbitalElementConversions.cpp")
 setup_custom_test_program(test_OrbitalElementConversions "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_OrbitalElementConversions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
 
-add_executable(test_UnitConversions "${SRCROOT}${ASTRODYNAMICSDIR}/unitTests/unitTestUnitConversions.cpp")
+add_executable(test_UnitConversions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestUnitConversions.cpp")
 setup_custom_test_program(test_UnitConversions "${SRCROOT}${ASTRODYNAMICSDIR}")
 target_link_libraries(test_UnitConversions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
 
