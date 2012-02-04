@@ -178,12 +178,15 @@ integrateTo( const IndependentVariableType intervalEnd,
 
 
     // Flag to indicate that the integration interval end has been reached
-    bool atIntegrationIntervalEnd = std::numeric_limits<double>::epsilon() <=
-            ( getCurrentInterval() + stepSize - intervalEnd );
+    bool atIntegrationIntervalEnd = ( intervalEnd - getCurrentInterval()  ) *
+            stepSize / std::abs( stepSize )
+            <= std::numeric_limits<IndependentVariableType>::epsilon();
 
     while ( !atIntegrationIntervalEnd )
     {
-        if ( getCurrentInterval() + stepSize >= intervalEnd )
+        // Check if the remaining interval is smaller than the step size
+        if ( std::abs( intervalEnd - getCurrentInterval() ) <= std::abs( stepSize ) *
+             ( 1.0 + std::numeric_limits<IndependentVariableType>::epsilon() ) )
         {
             // The next step is beyond the end of the integration interval, so adjust the
             // step size accordingly

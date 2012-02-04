@@ -143,7 +143,7 @@ bool testRungeKutta4Integrator( const RungeKutta4IntegratorXd::StateDerivativeFu
         // cerr statement if test fails.
         if ( !expectedState.isApprox( finalState, tolerance ) )
         {
-            std::cerr << "RungeKutta4Integrator test failed" << endl
+            std::cerr << "RungeKutta4Integrator two step test failed" << endl
                       << "Expected result: " << expectedState << endl
                       << "Actual result: " << finalState << endl;
             return false;
@@ -242,6 +242,17 @@ int main( )
                                                   0.2,
                                                   benchmarkFunctions[Exponential].initialState,
                                                   benchmarkFunctions[Exponential].endState,
+                                                  1e-3 );
+    }
+
+    // Test with x_dot = x, but integrate backwards
+    {
+        testRK4IsOk &= testRungeKutta4Integrator( benchmarkFunctions[InverseExponential].pointerToStateDerivativeFunction,
+                                                  benchmarkFunctions[InverseExponential].initialInterval,
+                                                  benchmarkFunctions[InverseExponential].endInterval,
+                                                  -0.2,
+                                                  benchmarkFunctions[InverseExponential].initialState,
+                                                  benchmarkFunctions[InverseExponential].endState,
                                                   1e-3 );
     }
 

@@ -128,6 +128,7 @@ enum BenchmarkFunctions
     Zero,
     Constant,
     Exponential,
+    InverseExponential,
     NumericalRecipes
 };
 
@@ -146,7 +147,12 @@ std::map<BenchmarkFunctions, BenchmarkFunction>& getBenchmarkFunctions()
 
         benchmarkFunctions[Exponential] = BenchmarkFunction( &exponentialStateDerivative,
                                                              0.0, Eigen::VectorXd::Constant( 1, 0.7 ),
-                                                             4.0, std::exp( 4.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ) );
+                                                             20.0, std::exp( 20.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ) );
+
+        benchmarkFunctions[InverseExponential] = BenchmarkFunction( &exponentialStateDerivative,
+                                                             4.0, std::exp( 4.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ),
+                                                             0.0, Eigen::VectorXd::Constant( 1, 0.7 ) );
+
         benchmarkFunctions[NumericalRecipes] = BenchmarkFunction( &numericalRecipesStateDerivative,
                                                                   0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
                                                                   2.0, Eigen::VectorXd::Constant( 1, 5.3053630 ) );
