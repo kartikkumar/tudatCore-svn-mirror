@@ -1,7 +1,7 @@
 /*! \file orbitalElementConversions.h
  *    This header file contains a namespace with orbital element conversion functions.
  *
- *    Path              : /Astrodynamics/States/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
  *    Version           : 11
  *    Check status      : Checked
  *
@@ -113,22 +113,22 @@ enum CartesianElementVectorIndices
 /*!
  * Converts Keplerian to Cartesian orbital elements.
  * \param keplerianElements Vector containing Keplerian elements. Order of elements is important!
- *          keplerianElements( 0 ) = semiMajorAxis                      [m],
- *          keplerianElements( 1 ) = eccentricity                       [-],
- *          keplerianElements( 2 ) = inclination                        [rad],
- *          keplerianElements( 3 ) = argument of periapsis              [rad],
- *          keplerianElements( 4 ) = longitude of ascending node        [rad],
- *          keplerianElements( 5 ) = true anomaly                       [rad].
+ *          keplerianElements( 0 ) = semiMajorAxis,                                             [m]
+ *          keplerianElements( 1 ) = eccentricity,                                              [-]
+ *          keplerianElements( 2 ) = inclination,                                             [rad]
+ *          keplerianElements( 3 ) = argument of periapsis,                                   [rad]
+ *          keplerianElements( 4 ) = longitude of ascending node,                             [rad]
+ *          keplerianElements( 5 ) = true anomaly.                                            [rad]
  *          WARNING: If eccentricity is 1.0 within machine precision,
  *          keplerianElements( 0 ) = semi-latus rectum.
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.
  * \return Converted state in Cartesian elements. The order of elements is fixed!
- *          cartesianElements( 0 ) = x-position coordinate              [m],
- *          cartesianElements( 1 ) = y-position coordinate              [m],
- *          cartesianElements( 2 ) = z-position coordinate              [m],
- *          cartesianElements( 3 ) = x-velocity coordinate              [m/s],
- *          cartesianElements( 4 ) = y-velocity coordinate              [m/s],
- *          cartesianElements( 5 ) = z-velocity coordinate              [m/s].
+ *          cartesianElements( 0 ) = x-position coordinate,                                     [m]
+ *          cartesianElements( 1 ) = y-position coordinate,                                     [m]
+ *          cartesianElements( 2 ) = z-position coordinate,                                     [m]
+ *          cartesianElements( 3 ) = x-velocity coordinate,                                   [m/s]
+ *          cartesianElements( 4 ) = y-velocity coordinate,                                   [m/s]
+ *          cartesianElements( 5 ) = z-velocity coordinate.                                   [m/s]
  */
 Eigen::VectorXd convertKeplerianToCartesianElements(
         const Eigen::VectorXd& keplerianElements, const double centralBodyGravitationalParameter );
@@ -136,20 +136,20 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
 //! Convert Cartesian to Keplerian orbital elements.
 /*!
  * \param cartesianElements Vector containing Cartesian elements. Order of elements is important!
- *          cartesianElements( 0 ) = x-position coordinate,
- *          cartesianElements( 1 ) = y-position coordinate,
- *          cartesianElements( 2 ) = z-position coordinate,
- *          cartesianElements( 3 ) = x-velocity coordinate,
- *          cartesianElements( 4 ) = y-velocity coordinate,
- *          cartesianElements( 5 ) = z-velocity coordinate.
+ *          cartesianElements( 0 ) = x-position coordinate,                                     [m]
+ *          cartesianElements( 1 ) = y-position coordinate,                                     [m]
+ *          cartesianElements( 2 ) = z-position coordinate,                                     [m]
+ *          cartesianElements( 3 ) = x-velocity coordinate,                                   [m/s]
+ *          cartesianElements( 4 ) = y-velocity coordinate,                                   [m/s]
+ *          cartesianElements( 5 ) = z-velocity coordinate.                                   [m/s]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.
  * \return Converted state in Keplerian elements. The order of elements is fixed!
- *          keplerianElements( 0 ) = semiMajorAxis,
- *          keplerianElements( 1 ) = eccentricity,
- *          keplerianElements( 2 ) = inclination,
- *          keplerianElements( 3 ) = argument of periapsis,
- *          keplerianElements( 4 ) = longitude of ascending node,
- *          keplerianElements( 5 ) = true anomaly.
+ *          keplerianElements( 0 ) = semiMajorAxis,                                             [m]
+ *          keplerianElements( 1 ) = eccentricity,                                              [-]
+ *          keplerianElements( 2 ) = inclination,                                             [rad]
+ *          keplerianElements( 3 ) = argument of periapsis,                                   [rad]
+ *          keplerianElements( 4 ) = longitude of ascending node,                             [rad]
+ *          keplerianElements( 5 ) = true anomaly.                                            [rad]
  *          WARNING: If eccentricity is 1.0 within machine precision,
  *          keplerianElements( 0 ) = semi-latus rectum.
  *          WARNING: If eccentricity is 0.0 within machine precision,
@@ -164,9 +164,9 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
 /*!
  * Converts true anomaly to eccentric anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equations used can be found in (Chobotov, 2002).
- * \param trueAnomaly True anomaly.
- * \param eccentricity Eccentricity.
- * \return Eccentric anomaly.
+ * \param trueAnomaly True anomaly.                                                           [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return Eccentric anomaly [rad].
  */
 double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly, const double eccentricity );
 
@@ -174,9 +174,9 @@ double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly, const dou
 /*!
  * Converts eccentric anomaly to true anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equations used can be found in (Chobotov, 2002).
- * \param eccentricAnomaly Eccentric anomaly.
- * \param eccentricity Eccentricity.
- * \return True anomaly.
+ * \param eccentricAnomaly Eccentric anomaly.                                                 [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
  */
 double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
                                              const double eccentricity );
@@ -185,9 +185,9 @@ double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
 /*!
  * Converts true anomaly to hyperbolic eccentric anomaly for hyperbolic orbits
  * ( eccentricity > 1.0 ). The equations used can be found in (Chobotov, 2002).
- * \param trueAnomaly True anomaly.
- * \param eccentricity Eccentricity.
- * \return Hyperbolic eccentric anomaly.
+ * \param trueAnomaly True anomaly.                                                           [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return Hyperbolic eccentric anomaly.                                                      [rad]
  */
 double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
                                                        const double eccentricity );
@@ -196,9 +196,9 @@ double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
 /*!
  * Converts hyperbolic eccentric anomaly to true anomaly for hyperbolic orbits
  * ( eccentricity > 1.0 ). The equations used can be found in (Chobotov, 2002).
- * \param hyperbolicEccentricAnomaly Hyperbolic eccentric anomaly.
- * \param eccentricity Eccentricity.
- * \return True anomaly.
+ * \param hyperbolicEccentricAnomaly Hyperbolic eccentric anomaly.                            [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
  */
 double convertHyperbolicEccentricAnomalyToTrueAnomaly( const double hyperbolicEccentricAnomaly,
                                                        const double eccentricity );
@@ -207,9 +207,9 @@ double convertHyperbolicEccentricAnomalyToTrueAnomaly( const double hyperbolicEc
 /*!
  * Converts eccentric anomaly to mean anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equations used can be found in (Chobotov, 2002).
- * \param eccentricity Eccentricity.
- * \param eccentricAnomaly Eccentric anomaly.
- * \return Mean anomaly.
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \param eccentricAnomaly Eccentric anomaly [rad].
+ * \return Mean anomaly [rad].
  */
 double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
                                              const double eccentricity );
@@ -218,9 +218,9 @@ double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
 /*!
  * Converts hyperbolic eccentric anomaly to mean anomaly for hyperbolic orbits
  * ( eccentricity > 1.0 ). The equations used can be found in (Chobotov, 2002).
- * \param hyperbolicEccentricAnomaly Hyperbolic eccentric anomaly.
- * \param eccentricity Eccentricity.
- * \return Mean anomaly.
+ * \param hyperbolicEccentricAnomaly Hyperbolic eccentric anomaly.                            [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return Mean anomaly.                                                                      [rad]
  */
 double convertHyperbolicEccentricAnomalyToMeanAnomaly( const double hyperbolicEccentricAnomaly,
                                                        const double eccentricity );
@@ -229,10 +229,10 @@ double convertHyperbolicEccentricAnomalyToMeanAnomaly( const double hyperbolicEc
 /*!
  * Converts elapsed time to mean anomaly change for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equation used can be found in (Chobotov, 2002).
- * \param elapsedTime Elapsed time.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \param semiMajorAxis Semi-major axis.
- * \return Mean anomaly change.
+ * \param elapsedTime Elapsed time.                                                             [s]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Mean anomaly change.                                                               [rad]
  */
 double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
         const double elapsedTime, const double centralBodyGravitationalParameter,
@@ -242,10 +242,10 @@ double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
 /*!
  * Converts mean anomaly change to elapsed time for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equation used can be found in (Chobotov, 2002).
- * \param meanAnomalyChange Mean anomaly change.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \param semiMajorAxis Semi-major axis.
- * \return Elapsed time.
+ * \param meanAnomalyChange Mean anomaly change.                                              [rad]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Elapsed time.                                                                        [s]
  */
 double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
@@ -255,10 +255,10 @@ double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
 /*!
  * Converts elapsed time to mean anomaly change for hyperbolic orbits ( eccentricity > 1.0 ).
  * The equation used can be found in (Chobotov, 2002).
- * \param elapsedTime Elapsed time.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \param semiMajorAxis Semi-major axis.
- * \return Mean anomaly change.
+ * \param elapsedTime Elapsed time.                                                             [s]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Mean anomaly change.                                                               [rad]
  */
 double convertElapsedTimeToMeanAnomalyChangeForHyperbolicOrbits(
         const double elapsedTime, const double centralBodyGravitationalParameter,
@@ -268,10 +268,10 @@ double convertElapsedTimeToMeanAnomalyChangeForHyperbolicOrbits(
 /*!
  * Converts mean anomaly change to elapsed time for hyperbolic orbits ( eccentricity > 1.0 ).
  * The equation used can be found in (Chobotov, 2002).
- * \param meanAnomalyChange Mean anomaly change.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \param semiMajorAxis Semi-major axis.
- * \return Elapsed time.
+ * \param meanAnomalyChange Mean anomaly change.                                              [rad]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Elapsed time.                                                                        [s]
  */
 double convertMeanAnomalyChangeToElapsedTimeForHyperbolicOrbits(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
@@ -280,9 +280,9 @@ double convertMeanAnomalyChangeToElapsedTimeForHyperbolicOrbits(
 //! Convert mean motion to semi-major axis.
 /*!
  * Converts mean motion to semi-major axis.
- * \param meanMotion Mean motion.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \return semiMajorAxis Semi-major axis.
+ * \param meanMotion Mean motion.                                                           [rad/s]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \return semiMajorAxis Semi-major axis.                                                       [m]
  */
 double convertMeanMotionToSemiMajorAxis( const double meanMotion,
                                          const double centralBodyGravitationalParameter );
@@ -290,9 +290,9 @@ double convertMeanMotionToSemiMajorAxis( const double meanMotion,
 //! Convert semi-major axis to mean motion.
 /*!
  * Converts semi-major axis to mean motion.
- * \param semiMajorAxis Semi-major axis.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \return meanMotion Mean motion.
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \return meanMotion Mean motion.                                                          [rad/s]
  */
 double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
                                          const double centralBodyGravitationalParameter );

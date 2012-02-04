@@ -1,9 +1,8 @@
 /*! \file unitTestUnitConversions.cpp
- *    This unit test will test the unit conversions that are
- *    defined in unitConversions.h.
+ *    This unit test will test the unit conversions that are defined in unitConversions.h.
  *
- *    Path              : /Astrodynamics/
- *    Version           : 7
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
+ *    Version           : 10
  *    Check status      : Checked
  *
  *    Author/Checker    : J. Melman
@@ -23,7 +22,7 @@
  *    E-mail address    : K.Kumar@tudelft.nl
  *
  *    Date created      : 10 September, 2010
- *    Last modified     : 27 January, 2012
+ *    Last modified     : 4 February, 2012
  *
  *    References
  *      Wikipedia. http://en.wikipedia.org/wiki/Neptune, last accessed: 27 January, 2012(a).
@@ -69,361 +68,138 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      110127    D. Dirkx          Minor textual changes and made consistent with rewrite of
  *                                  physical constants.
+ *      120204    K. Kumar          Transferred unit tests to Boost unit test framework.
  */
 
+// Required Boost unit test framework define.
+#define BOOST_TEST_MAIN
+
 // Include statements.
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <iostream>
 #include <limits>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/unitConversions.h"
 
+// Define Boost test suite.
+BOOST_AUTO_TEST_SUITE( test_unit_conversions )
+
 //! Test conversion from kilometers to meters.
-/*!
- * Tests conversion from kilometers to meters.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromKilometersToMeters( )
+BOOST_AUTO_TEST_CASE( testConversionFromKilometersToMeters )
 {
-    if ( std::fabs( tudat::unit_conversions::convertKilometersToMeters( 1.0e6 )
-                    - 1.0e6 * 1.0e3 ) / 1.0e9 > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertKilometersToMeters( 1.0e6 ),
+                                1.0e6 * 1.0e3, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from degrees to radians.
-/*!
- * Tests conversion from degrees to radians.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromDegreesToRadians( )
+BOOST_AUTO_TEST_CASE( testConversionFromDegreesToRadians )
 {
-    if ( std::fabs( tudat::unit_conversions::convertDegreesToRadians( 45.0 ) - M_PI / 4.0 )
-         / M_PI / 4.0 > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertDegreesToRadians( 45.0 ),
+                                M_PI / 4.0, std::numeric_limits< double >::epsilon( ) );
 }
 
+
 //! Test conversion from degrees to arcminutes.
-/*!
- * Tests conversion from degrees to arcminutes.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromDegreesToArcminutes( )
+BOOST_AUTO_TEST_CASE( testConversionFromDegreesToArcminutes )
 {
-    if ( std::fabs( tudat::unit_conversions::convertDegreesToArcminutes( 43.2 ) - 43.2 * 60.0 )
-         / ( 43.2 * 60.0 ) > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertDegreesToArcminutes( 43.2 ),
+                                43.2 * 60.0, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from arcminutes to arcseconds.
-/*!
- * Tests conversion from arcminutes to arcseconds.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromArcminutesToArcSeconds( )
+BOOST_AUTO_TEST_CASE( testConversionFromArcminutesToArcSeconds )
 {
-    if ( std::fabs( tudat::unit_conversions::convertArcminutesToArcseconds( 125.9 )
-                    - 125.9 * 60.0 ) / ( 125.9 * 60.0 )
-         > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertArcminutesToArcseconds( 125.9 ),
+                                125.9 * 60.0, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from astronomical units to meters.
-/*!
- * Tests conversion from astronomical units to meters.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromAstronomicalUnitsToMeters( )
+BOOST_AUTO_TEST_CASE( testConversionFromAstronomicalUnitsToMeters )
 {
     // Case: Neptune's semi-major axis (Wikipedia, 2012a).
-    if ( std::fabs( tudat::unit_conversions::convertAstronomicalUnitsToMeters( 30.10366151 )
-                    - 4.503443661e+12 ) > 1.0e3 )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION(
+                tudat::unit_conversions::convertAstronomicalUnitsToMeters( 30.10366151 ),
+                                4.503443661e+12, 1.0e-9 );
 }
 
 //! Test conversion from minutes to seconds.
-/*!
- * Tests conversion from minutes to seconds.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromMinutesToSeconds( )
+BOOST_AUTO_TEST_CASE( testConversionFromMinutesToSeconds )
 {
-    if ( std::fabs( tudat::unit_conversions::convertMinutesToSeconds( 12.0 ) - 12.0 * 60.0 )
-         / ( 12.0 * 60.0 ) > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertMinutesToSeconds( 12.0 ),
+                                12.0 * 60.0, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from seconds to minutes.
-/*!
- * Tests conversion from seconds to minutes.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromSecondsToMinutes( )
+BOOST_AUTO_TEST_CASE( testConversionFromSecondsToMinutes )
 {
-    if ( std::fabs( tudat::unit_conversions::convertSecondsToMinutes( 12.0 ) - 0.2 ) / 0.2
-         > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertSecondsToMinutes( 12.0 ),
+                                0.2, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from hours to Julian years.
-/*!
- * Test conversion from hours to Julian years.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromHoursToJulianYears( )
+BOOST_AUTO_TEST_CASE( testConversionFromHoursToJulianYears )
 {
-    if ( std::fabs( tudat::unit_conversions::convertJulianDaysToJulianYears(
-                        tudat::unit_conversions::convertSecondsToJulianDays(
-                            tudat::unit_conversions::convertHoursToSeconds( 24.0 ) ) )
-               - 1.0 / 365.25 ) / ( 1.0 / 365.25 )  > std::numeric_limits< double >::epsilon( )  )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertJulianDaysToJulianYears(
+                                    tudat::unit_conversions::convertSecondsToJulianDays(
+                                        tudat::unit_conversions::convertHoursToSeconds( 24.0 ) ) ),
+                                1.0 / 365.25, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from Julian years to hours.
-/*!
- * Tests conversion from Julian years to hours.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromJulianYearsToHours( )
+BOOST_AUTO_TEST_CASE( testConversionFromJulianYearsToHours )
 {
-    if ( std::fabs( tudat::unit_conversions::convertSecondsToHours(
-                        tudat::unit_conversions::convertJulianDaysToSeconds(
-                            tudat::unit_conversions::convertJulianYearsToJulianDays(
-                                1.0 / 365.25 ) ) )
-                    - 24.0 ) / ( 24.0 )  > std::numeric_limits< double >::epsilon( )  )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertSecondsToHours(
+                                    tudat::unit_conversions::convertJulianDaysToSeconds(
+                                        tudat::unit_conversions::convertJulianYearsToJulianDays(
+                                            1.0 / 365.25 ) ) ),
+                                24.0, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from sidereal days to seconds.
-/*!
- * Tests conversion from sidereal days to seconds.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromSiderealDaysToSeconds( )
+BOOST_AUTO_TEST_CASE( testConversionFromSiderealDaysToSeconds )
 {
-    if ( std::fabs( tudat::unit_conversions::convertSiderealDaysToSeconds( 7.0 )
-                    - 7.0 * tudat::physical_constants::SIDEREAL_DAY )
-         / ( 7.0 * tudat::physical_constants::SIDEREAL_DAY )
-         > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertSiderealDaysToSeconds( 7.0 ),
+                                7.0 * tudat::physical_constants::SIDEREAL_DAY,
+                                std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from seconds to sidereal days.
-/*!
- * Tests conversion from seconds to sidereal days.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromSecondsToSiderealDays( )
+BOOST_AUTO_TEST_CASE( testConversionFromSecondsToSiderealDays )
 {
-    if ( std::fabs( tudat::unit_conversions::convertSecondsToSiderealDays( 100.0 ) -
-                    100.0 / tudat::physical_constants::SIDEREAL_DAY )
-         / ( 100.0 / tudat::physical_constants::SIDEREAL_DAY )
-         > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertSecondsToSiderealDays( 100.0 ),
+                                100.0 / tudat::physical_constants::SIDEREAL_DAY,
+                                std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion of temperature in Rankine to Kelvin.
-/*!
- * Tests conversion of temperature in Rankine to Kelvin
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromRankineToKelvin( )
+BOOST_AUTO_TEST_CASE( testConversionFromRankineToKelvin )
 {
-    // Case: 0 degree celcius, (Wikipedia, 2012d)
-    if ( std::fabs( tudat::unit_conversions::convertRankineToKelvin( 491.67 ) - 273.15 )
-         / 273.15 > std::numeric_limits< double >::epsilon( ) )
-    { return true; }
-
-    else
-    { return false; }
+    // Case: 0 deg Celcius (Wikipedia, 2011d).
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertRankineToKelvin( 491.67 ),
+                                273.15, std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test conversion from distance in feet to meters.
-/*!
- * Tests conversion from distance in feet to meters.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromFeetToMeters( )
+BOOST_AUTO_TEST_CASE( testConversionFromFeetToMeters )
 {
     // Case: length of a statute mile (Wikipedia, 2011b).
-    if ( std::fabs( tudat::unit_conversions::convertFeetToMeter( 5280.0 ) - 1609.344 ) / 1609.344
-         > std::numeric_limits< double >::epsilon( )  )
-    { return true; }
-
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertFeetToMeter( 5280.0 ),
+                                1609.344, std::numeric_limits< double >::epsilon( ) );
 }
+
 
 //! Test conversion from pounds-per-square-feet to Pascal.
-/*!
- * Tests conversion from pounds-per-square-feet to Pascal.
- * \return False if test passes and code is working; true if the test fails and the code is
- *         erroneous.
- */
-bool testConversionFromPoundsPerSquareFeetToPascal( )
+BOOST_AUTO_TEST_CASE( testConversionFromPoundsPerSquareFeetToPascal )
 {
     // Case: atmospheric pressure at sea level (Wikipedia, 2011c).
-    if ( std::fabs( tudat::unit_conversions::convertPoundPerSquareFeetToPascal( 2116.21662367394 )
-                    - 101325.0 ) > 1.0e-4 )
-    { return true; }
-
-    else
-    { return false; }
+    BOOST_CHECK_CLOSE_FRACTION(
+                tudat::unit_conversions::convertPoundPerSquareFeetToPascal( 2116.21662367394 ),
+                101325.0, 1.0e-9 );
 }
 
-//! Test unit conversions.
-int main( )
-{
-    // Declare test result boolean.
-    bool isUnitConversionsErroneous = false;
-
-    // Test 1: Test conversion from kilometers to meters.
-    if ( testConversionFromKilometersToMeters( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from kilometers to meters failed (Test 1)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 2: Test conversion from degrees to radians.
-    if ( testConversionFromDegreesToRadians( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from degrees to radians failed (Test 2)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 3: Test conversion from degrees to arcminutes.
-    if ( testConversionFromDegreesToArcminutes( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from degrees to arcminutes failed (Test 3)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 4: Test conversion from arcminutes to acrseconds.
-    if ( testConversionFromArcminutesToArcSeconds( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from arcminutes to arcseconds failed (Test 4)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 5: Test conversion from astronomical units to meters.
-    if ( testConversionFromAstronomicalUnitsToMeters( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from Astronomical Units to meters failed (Test 5)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 6: Test conversion from minutes to seconds.
-    if ( testConversionFromMinutesToSeconds( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from minutes to seconds failed (Test 6)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 7: Test conversion from seconds to minutes.
-    if ( testConversionFromSecondsToMinutes( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from seconds to minutes failed (Test 7)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 8: Test conversion from hours to Julian years.
-    if ( testConversionFromHoursToJulianYears( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from hours to Julian years failed (Test 8)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 9: Test conversion from Julian years to hours.
-    if ( testConversionFromJulianYearsToHours( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from Julian years to hours failed (Test 9)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 10: Test conversion from Sidereal days to seconds.
-    if ( testConversionFromSiderealDaysToSeconds( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from Sidereal days to seconds failed (Test 10)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 11: Test conversion from seconds to Sidereal days.
-    if ( testConversionFromSecondsToSiderealDays( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from seconds to Sidereal days failed (Test 11)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 12: Test conversion from Rankine to Kelvin.
-    if ( testConversionFromRankineToKelvin( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from Rankine to Kelvin failed (Test 12)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 13: Test conversion from feet to meters.
-    if ( testConversionFromFeetToMeters( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from feet to meters failed (Test 13)."
-                  << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    // Test 14: Test conversion from pounds-per-square-feet to Pascals.
-    if ( testConversionFromPoundsPerSquareFeetToPascal( ) == true )
-    {
-        std::cerr << "ERROR: Test of conversion from pounds-per-square-feet to Pascals failed "
-                  << "(Test 14)." << std::endl;
-        isUnitConversionsErroneous = true;
-    }
-
-    return isUnitConversionsErroneous;
-}
+// Close Boost test suite.
+BOOST_AUTO_TEST_SUITE_END( )
 
 // End of file.

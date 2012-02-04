@@ -141,11 +141,10 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
             / ( 1.0 + eccentricity_ * cosineOfTrueAnomaly_ );
 
     // Definition of velocity in the perifocal coordinate system.
-    Eigen::Vector2d velocityPerifocal_ = Eigen::Vector2d::Zero( 2 );
-    velocityPerifocal_.x( ) = -sqrt( centralBodyGravitationalParameter / semiLatusRectum_ )
-            * sineOfTrueAnomaly_;
-    velocityPerifocal_.y( ) = sqrt( centralBodyGravitationalParameter / semiLatusRectum_ )
-            * ( eccentricity_ + cosineOfTrueAnomaly_ );
+    Eigen::Vector2d velocityPerifocal_(
+                -sqrt( centralBodyGravitationalParameter / semiLatusRectum_ ) * sineOfTrueAnomaly_,
+                sqrt( centralBodyGravitationalParameter / semiLatusRectum_ )
+                * ( eccentricity_ + cosineOfTrueAnomaly_ ) );
 
     // Definition of the transformation matrix.
     Eigen::MatrixXd transformationMatrix_ = Eigen::MatrixXd::Zero( 3, 2 );
