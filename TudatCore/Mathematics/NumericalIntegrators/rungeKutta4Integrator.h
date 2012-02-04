@@ -125,11 +125,8 @@ public:
 
     //! Perform a single integration step
     /*!
-     * Perform a single integration step from intervalStart with initialState and stepSize and
-     * sets the stepSize member variable.
-     * \param intervalStart The start of the interval of this step
-     * \param initialState The initial state
-     * \param initialStepSize The initial step size
+     * Perform a single integration step.
+     * \param stepSize The step size to take
      * \return The state at the end of the interval
      */
     virtual StateType performIntegrationStep( const IndependentVariableType stepSize )

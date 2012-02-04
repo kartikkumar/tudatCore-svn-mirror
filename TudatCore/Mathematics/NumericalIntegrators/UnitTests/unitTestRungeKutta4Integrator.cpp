@@ -155,14 +155,15 @@ bool testRungeKutta4Integrator( const RungeKutta4IntegratorXd::StateDerivativeFu
             std::cerr << "RungeKutta4Integrator rollback returned false" << endl;
             return false;
         }
-        if ( std::abs( integrator.getCurrentInterval() != intervalEnd ) /
-             intervalEnd > std::numeric_limits<double>::epsilon() )
+        if ( std::abs( integrator.getCurrentInterval() - intervalEnd ) / intervalEnd >
+             std::numeric_limits<double>::epsilon() )
         {
             std::cerr << "RungeKutta4Integrator rollback to invalid interval" << endl
                       << "Expected result: " << intervalEnd << endl
                       << "Actual result: " << integrator.getCurrentInterval() << endl;
             return false;
         }
+        // This result should be exactly the same
         if ( integrator.getCurrentState() != finalState )
         {
             std::cerr << "RungeKutta4Integrator rollback to invalid state" << endl
