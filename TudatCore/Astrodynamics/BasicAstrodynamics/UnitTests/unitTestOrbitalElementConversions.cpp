@@ -95,7 +95,7 @@
 #include <cmath>
 #include <Eigen/Core>
 #include <limits>
-#include "TudatCore/Astrodynamics/orbitalElementConversions.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Basics/testMacros.h"
 
 // Define Boost test suite.

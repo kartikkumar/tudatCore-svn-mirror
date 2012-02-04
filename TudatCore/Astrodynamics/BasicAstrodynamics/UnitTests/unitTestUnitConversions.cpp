@@ -75,8 +75,8 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
-#include "TudatCore/Astrodynamics/physicalConstants.h"
-#include "TudatCore/Astrodynamics/unitConversions.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/unitConversions.h"
 
 //! Test conversion from kilometers to meters.
 /*!

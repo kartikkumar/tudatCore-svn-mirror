@@ -40,7 +40,8 @@ set(NUMERICALINTEGRATORS_SOURCES
 # Add header files.
 set(NUMERICALINTEGRATORS_HEADERS 
   "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/numericalIntegrator.h"
-  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/rungeKutta4Integrator.h"  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
+  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/rungeKutta4Integrator.h"
+  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
 )
 
 # Add static libraries.
@@ -56,6 +57,5 @@ target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators)
 add_executable(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestRungeKutta4Integrator.cpp")
 setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
 target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators)
-
 
 # End of file.

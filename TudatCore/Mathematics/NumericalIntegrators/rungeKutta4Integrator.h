@@ -69,9 +69,10 @@ class RungeKutta4Integrator :
         public NumericalIntegrator<IndependentVariableType, StateType, StateDerivativeType>
 {
 public:
-    //! Typedef of the base class
+
+    //! Typedef of the base class.
     /*!
-     * Typedef of the base class with all template parameters filled in
+     * Typedef of the base class with all template parameters filled in.
      */
     typedef NumericalIntegrator<IndependentVariableType, StateType, StateDerivativeType> Base;
 
@@ -82,13 +83,13 @@ public:
      */
     typedef typename Base::StateDerivativeFunction StateDerivativeFunction;
 
-    //! Default constructor
+    //! Default constructor.
     /*!
      * Default constructor, taking a state derivative function as argument.
      * \param stateDerivativeFunction State derivative function.
-     * \param intervalStart The start of the integration interval
-     * \param initialState The initial state
-     * \sa NumericalIntegrator::NumericalIntegrator
+     * \param intervalStart The start of the integration interval.
+     * \param initialState The initial state.
+     * \sa NumericalIntegrator::NumericalIntegrator.
      */
     RungeKutta4Integrator( const StateDerivativeFunction& stateDerivativeFunction,
                            const IndependentVariableType intervalStart,
@@ -179,6 +180,7 @@ public:
 
 
 protected:
+
     //! Last used step size
     /*!
      * Last used step size, passed to either integrateTo() or performIntegrationStep()
@@ -207,9 +209,6 @@ protected:
      * Last state as computed by performIntegrationStep()
      */
     StateType lastState_;
-
-
-
 
 }; // class RungeKutta4Integrator
 

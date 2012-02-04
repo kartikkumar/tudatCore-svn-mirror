@@ -86,8 +86,8 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
   return globalRandomNumberGenerator;
 }
 
-} // Namespace mathematics.
+} // namespace mathematics.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 // End of file.

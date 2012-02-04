@@ -297,9 +297,9 @@ double convertMeanMotionToSemiMajorAxis( const double meanMotion,
 double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
                                          const double centralBodyGravitationalParameter );
 
-} // Namespace orbital_element_conversions.
+} // namespace orbital_element_conversions.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
 

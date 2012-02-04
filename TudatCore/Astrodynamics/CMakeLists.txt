@@ -1,11 +1,11 @@
 # \file CMakeLists.txt
- #    This is the CMake file for the Basics sub-directory.
+ #    This is the CMake file for the Astrodynamics sub-directory.
  #
- #    Path              : /Basics/
- #    Version           : 3
+ #    Path              : /Astrodynamics/
+ #    Version           : 2
  #    Check status      : Checked
  #
- #    Author            : S.M. Persson
+ #    Author/Checker    : S.M. Persson
  #    Affiliation       : McGill University, Department of Mechanical Engineering
  #    E-mail address    : mikael.s.persson@gmail.com
  #
@@ -13,12 +13,8 @@
  #    Affiliation       : Delft University of Technology
  #    E-mail address    : K.Kumar@tudelft.nl
  #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
  #    Date created      : 20 August, 2011
- #    Last modified     : 27 January, 2012
+ #    Last modified     : 4 February, 2012
  #
  #    References
  #
@@ -38,45 +34,29 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      110820    S.M. Persson      File created.
- #      111025    K. Kumar          Adapted file to work with Revision 194.
- #      111026    K. Kumar          Adapted file so all headers show in project tree in Qt Creator.
- #      120127    K. Kumar          Added Boost libraries to unit tests.
+ #      120204    K. Kumar          Adapted for Astrodynamics sub-directory.
  #/
+
+# Define the main sub-directories.
+set(BASICASTRODYNAMICSDIR "${ASTRODYNAMICSDIR}/BasicAstrodynamics")
 
 # Add source files.
 set(ASTRODYNAMICS_SOURCES
-  "${SRCROOT}${ASTRODYNAMICSDIR}/astrodynamicsFunctions.cpp"
-  "${SRCROOT}${ASTRODYNAMICSDIR}/orbitalElementConversions.cpp"
 )
 
 # Add header files.
 set(ASTRODYNAMICS_HEADERS
-  "${SRCROOT}${ASTRODYNAMICSDIR}/astrodynamicsFunctions.h"
-  "${SRCROOT}${ASTRODYNAMICSDIR}/orbitalElementConversions.h"
-  "${SRCROOT}${ASTRODYNAMICSDIR}/physicalConstants.h"
-  "${SRCROOT}${ASTRODYNAMICSDIR}/unitConversions.h"
 )
 
+# Add subdirectories.
+add_subdirectory("${SRCROOT}${BASICASTRODYNAMICSDIR}")
+
+# Get target properties for static libraries.
+get_target_property(BASICASTRODYNAMICSSOURCES tudat_core_basic_astrodynamics SOURCES)
+
 # Add static libraries.
-add_library(tudat_core_astrodynamics STATIC ${ASTRODYNAMICS_SOURCES} ${ASTRODYNAMICS_HEADERS})
+add_library(tudat_core_astrodynamics STATIC ${ASTRODYNAMICS_SOURCES} ${ASTRODYNAMICS_HEADERS} ${BASICASTRODYNAMICSSOURCES})
 setup_tudat_library_target(tudat_core_astrodynamics "${SRCROOT}${ASTRODYNAMICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")
-
-# Add unit tests.
-add_executable(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestPhysicalConstants.cpp")
-setup_custom_test_program(test_PhysicalConstants "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_PhysicalConstants tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestAstrodynamicsFunctions.cpp")
-setup_custom_test_program(test_AstrodynamicsFunctions "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_AstrodynamicsFunctions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_OrbitalElementConversions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestOrbitalElementConversions.cpp")
-setup_custom_test_program(test_OrbitalElementConversions "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_OrbitalElementConversions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_UnitConversions "${SRCROOT}${ASTRODYNAMICSDIR}/UnitTests/unitTestUnitConversions.cpp")
-setup_custom_test_program(test_UnitConversions "${SRCROOT}${ASTRODYNAMICSDIR}")
-target_link_libraries(test_UnitConversions tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
 
 # End of file.

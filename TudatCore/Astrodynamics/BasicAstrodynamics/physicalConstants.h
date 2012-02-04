@@ -143,9 +143,9 @@ const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
  */
 const static double SPECIFIC_GAS_CONSTANT_AIR = 2.87e2;
 
-} // Namespace physical_constants.
+} // namespace physical_constants.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_PHYSICAL_CONSTANTS_H
 

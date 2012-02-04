@@ -42,7 +42,7 @@
 #define TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H
 
 // Include statements.
-#include "TudatCore/Astrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 //! Tudat library namespace.
 /*!
@@ -125,9 +125,9 @@ double computeKeplerEnergy( const double semiMajorAxis,
  */
 double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbitalPeriodBody2 );
 
-} // Namespace astrodynamics.
+} // namespace astrodynamics.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H
 

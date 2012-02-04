@@ -81,7 +81,7 @@
 #include <Eigen/Geometry>
 #include <numeric>
 #include <cmath>
-#include "TudatCore/Astrodynamics/orbitalElementConversions.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Mathematics/linearAlgebra.h"
 
 //! Tudat library namespace.
@@ -506,8 +506,8 @@ double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
                                          const double centralBodyGravitationalParameter )
 { return std::sqrt( centralBodyGravitationalParameter / std::pow( semiMajorAxis, 3.0 ) ); }
 
-} // Namespace orbital_element_conversions.
+} // namespace orbital_element_conversions.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 // End of file.

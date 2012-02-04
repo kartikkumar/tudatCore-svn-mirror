@@ -67,12 +67,12 @@
  *                                  physical constants.
  */
 
-#ifndef TUDAT_UNIT_CONVERSIONS_H
-#define TUDAT_UNIT_CONVERSIONS_H
+#ifndef TUDAT_CORE_UNIT_CONVERSIONS_H
+#define TUDAT_CORE_UNIT_CONVERSIONS_H
 
 // Include statements.
 #include <cmath>
-#include "TudatCore/Astrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 //! Tudat library namespace.
 /*!
@@ -299,10 +299,10 @@ template < typename T >
 T convertPoundPerSquareFeetToPascal( T pressureInPoundPerSquareFeet )
 { return pressureInPoundPerSquareFeet * 47.880259; }
 
-}
+} // namespace unit_conversions.
 
-}
+} // namespace tudat.
 
-#endif // TUDAT_UNIT_CONVERSIONS_H
+#endif // TUDAT_CORE_UNIT_CONVERSIONS_H
 
 // End of file.

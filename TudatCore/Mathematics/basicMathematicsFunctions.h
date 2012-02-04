@@ -100,9 +100,9 @@ typedef boost::mt19937 GlobalRandomNumberGeneratorType;
  */
 GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
 
-} // Namespace mathematics.
+} // namespace mathematics.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
 

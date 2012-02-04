@@ -58,8 +58,8 @@
 #include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <limits>
-#include "TudatCore/Astrodynamics/astrodynamicsFunctions.h"
-#include "TudatCore/Astrodynamics/physicalConstants.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
+#include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 // Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_astrodynamics_functions )

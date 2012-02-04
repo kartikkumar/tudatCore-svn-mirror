@@ -95,11 +95,11 @@ double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
 double computeAngleBetweenVectors( const Eigen::VectorXd& vector0,
                                    const Eigen::VectorXd& vector1 );
 
-} // Namespace linear_algebra.
+} // namespace linear_algebra.
 
-} // Namespace mathematics.
+} // namespace mathematics.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_LINEAR_ALGEBRA_H
 

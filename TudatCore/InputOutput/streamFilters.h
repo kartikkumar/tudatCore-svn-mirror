@@ -260,11 +260,11 @@ private:
     bool isOmitIfEmpty_;
 };
 
-} // Namespace stream_filters.
+} // namespace stream_filters.
 
-} // Namespace input_output.
+} // namespace input_output.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_STREAMFILTERS_H
 

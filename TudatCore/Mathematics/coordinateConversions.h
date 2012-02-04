@@ -150,11 +150,11 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
 */
 Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates );
 
-} // Namespace coordinate_conversions.
+} // namespace coordinate_conversions.
 
-} // Namespace mathematics.
+} // namespace mathematics.
 
-} // Namespace tudat.
+} // namespace tudat.
 
 #endif // TUDAT_CORE_COORDINATECONVERSIONS_H
 
