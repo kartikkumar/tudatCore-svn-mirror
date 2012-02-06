@@ -108,7 +108,7 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
     double eccentricity_ = keplerianElements( eccentricityIndex );
     double inclination_ = keplerianElements( inclinationIndex );
     double argumentOfPeriapsis_ = keplerianElements( argumentOfPeriapsisIndex );
-    double rightAscensionOfAscendingNode_ = keplerianElements( rightAscensionOfAscendingNodeIndex );
+    double longitudeOfAscendingNode_ = keplerianElements( longitudeOfAscendingNodeIndex );
     double trueAnomaly_ = keplerianElements( trueAnomalyIndex );
 
     // Pre-compute sines and cosines of involved angles for efficient computation.
@@ -116,8 +116,8 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
     double sineOfInclination_ = sin( inclination_ );
     double cosineOfArgumentOfPeriapsis_ = cos( argumentOfPeriapsis_ );
     double sineOfArgumentOfPeriapsis_ = sin( argumentOfPeriapsis_ );
-    double cosineOfLongitudeOfAscendingNode_ = cos( rightAscensionOfAscendingNode_ );
-    double sineOfLongitudeOfAscendingNode_ = sin( rightAscensionOfAscendingNode_ );
+    double cosineOfLongitudeOfAscendingNode_ = cos( longitudeOfAscendingNode_ );
+    double sineOfLongitudeOfAscendingNode_ = sin( longitudeOfAscendingNode_ );
     double cosineOfTrueAnomaly_ = cos( trueAnomaly_ );
     double sineOfTrueAnomaly_ = sin( trueAnomaly_ );
 
@@ -216,15 +216,15 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
             - centralBodyGravitationalParameter / position_.norm( );
 
     // Compute the value of the eccentricity.
-    computedKeplerianElements_( 1 ) = eccentricityVector_.norm( );
+    computedKeplerianElements_( eccentricityIndex ) = eccentricityVector_.norm( );
 
     // Define and compute boolean of whether orbit is circular or not.
     bool isOrbitCircular_ = computedKeplerianElements_( 1 )
             < std::numeric_limits< double >::epsilon( );
 
     // Compute the value of inclination. Range between 0 degrees and 180 degrees.
-    computedKeplerianElements_( 2 ) = acos( orbitAngularMomentum_.z( )
-                                             / orbitAngularMomentum_.norm(  ) );
+    computedKeplerianElements_( inclinationIndex ) = acos( orbitAngularMomentum_.z( )
+                                                           / orbitAngularMomentum_.norm(  ) );
 
     // Define and compute boolean of whether orbit is equatorial or not.
     bool isOrbitEquatorial_ = unitVectorToAscendingNode_.norm( )
@@ -236,42 +236,44 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
 
     // Compute the value of semi-major axis.
     // Non-parabolic orbits.
-    if ( fabs( computedKeplerianElements_( 1 ) - 1.0 )
+    if ( fabs( computedKeplerianElements_( eccentricityIndex ) - 1.0 )
          > std::numeric_limits< double >::epsilon( ) )
     {
-        computedKeplerianElements_( 0 ) = centralBodyGravitationalParameter
+        computedKeplerianElements_( semiMajorAxisIndex ) = centralBodyGravitationalParameter
                 / ( -2.0 * totalOrbitalEnergy_ );
     }
 
     // Parabolic orbits.
     else
-    { computedKeplerianElements_( 0 ) = semiLatusRectum_; }
+    { computedKeplerianElements_( semiMajorAxisIndex ) = semiLatusRectum_; }
 
     // Compute the value of argument of periapsis.
     // Range between 0 degrees and 360 degrees.
     // Non-circular, inclined orbits.
     if ( !isOrbitCircular_ && !isOrbitEquatorial_ )
     {
-        computedKeplerianElements_( 3 )
+        computedKeplerianElements_( argumentOfPeriapsisIndex )
                 = tudat::mathematics::linear_algebra::computeAngleBetweenVectors(
                     eccentricityVector_, unitVectorToAscendingNode_ );
 
         // Quadrant check.
         if ( eccentricityVector_( 2 ) < 0.0 )
-        { computedKeplerianElements_( 3 ) = 2.0 * M_PI - computedKeplerianElements_( 3 ); }
+        { computedKeplerianElements_( argumentOfPeriapsisIndex )
+                    = 2.0 * M_PI - computedKeplerianElements_( argumentOfPeriapsisIndex ); }
     }
 
     // Circular orbits.
     else if ( isOrbitCircular_ )
-    { computedKeplerianElements_( 3 ) = 0.0; }
+    { computedKeplerianElements_( argumentOfPeriapsisIndex ) = 0.0; }
 
     // Equatorial orbits.
     // Argument of periapsis is defined as angle between eccentricity vector
     // and x-axis.
     else
     {
-        computedKeplerianElements_( 3 ) = std::fmod( atan2( eccentricityVector_( 1 ),
-                                                             eccentricityVector_( 0 ) ), 2.0 * M_PI );
+        computedKeplerianElements_( argumentOfPeriapsisIndex )
+                = std::fmod( atan2( eccentricityVector_( 1 ),
+                                    eccentricityVector_( 0 ) ), 2.0 * M_PI );
     }
 
     // Compute the value of longitude of ascending node.
@@ -279,28 +281,29 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
     // Non-equatorial orbits.
     if ( !isOrbitEquatorial_ )
     {
-        computedKeplerianElements_( 4 ) =
+        computedKeplerianElements_( longitudeOfAscendingNodeIndex ) =
                 std::fmod( atan2( unitVectorToAscendingNode_.y( ),
                                   unitVectorToAscendingNode_.x( ) ), 2.0 * M_PI );
     }
 
     // Equatorial orbits.
     else
-    { computedKeplerianElements_( 4 ) = 0.0; }
+    { computedKeplerianElements_( longitudeOfAscendingNodeIndex ) = 0.0; }
 
     // Compute the value of true anomaly.
     // Range between 0 degrees and 360 degrees.
     // Non-circular orbits.
     if ( !isOrbitCircular_ )
     {
-        computedKeplerianElements_( 5 ) = tudat::mathematics::linear_algebra
+        computedKeplerianElements_( trueAnomalyIndex ) = tudat::mathematics::linear_algebra
                 ::computeAngleBetweenVectors( position_, eccentricityVector_ );
 
         // Quadrant check. In the second half of the orbit, the angle
         // between position and velocity vector is larger than 90 degrees.
         if ( velocity_.dot( position_ ) < 0.0 )
         {
-            computedKeplerianElements_( 5 ) = 2.0 * M_PI - computedKeplerianElements_( 5 );
+            computedKeplerianElements_( trueAnomalyIndex )
+                    = 2.0 * M_PI - computedKeplerianElements_( trueAnomalyIndex );
         }
     }
 
@@ -310,20 +313,21 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
         // Circular equatorial orbits.
         if ( isOrbitEquatorial_ )
         {
-            computedKeplerianElements_( 5 ) =
+            computedKeplerianElements_( trueAnomalyIndex ) =
                     std::fmod( atan2( position_.y( ), position_.x( ) ), 2.0 * M_PI );
         }
 
         // Circular inclined orbits.
         else
         {
-            computedKeplerianElements_( 5 ) = tudat::mathematics::linear_algebra
+            computedKeplerianElements_( trueAnomalyIndex ) = tudat::mathematics::linear_algebra
                     ::computeAngleBetweenVectors( position_, unitVectorToAscendingNode_ );
 
             // Quadrant check. In the second half of the orbit, the body will be below the
             // xy-plane.
             if ( cartesianElements( 5 ) < 0.0 )
-            { computedKeplerianElements_( 5 ) = 2.0 * M_PI - computedKeplerianElements_( 5 ); }
+            { computedKeplerianElements_( trueAnomalyIndex )
+                        = 2.0 * M_PI - computedKeplerianElements_( trueAnomalyIndex ); }
         }
     }
 

@@ -74,7 +74,9 @@ namespace tudat
 
 //! Orbital element conversions namespace.
 /*!
- * Orbital element conversions namespace.
+ * Orbital element conversions namespace, containing classical Keplerian to Cartesian element
+ * conversions, and other conversions between classical Keplerian elements, e.g., true anomaly
+ * to/from eccentric anomaly.
  */
 namespace orbital_element_conversions
 {
@@ -86,13 +88,13 @@ namespace orbital_element_conversions
  *  eccentricity = 1,
  *  inclination = 2,
  *  argument of periapsis = 3,
- *  right ascension of ascending node = 4,
+ *  longitude of ascending node = 4,
  *  true anomaly = 5.
  */
 enum KeplerianElementVectorIndices
 {
     semiMajorAxisIndex, eccentricityIndex, inclinationIndex, argumentOfPeriapsisIndex,
-    rightAscensionOfAscendingNodeIndex, trueAnomalyIndex
+    longitudeOfAscendingNodeIndex, trueAnomalyIndex
 };
 
 //! Cartesian element vector indices.

@@ -56,7 +56,8 @@
  *      110913    K. Kumar          Implemented automatic root-path functions based on
  *                                  suggestions by M. Persson.
  *      111117    K. Kumar          Added listAllFilesInDirectory() function.
- *      120127    K. Kumar          Adapted for Tudat Core.
+ *      120127    K. Kumar          Adapted for Tudat Core; moved other functions to Tudat
+ *                                  library.
  */
 
 #ifndef TUDAT_CORE_BASICINPUTOUTPUT_H
