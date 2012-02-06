@@ -88,6 +88,8 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
     using std::pow;
     using std::sin;
     using std::sqrt;
+    using Eigen::Vector2d;
+    using Eigen::Vector3d;
 
     // Set local keplerian elements.
     double semiMajorAxis_ = keplerianElements( semiMajorAxisIndex );
@@ -120,14 +122,14 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
     { semiLatusRectum_ = semiMajorAxis_; }
 
     // Definition of position in the perifocal coordinate system.
-    Eigen::Vector2d positionPerifocal_ = Eigen::Vector2d::Zero( 2 );
+    Vector2d positionPerifocal_ = Eigen::Vector2d::Zero( 2 );
     positionPerifocal_.x( ) = semiLatusRectum_ * cosineOfTrueAnomaly_
             / ( 1.0 + eccentricity_ * cosineOfTrueAnomaly_ );
     positionPerifocal_.y( ) = semiLatusRectum_ * sineOfTrueAnomaly_
             / ( 1.0 + eccentricity_ * cosineOfTrueAnomaly_ );
 
     // Definition of velocity in the perifocal coordinate system.
-    Eigen::Vector2d velocityPerifocal_(
+    Vector2d velocityPerifocal_(
                 -sqrt( centralBodyGravitationalParameter / semiLatusRectum_ ) * sineOfTrueAnomaly_,
                 sqrt( centralBodyGravitationalParameter / semiLatusRectum_ )
                 * ( eccentricity_ + cosineOfTrueAnomaly_ ) );
@@ -155,11 +157,11 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
     Eigen::VectorXd convertedCartesianElements_ = Eigen::VectorXd::Zero( 6 );
 
     // Compute value of position in Cartesian coordinates.
-    Eigen::Vector3d position_ = transformationMatrix_ * positionPerifocal_;
+    Vector3d position_ = transformationMatrix_ * positionPerifocal_;
     convertedCartesianElements_.segment( 0, 3 ) = position_;
 
     // Compute value of velocity in Cartesian coordinates.
-    Eigen::Vector3d velocity_ = transformationMatrix_ * velocityPerifocal_;
+    Vector3d velocity_ = transformationMatrix_ * velocityPerifocal_;
     convertedCartesianElements_.segment( 3, 3 ) = velocity_;
 
     // Return Cartesian elements.
@@ -175,25 +177,26 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
     using std::atan2;
     using std::fabs;
     using std::pow;
+    using Eigen::Vector3d;
 
     // Declare converted Keplerian elements.
     Eigen::VectorXd computedKeplerianElements_ = Eigen::VectorXd::Zero( 6 );
 
     // Declare position in the inertial frame.
-    Eigen::Vector3d position_ = cartesianElements.segment( 0, 3 );
+    Vector3d position_ = cartesianElements.segment( 0, 3 );
 
     // Declare velocity in the inertial frame.
-    Eigen::Vector3d velocity_ = cartesianElements.segment( 3, 3 );
+    Vector3d velocity_ = cartesianElements.segment( 3, 3 );
 
     // Definition of orbit angular momentum.
-    Eigen::Vector3d orbitAngularMomentum_ = position_.cross( velocity_ );
+    Vector3d orbitAngularMomentum_ = position_.cross( velocity_ );
 
     // Definition of the (unit) vector to the ascending node.
-    Eigen::Vector3d unitVectorToAscendingNode_ = Eigen::Vector3d::UnitZ( ).cross(
+    Vector3d unitVectorToAscendingNode_ = Eigen::Vector3d::UnitZ( ).cross(
                 orbitAngularMomentum_.normalized( ) );
 
     // Definition of eccentricity vector.
-    Eigen::Vector3d eccentricityVector_ =
+    Vector3d eccentricityVector_ =
             velocity_.cross( orbitAngularMomentum_ ) / centralBodyGravitationalParameter
             - position_.normalized( );
 
@@ -311,7 +314,7 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
 
             // Quadrant check. In the second half of the orbit, the body will be below the
             // xy-plane.
-            if ( cartesianElements( 5 ) < 0.0 )
+            if ( cartesianElements( trueAnomalyIndex ) < 0.0 )
             { computedKeplerianElements_( trueAnomalyIndex )
                         = 2.0 * M_PI - computedKeplerianElements_( trueAnomalyIndex ); }
         }
