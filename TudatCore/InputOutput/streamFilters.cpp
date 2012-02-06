@@ -5,15 +5,6 @@
  *    Path              : /InputOutput/
  *    Version           : 2
  *    Check status      : Unchecked
- *
- *    Author            : S. Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Checker           : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
  *    Date created      : 27 January, 2012
  *    Last modified     : 27 January, 2012
  *

@@ -1,26 +1,9 @@
 /*! \file unitTestUnitConversions.cpp
  *    This unit test will test the unit conversions that are defined in unitConversions.h.
  *
- *    Path              : /Astrodynamics/BasicAstrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
  *    Version           : 10
  *    Check status      : Checked
- *
- *    Author/Checker    : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Author            : F. M. Engelen
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : F.M.Engelen@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
- *    Checker           : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
  *    Date created      : 10 September, 2010
  *    Last modified     : 4 February, 2012
  *

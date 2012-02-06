@@ -1,30 +1,9 @@
 /*! \file unitConversions.h
  *    This file contains a namespace with selected unit conversions commonly used in astrodynamics.
  *
- *    Path              : /Astrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
  *    Version           : 8
  *    Check status      : Checked
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Author            : F. M. Engelen
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : F.M.Engelen@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
- *    Checker           : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
  *    Date created      : 6 September, 2010
  *    Last modified     : 27 January, 2012
  *

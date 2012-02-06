@@ -2,22 +2,9 @@
  *    Source file that defines the unit test for the 4th-order, fixed stepsize,
  *    Runge-Kutta integrator included in Tudat.
  *
- *    Path              : /Mathematics/NumericalIntegrators/
+ *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
  *    Version           : 3
  *    Check status      : Checked
- *
- *    Author            : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Author            : B. Tong Minh
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : b.tongminh@student.tudelft.nl
- *
- *    Checker           : J.C.P. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
  *    Date created      : 17 May, 2011
  *    Last modified     : 27 January, 2012
  *

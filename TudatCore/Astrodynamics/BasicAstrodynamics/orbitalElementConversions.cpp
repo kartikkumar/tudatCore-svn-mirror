@@ -4,23 +4,6 @@
  *    Path              : /Astrodynamics/BasicAstrodynamics/
  *    Version           : 20
  *    Check status      : Checked
- *
- *    Author            : E. Iorfida
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : elisabetta_iorfida@yahoo.it
- *
- *    Author            : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Checker           : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : B. Tong Minh
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : B.TongMinh@student.tudelft.nl
- *
  *    Date created      : 20 October, 2010
  *    Last modified     : 6 February, 2012
  *

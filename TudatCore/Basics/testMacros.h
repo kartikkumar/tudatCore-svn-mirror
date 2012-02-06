@@ -1,17 +1,8 @@
 /*! \file testMacros.h
  *
- *    Path              : /
+ *    Path              : /Basics/
  *    Version           : 1
  *    Check status      : Checked
- *
- *    Author            : Simon Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Checker           : 
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : 
- *
  *    Date created      : 2 February, 2012
  *    Last modified     : 2 February, 2012
  *
@@ -46,7 +37,7 @@
 #include <boost/test/unit_test.hpp>
 
 //! Base macro for various matrix tests.
-/**
+/*!
  * This macro tests if both matrices are equal in size. If they are non-equal, an error is shown 
  * with the mismatching dimension. If they are equal, then this macro initiates a loop over each
  * Element in the matrix using counters 'row' and 'col'. The next statement after this macro is the
@@ -71,7 +62,7 @@
         for (signed int col=0; col < L.cols(); col++ )
 
 //! Same as BOOST_CHECK_CLOSE, but operates on Eigen vectors/matrices
-/**
+/*!
  * Checks for an equal amount of rows/columns and if each element falls with the passed tolerance
  * The actual comparison is done element wise using BOOST_CHECK_CLOSE(L, R, T)
  * \see http://www.boost.org/libs/test/doc/html/utf/testing-tools/reference.html
@@ -97,7 +88,7 @@
 #endif
 
 //! Same as BOOST_CHECK_CLOSE_FRACTION, but operates on Eigen vectors/matrices
-/**
+/*!
  * Checks for an equal amount of rows/columns and if each element falls with the passed tolerance
  * The actual comparison is done element wise using BOOST_CHECK_CLOSE_FRACTION(L, R, T)
  * \see http://www.boost.org/libs/test/doc/html/utf/testing-tools/reference.html
@@ -122,3 +113,5 @@
 #endif
 
 #endif // TUDAT_CORE_TESTMACROS_H
+
+// End of file.

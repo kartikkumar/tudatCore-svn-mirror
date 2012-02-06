@@ -1,18 +1,9 @@
 /*! \file physicalConstants.h
  *    This file contains a namespace with selected constants commonly used in astrodynamics.
  *
- *    Path              : /Astrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
  *    Version           : 5
  *    Check status      : Checked
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
  *    Date created      : 3 September, 2010
  *    Last modified     : 3 February, 2012
  *

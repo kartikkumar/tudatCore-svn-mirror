@@ -4,23 +4,6 @@
  *    Path              : /Mathematics/
  *    Version           : 15
  *    Check status      : Checked
- *
- *    Author            : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Author/Checker    : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
- *    Author            : J.C.P Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : L. Abdulkadir
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : L.Abdulkadir@student.tudelft.nl
- *
  *    Date created      : 3 September, 2010
  *    Last modified     : 27 January, 2012
  *

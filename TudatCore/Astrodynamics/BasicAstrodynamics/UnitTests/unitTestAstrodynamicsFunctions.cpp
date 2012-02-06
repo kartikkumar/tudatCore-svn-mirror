@@ -1,18 +1,9 @@
 /*! \file unitTestAstrodynamicsFunctions.cpp
  *    This unit test will test general astrodynamics functions defined in astrodynamicsFunctions.h.
  *
- *    Path              : /Astrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
  *    Version           : 7
  *    Check status      : Checked
- *
- *    Author            : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
  *    Date created      : 11 November, 2011
  *    Last modified     : 28 January, 2012
  *

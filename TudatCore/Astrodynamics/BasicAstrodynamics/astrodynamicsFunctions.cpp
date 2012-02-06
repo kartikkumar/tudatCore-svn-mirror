@@ -1,18 +1,9 @@
 /*! \file astrodynamicsFunctions.cpp
  *    This source file contains general astrodynamics functions.
  *
- *    Path              : /Astrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
  *    Version           : 3
  *    Check status      : Checked
- *
- *    Author            : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
  *    Date created      : 11 November, 2011
  *    Last modified     : 27 January, 2012
  *

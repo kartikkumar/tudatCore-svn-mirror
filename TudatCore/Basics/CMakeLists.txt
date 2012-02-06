@@ -1,16 +1,11 @@
 # \file CMakeLists.txt
- #    This is the CMake file for the BASICSDIR sub-directory.
+ #    This is the CMake file for the Basics sub-directory.
  #
- #    Path              : /BASICSDIR/
+ #    Path              : /Basics/
  #    Version           : 1
  #    Check status      : Checked
- #
- #    Author            : S. Billemont
- #    Affiliation       : Delft University of Technology
- #    E-mail address    : simon@angelcorp.be
- #
- #    Date created      : 02 February, 2012
- #    Last modified     : 02 February, 2012
+ #    Date created      : 2 February, 2012
+ #    Last modified     : 2 February, 2012
  #
  #    References
  #

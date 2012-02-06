@@ -4,15 +4,6 @@
  *    Path              : /Mathematics/NumericalIntegrators/
  *    Version           : 2
  *    Check status      : Checked
- *
- *    Author            : B. Tong Minh
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : b.tongminh@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
  *    Date created      : 27 January, 2012
  *    Last modified     : 28 January, 2012
  *

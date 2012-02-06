@@ -2,16 +2,7 @@
  *
  *    Path              : /Basics/
  *    Version           : 1
- *    Check status      : Unchecked
- *
- *    Author            : Simon Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Checker           : 
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : 
- *
+ *    Check status      : Unchecked 
  *    Date created      : 2 February, 2012
  *    Last modified     : 2 February, 2012
  *
@@ -36,7 +27,7 @@
  */
 
 //! Suppress compile time unused parameter warnings
-/**
+/*!
  * This macro suppresses the warning that a parameter passed to a function/method is not used, but
  * still passed in. This commonly occurs when overriding virtual methods.
  * 
@@ -51,7 +42,7 @@
 #define TUDAT_UNUSED_PARAMETER( unusedParameter ) { ( void ) unusedParameter; }
 
 //! Mark a declaration as deprecated
-/**
+/*!
  * When a declaration is marked as deprecated, it should be avoided, as most likely it performs 
  * something unwanted, superseded by another functionality or marked for removal in a future a 
  * release. The user should check where the deprecation warning comes from in order to get information
@@ -84,3 +75,5 @@
 #pragma message("WARNING: You need to implement DEPRECATED for this compiler")
 #define TUDAT_DEPRECATED(message, expression) expression
 #endif
+
+// End of file.

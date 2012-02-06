@@ -1,18 +1,9 @@
 /*! \file unitTestPhysicalconstants.cpp
  *    This unit test will test the physical constants that are defined in physicalConstants.h.
  *
- *    Path              : /Astrodynamics/
+ *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
  *    Version           : 7
  *    Check status      : Checked
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
  *    Date created      : 10 September, 2010
  *    Last modified     : 28 January, 2012
  *

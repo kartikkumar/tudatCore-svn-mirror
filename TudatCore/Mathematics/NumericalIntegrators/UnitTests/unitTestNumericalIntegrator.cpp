@@ -2,18 +2,9 @@
  *    Source file that defines the unit test for the abstract base class for numerical integrators
  *    in Tudat.
  *
- *    Path              : /Mathematics/NumericalIntegrators/
+ *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
  *    Version           : 2
  *    Check status      : Checked
- *
- *    Author            : B. Tong Minh
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : b.tongminh@student.tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
  *    Date created      : 27 January, 2012
  *    Last modified     : 6 February, 2012
  *

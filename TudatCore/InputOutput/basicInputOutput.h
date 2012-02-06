@@ -1,26 +1,9 @@
 /*! \file basicInputOutput.h
  *    Header file that defines the basic input and output functionality contained in Tudat.
  *
- *    Path              : /Basics/
+ *    Path              : /InputOutput/
  *    Version           : 10
  *    Check status      : Checked
- *
- *    Author/Checker    : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Author            : J. Leloux
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.Leloux@tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
- *    Checker           : S. Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
  *    Date created      : 10 August, 2010
  *    Last modified     : 27 January, 2011
  *

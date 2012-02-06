@@ -4,15 +4,6 @@
  #    Path              : /Basics/
  #    Version           : 2
  #    Check status      : Checked
- #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
- #    Author            : K. Kumar
- #    Affiliation       : Delft University of Technology
- #    E-mail address    : K.Kumar@tudelft.nl
- #
  #    Date created      : 20 August, 2011
  #    Last modified     : 27 January, 2012
  #

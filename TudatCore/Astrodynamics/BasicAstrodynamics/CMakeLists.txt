@@ -4,19 +4,6 @@
  #    Path              : /Astrodynamics/BasicAstrodynamics/
  #    Version           : 4
  #    Check status      : Checked
- #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
- #    Author            : K. Kumar
- #    Affiliation       : Delft University of Technology
- #    E-mail address    : K.Kumar@tudelft.nl
- #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
  #    Date created      : 20 August, 2011
  #    Last modified     : 4 February, 2012
  #

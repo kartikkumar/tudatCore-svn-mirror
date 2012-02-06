@@ -1,23 +1,23 @@
 /*! \file unitTest_testMacros.cpp
  *
- *    Path              : /
+ *    Path              : /Basics/UnitTests/
  *    Version           : 1
  *    Check status      : Checked
- *
- *    Author            : Simon Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Checker           : 
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : 
- *
  *    Date created      : 2 February, 2012
  *    Last modified     : 2 February, 2012
  *
  *    References
  *
  *    Notes
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  *
  *    Copyright (c) 2010-2011 Delft University of Technology.
  *

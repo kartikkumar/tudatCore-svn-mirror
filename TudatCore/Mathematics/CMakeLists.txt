@@ -1,22 +1,9 @@
 # \file CMakeLists.txt
  #    This is the CMake file for the Basics sub-directory.
  #
- #    Path              : /Basics/
+ #    Path              : /Mathematics/
  #    Version           : 3
  #    Check status      : Checked
- #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
- #    Author            : K. Kumar
- #    Affiliation       : Delft University of Technology
- #    E-mail address    : K.Kumar@tudelft.nl
- #
- #    Author            : S.M. Persson
- #    Affiliation       : McGill University, Department of Mechanical Engineering
- #    E-mail address    : mikael.s.persson@gmail.com
- #
  #    Date created      : 20 August, 2011
  #    Last modified     : 26 October, 2011
  #

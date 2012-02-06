@@ -1,18 +1,9 @@
 /*! \file linearAlgebra.h
  *    Header file that defines a number of useful linear algebra operation definitions.
  *
- *    Path              : /Mathematics/LinearAlgebra/
+ *    Path              : /Mathematics/
  *    Version           : 5
  *    Check status      : Checked
- *
- *    Author            : J. Melman
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : J.C.P.Melman@tudelft.nl
- *
- *    Checker           : D. Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
  *    Date created      : 7 August, 2009
  *    Last modified     : 27 January, 2012
  *
