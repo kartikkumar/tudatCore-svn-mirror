@@ -1,8 +1,8 @@
 /*! \file orbitalElementConversions.cpp
  *    This source file contains a namespace with orbital element conversion functions.
  *
- *    Path              : /Astrodynamics/States/
- *    Version           : 19
+ *    Path              : /Astrodynamics/BasicAstrodynamics/
+ *    Version           : 20
  *    Check status      : Checked
  *
  *    Author            : E. Iorfida
@@ -22,7 +22,7 @@
  *    E-mail address    : B.TongMinh@student.tudelft.nl
  *
  *    Date created      : 20 October, 2010
- *    Last modified     : 31 January, 2012
+ *    Last modified     : 6 February, 2012
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -73,6 +73,9 @@
  *      110805    K. Kumar          Added mean motion to semi-major axis conversion.
  *      120131    K. Kumar          Adapted for Tudat Core, interfaces changed to use VectorXd,
  *                                  only Keplerian <-> Cartesian conversions included.
+ *      120206    K. Kumar          Added wrapper functions for orbital element conversions when
+ *                                  eccentricity is not known a priori (if-statement to choose
+ *                                  between elliptical and hyperbolic orbits).
  */
 
 // Include statements.
@@ -335,8 +338,9 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
     return computedKeplerianElements_;
 }
 
-//! Convert true anomaly to eccentric anomaly.
-double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly, const double eccentricity )
+//! Convert true anomaly to (elliptic) eccentric anomaly.
+double convertTrueAnomalyToEllipticalEccentricAnomaly( const double trueAnomaly,
+                                                       const double eccentricity )
 {
     if ( eccentricity >= 1.0 || eccentricity < 0.0 )
     {
@@ -357,37 +361,8 @@ double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly, const dou
         double cosineOfEccentricAnomaly_ = ( eccentricity + cos( trueAnomaly ) )
                 / ( 1.0 + eccentricity * cos( trueAnomaly ) );
 
-        // Return eccentric anomaly.
+        // Return elliptic eccentric anomaly.
         return std::atan2( sineOfEccentricAnomaly_, cosineOfEccentricAnomaly_ );
-    }
-}
-
-//! Convert eccentric anomaly to true anomaly.
-double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
-                                             const double eccentricity )
-{
-    if ( eccentricity >= 1.0 || eccentricity < 0.0 )
-    {
-        boost::throw_exception(
-                    boost::enable_error_info(
-                        std::runtime_error( "Eccentricity is invalid." ) ) );
-    }
-
-    else
-    {
-        // Using declarations.
-        using std::cos;
-        using std::sqrt;
-
-        // Compute sine and cosine of true anomaly.
-        double sineOfTrueAnomaly_ = sqrt( 1.0 - std::pow( eccentricity, 2.0 ) ) *
-                std::sin( eccentricAnomaly ) / ( 1.0 - eccentricity * cos( eccentricAnomaly ) );
-
-        double cosineOfTrueAnomaly_ = ( cos( eccentricAnomaly ) - eccentricity )
-                / ( 1.0 - eccentricity * cos( eccentricAnomaly ) );
-
-        // Return true anomaly.
-        return atan2( sineOfTrueAnomaly_, cosineOfTrueAnomaly_  );
     }
 }
 
@@ -418,6 +393,85 @@ double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
         // Return hyperbolic eccentric anomaly.
         return boost::math::atanh( hyperbolicSineOfHyperbolicEccentricAnomaly_
                       / hyperbolicCosineOfHyperbolicEccentricAnomaly_ );
+    }
+}
+
+//! Convert true anomaly to eccentric anomaly.
+double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly,
+                                             const double eccentricity )
+{
+    // Declare computed eccentric anomaly.
+    double eccentricAnomaly_ = -0.0;
+
+    // Check if eccentricity is invalid and throw an error if true.
+    if ( eccentricity < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Eccentricity is invalid." ) ) );
+    }
+
+    // Check if orbit is parabolic and throw an error if true.
+    else if ( std::fabs( eccentricity - 1.0 ) < std::numeric_limits< double >::epsilon( ) )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error(
+                            "Parabolic orbits have not yet been implemented." ) ) );
+    }
+
+    // Check if orbit is elliptical and compute eccentric anomaly.
+    else if ( eccentricity >= 0.0 && eccentricity < 1.0 )
+    {
+        eccentricAnomaly_ = convertTrueAnomalyToEllipticalEccentricAnomaly( trueAnomaly,
+                                                                            eccentricity );
+    }
+
+    else if ( eccentricity > 1.0 )
+    {
+        eccentricAnomaly_ = convertTrueAnomalyToHyperbolicEccentricAnomaly( trueAnomaly,
+                                                                            eccentricity );
+    }
+
+    // Return computed eccentric anomaly.
+    return eccentricAnomaly_;
+
+}
+
+//! Convert (elliptic) eccentric anomaly to true anomaly.
+/*!
+ * Converts eccentric anomaly to true anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
+ * The equations used can be found in (Chobotov, 2002).
+ * \param ellipticEccentricAnomaly Elliptic eccentric anomaly.                                [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
+ */
+double convertEllipticalEccentricAnomalyToTrueAnomaly( const double ellipticEccentricAnomaly,
+                                                       const double eccentricity )
+{
+    if ( eccentricity >= 1.0 || eccentricity < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Eccentricity is invalid." ) ) );
+    }
+
+    else
+    {
+        // Using declarations.
+        using std::cos;
+        using std::sqrt;
+
+        // Compute sine and cosine of true anomaly.
+        double sineOfTrueAnomaly_ = sqrt( 1.0 - std::pow( eccentricity, 2.0 ) ) *
+                std::sin( ellipticEccentricAnomaly )
+                / ( 1.0 - eccentricity * cos( ellipticEccentricAnomaly ) );
+
+        double cosineOfTrueAnomaly_ = ( cos( ellipticEccentricAnomaly ) - eccentricity )
+                / ( 1.0 - eccentricity * cos( ellipticEccentricAnomaly ) );
+
+        // Return true anomaly.
+        return atan2( sineOfTrueAnomaly_, cosineOfTrueAnomaly_  );
     }
 }
 
@@ -453,23 +507,164 @@ double convertHyperbolicEccentricAnomalyToTrueAnomaly( const double hyperbolicEc
 
 }
 
-//! Convert eccentric anomaly to mean anomaly.
-double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
+//! Convert eccentric anomaly to true anomaly.
+double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
                                              const double eccentricity )
-{ return eccentricAnomaly - eccentricity * std::sin( eccentricAnomaly ); }
+{
+    // Declare computed true anomaly.
+    double trueAnomaly_ = -0.0;
+
+    // Check if eccentricity is invalid and throw an error if true.
+    if ( eccentricity < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Eccentricity is invalid." ) ) );
+    }
+
+    // Check if orbit is parabolic and throw an error if true.
+    else if ( std::fabs( eccentricity - 1.0 ) < std::numeric_limits< double >::epsilon( ) )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error(
+                            "Parabolic orbits have not yet been implemented." ) ) );
+    }
+
+    // Check if orbit is elliptical and compute true anomaly.
+    else if ( eccentricity >= 0.0 && eccentricity < 1.0 )
+    {
+        trueAnomaly_ = convertEllipticalEccentricAnomalyToTrueAnomaly( eccentricAnomaly,
+                                                                       eccentricity );
+    }
+
+    else if ( eccentricity > 1.0 )
+    {
+        trueAnomaly_ = convertHyperbolicEccentricAnomalyToTrueAnomaly( eccentricAnomaly,
+                                                                       eccentricity );
+    }
+
+    // Return computed true anomaly.
+    return trueAnomaly_;
+}
+
+//! Convert (elliptical) eccentric anomaly to mean anomaly.
+double convertEllipticalEccentricAnomalyToMeanAnomaly( const double ellipticalEccentricAnomaly,
+                                                       const double eccentricity )
+{ return ellipticalEccentricAnomaly - eccentricity * std::sin( ellipticalEccentricAnomaly ); }
 
 //! Convert hyperbolic eccentric anomaly to mean anomaly.
 double convertHyperbolicEccentricAnomalyToMeanAnomaly(
     const double hyperbolicEccentricAnomaly, const double eccentricity )
 { return eccentricity * std::sinh( hyperbolicEccentricAnomaly ) - hyperbolicEccentricAnomaly; }
 
-//! Convert elapsed time to mean anomaly for elliptical orbits.
-double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
+
+//! Convert eccentric anomaly to mean anomaly.
+double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
+                                             const double eccentricity )
+{
+    // Declare computed mean anomaly.
+    double meanAnomaly_ = -0.0;
+
+    // Check if eccentricity is invalid and throw an error if true.
+    if ( eccentricity < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Eccentricity is invalid." ) ) );
+    }
+
+    // Check if orbit is parabolic and throw an error if true.
+    else if ( std::fabs( eccentricity - 1.0 ) < std::numeric_limits< double >::epsilon( ) )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error(
+                            "Parabolic orbits have not yet been implemented." ) ) );
+    }
+
+    // Check if orbit is elliptical and compute true anomaly.
+    else if ( eccentricity >= 0.0 && eccentricity < 1.0 )
+    {
+        meanAnomaly_ = convertEllipticalEccentricAnomalyToMeanAnomaly( eccentricAnomaly,
+                                                                       eccentricity );
+    }
+
+    else if ( eccentricity > 1.0 )
+    {
+        meanAnomaly_ = convertHyperbolicEccentricAnomalyToMeanAnomaly( eccentricAnomaly,
+                                                                       eccentricity );
+    }
+
+    // Return computed mean anomaly.
+    return meanAnomaly_;
+}
+
+//! Convert elapsed time to (elliptical) mean anomaly change.
+double convertElapsedTimeToEllipticalMeanAnomalyChange(
         const double elapsedTime, const double centralBodyGravitationalParameter,
         const double semiMajorAxis )
 {
-    return std::sqrt( centralBodyGravitationalParameter
-                      / std::pow( semiMajorAxis, 3.0 ) ) * elapsedTime;
+    // Check if semi-major axis is invalid and throw error if true.
+    if ( semiMajorAxis < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Semi-major axis is invalid." ) ) );
+    }
+
+    // Else return elliptical mean anomaly change.
+    else
+    {
+        return std::sqrt( centralBodyGravitationalParameter
+                          / std::pow( semiMajorAxis, 3.0 ) ) * elapsedTime;
+    }
+}
+
+//! Convert elapsed time to mean anomaly change for hyperbolic orbits.
+double convertElapsedTimeToHyperbolicMeanAnomalyChange(
+        const double elapsedTime, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis )
+{
+    // Check if semi-major axis is invalid and throw error if true.
+    if ( semiMajorAxis > 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Semi-major axis is invalid." ) ) );
+    }
+
+    // Else return hyperbolic mean anomaly change.
+    else
+    {
+        return std::sqrt( centralBodyGravitationalParameter
+                          / std::pow( -semiMajorAxis, 3.0 ) ) * elapsedTime;
+    }
+}
+
+//! Convert elapsed time to mean anomaly change.
+double convertElapsedTimeToMeanAnomalyChange(
+        const double elapsedTime, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis )
+{
+    // Declare computed mean anomaly change.
+    double meanAnomalyChange_ = -0.0;
+
+    // Check if orbit is elliptical and compute true anomaly.
+    if ( semiMajorAxis > 0.0 )
+    {
+        meanAnomalyChange_ = convertElapsedTimeToEllipticalMeanAnomalyChange(
+                    elapsedTime, centralBodyGravitationalParameter, semiMajorAxis );
+    }
+
+    else if ( semiMajorAxis < 0.0 )
+    {
+        meanAnomalyChange_ = convertElapsedTimeToHyperbolicMeanAnomalyChange(
+                    elapsedTime, centralBodyGravitationalParameter, semiMajorAxis );
+    }
+
+    // Return computed mean anomaly change.
+    return meanAnomalyChange_;
 }
 
 //! Convert mean anomaly to elapsed time for elliptical orbits.
@@ -479,15 +674,6 @@ double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
 {
     return meanAnomalyChange * std::sqrt( std::pow( semiMajorAxis, 3.0 )
                                           / centralBodyGravitationalParameter );
-}
-
-//! Convert elapsed time to mean anomaly change for hyperbolic orbits.
-double convertElapsedTimeToMeanAnomalyChangeForHyperbolicOrbits(
-        const double elapsedTime, const double centralBodyGravitationalParameter,
-        const double semiMajorAxis )
-{
-    return std::sqrt( centralBodyGravitationalParameter
-                      / std::pow( -semiMajorAxis, 3.0 ) ) * elapsedTime;
 }
 
 //! Convert mean anomaly change to elapsed time for hyperbolic orbits.

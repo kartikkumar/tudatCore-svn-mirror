@@ -1,6 +1,5 @@
-/*! \file basicFunctions.h
- *    Header file that defines the basicFunctions namespace, containing all
- *    basic functions contained in Tudat.
+/*! \file basicInputOutput.h
+ *    Header file that defines the basic input and output functionality contained in Tudat.
  *
  *    Path              : /Basics/
  *    Version           : 10
@@ -100,9 +99,9 @@ static std::string getCoreRootPath( )
 #endif
 }
 
-} // namespace input_output
+} // namespace input_output.
 
-} // namespace tudat
+} // namespace tudat.
 
 #endif // TUDAT_CORE_BASICINPUTOUTPUT_H
 

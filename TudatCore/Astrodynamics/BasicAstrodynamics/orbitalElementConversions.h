@@ -2,7 +2,7 @@
  *    This header file contains a namespace with orbital element conversion functions.
  *
  *    Path              : /Astrodynamics/BasicAstrodynamics/
- *    Version           : 11
+ *    Version           : 12
  *    Check status      : Checked
  *
  *    Author            : E. Iorfida
@@ -22,7 +22,7 @@
  *    E-mail address    : B.TongMinh@student.tudelft.nl
  *
  *    Date created      : 20 October, 2010
- *    Last modified     : 31 January, 2012
+ *    Last modified     : 6 February, 2012
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -57,6 +57,9 @@
  *      110810    J. Leloux         Corrected doxygen documentation.
  *      120131    K. Kumar          Adapted for Tudat Core, interfaces changed to use VectorXd,
  *                                  only Keplerian <-> Cartesian conversions included.
+ *      120206    K. Kumar          Added wrapper functions for orbital element conversions when
+ *                                  eccentricity is not known a priori (if-statement to choose
+ *                                  between elliptical and hyperbolic orbits).
  */
 
 #ifndef TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
@@ -162,26 +165,16 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
 Eigen::VectorXd convertCartesianToKeplerianElements(
         const Eigen::VectorXd& cartesianElements, const double centralBodyGravitationalParameter );
 
-//! Convert true anomaly to eccentric anomaly.
+//! Convert true anomaly to (elliptical) eccentric anomaly.
 /*!
  * Converts true anomaly to eccentric anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equations used can be found in (Chobotov, 2002).
  * \param trueAnomaly True anomaly.                                                           [rad]
  * \param eccentricity Eccentricity.                                                            [-]
- * \return Eccentric anomaly [rad].
+ * \return (Elliptical) Eccentric anomaly.                                                    [rad]
  */
-double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly, const double eccentricity );
-
-//! Convert eccentric anomaly to true anomaly.
-/*!
- * Converts eccentric anomaly to true anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
- * The equations used can be found in (Chobotov, 2002).
- * \param eccentricAnomaly Eccentric anomaly.                                                 [rad]
- * \param eccentricity Eccentricity.                                                            [-]
- * \return True anomaly.                                                                      [rad]
- */
-double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
-                                             const double eccentricity );
+double convertTrueAnomalyToEllipticalEccentricAnomaly( const double trueAnomaly,
+                                                       const double eccentricity );
 
 //! Convert true anomaly to hyperbolic eccentric anomaly.
 /*!
@@ -192,6 +185,33 @@ double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
  * \return Hyperbolic eccentric anomaly.                                                      [rad]
  */
 double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
+                                                       const double eccentricity );
+
+//! Convert true anomaly to eccentric anomaly.
+/*!
+ * Converts true anomaly to eccentric anomaly for elliptical and hyperbolic orbits
+ * ( eccentricity < 1.0 && eccentricity > 1.0 ). This function is essentially a wrapper for
+ * convertTrueAnomalyToEllipticalEccentricAnomaly() and
+ * convertTrueAnomalyToHyperbolicEccentricAnomaly(). It should be used in cases where the
+ * eccentricity of the orbit is not known a priori. Currently, this implementation performs a
+ * check on the eccentricity and throws an error for eccentricity < 0.0 and parabolic orbits, which
+ * have not been implemented. The equations used can be found in (Chobotov, 2002).
+ * \param eccentricAnomaly Eccentric anomaly.                                                 [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
+ */
+double convertTrueAnomalyToEccentricAnomaly( const double eccentricAnomaly,
+                                             const double eccentricity );
+
+//! Convert (elliptical) eccentric anomaly to true anomaly.
+/*!
+ * Converts eccentric anomaly to true anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
+ * The equations used can be found in (Chobotov, 2002).
+ * \param ellipticalEccentricAnomaly Elliptical eccentric anomaly.                            [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
+ */
+double convertEllipticalEccentricAnomalyToTrueAnomaly( const double ellipticalEccentricAnomaly,
                                                        const double eccentricity );
 
 //! Convert hyperbolic eccentric anomaly to true anomaly.
@@ -205,16 +225,32 @@ double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
 double convertHyperbolicEccentricAnomalyToTrueAnomaly( const double hyperbolicEccentricAnomaly,
                                                        const double eccentricity );
 
-//! Convert eccentric anomaly to mean anomaly.
+//! Convert eccentric anomaly to true anomaly.
+/*!
+ * Converts eccentric anomaly to true anomaly for elliptical and hyperbolic orbits
+ * ( eccentricity < 1.0 && eccentricity > 1.0 ). This function is essentially a wrapper for
+ * convertEllipticalEccentricAnomalyToTrueAnomaly() and
+ * convertHyperbolicEccentricAnomalyToTrueAnomaly(). It should be used in cases where the
+ * eccentricity of the orbit is not known a priori. Currently, this implementation performs a
+ * check on the eccentricity and throws an error for eccentricity < 0.0 and parabolic orbits, which
+ * have not been implemented. The equations used can be found in (Chobotov, 2002).
+ * \param eccentricAnomaly Eccentric anomaly.                                                 [rad]
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \return True anomaly.                                                                      [rad]
+ */
+double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
+                                             const double eccentricity );
+
+//! Convert (elliptical) eccentric anomaly to mean anomaly.
 /*!
  * Converts eccentric anomaly to mean anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equations used can be found in (Chobotov, 2002).
  * \param eccentricity Eccentricity.                                                            [-]
- * \param eccentricAnomaly Eccentric anomaly [rad].
+ * \param ellipticalEccentricAnomaly (Elliptical) eccentric anomaly [rad].
  * \return Mean anomaly [rad].
  */
-double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
-                                             const double eccentricity );
+double convertEllipticalEccentricAnomalyToMeanAnomaly( const double ellipticalEccentricAnomaly,
+                                                       const double eccentricity );
 
 //! Convert hyperbolic eccentric anomaly to mean anomaly.
 /*!
@@ -227,16 +263,64 @@ double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
 double convertHyperbolicEccentricAnomalyToMeanAnomaly( const double hyperbolicEccentricAnomaly,
                                                        const double eccentricity );
 
-//! Convert elapsed time to mean anomaly change for elliptical orbits.
+//! Convert eccentric anomaly to mean anomaly.
+/*!
+ * Converts eccentric anomaly to mean anomaly for elliptical and hyperbolic orbits
+ * ( eccentricity < 1.0 && eccentricity > 1.0 ). This function is essentially a wrapper for
+ * convertEllipticalEccentricAnomalyToMeanAnomaly() and
+ * convertHyperbolicEccentricAnomalyToMeanAnomaly(). It should be used in cases where the
+ * eccentricity of the orbit is not known a priori. Currently, this implementation performs a
+ * check on the eccentricity and throws an error for eccentricity < 0.0 and parabolic orbits, which
+ * have not been implemented. The equations used can be found in (Chobotov, 2002).
+ * \param eccentricity Eccentricity.                                                            [-]
+ * \param eccentricAnomaly Eccentric anomaly.                                                 [rad]
+ * \return Mean anomaly.                                                                      [rad]
+ */
+double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
+                                             const double eccentricity );
+
+//! Convert elapsed time to (elliptical) mean anomaly change.
 /*!
  * Converts elapsed time to mean anomaly change for elliptical orbits ( 0 <= eccentricity < 1.0 ).
- * The equation used can be found in (Chobotov, 2002).
+ * The semi-major axis must be non-negative; this function will throw an error to indicate if the
+ * semi-major axis is invalid. The equation used can be found in (Chobotov, 2002).
+ * \param elapsedTime Elapsed time.                                                             [s]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return (Elliptical) Mean anomaly change.                                                  [rad]
+ */
+double convertElapsedTimeToEllipticalMeanAnomalyChange(
+        const double elapsedTime, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis );
+
+//! Convert elapsed time to mean anomaly change for hyperbolic orbits.
+/*!
+ * Converts elapsed time to mean anomaly change for hyperbolic orbits ( eccentricity > 1.0 ).
+ * The semi-major axis must be non-positive; this function will throw an error to indicate if the
+ * semi-major axis is invalid. The equation used can be found in (Chobotov, 2002).
  * \param elapsedTime Elapsed time.                                                             [s]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
  * \param semiMajorAxis Semi-major axis.                                                        [m]
  * \return Mean anomaly change.                                                               [rad]
  */
-double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
+double convertElapsedTimeToHyperbolicMeanAnomalyChange(
+        const double elapsedTime, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis );
+
+//! Convert elapsed time to mean anomaly change.
+/*!
+ * Converts elapsed time to mean anomaly change for elliptical and hyperbolic orbits
+ * ( eccentricity < 1.0 && eccentricity > 1.0 ). This function is essentially a wrapper for
+ * convertElapsedTimeToEllipticalMeanAnomalyChange() and
+ * convertElapsedTimeToHyperbolicMeanAnomalyChange(). It should be used in cases where the
+ * eccentricity of the orbit is not known a priori. The equations used can be found in
+ * (Chobotov, 2002).
+ * \param elapsedTime Elapsed time.                                                             [s]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Mean anomaly change.                                                               [rad]
+ */
+double convertElapsedTimeToMeanAnomalyChange(
         const double elapsedTime, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
@@ -251,19 +335,6 @@ double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
  */
 double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
-        const double semiMajorAxis );
-
-//! Convert elapsed time to mean anomaly change for hyperbolic orbits.
-/*!
- * Converts elapsed time to mean anomaly change for hyperbolic orbits ( eccentricity > 1.0 ).
- * The equation used can be found in (Chobotov, 2002).
- * \param elapsedTime Elapsed time.                                                             [s]
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
- * \param semiMajorAxis Semi-major axis.                                                        [m]
- * \return Mean anomaly change.                                                               [rad]
- */
-double convertElapsedTimeToMeanAnomalyChangeForHyperbolicOrbits(
-        const double elapsedTime, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
 //! Convert mean anomaly change to elapsed time for hyperbolic orbits.
