@@ -650,13 +650,14 @@ double convertElapsedTimeToMeanAnomalyChange(
     // Declare computed mean anomaly change.
     double meanAnomalyChange_ = -0.0;
 
-    // Check if orbit is elliptical and compute true anomaly.
+    // Check if orbit is elliptical and compute mean anomaly change.
     if ( semiMajorAxis > 0.0 )
     {
         meanAnomalyChange_ = convertElapsedTimeToEllipticalMeanAnomalyChange(
                     elapsedTime, centralBodyGravitationalParameter, semiMajorAxis );
     }
 
+    // Else orbit is hyperbolic; compute mean anomaly change.
     else if ( semiMajorAxis < 0.0 )
     {
         meanAnomalyChange_ = convertElapsedTimeToHyperbolicMeanAnomalyChange(
@@ -667,22 +668,72 @@ double convertElapsedTimeToMeanAnomalyChange(
     return meanAnomalyChange_;
 }
 
-//! Convert mean anomaly to elapsed time for elliptical orbits.
-double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
-        const double meanAnomalyChange, const double centralBodyGravitationalParameter,
-        double semiMajorAxis )
+//! Convert (elliptical) mean anomaly change to elapsed time.
+double convertEllipticalMeanAnomalyChangeToElapsedTime(
+        const double ellipticalMeanAnomalyChange, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis )
 {
-    return meanAnomalyChange * std::sqrt( std::pow( semiMajorAxis, 3.0 )
-                                          / centralBodyGravitationalParameter );
+    // Check if semi-major axis is invalid and throw error if true.
+    if ( semiMajorAxis < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Semi-major axis is invalid." ) ) );
+    }
+
+    // Else return elapsed time.
+    else
+    {
+        return ellipticalMeanAnomalyChange * std::sqrt( std::pow( semiMajorAxis, 3.0 )
+                                                        / centralBodyGravitationalParameter );
+    }
 }
 
-//! Convert mean anomaly change to elapsed time for hyperbolic orbits.
-double convertMeanAnomalyChangeToElapsedTimeForHyperbolicOrbits(
+//! Convert hyperbolic mean anomaly change to elapsed time.
+double convertHyperbolicMeanAnomalyChangeToElapsedTime(
+        const double hyperbolicMeanAnomalyChange, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis )
+{
+    // Check if semi-major axis is invalid and throw error if true.
+    if ( semiMajorAxis > 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Semi-major axis is invalid." ) ) );
+    }
+
+    // Else return elapsed time.
+    else
+    {
+        return std::sqrt( std::pow( -semiMajorAxis, 3.0 )
+                          / centralBodyGravitationalParameter ) * hyperbolicMeanAnomalyChange;
+    }
+}
+
+//! Convert mean anomaly change to elapsed time.
+double convertMeanAnomalyChangeToElapsedTime(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
         const double semiMajorAxis )
 {
-    return std::sqrt( std::pow( -semiMajorAxis, 3.0 )
-                      / centralBodyGravitationalParameter ) * meanAnomalyChange;
+    // Declare computed elapsed time.
+    double elapsedTime_ = -0.0;
+
+    // Check if orbit is elliptical and compute elapsed time.
+    if ( semiMajorAxis > 0.0 )
+    {
+        elapsedTime_ = convertEllipticalMeanAnomalyChangeToElapsedTime(
+                    meanAnomalyChange, centralBodyGravitationalParameter, semiMajorAxis );
+    }
+
+    // Else orbit is hyperbolic; compute elapsed time.
+    else if ( semiMajorAxis < 0.0 )
+    {
+        elapsedTime_ = convertHyperbolicMeanAnomalyChangeToElapsedTime(
+                    meanAnomalyChange, centralBodyGravitationalParameter, semiMajorAxis );
+    }
+
+    // Return computed elapsed time.
+    return elapsedTime_;
 }
 
 //! Convert mean motion to semi-major axis.

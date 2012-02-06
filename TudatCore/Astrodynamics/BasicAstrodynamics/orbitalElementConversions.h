@@ -28,6 +28,8 @@
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
  *      Wertz, J. R. Mission geometry; orbit and constellation design and management.
  *      Mengali, G., Quarta, A.A. Fondamenti di meccanica del volo spaziale.
+ *      Wertz, J.R. Mission Geometry; Orbit and Constellation Design and Management, Spacecraft
+ *          Orbit and Attitude Systems, Microcosm Press, Kluwer Academic Publishers, 2001.
  *
  *    Notes
  *
@@ -314,7 +316,7 @@ double convertElapsedTimeToHyperbolicMeanAnomalyChange(
  * convertElapsedTimeToEllipticalMeanAnomalyChange() and
  * convertElapsedTimeToHyperbolicMeanAnomalyChange(). It should be used in cases where the
  * eccentricity of the orbit is not known a priori. The equations used can be found in
- * (Chobotov, 2002).
+ * (Wertz, 2001).
  * \param elapsedTime Elapsed time.                                                             [s]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
  * \param semiMajorAxis Semi-major axis.                                                        [m]
@@ -324,29 +326,48 @@ double convertElapsedTimeToMeanAnomalyChange(
         const double elapsedTime, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
-//! Convert mean anomaly change to elapsed time for elliptical orbits.
+//! Convert (elliptical) mean anomaly change to elapsed time.
 /*!
  * Converts mean anomaly change to elapsed time for elliptical orbits ( 0 <= eccentricity < 1.0 ).
- * The equation used can be found in (Chobotov, 2002).
- * \param meanAnomalyChange Mean anomaly change.                                              [rad]
+ * The equation used can be found in (Wertz, 2001). This function checks if the semi-major axis is
+ * non-negative and throws an error if it not.
+ * \param ellipticalMeanAnomalyChange (Elliptical) Mean anomaly change.                       [rad]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
  * \param semiMajorAxis Semi-major axis.                                                        [m]
  * \return Elapsed time.                                                                        [s]
  */
-double convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
-        const double meanAnomalyChange, const double centralBodyGravitationalParameter,
+double convertEllipticalMeanAnomalyChangeToElapsedTime(
+        const double ellipticalMeanAnomalyChange, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
-//! Convert mean anomaly change to elapsed time for hyperbolic orbits.
+//! Convert hyperbolic mean anomaly change to elapsed time.
 /*!
  * Converts mean anomaly change to elapsed time for hyperbolic orbits ( eccentricity > 1.0 ).
- * The equation used can be found in (Chobotov, 2002).
+ * The equation used can be found in (Wertz, 2001). This function checks if the semi-major axis is
+ * non-positive and throws an error if it not.
+ * \param hyperbolicMeanAnomalyChange Hyperbolic mean anomaly change.                         [rad]
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
+ * \param semiMajorAxis Semi-major axis.                                                        [m]
+ * \return Elapsed time.                                                                        [s]
+ */
+double convertHyperbolicMeanAnomalyChangeToElapsedTime(
+        const double hyperbolicMeanAnomalyChange, const double centralBodyGravitationalParameter,
+        const double semiMajorAxis );
+
+//! Convert mean anomaly change to elapsed time.
+/*!
+ * Converts mean anomaly change to elapsed time for elliptical and hyperbolic orbits
+ * ( eccentricity < 1.0 && eccentricity > 1.0 ). This function is essentially a wrapper for
+ * convertEllipticalMeanAnomalyChangeToElapsedTime() and
+ * convertHyperbolicMeanAnomalyChangeToElapsedTime(). It should be used in cases where the
+ * eccentricity of the orbit is not known a priori. The equations used can be found in
+ * (Wertz, 2001).
  * \param meanAnomalyChange Mean anomaly change.                                              [rad]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
  * \param semiMajorAxis Semi-major axis.                                                        [m]
  * \return Elapsed time.                                                                        [s]
  */
-double convertMeanAnomalyChangeToElapsedTimeForHyperbolicOrbits(
+double convertMeanAnomalyChangeToElapsedTime(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 

@@ -900,21 +900,20 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
     }
 
     // Case 3: Hyperbolic orbit around the Sun.
-    // The benchmark data is obtained from (Jenab, 2008). Ideally, this will be a more "reliable"
-    // source in future.
+    // The benchmark data is obtained by simply repeating the equations in MATLAB. This test needs
+    // to be replaced with real "external" benchmark data.
     {
         // Set elapsed time [s].
-        double elapsedTime = 86400.0 * 181.4556136739202;
+        double elapsedTime = 1000.0;
 
         // Set Sun gravitational parameter [m^3/s^-2].
-        double sunGravitationalParameter = 1.32712440018e20;
+        double sunGravitationalParameter = 3.9859383624e14;
 
         // Set semi-major axis [m].
-        double semiMajorAxis = -0.8485759475247914 * 1.49597870691e11;
+        double semiMajorAxis = -40000.0;
 
         // Set expected mean anomaly change [rad].
-        double expectedMeanAnomalyChange = std::fmod( 0.02200621566858702
-                                                      * 86400.0, 2.0 * M_PI );
+        double expectedMeanAnomalyChange = 2.495601869539691e3;
 
         // Compute mean anomaly change [rad].
         double computedMeanAnomalyChange = tudat::orbital_element_conversions
@@ -923,7 +922,7 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
 
         // Check if computed mean anomaly change matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, computedMeanAnomalyChange,
-                                    1.0e-14 );
+                                    1.0e-15 );
     }
 
     // Case 4: Earth-orbiting satellite (test for wrapper function).
@@ -953,11 +952,36 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         BOOST_CHECK_CLOSE_FRACTION( expectedEllipticalMeanAnomalyChange,
                                     computedEllipticalMeanAnomalyChange, 1.0e-14 );
     }
+
+    // Case 5: Hyperbolic orbit around the Sun (test for wrapper function).
+    // The benchmark data is obtained by simply repeating the equations in MATLAB. This test needs
+    // to be replaced with real "external" benchmark data.
+    {
+        // Set elapsed time [s].
+        double elapsedTime = 1000.0;
+
+        // Set Sun gravitational parameter [m^3/s^-2].
+        double sunGravitationalParameter = 3.9859383624e14;
+
+        // Set semi-major axis [m].
+        double semiMajorAxis = -40000.0;
+
+        // Set expected mean anomaly change [rad].
+        double expectedMeanAnomalyChange = 2.495601869539691e3;
+
+        // Compute mean anomaly change [rad].
+        double computedMeanAnomalyChange = tudat::orbital_element_conversions
+                ::convertElapsedTimeToMeanAnomalyChange(
+                    elapsedTime, sunGravitationalParameter, semiMajorAxis );
+
+        // Check if computed mean anomaly change matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, computedMeanAnomalyChange,
+                                    1.0e-15 );
+    }
 }
 
-// Test if conversion from mean anomaly change to elapsed time for elliptical orbits is working
-// correctly.
-BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits )
+// Test if conversion from mean anomaly change to elapsed time is working correctly.
+BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
 {
     // Case 1: Earth-orbiting satellite.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
@@ -965,8 +989,8 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits 
     // kepprop2b('ValidationTest'). To see the mean anomaly values computed, in the MATLAB file,
     // remove the semi-colon at the end of line 68 in kepprop2b.m.
     {
-        // Set mean anomaly change [rad].
-        double meanAnomalyChange = 3.210592164838165 - 1.950567148859647;
+        // Set elliptical mean anomaly change [rad].
+        double ellipticalMeanAnomalyChange = 3.210592164838165 - 1.950567148859647;
 
         // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 398600.4415;
@@ -979,8 +1003,8 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits 
 
         // Compute elapsed time [s].
         double computedElapsedTime = tudat::orbital_element_conversions
-                ::convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
-                    meanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
+                ::convertEllipticalMeanAnomalyChangeToElapsedTime(
+                    ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
         // Check if computed elapsed time matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime, 1.0e-15 );
@@ -992,8 +1016,8 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits 
     // kepprop2b('ValidationTest'). To see the mean anomaly values computed, in the MATLAB file,
     // remove the semi-colon at the end of line 68 in kepprop2b.m.
     {
-        // Set mean anomaly change [rad].
-        double meanAnomalyChange = 0.0;
+        // Set elliptical mean anomaly change [rad].
+        double ellipticalMeanAnomalyChange = 0.0;
 
         // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 398600.4415;
@@ -1006,12 +1030,89 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits 
 
         // Compute elapsed time [s].
         double computedElapsedTime = tudat::orbital_element_conversions
-                ::convertMeanAnomalyChangeToElapsedTimeForEllipticalOrbits(
-                    meanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
+                ::convertEllipticalMeanAnomalyChangeToElapsedTime(
+                    ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
         // Check if computed elapsed time matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime,
                                     std::numeric_limits< double >::epsilon( ) );
+    }
+
+    // Case 3: Hyperbolic orbit around the Sun.
+    // The benchmark data is obtained by simply repeating the equations in MATLAB. This test needs
+    // to be replaced with real "external" benchmark data.
+    {
+        // Set hyperbolic mean anomaly [rad].
+        double hyperbolicMeanAnomaly = 2.495601869539691e3;
+
+        // Set Sun gravitational parameter [m^3/s^-2].
+        double sunGravitationalParameter = 3.9859383624e14;
+
+        // Set semi-major axis [m].
+        double semiMajorAxis = -40000.0;
+
+        // Set expected elapsed time [s].
+        double expectedElapsedTime = 1000.0;
+
+        // Compute elapsed time [s].
+        double computedElapsedTime = tudat::orbital_element_conversions
+                ::convertHyperbolicMeanAnomalyChangeToElapsedTime(
+                    hyperbolicMeanAnomaly, sunGravitationalParameter, semiMajorAxis );
+
+        // Check if computed elapsed time matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime, 1.0e-15 );
+    }
+
+    // Case 4: Earth-orbiting satellite (test wrapper function).
+    // The benchmark data is obtained by running ODTBX (NASA, 2012).
+    // The data is produced by running the kepprop2b_test() function through
+    // kepprop2b('ValidationTest'). To see the mean anomaly values computed, in the MATLAB file,
+    // remove the semi-colon at the end of line 68 in kepprop2b.m.
+    {
+        // Set elliptical mean anomaly change [rad].
+        double ellipticalMeanAnomalyChange = 3.210592164838165 - 1.950567148859647;
+
+        // Set Earth gravitational parameter [m^3/s^2].
+        double earthGravitationalParameter = 398600.4415;
+
+        // Set semi-major axis [m].
+        double semiMajorAxis = 42165.3431351313;
+
+        // Set expected elapsed time [s].
+        double expectedElapsedTime = 17280.0;
+
+        // Compute elapsed time [s].
+        double computedElapsedTime = tudat::orbital_element_conversions
+                ::convertMeanAnomalyChangeToElapsedTime(
+                    ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
+
+        // Check if computed elapsed time matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime, 1.0e-15 );
+    }
+
+    // Case 5: Hyperbolic orbit around the Sun.
+    // The benchmark data is obtained by simply repeating the equations in MATLAB. This test needs
+    // to be replaced with real "external" benchmark data.
+    {
+        // Set hyperbolic mean anomaly [rad].
+        double hyperbolicMeanAnomaly = 2.495601869539691e3;
+
+        // Set Sun gravitational parameter [m^3/s^-2].
+        double sunGravitationalParameter = 3.9859383624e14;
+
+        // Set semi-major axis [m].
+        double semiMajorAxis = -40000.0;
+
+        // Set expected elapsed time [s].
+        double expectedElapsedTime = 1000.0;
+
+        // Compute elapsed time [s].
+        double computedElapsedTime = tudat::orbital_element_conversions
+                ::convertMeanAnomalyChangeToElapsedTime(
+                    hyperbolicMeanAnomaly, sunGravitationalParameter, semiMajorAxis );
+
+        // Check if computed elapsed time matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedElapsedTime, computedElapsedTime, 1.0e-15 );
     }
 }
 
