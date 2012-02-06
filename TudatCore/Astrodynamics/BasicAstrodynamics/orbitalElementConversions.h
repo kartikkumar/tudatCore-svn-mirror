@@ -95,9 +95,9 @@ enum KeplerianElementVectorIndices
     rightAscensionOfAscendingNodeIndex, trueAnomalyIndex
 };
 
-//! Keplerian element vector indices.
+//! Cartesian element vector indices.
 /*!
- * Keplerian elements defined by the following indices in VectorXd(6) objects:
+ * Cartesian elements defined by the following indices in VectorXd(6) objects:
  *  x-position = 0,
  *  y-position = 1,
  *  z-position = 2,
@@ -238,7 +238,7 @@ double convertElapsedTimeToMeanAnomalyChangeForEllipticalOrbits(
         const double elapsedTime, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
-//! Convert mean anomaly change to elapsed time.
+//! Convert mean anomaly change to elapsed time for elliptical orbits.
 /*!
  * Converts mean anomaly change to elapsed time for elliptical orbits ( 0 <= eccentricity < 1.0 ).
  * The equation used can be found in (Chobotov, 2002).

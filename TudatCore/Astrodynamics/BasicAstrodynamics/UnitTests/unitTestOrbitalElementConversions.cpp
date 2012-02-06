@@ -3,7 +3,7 @@
  *    Cartesian elements and vice-versa, and various other orbital element conversion functions.
  *
  *    Path              : /Astrodynamics/States/
- *    Version           : 15
+ *    Version           : 17
  *    Check status      : Unchecked
  *
  *    Author            : E. Iorfida
@@ -23,7 +23,7 @@
  *    E-mail address    : B.TongMinh@student.tudelft.nl
  *
  *    Date created      : 3 December, 2010
- *    Last modified     : 3 February, 2012
+ *    Last modified     : 4 February, 2012
  *
  *    References
  *      NASA, Goddard Spaceflight Center. Orbit Determination Toolbox (ODTBX), NASA - GSFC Open
@@ -38,6 +38,10 @@
  *          1st February, 2012.
  *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
  *      accessed: 1st February, 2012, last modified: 29th January, 2012.
+ *      Rocket and Space Technology. Example problems, http://www.braeunig.us/space/problem.htm,
+ *          last accessed: 4th February, 2012.
+ *      Jenab. http://jenab6.livejournal.com/15054.html, last accessed: 4th February, 2012, last
+ *          modified: 6th August, 2008.
  *
  *    Notes
  *
@@ -84,6 +88,8 @@
  *                                  tests use ODTBX as benchmark.
  *      120201    K. Kumar          Added unit tests for conversions transferred to Tudat Core.
  *      120203    K. Kumar          Changed orbital element defines to enum.
+ *      120204    K. Kumar          Added unit tests for parabolic orbits; the tests are not ideal;
+ *                                  see tests for notes.
  */
 
 // Required Boost unit test framework define.
@@ -97,6 +103,9 @@
 #include <limits>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Basics/testMacros.h"
+
+#include <iostream>
+#include <iomanip>
 
 // Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_orbital_element_conversions )
@@ -216,6 +225,39 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
         // Check if computed Cartesian elements match the expected values.
         TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedCartesianElements,
                                            computedCartesianElements, 1.0e-15 );
+    }
+
+    // Case 3: Parabolic orbit around the Earth.
+    // Earth-orbiting satellite example (Rocket and Space Technology, 2012).
+    {
+        // Using declarations.
+        using namespace tudat::orbital_element_conversions;
+
+        // Set Earth gravitational parameter [m^3/s^2].
+        double earthGravitationalParameter = 3.986005e14;
+
+        // Set Keplerian elements [m,-,rad,rad,rad,rad].
+        unsigned int semiLatusRectum = 0;
+        Eigen::VectorXd keplerianElements( 6 );
+        keplerianElements( semiLatusRectum ) = 2.0 * 6678140.0;
+        keplerianElements( eccentricityIndex ) = 1.0;
+        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * M_PI;
+        keplerianElements( argumentOfPeriapsisIndex ) = 0.0;
+        keplerianElements( rightAscensionOfAscendingNodeIndex ) = 0.0;
+        keplerianElements( trueAnomalyIndex ) = 0.0;
+
+        // Set expected escape velocity [m/s].
+        double expectedEscapeVelocity = 10926.0;
+
+        // Compute Cartesian elements.
+        Eigen::VectorXd computedCartesianElements( 6 );
+        computedCartesianElements = tudat::orbital_element_conversions::
+                convertKeplerianToCartesianElements( keplerianElements,
+                                                     earthGravitationalParameter );
+
+        // Check if computed escape veloicty matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedEscapeVelocity,
+                                    computedCartesianElements.segment( 3, 3 ).norm( ), 1.0e-4 );
     }
 }
 
@@ -355,6 +397,44 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
         TUDAT_CHECK_MATRIX_CLOSE_FRACTION( expectedKeplerianElements,
                                            computedKeplerianElements, 1.0e-15 );
     }
+
+    // Case 3: Parabolic orbit around the Sun.
+    // This test is based on converting Keplerian elements to Cartesian element and then
+    // recomputing the input Keplerian element values. Ideally, an independent check will replace
+    // this test in future.
+    {
+        // Using declarations.
+        using namespace tudat::orbital_element_conversions;
+
+        // Set Earth gravitational parameter [m^3/s^2].
+        double earthGravitationalParameter = 3.986005e14;
+
+        // Set Keplerian elements [m,-,rad,rad,rad,rad].
+        unsigned int semiLatusRectum = 0;
+        Eigen::VectorXd keplerianElements( 6 );
+        keplerianElements( semiLatusRectum ) = 2.0 * 6678140.0;
+        keplerianElements( eccentricityIndex ) = 1.0;
+        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * M_PI;
+        keplerianElements( argumentOfPeriapsisIndex ) = 0.0;
+        keplerianElements( rightAscensionOfAscendingNodeIndex ) = 0.0;
+        keplerianElements( trueAnomalyIndex ) = 0.0;
+
+        // Compute Cartesian elements.
+        Eigen::VectorXd computedCartesianElements( 6 );
+        computedCartesianElements = tudat::orbital_element_conversions::
+                convertKeplerianToCartesianElements( keplerianElements,
+                                                     earthGravitationalParameter );
+
+        // Recompute Keplerian elements.
+        Eigen::VectorXd recomputedKeplerianElements( 6 );
+        recomputedKeplerianElements = tudat::orbital_element_conversions::
+                convertCartesianToKeplerianElements( computedCartesianElements,
+                                                     earthGravitationalParameter );
+
+        // Check if recomputed Keplerian elements match the expected values.
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( keplerianElements,
+                                           recomputedKeplerianElements, 1.0e-15 );
+    }
 }
 
 // Test if conversion from true anomaly to eccentric anomaly is working correctly.
@@ -421,6 +501,27 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         // Check if computed eccentric anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedEccentricAnomaly, computedEccentricAnomaly,
                                     std::numeric_limits< double >::epsilon( ) );
+    }
+
+    // Case 4: General hyperbolic orbit.
+    // The benchmark data is obtained from (Fortescue, 2003).
+    {
+        // Set eccentricity.
+        double eccentricity = -3.0;
+
+        // Set true anomaly.
+        double trueAnomaly = 0.5291;
+
+        // Set expected hyperbolic eccentric anomaly.
+        double expectedHyperbolicEccentricAnomaly = 0.3879;
+
+        // Compute hyperbolic eccentric anomaly.
+        double convertedHyperbolicEccentricAnomaly = tudat::orbital_element_conversions
+                ::convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricity );
+
+        // Check if computed hyperbolic eccentric anomaly matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedHyperbolicEccentricAnomaly,
+                                    convertedHyperbolicEccentricAnomaly, 1.0e-5 );
     }
 }
 
@@ -492,31 +593,6 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
                                     std::numeric_limits< double >::epsilon( ) );
     }
 
-}
-
-// Test if conversion from true anomaly to hyperbolic eccentric anomaly is working correctly.
-BOOST_AUTO_TEST_CASE( testTrueAnomalyToHyperbolicEccentricAnomalyConversion )
-{
-    // Case 1: General hyperbolic orbit.
-    // The benchmark data is obtained from (Fortescue, 2003).
-    {
-        // Set eccentricity.
-        double eccentricity = 3.0;
-
-        // Set true anomaly.
-        double trueAnomaly = 0.5291;
-
-        // Set expected hyperbolic eccentric anomaly.
-        double expectedHyperbolicEccentricAnomaly = 0.3879;
-
-        // Compute hyperbolic eccentric anomaly.
-        double convertedHyperbolicEccentricAnomaly = tudat::orbital_element_conversions
-                ::convertTrueAnomalyToHyperbolicEccentricAnomaly( trueAnomaly, eccentricity );
-
-        // Check if computed hyperbolic eccentric anomaly matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedHyperbolicEccentricAnomaly,
-                                    convertedHyperbolicEccentricAnomaly, 1.0e-5 );
-    }
 }
 
 // Test if conversion from hyperbolic eccentric anomaly to true anomaly is working correctly.
@@ -636,8 +712,9 @@ BOOST_AUTO_TEST_CASE( testHyperbolicEccentricAnomalyToMeanAnomalyConversion )
     }
 }
 
-// Test if conversion from elapsed time to mean anomaly is working correctly.
-BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
+// Test if conversion from elapsed time to mean anomaly change for elliptical orbits is working
+// correctly.
+BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversionForEllipticalOrbits )
 {
     // Case 1: Earth-orbiting satellite.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
@@ -696,8 +773,9 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
     }
 }
 
-// Test if conversion from mean anomaly to elapsed time is working correctly.
-BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
+// Test if conversion from mean anomaly change to elapsed time for elliptical orbits is working
+// correctly.
+BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversionForEllipticalOrbits )
 {
     // Case 1: Earth-orbiting satellite.
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
@@ -754,6 +832,40 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
                                     std::numeric_limits< double >::epsilon( ) );
     }
 }
+
+// Test if conversion from elapsed time to mean anomaly change for hyperbolic orbits is working
+// correctly.
+BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversionForHyperbolicOrbits )
+{
+    // Case 1: Hyperbolic orbit around the Sun.
+    // The benchmark data is obtained from (Jenab, 2008). Ideally, this will be a more "reliable"
+    // source in future.
+    {
+        // Set elapsed time [s].
+        double elapsedTime = 86400.0 * 181.4556136739202;
+
+        // Set Sun gravitational parameter [m^3/s^-2].
+        double sunGravitationalParameter = 1.32712440018e20;
+
+        // Set semi-major axis [m].
+        double semiMajorAxis = -0.8485759475247914 * 1.49597870691e11;
+
+        // Set expected mean anomaly change [rad].
+        double expectedMeanAnomalyChange = std::fmod( 0.02200621566858702
+                                                      * 86400.0, 2.0 * M_PI );
+
+        // Compute mean anomaly change [rad].
+        double computedMeanAnomalyChange = tudat::orbital_element_conversions
+                ::convertElapsedTimeToMeanAnomalyChangeForHyperbolicOrbits(
+                    elapsedTime, sunGravitationalParameter, semiMajorAxis );
+
+        // Check if computed mean anomaly change matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedMeanAnomalyChange, computedMeanAnomalyChange,
+                                    1.0e-14 );
+
+    }
+}
+
 
 // Test if conversion from mean motion to semi-major axis is working correctly.
 BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
