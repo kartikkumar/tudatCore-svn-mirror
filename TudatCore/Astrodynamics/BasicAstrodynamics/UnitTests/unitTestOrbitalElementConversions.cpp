@@ -90,7 +90,9 @@
  *      120203    K. Kumar          Changed orbital element defines to enum.
  *      120204    K. Kumar          Added unit tests for parabolic orbits; the tests are not ideal;
  *                                  see tests for notes.
- *      120206    K. Kumar          Added tests for wrapper functions.
+ *      120206    K. Kumar          Added tests for wrapper functions and regrouped existing unit
+ *                                  tests. Some tests need to be reviewed since external data
+ *                                  hasn't been found.
  */
 
 // Required Boost unit test framework define.
@@ -1122,8 +1124,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
     // Case 1: Geostationary satellite around the Earth.
     // The benchmark data is obtained from (Wikipedia, 2012).
     {
-        // Set mean motion [rad/s].
-        double meanMotion = 7.2921e-5;
+        // Set elliptical mean motion [rad/s].
+        double ellipticalMeanMotion = 7.2921e-5;
 
         // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 5.9736e24 * 6.67428e-11;
@@ -1133,7 +1135,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
 
         // Compute semi-major axis [s].
         double computedSemiMajorAxis = tudat::orbital_element_conversions
-                ::convertMeanMotionToSemiMajorAxis( meanMotion, earthGravitationalParameter );
+                ::convertEllipticalMeanMotionToSemiMajorAxis( ellipticalMeanMotion,
+                                                              earthGravitationalParameter );
 
         // Check if computed semi-major axis matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, computedSemiMajorAxis, 1.0e-4 );
@@ -1142,8 +1145,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
     // Case 2: Geostationary satellite around Mars.
     // The benchmark data is obtained from (Wikipedia, 2012).
     {
-        // Set mean motion [rad/s].
-        double meanMotion = 7.088218e-5;
+        // Set elliptical mean motion [rad/s].
+        double ellipticalMeanMotion = 7.088218e-5;
 
         // Set Mars gravitational parameter [m^3/s^2].
         double marsGravitationalParameter = 42828.0e9;
@@ -1153,7 +1156,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
 
         // Compute semi-major axis [m].
         double computedSemiMajorAxis = tudat::orbital_element_conversions
-                ::convertMeanMotionToSemiMajorAxis( meanMotion, marsGravitationalParameter );
+                ::convertEllipticalMeanMotionToSemiMajorAxis( ellipticalMeanMotion,
+                                                              marsGravitationalParameter );
 
         // Check if computed semi-major axis matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedSemiMajorAxis, computedSemiMajorAxis, 1.0e-4 );
@@ -1172,15 +1176,17 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         // Set Earth gravitational parameter [m^3/s^2].
         double earthGravitationalParameter = 5.9736e24 * 6.67428e-11;
 
-        // Set expected mean motion [rad/s].
-        double expectedMeanMotion = 7.2921e-5;
+        // Set expected elliptical mean motion [rad/s].
+        double expectedEllipticalMeanMotion = 7.2921e-5;
 
-        // Compute mean motion [rad/s].
-        double computedMeanMotion = tudat::orbital_element_conversions
-                ::convertSemiMajorAxisToMeanMotion( semiMajorAxis, earthGravitationalParameter );
+        // Compute elliptical mean motion [rad/s].
+        double computedEllipticalMeanMotion = tudat::orbital_element_conversions
+                ::convertSemiMajorAxisToEllipticalMeanMotion( semiMajorAxis,
+                                                              earthGravitationalParameter );
 
-        // Check if computed mean motion matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, computedMeanMotion, 1.0e-3 );
+        // Check if computed elliptical mean motion matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedEllipticalMeanMotion,
+                                    computedEllipticalMeanMotion, 1.0e-3 );
     }
 
     // Case 2: Geostationary satellite around Mars.
@@ -1192,15 +1198,17 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         // Set Mars gravitational parameter [m^3/s^2].
         double marsGravitationalParameter = 42828.0e9;
 
-        // Set expected mean motion [rad/s].
-        double expectedMeanMotion = 7.088218e-5;
+        // Set expected elliptical mean motion [rad/s].
+        double expectedEllipticalMeanMotion = 7.088218e-5;
 
         // Compute mean motion [rad/s].
-        double computedMeanMotion = tudat::orbital_element_conversions
-                ::convertSemiMajorAxisToMeanMotion( semiMajorAxis, marsGravitationalParameter );
+        double computedEllipticalMeanMotion = tudat::orbital_element_conversions
+                ::convertSemiMajorAxisToEllipticalMeanMotion( semiMajorAxis,
+                                                              marsGravitationalParameter );
 
-        // Check if computed mean motion matches the expected value.
-        BOOST_CHECK_CLOSE_FRACTION( expectedMeanMotion, computedMeanMotion, 1.0e-4 );
+        // Check if computed elliptical mean motion matches the expected value.
+        BOOST_CHECK_CLOSE_FRACTION( expectedEllipticalMeanMotion,
+                                    computedEllipticalMeanMotion, 1.0e-4 );
     }
 }
 

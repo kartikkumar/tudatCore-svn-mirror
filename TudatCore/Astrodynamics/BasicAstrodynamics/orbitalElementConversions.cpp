@@ -736,15 +736,30 @@ double convertMeanAnomalyChangeToElapsedTime(
     return elapsedTime_;
 }
 
-//! Convert mean motion to semi-major axis.
-double convertMeanMotionToSemiMajorAxis( const double meanMotion,
-                                         const double centralBodyGravitationalParameter )
-{ return std::pow( centralBodyGravitationalParameter / std::pow( meanMotion, 2.0 ), 1.0 / 3.0 ); }
+//! Convert (elliptical) mean motion to semi-major axis.
+double convertEllipticalMeanMotionToSemiMajorAxis(
+        const double ellipticalMeanMotion, const double centralBodyGravitationalParameter )
+{
+    return std::pow( centralBodyGravitationalParameter
+                   / std::pow( ellipticalMeanMotion, 2.0 ), 1.0 / 3.0 );
+}
 
-//! Convert semi-major axis to mean motion.
-double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
-                                         const double centralBodyGravitationalParameter )
-{ return std::sqrt( centralBodyGravitationalParameter / std::pow( semiMajorAxis, 3.0 ) ); }
+//! Convert semi-major axis to elliptical mean motion.
+double convertSemiMajorAxisToEllipticalMeanMotion(
+        const double semiMajorAxis, const double centralBodyGravitationalParameter )
+{
+    // Check if semi-major axis is invalid and throw error if true.
+    if ( semiMajorAxis < 0.0 )
+    {
+        boost::throw_exception(
+                    boost::enable_error_info(
+                        std::runtime_error( "Semi-major axis is invalid." ) ) );
+    }
+
+    // Else compute and return elliptical mean motion.
+    {
+        return std::sqrt( centralBodyGravitationalParameter / std::pow( semiMajorAxis, 3.0 ) ); }
+    }
 
 } // namespace orbital_element_conversions.
 

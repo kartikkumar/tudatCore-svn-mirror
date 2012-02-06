@@ -371,25 +371,25 @@ double convertMeanAnomalyChangeToElapsedTime(
         const double meanAnomalyChange, const double centralBodyGravitationalParameter,
         const double semiMajorAxis );
 
-//! Convert mean motion to semi-major axis.
+//! Convert (elliptical) mean motion to semi-major axis.
 /*!
- * Converts mean motion to semi-major axis.
- * \param meanMotion Mean motion.                                                           [rad/s]
+ * Converts mean motion to semi-major axis for elliptical orbits.
+ * \param ellipticalMeanMotion (Elliptical) Mean motion.                                    [rad/s]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
  * \return semiMajorAxis Semi-major axis.                                                       [m]
  */
-double convertMeanMotionToSemiMajorAxis( const double meanMotion,
-                                         const double centralBodyGravitationalParameter );
+double convertEllipticalMeanMotionToSemiMajorAxis(
+        const double ellipticalMeanMotion, const double centralBodyGravitationalParameter );
 
-//! Convert semi-major axis to mean motion.
+//! Convert semi-major axis to elliptical mean motion.
 /*!
- * Converts semi-major axis to mean motion.
+ * Converts semi-major axis to elliptical mean motion.
  * \param semiMajorAxis Semi-major axis.                                                        [m]
  * \param centralBodyGravitationalParameter Gravitational parameter of central body.      [m^3/s^2]
- * \return meanMotion Mean motion.                                                          [rad/s]
+ * \return ellipticalMeanMotion (Elliptical) Mean motion.                                   [rad/s]
  */
-double convertSemiMajorAxisToMeanMotion( const double semiMajorAxis,
-                                         const double centralBodyGravitationalParameter );
+double convertSemiMajorAxisToEllipticalMeanMotion(
+        const double semiMajorAxis, const double centralBodyGravitationalParameter );
 
 } // namespace orbital_element_conversions.
 
