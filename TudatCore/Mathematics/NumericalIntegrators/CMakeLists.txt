@@ -47,10 +47,10 @@ setup_headers("${NUMERICALINTEGRATORS_HEADERS}" "${MATHEMATICSDIR}/NumericalInte
 # Add unit tests.
 add_executable(test_NumericalIntegrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestNumericalIntegrator.cpp")
 setup_custom_test_program(test_NumericalIntegrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
-target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators)
+target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
 
 add_executable(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestRungeKutta4Integrator.cpp")
 setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
-target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators)
+target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
 
 # End of file.

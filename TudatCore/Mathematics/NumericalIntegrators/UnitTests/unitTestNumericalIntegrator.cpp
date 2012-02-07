@@ -3,10 +3,10 @@
  *    in Tudat.
  *
  *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
- *    Version           : 2
+ *    Version           : 4
  *    Check status      : Checked
  *    Date created      : 27 January, 2012
- *    Last modified     : 6 February, 2012
+ *    Last modified     : 7 February, 2012
  *
  *    References
  *
@@ -28,15 +28,23 @@
  *      120127    B. Tong Minh      File created.
  *      120128    D. Dirkx          Minor changes during code check.
  *      120206    K. Kumar          Minor comment corrections.
+ *      120207    K. Kumar          Updated to Boost unit test framework.
  */
+
+// Required Boost unit test framework define.
+#define BOOST_TEST_MAIN
 
 // Include statements.
 #include <boost/bind.hpp>
+#include <boost/test/unit_test.hpp>
 #include <Eigen/Core>
 #include <iostream>
 #include <limits>
 #include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
 #include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
+
+// Define Boost test suite.
+BOOST_AUTO_TEST_SUITE( test_numerical_integrator )
 
 //! Using declaration of the NumericalIntegrator.
 using tudat::mathematics::numerical_integrators::NumericalIntegrator;
@@ -57,8 +65,9 @@ public:
     DummyNumericalIntegrator( const double intervalStart,
                               const Eigen::VectorXd& initialState ) :
         NumericalIntegrator< double, Eigen::VectorXd, Eigen::VectorXd >(
-            &tudat::unit_tests::numerical_integrators::zeroStateDerivative ),
-        numberOfSteps( 0 ), currentIntegrationIntervalPoint_( intervalStart ), currentState_( initialState ) { }
+            &tudat::mathematics::numerical_integrators::computeZeroStateDerivative ),
+        numberOfSteps( 0 ), currentIntegrationIntervalPoint_( intervalStart ),
+        currentState_( initialState ) { }
 
     //! Get step size of the next step.
     /*!
@@ -89,10 +98,7 @@ public:
      * return true if the rollback was succesful, and false otherwise.
      * \return True if the rollback was successful.
      */
-    virtual bool rollbackToPreviousState( )
-    {
-        return true;
-    }
+    virtual bool rollbackToPreviousState( ) { return true; }
 
     //! Perform a single integration step that does not do anything.
     /*!
@@ -108,7 +114,7 @@ public:
         numberOfSteps++;
 
         stepSize_ = stepSize;
-        currentIntegrationIntervalPoint_ += this->stepSize_;
+        currentIntegrationIntervalPoint_ += stepSize_;
 
         return currentState_;
     }
@@ -158,16 +164,8 @@ bool testIntegrateToFunction( const double intervalStart, const double intervalE
     Eigen::VectorXd integratedState = integrator.integrateTo( intervalEnd, stepSize );
 
     // Calculate expected number of steps.
-    int expectedNumberOfSteps = static_cast< int >( std::ceil( ( intervalEnd - intervalStart ) / stepSize ) );
-
-    // Check if the actual number of steps is equal to the expected number of steps.
-    if ( integrator.numberOfSteps != expectedNumberOfSteps )
-    {
-        std::cerr << "NumericalIntegrator::execute test failed" << std::endl
-                  << "Expected number of steps: " << expectedNumberOfSteps << std::endl
-                  << "Actual number of steps: " << integrator.numberOfSteps << std::endl;
-        return false;
-    }
+    int expectedNumberOfSteps = static_cast< int >(
+                std::ceil( ( intervalEnd - intervalStart ) / stepSize ) );
 
     // Check if the integrated state is equal to the initial state.
     // This is an exact comparison, because no arithmetics are performed on the state.
@@ -177,30 +175,39 @@ bool testIntegrateToFunction( const double intervalStart, const double intervalE
         return false;
     }
 
-    return true;
+    // Check if the actual number of steps is equal to the expected number of steps.
+    if ( integrator.numberOfSteps != expectedNumberOfSteps )
+    {
+        return false;
+    }
 
+    return true;
 }
 
-//! Test main
-int main( )
+//! Test if the numerical integrator base class is working correctly.
+BOOST_AUTO_TEST_CASE( testNumberOfStepsUsingNumericalIntegrator )
 {
-    bool testOk = true;
-
-    // Random initial state.
+    // Set random initial state.
     Eigen::VectorXd initialState( 4 );
     initialState << 0.34, 0.24, 0.76, 0.10;
 
-    // Test the number of steps for various intervals.
-    testOk &= testIntegrateToFunction( 0.0, 0.0, initialState, 10.0 );
-    testOk &= testIntegrateToFunction( 0.0, 10.0, initialState, 10.0 );
-    testOk &= testIntegrateToFunction( 0.0, 20.0, initialState, 10.0 );
-    testOk &= testIntegrateToFunction( 0.0, 30.0, initialState, 10.0 );
+    // Case 1: test number of steps for different start and end times.
+    {
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 0.0, initialState, 10.0 ) );
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 10.0, initialState, 10.0 ) );
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 20.0, initialState, 10.0 ) );
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 30.0, initialState, 10.0 ) );
+    }
 
-    testOk &= testIntegrateToFunction( 0.0, 10.0, initialState, 2.5 );
-    testOk &= testIntegrateToFunction( 0.0, 10.0, initialState, 3.0 );
-    testOk &= testIntegrateToFunction( 0.0, 10.0, initialState, 3.5 );
-
-    return !testOk;
+    // Case 2: test number of steps for different step sizes.
+    {
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 10.0, initialState, 2.5 ) );
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 10.0, initialState, 3.0 ) );
+        BOOST_CHECK( testIntegrateToFunction( 0.0, 10.0, initialState, 3.5 ) );
+    }
 }
+
+// Close Boost test suite.
+BOOST_AUTO_TEST_SUITE_END( )
 
 // End of file.

@@ -1,9 +1,9 @@
 /*! \file benchmarkFunctions.h
- *    Header file that defines benchmark functions for numerical integrators
+ *    Header file that defines benchmark functions for numerical integrators.
  *
- *    Path              : /Mathematics/NumericalIntegrators/UnitTests
- *    Version           : 1
- *    Check status      : Unchecked
+ *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
+ *    Version           : 2
+ *    Check status      : Checked
  *
  *    Author            : B. Tong Minh
  *    Affiliation       : Delft University of Technology
@@ -30,75 +30,99 @@
  *
  *    Changelog
  *      YYMMDD    Author            Comment
- *      120203    B. Tong Minh      File created
+ *      120203    B. Tong Minh      File created.
+ *      120207    K. Kumar          Minor comment corrections; changed "NumericalRecipes" to
+ *                                  "BurdenAndFaires", "InverseExponential" to
+ *                                  "BackwardsExponential".
  */
 
-#ifndef TUDAT_CORE_BENCHMARKFUNCTIONS_H
-#define TUDAT_CORE_BENCHMARKFUNCTIONS_H
+#ifndef TUDAT_CORE_BENCHMARK_FUNCTIONS_H
+#define TUDAT_CORE_BENCHMARK_FUNCTIONS_H
 
+// Include statements.
+#include <boost/function.hpp>
+#include <Eigen/Core>
 #include <map>
 
-#include <Eigen/Core>
-#include <boost/function.hpp>
-
-
+//! Tudat library namespace.
+/*!
+ * The Tudat library namespace.
+ */
 namespace tudat
 {
 
-namespace unit_tests
+//! Mathematics namespace.
+/*!
+ * The mathematics namespace included in Tudat.
+ */
+namespace mathematics
 {
 
+//! Numerical integrators namespace.
+/*!
+ * The numerical integrators namespace included in Tudat.
+ */
 namespace numerical_integrators
 {
 
-//! Struct containing information about a benchmark function
+//! Struct containing information about a benchmark function.
 /*!
- * Struct containing information about a benchmark function
- * \sa getBenchmarkFunctions()
+ * Struct containing information about a benchmark function.
+ * \sa getBenchmarkFunctions().
  */
 struct BenchmarkFunction
 {
-    //! Typedef to a benchmark state derivative function
+public:
+
+    //! Typedef to a benchmark state derivative function.
     typedef boost::function< Eigen::VectorXd( const double, const Eigen::VectorXd& ) >
-        StateDerivativeFunction;
-    //! Pointer to a benchmark state derivative function
-    StateDerivativeFunction pointerToStateDerivativeFunction;
+    StateDerivativeFunction;
 
-    //! Integration interval start
-    double initialInterval;
-    //! Integration initial state
-    Eigen::VectorXd initialState;
-
-    //! Integration interval end
-    double endInterval;
-    //! Expected end state
-    Eigen::VectorXd endState;
-
-    //! Default constructor
+    //! Default constructor.
     /*!
-     * Default constructor
+     * Default constructor.
      */
-    BenchmarkFunction() { }
+    BenchmarkFunction( ) { }
 
-    //! Initializer constructor
+    //! Initializer constructor.
     /*!
-     * Initializer constructor
-     * \param pointerToStateDerivativeFunction_ Pointer to benchmark function
-     * \param initialInterval_ Integration interval start
-     * \param initialState_ Integration initial state
-     * \param endInterval_ Integration interval end
-     * \param endState_ Expected end state
+     * Initializer constructor.
+     * \param pointerToStateDerivativeFunction_ Pointer to benchmark function.
+     * \param initialInterval_ Integration interval start.
+     * \param initialState_ Integration initial state.
+     * \param endInterval_ Integration interval end.
+     * \param endState_ Expected end state.
      */
-    BenchmarkFunction( const StateDerivativeFunction& pointerToStateDerivativeFunction_,
-                       const double initialInterval_, const Eigen::VectorXd& initialState_,
-                       const double endInterval_, const Eigen::VectorXd& endState_ ) :
-        pointerToStateDerivativeFunction( pointerToStateDerivativeFunction_ ),
-        initialInterval( initialInterval_ ), initialState( initialState_ ),
-        endInterval( endInterval_ ), endState( endState_ )
-    { }
+    BenchmarkFunction( const StateDerivativeFunction& pointerToStateDerivativeFunction,
+                       const double initialInterval, const Eigen::VectorXd& initialState,
+                       const double endInterval, const Eigen::VectorXd& endState ) :
+        pointerToStateDerivativeFunction_( pointerToStateDerivativeFunction ),
+        initialInterval_( initialInterval ), initialState_( initialState ),
+        endInterval_( endInterval ), endState_( endState ) { }
+
+    //! Pointer to a benchmark state derivative function.
+    StateDerivativeFunction pointerToStateDerivativeFunction_;
+
+    //! Integration interval start.
+    double initialInterval_;
+
+    //! Integration initial state.
+    Eigen::VectorXd initialState_;
+
+    //! Integration interval end.
+    double endInterval_;
+
+    //! Expected end state.
+    Eigen::VectorXd endState_;
+
+protected:
+
+private:
+
 };
-typedef struct BenchmarkFunction BenchmarkFunction;
 
+//! Typedef to a benchmark function.
+typedef struct BenchmarkFunction BenchmarkFunction;
 
 //! State derivative function that always returns zero.
 /*!
@@ -107,7 +131,7 @@ typedef struct BenchmarkFunction BenchmarkFunction;
  * \param state State at which the state derivative needs to be evalated.
  * \return Zero vector with length equal to state.
  */
-Eigen::VectorXd zeroStateDerivative( const double time, const Eigen::VectorXd& state )
+Eigen::VectorXd computeZeroStateDerivative( const double time, const Eigen::VectorXd& state )
 {
     return Eigen::VectorXd::Zero( state.rows( ) );
 }
@@ -119,7 +143,7 @@ Eigen::VectorXd zeroStateDerivative( const double time, const Eigen::VectorXd& s
  * \param state State at which the state derivative needs to be evalated.
  * \return State derivative, length equal to state, all zeroes.
  */
-Eigen::VectorXd constantStateDerivative( const double time, const Eigen::VectorXd& state )
+Eigen::VectorXd computeConstantStateDerivative( const double time, const Eigen::VectorXd& state )
 {
     return Eigen::VectorXd::Constant( state.rows( ), 1.0 );
 }
@@ -131,15 +155,16 @@ Eigen::VectorXd constantStateDerivative( const double time, const Eigen::VectorX
  * \param state State at which the state derivative needs to be evalated.
  * \return State derivative, length equal to state, all entries equal to state.
  */
-Eigen::VectorXd exponentialStateDerivative( const double time, const Eigen::VectorXd& state )
+Eigen::VectorXd computeExponentialStateDerivative( const double time,
+                                                   const Eigen::VectorXd& state )
 {
     return state;
 }
 
-//! Compute test state derivative.
+//! Compute test state derivative for Burden and Faires example.
 /*!
- * Computes test state derivative. The state derivative function defined
- * corresponds to Example 3, pg. 278 in (Burden and Faires, 2001).
+ * Computes test state derivative. The state derivative function defined corresponds to Example 3,
+ * pg. 278 in (Burden and Faires, 2001).
  * The initial-value problem is:
  * \f[
  *      y' = y - t^{ 2 } + 1
@@ -147,10 +172,11 @@ Eigen::VectorXd exponentialStateDerivative( const double time, const Eigen::Vect
  * with \f$ 0 \leq t \leq 2 \f$ and \f$ y( 0 ) = 0.5 \f$.
  * \param time Time at which the state derivative needs to be evaluated.
  * \param state State, length of which should be 1, at which the state derivative needs to
- * be evalated.
+ *          be evaluated.
  * \return State derivative, length equal to stat values according to above expression.
  */
-Eigen::VectorXd numericalRecipesStateDerivative( const double time, const Eigen::VectorXd& state )
+Eigen::VectorXd computeBurdenAndFairesStateDerivative( const double time,
+                                                       const Eigen::VectorXd& state )
 {
     Eigen::VectorXd stateDerivative( 1 );
     stateDerivative( 0 ) = state( 0 ) - std::pow( time, 2.0 ) + 1.0;
@@ -163,44 +189,49 @@ enum BenchmarkFunctions
     Zero,
     Constant,
     Exponential,
-    InverseExponential,
-    NumericalRecipes
+    BackwardsExponential,
+    BurdenAndFaires
 };
 
-//! Get all defined benchmark functions
-std::map<BenchmarkFunctions, BenchmarkFunction>& getBenchmarkFunctions()
+//! Get all defined benchmark functions.
+std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
 {
-    static std::map<BenchmarkFunctions, BenchmarkFunction> benchmarkFunctions;
-    if ( benchmarkFunctions.empty() )
+    static std::map< BenchmarkFunctions, BenchmarkFunction > benchmarkFunctions;
+
+    if ( benchmarkFunctions.empty( ) )
     {
-        benchmarkFunctions[Zero] = BenchmarkFunction( &zeroStateDerivative,
-                                                      0.0, Eigen::VectorXd::Constant( 10, 0.5 ),
-                                                      2.0, Eigen::VectorXd::Constant( 10, 0.5 ) );
-        benchmarkFunctions[Constant] = BenchmarkFunction( &constantStateDerivative,
-                                                          0.0, Eigen::VectorXd::Constant( 3, 0.6 ),
-                                                          3.0, Eigen::VectorXd::Constant( 3, 3.6 ) );
+        benchmarkFunctions[ Zero ] = BenchmarkFunction(
+                    &computeZeroStateDerivative, 0.0, Eigen::VectorXd::Constant( 10, 0.5 ),
+                    2.0, Eigen::VectorXd::Constant( 10, 0.5 ) );
 
-        benchmarkFunctions[Exponential] = BenchmarkFunction( &exponentialStateDerivative,
-                                                             0.0, Eigen::VectorXd::Constant( 1, 0.7 ),
-                                                             20.0, std::exp( 20.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ) );
+        benchmarkFunctions[ Constant ] = BenchmarkFunction(
+                    &computeConstantStateDerivative, 0.0, Eigen::VectorXd::Constant( 3, 0.6 ),
+                    3.0, Eigen::VectorXd::Constant( 3, 3.6 ) );
 
-        benchmarkFunctions[InverseExponential] = BenchmarkFunction( &exponentialStateDerivative,
-                                                             4.0, std::exp( 4.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ),
-                                                             0.0, Eigen::VectorXd::Constant( 1, 0.7 ) );
+        benchmarkFunctions[Exponential] = BenchmarkFunction(
+                    &computeExponentialStateDerivative, 0.0, Eigen::VectorXd::Constant( 1, 0.7 ),
+                    20.0, std::exp( 20.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ) );
 
-        benchmarkFunctions[NumericalRecipes] = BenchmarkFunction( &numericalRecipesStateDerivative,
-                                                                  0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
-                                                                  2.0, Eigen::VectorXd::Constant( 1, 5.3053630 ) );
+        benchmarkFunctions[ BackwardsExponential ] = BenchmarkFunction(
+                    &computeExponentialStateDerivative, 4.0,
+                    std::exp( 4.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ),
+                    0.0, Eigen::VectorXd::Constant( 1, 0.7 ) );
+
+        benchmarkFunctions[ BurdenAndFaires ] = BenchmarkFunction(
+                    &computeBurdenAndFairesStateDerivative,
+                    0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
+                    2.0, Eigen::VectorXd::Constant( 1, 5.3053630 ) );
     }
+
     return benchmarkFunctions;
 }
 
-} // namespace numerical_integrators
+} // namespace numerical_integrators.
 
-} // namespace unit_tests
+} // namespace unit_tests.
 
-} // namespace tudat
+} // namespace tudat.
 
+#endif // TUDAT_CORE_BENCHMARK_FUNCTIONS_H
 
-
-#endif // BENCHMARKFUNCTIONS_H
+// End of file.
