@@ -1,3 +1,38 @@
+/*! \file benchmarkFunctions.h
+ *    Header file that defines benchmark functions for numerical integrators
+ *
+ *    Path              : /Mathematics/NumericalIntegrators/UnitTests
+ *    Version           : 1
+ *    Check status      : Unchecked
+ *
+ *    Author            : B. Tong Minh
+ *    Affiliation       : Delft University of Technology
+ *    E-mail address    : b.tongminh@student.tudelft.nl
+ *
+ *    Date created      : 3 February, 2012
+ *    Last modified     : 7 February, 2012
+ *
+ *    References
+ *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
+ *
+ *    Notes
+ *
+ *    Copyright (c) 2010-2012 Delft University of Technology.
+ *
+ *    This software is protected by national and international copyright.
+ *    Any unauthorized use, reproduction or modification is unlawful and
+ *    will be prosecuted. Commercial and non-private application of the
+ *    software in any form is strictly prohibited unless otherwise granted
+ *    by the authors.
+ *
+ *    The code is provided without any warranty; without even the implied
+ *    warranty of merchantibility or fitness for a particular purpose.
+ *
+ *    Changelog
+ *      YYMMDD    Author            Comment
+ *      120203    B. Tong Minh      File created
+ */
+
 #ifndef TUDAT_CORE_BENCHMARKFUNCTIONS_H
 #define TUDAT_CORE_BENCHMARKFUNCTIONS_H
 
