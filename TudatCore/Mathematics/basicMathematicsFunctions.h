@@ -83,6 +83,17 @@ typedef boost::mt19937 GlobalRandomNumberGeneratorType;
  */
 GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
 
+//! Compute modulo of double.
+/*!
+ * Computes the remainder of division of one number by another.
+ * The remainder is in the range [ 0, divisor ].
+ * \param dividend Number to be divided.
+ * \param divisor Number that is divided by.
+ * \return Remainder of division of dividend by divisor.
+ */
+double computeModuloForSignedValues( double dividend, double divisor );
+
+
 } // namespace mathematics.
 
 } // namespace tudat.

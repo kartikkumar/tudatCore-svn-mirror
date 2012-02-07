@@ -69,6 +69,10 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
   return globalRandomNumberGenerator;
 }
 
+//! Compute modulo of double.
+double computeModuloForSignedValues( double dividend, double divisor )
+{ return dividend - divisor * floor( dividend / divisor ); }
+
 } // namespace mathematics.
 
 } // namespace tudat.

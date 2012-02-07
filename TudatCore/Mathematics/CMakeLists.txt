@@ -66,4 +66,9 @@ add_executable(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTes
 setup_custom_test_program(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}")
 target_link_libraries(test_LinearAlgebra tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
 
+# Add unit tests.
+add_executable(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
+setup_custom_test_program(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}")
+target_link_libraries(test_BasicMathematics tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
+
 # End of file.
