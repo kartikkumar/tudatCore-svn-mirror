@@ -49,7 +49,7 @@
 #include <cmath>
 #include <limits>
 #include <numeric>
-#include "TudatCore/Mathematics/coordinateConversions.h"
+#include <TudatCore/Mathematics/coordinateConversions.h>
 
 //! Convert spherical (radius_, zenith, azimuth) to Cartesian (x,y,z) coordinates.
 Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertSphericalToCartesian(
