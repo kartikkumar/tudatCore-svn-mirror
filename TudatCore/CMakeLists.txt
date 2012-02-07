@@ -78,20 +78,20 @@ if (WIN32)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
-    set(LIBROOT "${SRCROOT}/lib")
+    set(LIBROOT "${CODEROOT}/lib")
     set(INCLUDEROOT "${SRCROOT}/include")
-    set(BINROOT "${SRCROOT}/bin")
+    set(BINROOT "${CODEROOT}/bin")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-    set(LIBROOT "${SRCROOT}/lib")
+    set(LIBROOT "${CODEROOT}/lib")
     set(INCLUDEROOT "${SRCROOT}/include")
-    set(BINROOT "${SRCROOT}/bin")
+    set(BINROOT "${CODEROOT}/bin")
   endif()
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-  set(LIBROOT "${SRCROOT}/lib")
+  set(LIBROOT "${CODEROOT}/lib")
   set(INCLUDEROOT "${SRCROOT}/include")
-  set(BINROOT "${SRCROOT}/bin")
+  set(BINROOT "${CODEROOT}/bin")
 endif()
 
 # Set the global macros for setting up targets.
@@ -130,10 +130,10 @@ include_directories(AFTER
 )
 
 # Find Eigen3 library on local system.
-find_package(Eigen3 REQUIRED)
 # If Eigen3 is not found, use the following to manually set the path to the Eigen3 directory.
 # A default location is given as an example.
 #set(EIGEN3_INCLUDE_DIR "${SRCROOT}/External/eigen3")
+find_package(Eigen3 REQUIRED)
 
 # Include Eigen3 directories.
 # Set CMake flag to suppress Eigen warnings (platform-dependent solution).
@@ -149,11 +149,11 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 
 # Find Boost libraries on local system.
-find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework regex REQUIRED)
 # If Boost is not found, use the following to manually set the path to the Boost include and
 # library directories.
 #SET(Boost_INCLUDE_DIRS "C:\My\Custom\Path\To\Boost\Include\Directory")
 #SET(Boost_LIBRARY_DIRS "C:\My\Custom\Path\To\Boost\Library\Directory")
+find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework regex REQUIRED)
 
 # Include Boost directories.
 # Set CMake flag to suppress Boost warnings (platform-dependent solution).
@@ -175,7 +175,6 @@ endforeach(CURRENT_SUBDIR)
 get_target_property(ASTRODYNAMICS_SOURCES tudat_core_astrodynamics SOURCES)
 get_target_property(INPUTOUTPUT_SOURCES tudat_core_input_output SOURCES)
 get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)
-
 
 add_library(tudat_core STATIC ${BASICSDIR_SOURCES} ${ASTRODYNAMICS_SOURCES} ${INPUTOUTPUT_SOURCES} ${MATHEMATICS_SOURCES})
 setup_tudat_library_target(tudat_core "${SRCROOT}")
