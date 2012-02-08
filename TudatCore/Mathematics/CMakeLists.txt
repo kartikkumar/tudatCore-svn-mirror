@@ -31,17 +31,17 @@
 
 # Add source files.
 set(MATHEMATICS_SOURCES
-  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.cpp"
   "${SRCROOT}${MATHEMATICSDIR}/basicMathematicsFunctions.cpp"
   "${SRCROOT}${MATHEMATICSDIR}/coordinateConversions.cpp"
-
+  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.cpp"
 )
 
 # Add header files.
 set(MATHEMATICS_HEADERS 
-  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.h"
   "${SRCROOT}${MATHEMATICSDIR}/basicMathematicsFunctions.h"
   "${SRCROOT}${MATHEMATICSDIR}/coordinateConversions.h"
+  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.h"
+  "${SRCROOT}${MATHEMATICSDIR}/mathematicalConstants.h"
 )
 
 
@@ -70,5 +70,9 @@ target_link_libraries(test_LinearAlgebra tudat_core_mathematics tudat_core_astro
 add_executable(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
 setup_custom_test_program(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}")
 target_link_libraries(test_BasicMathematics tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
+
+add_executable(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
+setup_custom_test_program(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}")
+target_link_libraries(test_MathematicalConstants tudat_core_mathematics ${Boost_LIBRARIES})
 
 # End of file.

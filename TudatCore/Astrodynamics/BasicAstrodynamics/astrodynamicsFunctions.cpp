@@ -33,13 +33,16 @@
 #include <cmath>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
+#include "TudatCore/Mathematics/mathematicalConstants.h"
+
+using tudat::mathematics::PI;
 
 //! Compute Kepler orbital period.
 double tudat::astrodynamics::computeKeplerOrbitalPeriod(
         const double semiMajorAxis, const double gravitationalParameterOfCentralBody,
         const double massOfOrbitingBody )
 {
-    return 2.0 * M_PI * std::sqrt( std::pow( semiMajorAxis, 3.0 )
+    return 2.0 * PI * std::sqrt( std::pow( semiMajorAxis, 3.0 )
                                    /  ( ( physical_constants::GRAVITATIONAL_CONSTANT
                                           * massOfOrbitingBody )
                                         + gravitationalParameterOfCentralBody ) );
