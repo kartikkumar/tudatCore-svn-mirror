@@ -51,6 +51,7 @@
 
 // Include statements.
 #include <cmath>
+#include "TudatCore/Mathematics/mathematicalConstants.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 //! Tudat library namespace.
@@ -75,7 +76,7 @@ namespace unit_conversions
  */
 template < typename T >
 T convertRadiansToDegrees( T angleInRadians )
-{ return angleInRadians / M_PI * 180.0; }
+{ return angleInRadians / mathematics::PI * 180.0; }
 
 //! Converts angle in degrees to radians.
 /*!
@@ -85,7 +86,7 @@ T convertRadiansToDegrees( T angleInRadians )
  */
 template < typename T >
 T convertDegreesToRadians( T angleInDegrees )
-{ return angleInDegrees / 180.0 * M_PI; }
+{ return angleInDegrees / 180.0 * mathematics::PI; }
 
 //! Converts angle in degrees to arcminutes.
 /*!
