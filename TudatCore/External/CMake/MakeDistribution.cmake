@@ -31,10 +31,7 @@ install(TARGETS tudat_core
     ARCHIVE DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/lib"
 )
 # Install the Tudat Core header files
-install(DIRECTORY "${SRCROOT}/Astrodynamics"
-                  "${SRCROOT}/Basics"
-                  "${SRCROOT}/InputOutput"
-                  "${SRCROOT}/Mathematics"
+install(DIRECTORY "${SRCROOT}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/TudatCore"
         FILES_MATCHING PATTERN "*.h")
 # Install Eigen
@@ -45,3 +42,6 @@ install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost")
 install(DIRECTORY "${Boost_LIBRARY_DIRS_NORMALIZED}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib")
+# Install the environment file
+install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}")
