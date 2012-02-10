@@ -34,6 +34,6 @@ setup_tudat_library_target(tudatCore_basics "${SRCROOT}${BASICSDIR}")
 setup_headers("${BASICSDIR_HEADERS}" "${BASICSDIR}")
 
 # Add unit tests.
-add_executable(test_TestMacros "${SRCROOT}${BASICSDIR}/UnitTests/unitTest_testMacros.cpp")
+add_executable(test_TestMacros "${SRCROOT}${BASICSDIR}/UnitTests/unitTestTestMacros.cpp")
 setup_custom_test_program(test_TestMacros "${SRCROOT}${BASICSDIR}")
 target_link_libraries(test_TestMacros tudatCore_basics ${Boost_LIBRARIES})
