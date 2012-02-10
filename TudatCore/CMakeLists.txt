@@ -168,7 +168,5 @@ get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)
 add_library(tudat_core STATIC ${BASICSDIR_SOURCES} ${ASTRODYNAMICS_SOURCES} ${INPUTOUTPUT_SOURCES} ${MATHEMATICS_SOURCES})
 setup_tudat_library_target(tudat_core "${SRCROOT}")
 
-# Add the installer
+# Add the installer.
 include("${PROJECT_SOURCE_DIR}/External/CMake/MakeDistribution.cmake")
-
-# End of file.
