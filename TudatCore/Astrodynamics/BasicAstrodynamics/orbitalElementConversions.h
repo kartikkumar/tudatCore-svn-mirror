@@ -40,28 +40,16 @@
 #ifndef TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
 #define TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
 
-// Include statements.
 #include <Eigen/Core>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Orbital element conversions namespace.
-/*!
- * Orbital element conversions namespace, containing classical Keplerian to Cartesian element
- * conversions, and other conversions between classical Keplerian elements, e.g., true anomaly
- * to/from eccentric anomaly.
- */
 namespace orbital_element_conversions
 {
 
 //! Keplerian element vector indices.
 /*!
- * Keplerian elements defined by the following indices in VectorXd(6) objects:
+ *  Keplerian elements defined by the following indices in VectorXd(6) objects:
  *  semi-major axis = 0,
  *  eccentricity = 1,
  *  inclination = 2,
@@ -77,7 +65,7 @@ enum KeplerianElementVectorIndices
 
 //! Cartesian element vector indices.
 /*!
- * Cartesian elements defined by the following indices in VectorXd(6) objects:
+ *  Cartesian elements defined by the following indices in VectorXd(6) objects:
  *  x-position = 0,
  *  y-position = 1,
  *  z-position = 2,
@@ -86,8 +74,9 @@ enum KeplerianElementVectorIndices
  *  z-velocity = 5.
  */
 enum CartesianElementVectorIndices
-{ xPositionIndex, yPositionIndex, zPositionIndex, xVelocityIndex, yVelocityIndex, zVelocityIndex };
-
+{
+    xPositionIndex, yPositionIndex, zPositionIndex, xVelocityIndex, yVelocityIndex, zVelocityIndex
+};
 
 //! Convert Keplerian to Cartesian orbital elements.
 /*!
@@ -115,6 +104,7 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
 
 //! Convert Cartesian to Keplerian orbital elements.
 /*!
+ * Converts Cartesian to Keplerian orbital elements.
  * \param cartesianElements Vector containing Cartesian elements. Order of elements is important!
  *          cartesianElements( 0 ) = x-position coordinate,                                     [m]
  *          cartesianElements( 1 ) = y-position coordinate,                                     [m]
@@ -364,10 +354,7 @@ double convertEllipticalMeanMotionToSemiMajorAxis(
 double convertSemiMajorAxisToEllipticalMeanMotion(
         const double semiMajorAxis, const double centralBodyGravitationalParameter );
 
-} // namespace orbital_element_conversions.
-
-} // namespace tudat.
+} // namespace orbital_element_conversions
+} // namespace tudat
 
 #endif // TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H
-
-// End of file.

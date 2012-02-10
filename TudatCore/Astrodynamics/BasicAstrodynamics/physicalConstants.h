@@ -19,34 +19,22 @@
  *      120203    K. Kumar          Added missing specific gas constant value; need unit test.
  *
  *    References
- *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical
- *          Standards", in Highlights of Astronomy (I. Appenzeller, ed.),
- *          Table 1, Kluwer Academic Publishers, Dordrecht.
+ *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical Standards",
+ *          in Highlights of Astronomy (I. Appenzeller, ed.), Table 1, Kluwer Academic Publishers,
+ *          Dordrecht.
  *      Standish, E.M. (1998) "JPL Planetary and Lunar Ephemerides,
  *          DE405/LE405", JPL IOM 312.F-98-048.
- *      Anderson, J.D. Jr. Hypersonic and High-Temperature Gas Dynamics
- *          Second Edition, p469.
+ *      Anderson, J.D. Jr. Hypersonic and High-Temperature Gas Dynamics, Second Edition, p469.
  *
  */
 
 // Temporary notes (move to class/function doxygen):
 // The reference for the sidereal day and year should be updated.
-// 
-
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
 #define TUDAT_CORE_PHYSICAL_CONSTANTS_H
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Physical constants namespace.
-/*!
- * The physical constants namespace includes selected constants commonly used in astrodynamics.
- */
 namespace physical_constants
 {
 
@@ -127,10 +115,7 @@ const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
  */
 const static double SPECIFIC_GAS_CONSTANT_AIR = 2.87e2;
 
-} // namespace physical_constants.
-
-} // namespace tudat.
+} // namespace physical_constants
+} // namespace tudat
 
 #endif // TUDAT_CORE_PHYSICAL_CONSTANTS_H
-
-// End of file.

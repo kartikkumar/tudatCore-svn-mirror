@@ -34,10 +34,8 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
@@ -45,13 +43,16 @@
 #include <limits>
 #include "TudatCore/Mathematics/coordinateConversions.h"
 
-// Define Boost test suite.
+namespace tudat
+{
+namespace unit_tests
+{
+
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
 
 //! Test if cylindrical-to-Cartesian conversion is working correctly.
 BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
 {
-    // Using declarations.
     using tudat::mathematics::coordinate_conversions::convertCylindricalToCartesian;
 
     // Test 1: Test conversion of ( 2.0, 0.0 ).
@@ -134,7 +135,6 @@ BOOST_AUTO_TEST_CASE( testCylindricalToCartesianConversion )
 //! Test if spherical-to-Cartesian conversion is working correctly.
 BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 {
-    // Using declarations.
     using tudat::mathematics::coordinate_conversions::convertSphericalToCartesian;
     
     // Test 1: Test conversion of: ( 0.0, 0.0, 0.0 ).
@@ -208,7 +208,6 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 //! Test if Cartesian-to-spherical conversion is working correctly.
 BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
 {
-    // Using declarations.
     using std::acos;
     using std::atan2;
     using std::pow;
@@ -306,7 +305,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     }
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

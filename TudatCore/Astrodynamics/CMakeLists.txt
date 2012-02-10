@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the Astrodynamics sub-directory.
- #
- #    Path              : /Astrodynamics/
- #    Version           : 2
- #    Check status      : Checked
- #    Date created      : 20 August, 2011
- #    Last modified     : 4 February, 2012
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -20,12 +7,16 @@
  #    by the authors.
  #
  #    The code is provided without any warranty; without even the implied
- #    warranty of merchantibility or fitness for a particular purpose.
+ #    warranty of merchantibility or fitness for a particular purpose. #
+ #    References
  #
  #    Changelog
  #      YYMMDD    Author            Comment
  #      110820    S.M. Persson      File created.
  #      120204    K. Kumar          Adapted for Astrodynamics sub-directory.
+ #
+ #    References
+ #
  #/
 
 # Define the main sub-directories.
@@ -49,5 +40,3 @@ get_target_property(BASICASTRODYNAMICSSOURCES tudat_core_basic_astrodynamics SOU
 add_library(tudat_core_astrodynamics STATIC ${ASTRODYNAMICS_SOURCES} ${ASTRODYNAMICS_HEADERS} ${BASICASTRODYNAMICSSOURCES})
 setup_tudat_library_target(tudat_core_astrodynamics "${SRCROOT}${ASTRODYNAMICSDIR}")
 setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")
-
-# End of file.

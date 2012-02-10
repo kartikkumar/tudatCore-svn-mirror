@@ -29,9 +29,7 @@
  *
  */
 
-// Include statements.
 #include <cmath>
-#include <iostream> 
 #include <limits>
 #include "TudatCore/Mathematics/basicMathematicsFunctions.h"
 
@@ -109,5 +107,3 @@ int main( )
 
     return isBasicMathematicsFunctionsErroneous;
 }
-
-// End of file.

@@ -19,7 +19,6 @@
  *
  */
 
-// Include statements.
 #include <cmath>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
@@ -27,10 +26,15 @@
 
 using tudat::mathematics::PI;
 
+namespace tudat
+{
+namespace astrodynamics
+{
+
 //! Compute Kepler orbital period.
-double tudat::astrodynamics::computeKeplerOrbitalPeriod(
-        const double semiMajorAxis, const double gravitationalParameterOfCentralBody,
-        const double massOfOrbitingBody )
+double computeKeplerOrbitalPeriod( const double semiMajorAxis,
+                                   const double gravitationalParameterOfCentralBody,
+                                   const double massOfOrbitingBody )
 {
     return 2.0 * PI * std::sqrt( std::pow( semiMajorAxis, 3.0 )
                                    /  ( ( physical_constants::GRAVITATIONAL_CONSTANT
@@ -39,17 +43,17 @@ double tudat::astrodynamics::computeKeplerOrbitalPeriod(
 }
 
 //! Compute Kepler angular momentum.
-double tudat::astrodynamics::computeKeplerAngularMomentum(
-        const double semiMajorAxis, const double eccentricity,
-        const double gravitationalParameterOfCentralBody, const double massOfOrbitingBody )
+double computeKeplerAngularMomentum( const double semiMajorAxis, const double eccentricity,
+                                     const double gravitationalParameterOfCentralBody,
+                                     const double massOfOrbitingBody )
 {
     return massOfOrbitingBody * std::sqrt( gravitationalParameterOfCentralBody * semiMajorAxis
                                            * ( 1.0 - std::pow( eccentricity, 2.0 ) ) );
 }
 
 //! Compute Kepler mean motion.
-double tudat::astrodynamics::computeKeplerMeanMotion(
-        const double semiMajorAxis, const double gravitationalParameterOfCentralBody,
+double computeKeplerMeanMotion( const double semiMajorAxis,
+                                const double gravitationalParameterOfCentralBody,
         const double massOfOrbitingBody )
 {
     return std::sqrt( ( ( physical_constants::GRAVITATIONAL_CONSTANT * massOfOrbitingBody )
@@ -57,18 +61,18 @@ double tudat::astrodynamics::computeKeplerMeanMotion(
 }
 
 //! Compute Kepler orbital energy.
-double tudat::astrodynamics::computeKeplerEnergy(
-        const double semiMajorAxis, const double gravitationalParameterOfCentralBody,
-        const double massOfOrbitingBody )
+double computeKeplerEnergy( const double semiMajorAxis,
+                            const double gravitationalParameterOfCentralBody,
+                            const double massOfOrbitingBody )
 {
     return -massOfOrbitingBody * gravitationalParameterOfCentralBody / ( 2.0 * semiMajorAxis );
 }
 
 //! Compute synodic period.
-double tudat::astrodynamics::computeSynodicPeriod( const double orbitalPeriodBody1,
-                                                   const double orbitalPeriodBody2 )
+double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbitalPeriodBody2 )
 {
     return 1.0 / std::fabs( 1.0 / orbitalPeriodBody1 - 1.0 / orbitalPeriodBody2 );
 }
 
-// End of file.
+} // namespace astrodynamics
+} // namespace tudat

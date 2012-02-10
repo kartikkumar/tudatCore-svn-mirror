@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the Basics sub-directory.
- #
- #    Path              : /Astrodynamics/BasicAstrodynamics/
- #    Version           : 4
- #    Check status      : Checked
- #    Date created      : 20 August, 2011
- #    Last modified     : 4 February, 2012
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -28,7 +15,10 @@
  #      111025    K. Kumar          Adapted file to work with Revision 194.
  #      111026    K. Kumar          Adapted file so all headers show in project tree in Qt Creator.
  #      120127    K. Kumar          Added Boost libraries to unit tests.
- #	120204    K. Kumar	    Adapted for new BasicAstrodynamics sub-directory.
+ #	120204    K. Kumar	     Adapted for new BasicAstrodynamics sub-directory.
+ #
+ #    References
+ #
  #/
 
 # Add source files.
@@ -66,5 +56,3 @@ target_link_libraries(test_OrbitalElementConversions tudat_core_basic_astrodynam
 add_executable(test_UnitConversions "${SRCROOT}${BASICASTRODYNAMICSDIR}/UnitTests/unitTestUnitConversions.cpp")
 setup_custom_test_program(test_UnitConversions "${SRCROOT}${BASICASTRODYNAMICSDIR}")
 target_link_libraries(test_UnitConversions tudat_core_basic_astrodynamics  tudat_core_astrodynamics tudat_core_mathematics ${Boost_LIBRARIES})
-
-# End of file.

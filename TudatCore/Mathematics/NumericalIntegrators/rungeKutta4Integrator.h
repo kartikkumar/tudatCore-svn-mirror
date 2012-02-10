@@ -22,27 +22,12 @@
 #ifndef TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H
 #define TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H
 
-// Include statements.
 #include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace included in Tudat.
- */
 namespace mathematics
 {
-
-//! Numerical integrators namespace.
-/*!
- * The numerical integrators namespace included in Tudat.
- */
 namespace numerical_integrators
 {
 
@@ -197,7 +182,7 @@ protected:
      */
     StateType lastState_;
 
-}; // class RungeKutta4Integrator.
+};
 
 //! Typedef of RK4 integrator (state/state derivative = VectorXd, independent variable = double).
 /*!
@@ -212,12 +197,8 @@ typedef RungeKutta4Integrator< > RungeKutta4IntegratorXd;
  */
 typedef RungeKutta4Integrator< double, double, double > RungeKutta4Integratord;
 
-} // namespace integrators.
-
-} // namespace mathematics.
-
-} // namespace tudat.
+} // namespace integrators
+} // namespace mathematics
+} // namespace tudat
 
 #endif // TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H
-
-// End of file.

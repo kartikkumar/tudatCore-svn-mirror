@@ -24,30 +24,13 @@
 #ifndef TUDAT_CORE_BENCHMARK_FUNCTIONS_H
 #define TUDAT_CORE_BENCHMARK_FUNCTIONS_H
 
-// Include statements.
 #include <boost/function.hpp>
 #include <Eigen/Core>
 #include <map>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace included in Tudat.
- */
-namespace mathematics
-{
-
-//! Numerical integrators namespace.
-/*!
- * The numerical integrators namespace included in Tudat.
- */
-namespace numerical_integrators
+namespace unit_tests
 {
 
 //! Struct containing information about a benchmark function.
@@ -211,12 +194,7 @@ std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
     return benchmarkFunctions;
 }
 
-} // namespace numerical_integrators.
-
-} // namespace unit_tests.
-
-} // namespace tudat.
+} // namespace unit_tests
+} // namespace tudat
 
 #endif // TUDAT_CORE_BENCHMARK_FUNCTIONS_H
-
-// End of file.

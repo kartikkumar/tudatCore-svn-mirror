@@ -104,5 +104,3 @@
 #endif
 
 #endif // TUDAT_CORE_TESTMACROS_H
-
-// End of file.

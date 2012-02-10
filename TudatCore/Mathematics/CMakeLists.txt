@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the Basics sub-directory.
- #
- #    Path              : /Mathematics/
- #    Version           : 3
- #    Check status      : Checked
- #    Date created      : 20 August, 2011
- #    Last modified     : 26 October, 2011
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -27,6 +14,9 @@
  #      110820    S.M. Persson      File created.
  #      111025    K. Kumar          Adapted file to work with Revision 194.
  #      111026    K. Kumar          Adapted file so all headers show in project tree in Qt Creator.
+ #
+ #    References
+ #
  #/
 
 # Add source files.
@@ -74,5 +64,3 @@ target_link_libraries(test_BasicMathematics tudat_core_mathematics tudat_core_as
 add_executable(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
 setup_custom_test_program(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}")
 target_link_libraries(test_MathematicalConstants tudat_core_mathematics ${Boost_LIBRARIES})
-
-# End of file.

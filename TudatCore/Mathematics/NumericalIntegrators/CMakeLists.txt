@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the NumericalIntegrators sub-directory.
- #
- #    Path              : /Mathematics/NumericalIntegrators/
- #    Version           : 1
- #    Check status      : Broken
- #    Date created      : 27 January, 2011
- #    Last modified     : 27 January, 2011
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2012 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -25,6 +12,9 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      120127    B. Tong Minh      File created.
+ #
+ #    References
+ #
  #/
 
 # Add source files.
@@ -52,5 +42,3 @@ target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators 
 add_executable(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestRungeKutta4Integrator.cpp")
 setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
 target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
-
-# End of file.

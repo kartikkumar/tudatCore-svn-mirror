@@ -51,7 +51,6 @@
  *
  */
 
-// Include statements.
 #include <boost/exception/all.hpp>
 #include <boost/math/special_functions/atanh.hpp>
 #include <Eigen/Geometry>
@@ -60,11 +59,8 @@
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Mathematics/linearAlgebra.h"
 
-//! Tudat library namespace.
 namespace tudat
 {
-
-//! Orbital element conversions namespace.
 namespace orbital_element_conversions
 {
 
@@ -72,7 +68,6 @@ namespace orbital_element_conversions
 Eigen::VectorXd convertKeplerianToCartesianElements(
         const Eigen::VectorXd& keplerianElements, const double centralBodyGravitationalParameter )
 {
-    // Using declarations.
     using std::cos;
     using std::fabs;
     using std::pow;
@@ -162,7 +157,6 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
 Eigen::VectorXd convertCartesianToKeplerianElements(
         const Eigen::VectorXd& cartesianElements, const double centralBodyGravitationalParameter )
 {
-    // Using declarations.
     using std::acos;
     using std::atan2;
     using std::fabs;
@@ -327,7 +321,6 @@ double convertTrueAnomalyToEllipticalEccentricAnomaly( const double trueAnomaly,
 
     else
     {
-        // Using declarations.
         using std::cos;
         using std::sqrt;
 
@@ -355,7 +348,6 @@ double convertTrueAnomalyToHyperbolicEccentricAnomaly( const double trueAnomaly,
 
     else
     {
-        // Using declarations.
         using std::cos;
 
         // Compute hyperbolic sine and hyperbolic cosine of hyperbolic eccentric anomaly.
@@ -411,17 +403,9 @@ double convertTrueAnomalyToEccentricAnomaly( const double trueAnomaly,
 
     // Return computed eccentric anomaly.
     return eccentricAnomaly_;
-
 }
 
 //! Convert (elliptic) eccentric anomaly to true anomaly.
-/*!
- * Converts eccentric anomaly to true anomaly for elliptical orbits ( 0 <= eccentricity < 1.0 ).
- * The equations used can be found in (Chobotov, 2002).
- * \param ellipticEccentricAnomaly Elliptic eccentric anomaly.                                [rad]
- * \param eccentricity Eccentricity.                                                            [-]
- * \return True anomaly.                                                                      [rad]
- */
 double convertEllipticalEccentricAnomalyToTrueAnomaly( const double ellipticEccentricAnomaly,
                                                        const double eccentricity )
 {
@@ -434,7 +418,6 @@ double convertEllipticalEccentricAnomalyToTrueAnomaly( const double ellipticEcce
 
     else
     {
-        // Using declarations.
         using std::cos;
         using std::sqrt;
 
@@ -464,7 +447,6 @@ double convertHyperbolicEccentricAnomalyToTrueAnomaly( const double hyperbolicEc
 
     else
     {
-        // Using declarations.
         using std::cosh;
 
         // Compute sine and cosine of true anomaly.
@@ -527,13 +509,16 @@ double convertEccentricAnomalyToTrueAnomaly( const double eccentricAnomaly,
 //! Convert (elliptical) eccentric anomaly to mean anomaly.
 double convertEllipticalEccentricAnomalyToMeanAnomaly( const double ellipticalEccentricAnomaly,
                                                        const double eccentricity )
-{ return ellipticalEccentricAnomaly - eccentricity * std::sin( ellipticalEccentricAnomaly ); }
+{
+    return ellipticalEccentricAnomaly - eccentricity * std::sin( ellipticalEccentricAnomaly );
+}
 
 //! Convert hyperbolic eccentric anomaly to mean anomaly.
 double convertHyperbolicEccentricAnomalyToMeanAnomaly(
     const double hyperbolicEccentricAnomaly, const double eccentricity )
-{ return eccentricity * std::sinh( hyperbolicEccentricAnomaly ) - hyperbolicEccentricAnomaly; }
-
+{
+    return eccentricity * std::sinh( hyperbolicEccentricAnomaly ) - hyperbolicEccentricAnomaly;
+}
 
 //! Convert eccentric anomaly to mean anomaly.
 double convertEccentricAnomalyToMeanAnomaly( const double eccentricAnomaly,
@@ -734,11 +719,9 @@ double convertSemiMajorAxisToEllipticalMeanMotion(
 
     // Else compute and return elliptical mean motion.
     {
-        return std::sqrt( centralBodyGravitationalParameter / std::pow( semiMajorAxis, 3.0 ) ); }
+        return std::sqrt( centralBodyGravitationalParameter / std::pow( semiMajorAxis, 3.0 ) );
     }
+}
 
-} // namespace orbital_element_conversions.
-
-} // namespace tudat.
-
-// End of file.
+} // namespace orbital_element_conversions
+} // namespace tudat

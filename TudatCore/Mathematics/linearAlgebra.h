@@ -31,28 +31,12 @@
 //#define EIGEN_NO_DEBUG
 //#endif
 
-// Include statements.
 #include <Eigen/Core>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace, containing free functions and classes.
- */
 namespace mathematics
 {
-
-//! Linear algebra namespace.
-/*!
- * The linear algebra namespace contains free functions to perform basic operations, such as
- * determining the angle between two vectors.
- */
 namespace linear_algebra
 {
 
@@ -76,12 +60,8 @@ double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
 double computeAngleBetweenVectors( const Eigen::VectorXd& vector0,
                                    const Eigen::VectorXd& vector1 );
 
-} // namespace linear_algebra.
-
-} // namespace mathematics.
-
-} // namespace tudat.
+} // namespace linear_algebra
+} // namespace mathematics
+} // namespace tudat
 
 #endif // TUDAT_CORE_LINEAR_ALGEBRA_H
-
-// End of file.

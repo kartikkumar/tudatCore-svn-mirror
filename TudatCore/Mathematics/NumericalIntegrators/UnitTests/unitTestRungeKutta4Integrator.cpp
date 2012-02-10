@@ -22,17 +22,18 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/unit_test.hpp>
-#include <iostream>
 #include <limits>
 #include "TudatCore/Mathematics/NumericalIntegrators/rungeKutta4Integrator.h"
 #include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
 
-// Define Boost test suite.
+namespace tudat
+{
+namespace unit_tests
+{
+
 BOOST_AUTO_TEST_SUITE( test_runge_kutta_4_integrator )
 
 //! Using declaration of the RungeKutta4IntegratorXd.
@@ -145,7 +146,6 @@ bool testValidityOfRungeKutta4Integrator(
  */
 bool testDifferentStateAndStateDerivativeTypes( )
 {
-    using tudat::mathematics::numerical_integrators::computeZeroStateDerivative;
     tudat::mathematics::numerical_integrators::RungeKutta4Integrator
             < double, Eigen::Vector3d, Eigen::VectorXd > integrator(
                 &computeZeroStateDerivative, 0.0, Eigen::Vector3d::Zero( ) );
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
     }
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

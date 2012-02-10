@@ -18,13 +18,16 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
 #include "TudatCore/InputOutput/basicInputOutput.h"
+
+namespace tudat
+{
+namespace unit_tests
+{
 
 //! Check if the Tudat rootpath is detected correctly.
 BOOST_AUTO_TEST_CASE( test_getRootPath )
@@ -41,4 +44,5 @@ BOOST_AUTO_TEST_CASE( test_getRootPath )
     #endif
 }
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

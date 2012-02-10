@@ -41,35 +41,18 @@
 #ifndef TUDAT_CORE_COORDINATE_CONVERSIONS_H
 #define TUDAT_CORE_COORDINATE_CONVERSIONS_H
 
-// Include statements.
 #include <Eigen/Core>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace, containing free functions and classes.
- */
 namespace mathematics
 {
-
-//! Coordinate conversions namespace.
-/*!
- * The coordinate conversions namespace contains free functions to convert between standard
- * coordinate frames, e.g, spherical-to-Cartesian, cylindrical-to-Cartesian etc.
- */
 namespace coordinate_conversions
 {
 
 //! Convert spherical (radius, zenith, azimuth) to cartesian (x,y,z) coordinates.
 /*!
- * Function to convert spherical to cartesian coordinates.
- * Schematic representation can be found on, e.g.,
+ * Converts spherical to cartesian coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
  * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the zenith angle:
@@ -85,8 +68,7 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
 
 //! Convert Cartesian (x,y,z) to spherical (radius, zenith, azimuth) coordinates.
 /*!
- * Converts Cartesian to spherical coordinates.
- * Schematic representation can be found on, e.g.,
+ * Converts Cartesian to spherical coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
  * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the azimuth angle:
@@ -103,8 +85,7 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
 
 //! Convert cylindrical (radius, azimuth, z) to Cartesian coordinates (x,y,z), z value unaffected.
 /*!
- * Function to convert cylindrical to Cartesian coordinates.
- * Schematic representation can be found on, e.g.,
+ * Converts cylindrical to Cartesian coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/CylindricalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$  the radius and
  * \f$ \theta \f$ the azimuth angle:
@@ -119,12 +100,8 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
 */
 Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates );
 
-} // namespace coordinate_conversions.
+} // namespace coordinate_conversions
+} // namespace mathematics
+} // namespace tudat
 
-} // namespace mathematics.
-
-} // namespace tudat.
-
-#endif // TUDAT_CORE_COORDINATECONVERSIONS_H
-
-// End of file.
+#endif // TUDAT_CORE_COORDINATE_CONVERSIONS_H

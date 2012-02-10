@@ -35,15 +35,20 @@
  *
  */
 
-// Include statements.
 #include <cmath>
 #include <limits>
 #include <numeric>
-#include <TudatCore/Mathematics/coordinateConversions.h>
+#include "TudatCore/Mathematics/coordinateConversions.h"
+
+namespace tudat
+{
+namespace mathematics
+{
+namespace coordinate_conversions
+{
 
 //! Convert spherical (radius_, zenith, azimuth) to Cartesian (x,y,z) coordinates.
-Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertSphericalToCartesian(
-        const Eigen::VectorXd& sphericalCoordinates )
+Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoordinates )
 {
     // Create local variables.
     double radius_ = sphericalCoordinates( 0 );
@@ -65,8 +70,7 @@ Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertSphericalToCa
 }
 
 //! Convert Cartesian (x,y,z) to spherical (radius_, zenith, azimuth) coordinates.
-Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertCartesianToSpherical(
-        const Eigen::VectorXd& cartesianCoordinates )
+Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates )
 {
     // Create output VectorXd.
     Eigen::VectorXd convertedSphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
@@ -93,8 +97,7 @@ Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertCartesianToSp
 }
 
 //! Convert cylindrical (radius_, azimuth, z) to Cartesian coordinates (x,y,z), z value unaffected.
-Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertCylindricalToCartesian(
-        const Eigen::VectorXd& cylindricalCoordinates )
+Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates )
 {
     // Create output VectorXd.
     Eigen::VectorXd convertedCartesianCoordinates_ = Eigen::VectorXd::Zero( 3 );
@@ -109,4 +112,6 @@ Eigen::VectorXd tudat::mathematics::coordinate_conversions::convertCylindricalTo
     return convertedCartesianCoordinates_;
 }
 
-// End of file.
+} // namespace coordinate_conversions
+} // namespace mathematics
+} // namespace tudat

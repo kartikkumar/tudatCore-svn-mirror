@@ -1,4 +1,4 @@
-/*    Copyright (c) 2010-2012 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -30,14 +30,14 @@ namespace tudat
 namespace mathematics
 {
 
-//! Constant E = exp(1) \approx 2.71828
+//! Constant E = exp(1) \approx 2.71828.
 /**
  * The constant E is base of the natural logarithm, and is also known as Napier's constant.
  * \See Wolfram MathWorld, Constant: http://mathworld.wolfram.com/e.html
  */
 const static double E = std::exp( 1.0 );
 
-//! The Golden ratio \approx 1.6180
+//! The Golden ratio \approx 1.6180.
 /**
  * The golden ratio, also known as the divine proportion, golden mean, or golden section, is a 
  * number often encountered when taking the ratios of distances in simple geometric figures such as 
@@ -46,7 +46,7 @@ const static double E = std::exp( 1.0 );
  */
 const static double GOLDEN_RATIO = 0.5 * (1 + std::sqrt( 5.0 ));
 
-//! The constant PI \approx 3.14159
+//! The constant PI \approx 3.14159.
 /**
  * The constant PI, denoted \pi, is a real number defined as the ratio of a circle's circumference 
  * C to its diameter, d = 2r
@@ -58,16 +58,16 @@ const static double GOLDEN_RATIO = 0.5 * (1 + std::sqrt( 5.0 ));
     const static double PI = 3.141592653589793238; // 18 digits
 #endif
 
-//! Not-a-number (NaN)
+//! Not-a-number (NaN).
 /**
  * NaN (Not a Number) is a value of the numeric data type representing an undefined or 
  * unrepresentable value.
  *
  * This is a shorthand notation for std::numeric_limits<double>::signaling_NaN();
  */
-#define TUDAT_NAN std::numeric_limits<double>::signaling_NaN()
+#define TUDAT_NAN std::numeric_limits< double >::signaling_NaN( )
 
-} // namespace mathematics.
-} // namespace tudat.
+} // namespace mathematics
+} // namespace tudat
 
 #endif // TUDAT_CORE_MATHEMATICAL_CONSTANTS_H

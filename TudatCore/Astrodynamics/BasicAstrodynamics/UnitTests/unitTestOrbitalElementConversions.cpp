@@ -67,10 +67,8 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
@@ -79,13 +77,14 @@
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Basics/testMacros.h"
 
-#include <iostream>
-#include <iomanip>
+namespace tudat
+{
+namespace unit_tests
+{
 
-// Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_orbital_element_conversions )
 
-// Test if conversion from Keplerian elements to Cartesian elements is working correctly.
+//! Test if conversion from Keplerian elements to Cartesian elements is working correctly.
 BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
 {
     // Case 1: Elliptical orbit around the Earth.
@@ -236,7 +235,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
     }
 }
 
-// Test if conversion from Cartesian elements to Keplerian elements is working correctly.
+//! Test if conversion from Cartesian elements to Keplerian elements is working correctly.
 BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 {
     // Case 1: Elliptical orbit around the Earth.
@@ -412,7 +411,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     }
 }
 
-// Test if conversion from true anomaly to eccentric anomaly is working correctly.
+//! Test if conversion from true anomaly to eccentric anomaly is working correctly.
 BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
 {
     // Case 1: General elliptical orbit.
@@ -546,7 +545,7 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
     }
 }
 
-// Test if conversion from eccentric anomaly to true anomaly is working correctly.
+//! Test if conversion from eccentric anomaly to true anomaly is working correctly.
 BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
 {
     // Case 1: General elliptical orbit.
@@ -680,7 +679,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
     }
 }
 
-// Test if conversion from eccentric anomaly to mean anomaly is working correctly.
+//! Test if conversion from eccentric anomaly to mean anomaly is working correctly.
 BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
 {
     // Case 1: General elliptical orbit.
@@ -813,7 +812,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
     }
 }
 
-// Test if conversion from elapsed time to mean anomaly change is working correctly.
+//! Test if conversion from elapsed time to mean anomaly change is working correctly.
 BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
 {
     // Case 1: Earth-orbiting satellite.
@@ -954,7 +953,7 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
     }
 }
 
-// Test if conversion from mean anomaly change to elapsed time is working correctly.
+//! Test if conversion from mean anomaly change to elapsed time is working correctly.
 BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
 {
     // Case 1: Earth-orbiting satellite.
@@ -1090,7 +1089,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
     }
 }
 
-// Test if conversion from mean motion to semi-major axis is working correctly.
+//! Test if conversion from mean motion to semi-major axis is working correctly.
 BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
 {
     // Case 1: Geostationary satellite around the Earth.
@@ -1136,7 +1135,7 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
     }
 }
 
-// Test if conversion from semi-major axis to mean motion is working correctly.
+//! Test if conversion from semi-major axis to mean motion is working correctly.
 BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
 {
     // Case 1: Geostationary satellite around the Earth.
@@ -1184,7 +1183,7 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
     }
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

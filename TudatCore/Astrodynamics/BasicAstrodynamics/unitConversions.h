@@ -38,30 +38,19 @@
 // The behaviour of the template conversion functions has not been tested
 // for integer data types.
 // 
-
 #ifndef TUDAT_CORE_UNIT_CONVERSIONS_H
 #define TUDAT_CORE_UNIT_CONVERSIONS_H
 
-// Include statements.
 #include <cmath>
 #include "TudatCore/Mathematics/mathematicalConstants.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Unit conversions namespace.
-/*!
- * Unit conversions namespace.
- */
 namespace unit_conversions
 {
 
-//! Converts angle in radians to degrees.
+//! Convert angle in radians to degrees.
 /*!
  * Converts angle given in radians to degrees.
  * \param angleInRadians Angle in radians.
@@ -71,7 +60,7 @@ template < typename T >
 T convertRadiansToDegrees( T angleInRadians )
 { return angleInRadians / mathematics::PI * 180.0; }
 
-//! Converts angle in degrees to radians.
+//! Convert angle in degrees to radians.
 /*!
  * Converts angle given in degrees to radians.
  * \param angleInDegrees Angle in degrees.
@@ -81,7 +70,7 @@ template < typename T >
 T convertDegreesToRadians( T angleInDegrees )
 { return angleInDegrees / 180.0 * mathematics::PI; }
 
-//! Converts angle in degrees to arcminutes.
+//! Convert angle in degrees to arcminutes.
 /*!
  * Converts angle given in degrees to arcminutes.
  * \param angleInDegrees Angle in degrees.
@@ -91,7 +80,7 @@ template < typename T >
 T convertDegreesToArcminutes( T angleInDegrees )
 { return angleInDegrees * 60.0; }
 
-//! Converts angle in arcminutes to arcseconds.
+//! Convert angle in arcminutes to arcseconds.
 /*!
  * Converts angle given in arcminutes to arcseconds.
  * \param angleInArcminutes Angle in arcminutes.
@@ -101,7 +90,7 @@ template < typename T >
 T convertArcminutesToArcseconds( T angleInArcminutes )
 { return angleInArcminutes * 60.0; }
 
-//! Converts distance in meters to kilometers.
+//! Convert distance in meters to kilometers.
 /*!
  * Converts distance given in meters to kilometers.
  * \param distanceInMeters Distance in meters.
@@ -111,7 +100,7 @@ template < typename T >
 T convertMetersToKilometers( T distanceInMeters )
 { return distanceInMeters / 1000.0; }
 
-//! Converts distance in kilometers to meters.
+//! Convert distance in kilometers to meters.
 /*!
  * Converts distance given in kilometers to meters.
  * \param distanceInKilometers Distance in kilometers.
@@ -121,7 +110,7 @@ template < typename T >
 T convertKilometersToMeters( T distanceInKilometers )
 { return distanceInKilometers * 1000.0; }
 
-//! Converts distance in meters to astronomical units.
+//! Convert distance in meters to astronomical units.
 /*!
  * Converts distance given in meters to astronomical units.
  * \param distanceInMeters Distance in meters.
@@ -131,7 +120,7 @@ template < typename T >
 T convertMetersToAstronomicalUnits( T distanceInMeters )
 { return distanceInMeters / physical_constants::ASTRONOMICAL_UNIT; }
 
-//! Converts distance in astronomical units to meters.
+//! Convert distance in astronomical units to meters.
 /*!
  * Converts distance given in astronomical units to meters.
  * \param distanceInAstronomicalUnits Distance in astronomical units.
@@ -141,7 +130,7 @@ template < typename T >
 T convertAstronomicalUnitsToMeters( T distanceInAstronomicalUnits )
 { return distanceInAstronomicalUnits * physical_constants::ASTRONOMICAL_UNIT; }
 
-//! Converts time in seconds to minutes.
+//! Convert time in seconds to minutes.
 /*!
  * Converts time given in seconds to minutes.
  * \param timeInSeconds Time in seconds.
@@ -151,7 +140,7 @@ template < typename T >
 T convertSecondsToMinutes( T timeInSeconds )
 { return timeInSeconds / 60.0; }
 
-//! Converts time in minutes to seconds.
+//! Convert time in minutes to seconds.
 /*!
  * Converts time given in minutes to seconds.
  * \param timeInMinutes Time in minutes.
@@ -161,7 +150,7 @@ template < typename T >
 T convertMinutesToSeconds( T timeInMinutes )
 { return timeInMinutes * 60.0; }
 
-//! Converts time in seconds to hours.
+//! Convert time in seconds to hours.
 /*!
  * Converts time given in seconds to hours.
  * \param timeInSeconds Time in seconds.
@@ -171,7 +160,7 @@ template < typename T >
 T convertSecondsToHours( T timeInSeconds )
 { return timeInSeconds / 3600.0; }
 
-//! Converts time in hours to seconds.
+//! Convert time in hours to seconds.
 /*!
  * Converts time given in hours to seconds.
  * \param timeInHours Time in hours.
@@ -181,7 +170,7 @@ template < typename T >
 T convertHoursToSeconds( T timeInHours )
 { return timeInHours * 3600.0; }
 
-//! Converts time in seconds to Julian days.
+//! Convert time in seconds to Julian days.
 /*!
  * Converts time given in seconds to Julian days.
  * \param timeInSeconds Time in seconds.
@@ -191,7 +180,7 @@ template < typename T >
 T convertSecondsToJulianDays( T timeInSeconds )
 { return timeInSeconds / physical_constants::JULIAN_DAY; }
 
-//! Converts time in Julian days to seconds.
+//! Convert time in Julian days to seconds.
 /*!
  * Converts time given in Julian days to seconds.
  * \param timeInJulianDays Time in Julian days.
@@ -201,7 +190,7 @@ template < typename T >
 T convertJulianDaysToSeconds( T timeInJulianDays )
 { return timeInJulianDays * physical_constants::JULIAN_DAY; }
 
-//! Converts time in seconds to sidereal days.
+//! Convert time in seconds to sidereal days.
 /*!
  * Converts time given in seconds to sidereal days.
  * \param timeInSeconds Time in seconds.
@@ -211,7 +200,7 @@ template < typename T >
 T convertSecondsToSiderealDays( T timeInSeconds )
 { return timeInSeconds / physical_constants::SIDEREAL_DAY; }
 
-//! Converts time in sidereal days to seconds.
+//! Convert time in sidereal days to seconds.
 /*!
  * Converts time given in sidereal days to seconds.
  * \param timeInSiderealDays Time in sidereal days.
@@ -221,7 +210,7 @@ template < typename T >
 T convertSiderealDaysToSeconds( T timeInSiderealDays )
 { return timeInSiderealDays * physical_constants::SIDEREAL_DAY; }
 
-//! Converts time in Julian days to Julian years.
+//! Convert time in Julian days to Julian years.
 /*!
  * Converts time given in Julian days to Julian years.
  * \param timeInJulianDays Time in Julian days.
@@ -231,7 +220,7 @@ template < typename T >
 T convertJulianDaysToJulianYears( T timeInJulianDays )
 { return timeInJulianDays / physical_constants::JULIAN_YEAR_IN_DAYS; }
 
-//! Converts time in Julian years to Julian days.
+//! Convert time in Julian years to Julian days.
 /*!
  * Converts time given in Julian years to Julian days.
  * \param timeInJulianYears Time in Julian years.
@@ -241,7 +230,7 @@ template < typename T >
 T convertJulianYearsToJulianDays( T timeInJulianYears )
 { return timeInJulianYears * physical_constants::JULIAN_YEAR_IN_DAYS; }
 
-//! Converts temperature in Rankine to Kelvin.
+//! Convert temperature in Rankine to Kelvin.
 /*!
  * Converts temperature given in Rankine to Kelvin (Wikipedia, 2012a).
  * \param temperatureInRankine Temperature in Rankine.
@@ -251,7 +240,7 @@ template < typename T >
 T convertRankineToKelvin( T temperatureInRankine )
 { return temperatureInRankine * 5.0 / 9.0; }
 
-//! Converts distance in feet to meters.
+//! Convert distance in feet to meters.
 /*!
  * Converts distance given in feet to meters (Wikipedia, 2012b).
  * \param distanceInFeet Distance in feet.
@@ -261,7 +250,7 @@ template < typename T >
 T convertFeetToMeter( T distanceInFeet )
 { return distanceInFeet * 0.3048; }
 
-//! Converts pressure in pound per square feet to Newton per square meter.
+//! Convert pressure in pound per square feet to Newton per square meter.
 /*!
  * Converts pressure given in pound per square feet to Newton per square meter (Pascal)
  * (Wikipedia, 2012c).
@@ -272,10 +261,7 @@ template < typename T >
 T convertPoundPerSquareFeetToPascal( T pressureInPoundPerSquareFeet )
 { return pressureInPoundPerSquareFeet * 47.880259; }
 
-} // namespace unit_conversions.
-
-} // namespace tudat.
+} // namespace unit_conversions
+} // namespace tudat
 
 #endif // TUDAT_CORE_UNIT_CONVERSIONS_H
-
-// End of file.

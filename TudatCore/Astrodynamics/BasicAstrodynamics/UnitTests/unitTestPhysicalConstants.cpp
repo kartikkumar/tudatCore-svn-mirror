@@ -25,16 +25,18 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <limits>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
-// Define Boost test suite.
+namespace tudat
+{
+namespace unit_tests
+{
+
 BOOST_AUTO_TEST_SUITE( test_physical_constants )
 
 //! Test if the physical constants have the correct relations (ratios/offsets).
@@ -90,7 +92,7 @@ BOOST_AUTO_TEST_CASE( testTimeConstants )
                                 std::numeric_limits< double >::epsilon( ) );
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

@@ -18,15 +18,18 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/iostreams/filtering_stream.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <sstream>
 #include "TudatCore/InputOutput/streamFilters.h"
+
+namespace tudat
+{
+namespace unit_tests
+{
 
 //! Test fixture for stream filters.
 /*!
@@ -65,10 +68,10 @@ protected:
 private:
 };
 
-// Create Boost fixture test suite for all the stream filter unit tests.
+//! Create Boost fixture test suite for all the stream filter unit tests.
 BOOST_FIXTURE_TEST_SUITE( test_suite_streamFilters, StreamFilterFixture )
 
-// Test with remove line endings on the skipped lines.
+//! Test with remove line endings on the skipped lines.
 BOOST_AUTO_TEST_CASE( test_skipFirstLines_noEmptyLines )
 {  
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -93,7 +96,7 @@ BOOST_AUTO_TEST_CASE( test_skipFirstLines_noEmptyLines )
                      ) == 0 );
 }
 
-// Test with don't remove line endings on the skipped lines.
+//! Test with don't remove line endings on the skipped lines.
 BOOST_AUTO_TEST_CASE( test_skipFirstLines_emptyLines )
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -118,7 +121,7 @@ BOOST_AUTO_TEST_CASE( test_skipFirstLines_emptyLines )
                      ) == 0 );
 }
 
-// Test with remove line endings on the tested lines.
+//! Test with remove line endings on the tested lines.
 BOOST_AUTO_TEST_CASE( test_removeComment_noEmptyLines )
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -143,7 +146,7 @@ BOOST_AUTO_TEST_CASE( test_removeComment_noEmptyLines )
                      ) == 0 );
 }
 
-// Test with dont remove line endings on the tested lines.
+//! Test with dont remove line endings on the tested lines.
 BOOST_AUTO_TEST_CASE( test_removeComment_emptyLines )
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -168,7 +171,7 @@ BOOST_AUTO_TEST_CASE( test_removeComment_emptyLines )
                     ) == 0 );
 }
 
-// Test with remove line endings on the tested lines.
+//! Test with remove line endings on the tested lines.
 BOOST_AUTO_TEST_CASE( test_replaceElements_delete_noEmptyLines )
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -196,7 +199,7 @@ BOOST_AUTO_TEST_CASE( test_replaceElements_delete_noEmptyLines )
         ) == 0 );
 }
 
-// Test with don't remove line endings on the tested lines.
+//! Test with don't remove line endings on the tested lines.
 BOOST_AUTO_TEST_CASE( test_replaceElements_delete_emptyLines )
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -224,7 +227,7 @@ BOOST_AUTO_TEST_CASE( test_replaceElements_delete_emptyLines )
         ) == 0 );
 }
 
-// Test with remove line endings on the tested lines.
+//! Test with remove line endings on the tested lines.
 BOOST_AUTO_TEST_CASE(test_replaceElements_replace)
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -252,7 +255,7 @@ BOOST_AUTO_TEST_CASE(test_replaceElements_replace)
         ) == 0 );
 }
 
-// Test with creating a literal search string (so no regex object but just literal string)
+//! Test with creating a literal search string (so no regex object but just literal string)
 BOOST_AUTO_TEST_CASE(test_replaceElements_literalConstuctor)
 {
     // Create a filter chain, attach the test filter and push in the testStream.
@@ -276,7 +279,7 @@ BOOST_AUTO_TEST_CASE(test_replaceElements_literalConstuctor)
     BOOST_CHECK( filteredData.compare("->foobar<-\n") == 0 );
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( );
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

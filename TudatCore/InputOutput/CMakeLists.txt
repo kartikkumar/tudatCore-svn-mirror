@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the InputOutput sub-directory.
- #
- #    Path              : /Basics/
- #    Version           : 2
- #    Check status      : Checked
- #    Date created      : 20 August, 2011
- #    Last modified     : 27 January, 2012
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -27,6 +14,9 @@
  #      110820    S.M. Persson      File created.
  #      120127    K. Kumar          Adapted for Tudat Core.
  #      120127    K. Kumar          Added stream filter code and unit test.
+ #
+ #    References
+ #
  #/
 
 # Add source files.
@@ -53,5 +43,3 @@ target_link_libraries(test_BasicInputOutput tudat_core_input_output ${Boost_LIBR
 add_executable(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp")
 setup_custom_test_program(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}")
 target_link_libraries(test_StreamFilters tudat_core_input_output ${Boost_LIBRARIES})
-
-# End of file.

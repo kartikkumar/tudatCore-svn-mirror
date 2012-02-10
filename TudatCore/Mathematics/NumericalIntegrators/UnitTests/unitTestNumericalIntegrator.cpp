@@ -20,10 +20,8 @@
  *
  */
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 #include <Eigen/Core>
@@ -32,7 +30,11 @@
 #include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
 #include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
 
-// Define Boost test suite.
+namespace tudat
+{
+namespace unit_tests
+{
+
 BOOST_AUTO_TEST_SUITE( test_numerical_integrator )
 
 //! Using declaration of the NumericalIntegrator.
@@ -54,7 +56,7 @@ public:
     DummyNumericalIntegrator( const double intervalStart,
                               const Eigen::VectorXd& initialState ) :
         NumericalIntegrator< double, Eigen::VectorXd, Eigen::VectorXd >(
-            &tudat::mathematics::numerical_integrators::computeZeroStateDerivative ),
+            &computeZeroStateDerivative ),
         numberOfSteps( 0 ), currentIntegrationIntervalPoint_( intervalStart ),
         currentState_( initialState ) { }
 
@@ -196,7 +198,7 @@ BOOST_AUTO_TEST_CASE( testNumberOfStepsUsingNumericalIntegrator )
     }
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

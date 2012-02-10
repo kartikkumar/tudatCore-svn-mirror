@@ -18,15 +18,20 @@
  *
  */
 
-// Include statements.
 #include <boost/assign.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <vector>
 #include "TudatCore/InputOutput/streamFilters.h"
 
+namespace tudat
+{
+namespace input_output
+{
+namespace stream_filters
+{
+
 //! Remove comments in a single line.
-std::string tudat::input_output::stream_filters::RemoveComment::do_filter(
-        const std::string& line )
+std::string RemoveComment::do_filter( const std::string& line )
 {
     // Find position of the skip character in the line.
     std::size_t index = line.find( skipCharacter_ );
@@ -45,8 +50,7 @@ std::string tudat::input_output::stream_filters::RemoveComment::do_filter(
 }
 
 //! Execute filter on the input line by skipping if required.
-std::string tudat::input_output::stream_filters::SkipFirstLines::do_filter(
-        const std::string& line )
+std::string SkipFirstLines::do_filter( const std::string& line )
 {
     // Check if the required number of lines have already been skipped.
     if ( numberOfSkippedLines_ >= linesToSkip_ )
@@ -64,8 +68,8 @@ std::string tudat::input_output::stream_filters::SkipFirstLines::do_filter(
 }
 
 //! Create filter with a basic search and replace string.
-tudat::input_output::stream_filters::ReplaceElements::ReplaceElements( std::string searchFilter,
-        std::string replaceString, bool isOmitIfEmpty ) 
+ReplaceElements::ReplaceElements( std::string searchFilter, std::string replaceString,
+                                  bool isOmitIfEmpty )
     // line_filter is set to true, to indicate to Boost not to append newline characters.
     : boost::iostreams::line_filter( true ), 
       replaceString_(replaceString), isOmitIfEmpty_( isOmitIfEmpty )
@@ -88,8 +92,7 @@ tudat::input_output::stream_filters::ReplaceElements::ReplaceElements( std::stri
 }
 
 //! Execute filter on a single line to replace matched elements with replace string.
-std::string tudat::input_output::stream_filters::ReplaceElements::do_filter(
-        const std::string& line )
+std::string ReplaceElements::do_filter( const std::string& line )
 {
     // Perform the regex search & replace
     std::string filteredString = boost::regex_replace( line, searchFilter_, replaceString_ );
@@ -106,4 +109,6 @@ std::string tudat::input_output::stream_filters::ReplaceElements::do_filter(
     }
 }
 
-// End of file.
+} // namespace stream_filters
+} // namespace input_output
+} // namespace tudat

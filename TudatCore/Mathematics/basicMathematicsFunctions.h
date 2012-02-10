@@ -42,20 +42,10 @@
 #ifndef TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
 #define TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
 
-// Include statements.
 #include <boost/random/mersenne_twister.hpp>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace, containing free functions and classes.
- */
 namespace mathematics
 {
 
@@ -83,11 +73,7 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
  */
 double computeModuloForSignedValues( double dividend, double divisor );
 
-
-} // namespace mathematics.
-
-} // namespace tudat.
+} // namespace mathematics
+} // namespace tudat
 
 #endif // TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H
-
-// End of file.

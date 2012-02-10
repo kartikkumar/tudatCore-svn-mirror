@@ -32,23 +32,13 @@
  *
  */
 
-#ifndef TUDAT_CORE_BASICINPUTOUTPUT_H
-#define TUDAT_CORE_BASICINPUTOUTPUT_H
+#ifndef TUDAT_CORE_BASIC_INPUT_OUTPUT_H
+#define TUDAT_CORE_BASIC_INPUT_OUTPUT_H
 
-// Include statements.
 #include <string>
 
-//! Tudat library namespace.
-/*!
- * The Tudat Library namespace.
- */
 namespace tudat
 {
-
-//! The input/output namespace.
-/*!
- * The input/output namespace.
- */
 namespace input_output
 {
 
@@ -72,10 +62,7 @@ static std::string getCoreRootPath( )
 #endif
 }
 
-} // namespace input_output.
+} // namespace input_output
+} // namespace tudat
 
-} // namespace tudat.
-
-#endif // TUDAT_CORE_BASICINPUTOUTPUT_H
-
-// End of file.
+#endif // TUDAT_CORE_BASIC_INPUT_OUTPUT_H

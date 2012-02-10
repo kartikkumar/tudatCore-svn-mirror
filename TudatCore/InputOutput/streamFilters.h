@@ -21,31 +21,16 @@
 #ifndef TUDAT_CORE_STREAMFILTERS_H
 #define TUDAT_CORE_STREAMFILTERS_H
 
-// Include statements.
 #include <boost/iostreams/filter/line.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
 #include <boost/iostreams/stream_buffer.hpp>
 #include <boost/regex.hpp>
 #include <string>
 
-//! Tudat library namespace.
-/*!
- * The Tudat Library namespace.
- */
 namespace tudat
 {
-
-//! The input/output namespace.
-/*!
- * The input/output namespace.
- */
 namespace input_output
 {
-
-//! The stream filters namespace.
-/*!
- * The stream filters namespace.
- */
 namespace stream_filters
 {
 
@@ -240,12 +225,8 @@ private:
     bool isOmitIfEmpty_;
 };
 
-} // namespace stream_filters.
-
-} // namespace input_output.
-
-} // namespace tudat.
+} // namespace stream_filters
+} // namespace input_output
+} // namespace tudat
 
 #endif // TUDAT_CORE_STREAMFILTERS_H
-
-// End of file.

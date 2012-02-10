@@ -1,16 +1,3 @@
-# \file CMakeLists.txt
- #    This is the CMake file for the Basics sub-directory.
- #
- #    Path              : /Basics/
- #    Version           : 1
- #    Check status      : Checked
- #    Date created      : 2 February, 2012
- #    Last modified     : 2 February, 2012
- #
- #    References
- #
- #    Notes
- #
  #    Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -25,6 +12,9 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      110820    S. Billemont      File created.
+ #
+ #    References
+ #
  #/
 
 # Add source files.
@@ -47,5 +37,3 @@ setup_headers("${BASICSDIR_HEADERS}" "${BASICSDIR}")
 add_executable(test_TestMacros "${SRCROOT}${BASICSDIR}/UnitTests/unitTest_testMacros.cpp")
 setup_custom_test_program(test_TestMacros "${SRCROOT}${BASICSDIR}")
 target_link_libraries(test_TestMacros tudatCore_basics ${Boost_LIBRARIES})
-
-# End of file.

@@ -26,13 +26,19 @@
  *
  */
 
-// Include statements.
 #include <cmath>
 #include "TudatCore/Mathematics/linearAlgebra.h"
 
+namespace tudat
+{
+namespace mathematics
+{
+namespace linear_algebra
+{
+
 //! Compute cosine of the angle between two vectors.
-double tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors(
-        const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
+double computeCosineOfAngleBetweenVectors( const Eigen::VectorXd& vector0,
+                                           const Eigen::VectorXd& vector1 )
 {
     assert( vector0.size( ) == vector1.size( ) );
 
@@ -57,8 +63,7 @@ double tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors(
 }
 
 //! Compute angle between two vectors.
-double tudat::mathematics::linear_algebra::computeAngleBetweenVectors(
-        const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
+double computeAngleBetweenVectors( const Eigen::VectorXd& vector0, const Eigen::VectorXd& vector1 )
 {
     // Determine the cosine of the angle by using another routine.
     double dotProductOfNormalizedVectors = computeCosineOfAngleBetweenVectors( vector0, vector1 );
@@ -67,4 +72,6 @@ double tudat::mathematics::linear_algebra::computeAngleBetweenVectors(
     return std::acos( dotProductOfNormalizedVectors );
 }
 
-// End of file.
+} // namespace linear_algebra
+} // namespace mathematics
+} // namespace tudat

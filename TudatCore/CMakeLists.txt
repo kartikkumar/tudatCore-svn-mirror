@@ -1,18 +1,4 @@
-# \file CMakeLists.txt
- #    This is the main CMake file for the Tudat project.
- #
- #    Path              : /
- #    Version           : 8
- #    Check status      : Checked
- #
- #    Date created      : 20 August, 2011
- #    Last modified     : 2 February, 2012
- #
- #    References
- #
- #    Notes
- #
- #    Copyright (c) 2010-2011 Delft University of Technology.
+ # Copyright (c) 2010-2011 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
  #    Any unauthorized use, reproduction or modification is unlawful and
@@ -36,6 +22,9 @@
  #      120127    K. Kumar          Adapted for Tudat Core.
  #      120202    K. Kumar          Updated path to TudatCore; added MSVC static runtime fix for
  #                                  use of Boost libraries.
+ #
+ #    References
+ #
  #/
 
 # Specify minimum CMake version required to compile Tudat.
@@ -171,7 +160,7 @@ foreach(CURRENT_SUBDIR ${SUBDIRS})
 add_subdirectory("${SRCROOT}${CURRENT_SUBDIR}")
 endforeach(CURRENT_SUBDIR)
 
-# Build the Tudat core library
+# Build the Tudat core library.
 get_target_property(ASTRODYNAMICS_SOURCES tudat_core_astrodynamics SOURCES)
 get_target_property(INPUTOUTPUT_SOURCES tudat_core_input_output SOURCES)
 get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)

@@ -37,7 +37,6 @@
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
-// Include statements.
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
@@ -45,7 +44,11 @@
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
-// Define Boost test suite.
+namespace tudat
+{
+namespace unit_tests
+{
+
 BOOST_AUTO_TEST_SUITE( test_astrodynamics_functions )
 
 //! Test if the orbital period of a Kepler orbit is computed correctly.
@@ -175,7 +178,7 @@ BOOST_AUTO_TEST_CASE( testSynodicPeriod )
                                 std::numeric_limits< double >::epsilon( ) );
 }
 
-// Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( )
 
-// End of file.
+} // namespace unit_tests
+} // namespace tudat

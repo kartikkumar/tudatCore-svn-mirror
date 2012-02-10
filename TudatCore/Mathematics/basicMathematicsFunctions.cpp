@@ -36,18 +36,13 @@
  *
  */
 
-// Include statements.
 #include <cmath>
 #include <ctime>
 #include <limits>
 #include "TudatCore/Mathematics/basicMathematicsFunctions.h"
 
-
-#include <iostream>
-
 namespace tudat
 {
-
 namespace mathematics
 {
 
@@ -61,10 +56,9 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
 
 //! Compute modulo of double.
 double computeModuloForSignedValues( double dividend, double divisor )
-{ return dividend - divisor * floor( dividend / divisor ); }
+{
+    return dividend - divisor * floor( dividend / divisor );
+}
 
-} // namespace mathematics.
-
-} // namespace tudat.
-
-// End of file.
+} // namespace mathematics
+} // namespace tudat

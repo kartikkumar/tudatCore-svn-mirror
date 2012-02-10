@@ -22,29 +22,14 @@
 #ifndef TUDAT_CORE_NUMERICAL_INTEGRATOR_H
 #define TUDAT_CORE_NUMERICAL_INTEGRATOR_H
 
-// Include statements.
 #include <limits>
 #include <boost/function.hpp>
 #include <Eigen/Core>
 
-//! Tudat library namespace.
-/*!
- * The Tudat library namespace.
- */
 namespace tudat
 {
-
-//! Mathematics namespace.
-/*!
- * The mathematics namespace included in Tudat.
- */
 namespace mathematics
 {
-
-//! Numerical integrators namespace.
-/*!
- * The numerical integrators namespace included in Tudat.
- */
 namespace numerical_integrators
 {
 
@@ -193,12 +178,8 @@ integrateTo( const IndependentVariableType intervalEnd,
     return getCurrentState( );
 }
 
-} // namespace integrators.
-
-} // namespace mathematics.
-
-} // namespace tudat.
+} // namespace numerical_integrators
+} // namespace mathematics
+} // namespace tudat
 
 #endif // TUDAT_CORE_NUMERICAL_INTEGRATOR_H
-
-// End of file.
