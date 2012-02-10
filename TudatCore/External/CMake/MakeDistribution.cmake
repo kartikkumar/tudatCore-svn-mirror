@@ -17,14 +17,13 @@
  #      120210    B. Tong Minh      File created
  #/
 
-if (NOT TUDAT_CORE_DISTRIBUTION_PATH)
-    set(TUDAT_CORE_DISTRIBUTION_PATH "${CODEROOT}/dist")
-endif (NOT TUDAT_CORE_DISTRIBUTION_PATH)
+if(NOT TUDAT_CORE_DISTRIBUTION_PATH)
+    set(TUDAT_CORE_DISTRIBUTION_PATH "${CODEROOT}/dist/core")
+endif(NOT TUDAT_CORE_DISTRIBUTION_PATH)
 
 # Slash normalization for Windows
 string(REPLACE "\\" "/" EIGEN3_INCLUDE_DIR_NORMALIZED "${EIGEN3_INCLUDE_DIR}")
 string(REPLACE "\\" "/" Boost_INCLUDE_DIRS_NORMALIZED "${Boost_INCLUDE_DIRS}")
-string(REPLACE "\\" "/" Boost_LIBRARY_DIRS_NORMALIZED "${Boost_LIBRARY_DIRS}")
 
 # Install the Tudat Core static library
 install(TARGETS tudat_core
@@ -33,15 +32,20 @@ install(TARGETS tudat_core
 # Install the Tudat Core header files
 install(DIRECTORY "${SRCROOT}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/TudatCore"
-        FILES_MATCHING PATTERN "*.h")
+        FILES_MATCHING PATTERN "*.h"
+)
 # Install Eigen
 install(DIRECTORY "${EIGEN3_INCLUDE_DIR_NORMALIZED}/"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/eigen3")
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/eigen3"
+)
 # Install Boost
 install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost")
-install(DIRECTORY "${Boost_LIBRARY_DIRS_NORMALIZED}/"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib")
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost"
+)
+install(FILES ${Boost_LIBRARIES}
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib"
+)
 # Install the environment file
 install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}")
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
+)
