@@ -1,29 +1,4 @@
-/*! \file unitTestUnitConversions.cpp
- *    This unit test will test the unit conversions that are defined in unitConversions.h.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
- *    Version           : 10
- *    Check status      : Checked
- *    Date created      : 10 September, 2010
- *    Last modified     : 4 February, 2012
- *
- *    References
- *      Wikipedia. http://en.wikipedia.org/wiki/Neptune, last accessed: 27 January, 2012(a).
- *      Wikipedia. http://en.wikipedia.org/wiki/Mile, last accessed: 27 January, 2012(b).
- *      Wikipedia. http://en.wikipedia.org/wiki/Atmospheric_pressure,
- *          last accessed: 27 January, 2012(c).
- *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
- *          last accessed: 27, January 2012(d).
- *
- *    Notes
- *      At the moment, not all conversion routines are test both ways. This
- *      should be modified in a next version.
- *
- *      Test runs code and verifies result against expected value.
- *      If the tested code is erroneous, the test function returns a boolean
- *      true; if the code is correct, the function returns a boolean false.
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -52,7 +27,25 @@
  *      110127    D. Dirkx          Minor textual changes and made consistent with rewrite of
  *                                  physical constants.
  *      120204    K. Kumar          Transferred unit tests to Boost unit test framework.
+ *
+ *    References
+ *      Wikipedia. http://en.wikipedia.org/wiki/Neptune, last accessed: 27 January, 2012(a).
+ *      Wikipedia. http://en.wikipedia.org/wiki/Mile, last accessed: 27 January, 2012(b).
+ *      Wikipedia. http://en.wikipedia.org/wiki/Atmospheric_pressure,
+ *          last accessed: 27 January, 2012(c).
+ *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
+ *          last accessed: 27, January 2012(d).
+ *
  */
+
+// Temporary notes (move to class/function doxygen):
+// At the moment, not all conversion routines are test both ways. This
+// should be modified in a next version.
+// 
+// Test runs code and verifies result against expected value.
+// If the tested code is erroneous, the test function returns a boolean
+// true; if the code is correct, the function returns a boolean false.
+// 
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN

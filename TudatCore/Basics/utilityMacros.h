@@ -1,16 +1,4 @@
-/*! \file utilityMacros.h
- *
- *    Path              : /Basics/
- *    Version           : 1
- *    Check status      : Unchecked 
- *    Date created      : 2 February, 2012
- *    Last modified     : 2 February, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -24,6 +12,9 @@
  *    Changelog
  *      YYMMDD    Author            Comment
  *      120202    S. Billemont      File created.
+ *
+ *    References
+ *
  */
 
 //! Suppress compile time unused parameter warnings

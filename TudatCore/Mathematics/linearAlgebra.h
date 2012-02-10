@@ -1,17 +1,4 @@
-/*! \file linearAlgebra.h
- *    Header file that defines a number of useful linear algebra operation definitions.
- *
- *    Path              : /Mathematics/
- *    Version           : 5
- *    Check status      : Checked
- *    Date created      : 7 August, 2009
- *    Last modified     : 27 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -29,6 +16,9 @@
  *      100930    J. Melman         Implemented namespace, minor comment changes.
  *      120127    D. Dirkx          Moved to Tudat core, added doxygen param and return.
  *      120127    K. Kumar          Minor edits.
+ *
+ *    References
+ *
  */
 
 #ifndef TUDAT_CORE_LINEAR_ALGEBRA_H

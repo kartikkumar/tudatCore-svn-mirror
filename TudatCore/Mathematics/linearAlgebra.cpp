@@ -1,17 +1,4 @@
-/*! \file linearAlgebra.cpp
- *    Source file that implements a number of useful linear algebra operation definitions.
- *
- *    Path              : /Mathematics/
- *    Version           : 7
- *    Check status      : Checked
- *    Date created      : 7 August, 2009
- *    Last modified     : 28 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -34,6 +21,9 @@
  *      120127    K. Kumar          Minor edits.
  *      120128    K. Kumar          Corrected computeCosineOfAngleBetweenVectors() to work with
  *                                  vectors of arbitrary length.
+ *
+ *    References
+ *
  */
 
 // Include statements.

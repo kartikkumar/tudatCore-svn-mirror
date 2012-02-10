@@ -1,18 +1,4 @@
-/*! \file streamFilters.h
- *    Header file that defines the stream filter functions included in Tudat. These can be used
- *    to filter streams of data from, e.g., input files.
- *
- *    Path              : /InputOutput/
- *    Version           : 2
- *    Check status      : Unchecked
- *    Date created      : 27 January, 2012
- *    Last modified     : 27 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -27,6 +13,9 @@
  *      YYMMDD    Author            Comment
  *      100902    S. Billemont      File created.
  *      120127    K. Kumar          Added missing comments and clarified variable-naming.
+ *
+ *    References
+ *
  */
 
 #ifndef TUDAT_CORE_STREAMFILTERS_H

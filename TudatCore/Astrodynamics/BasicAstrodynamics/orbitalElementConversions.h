@@ -1,22 +1,4 @@
-/*! \file orbitalElementConversions.h
- *    This header file contains a namespace with orbital element conversion functions.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/
- *    Version           : 12
- *    Check status      : Checked
- *    Date created      : 20 October, 2010
- *    Last modified     : 6 February, 2012
- *
- *    References
- *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
- *      Wertz, J. R. Mission geometry; orbit and constellation design and management.
- *      Mengali, G., Quarta, A.A. Fondamenti di meccanica del volo spaziale.
- *      Wertz, J.R. Mission Geometry; Orbit and Constellation Design and Management, Spacecraft
- *          Orbit and Attitude Systems, Microcosm Press, Kluwer Academic Publishers, 2001.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -45,6 +27,14 @@
  *      120206    K. Kumar          Added wrapper functions for orbital element conversions when
  *                                  eccentricity is not known a priori (if-statement to choose
  *                                  between elliptical and hyperbolic orbits).
+ *
+ *    References
+ *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
+ *      Wertz, J. R. Mission geometry; orbit and constellation design and management.
+ *      Mengali, G., Quarta, A.A. Fondamenti di meccanica del volo spaziale.
+ *      Wertz, J.R. Mission Geometry; Orbit and Constellation Design and Management, Spacecraft
+ *          Orbit and Attitude Systems, Microcosm Press, Kluwer Academic Publishers, 2001.
+ *
  */
 
 #ifndef TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H

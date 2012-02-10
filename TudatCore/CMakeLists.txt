@@ -44,6 +44,8 @@ cmake_minimum_required( VERSION 2.6 )
 # Specific Tudat project name.
 project( TudatCore )
 
+#TUDAT_INTALLER_CODE=6
+
 # Set module path to local CMake scripts.
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 
@@ -132,7 +134,9 @@ include_directories(AFTER
 # Find Eigen3 library on local system.
 # If Eigen3 is not found, use the following to manually set the path to the Eigen3 directory.
 # A default location is given as an example.
-#set(EIGEN3_INCLUDE_DIR "${SRCROOT}/External/eigen3")
+# Set Eigen3 path manually
+set(EIGEN3_INCLUDE_DIR "C:/Users/simon/workspace/eigen3")
+# Auto detection and validation, leave enabled even for manual override
 find_package(Eigen3 REQUIRED)
 
 # Include Eigen3 directories.
@@ -151,8 +155,11 @@ set(Boost_USE_STATIC_RUNTIME ON)
 # Find Boost libraries on local system.
 # If Boost is not found, use the following to manually set the path to the Boost include and
 # library directories.
-#SET(Boost_INCLUDE_DIRS "C:\My\Custom\Path\To\Boost\Include\Directory")
-#SET(Boost_LIBRARY_DIRS "C:\My\Custom\Path\To\Boost\Library\Directory")
+# Set Boost paths manually
+SET(BOOST_ROOT "C:/Users/simon/workspace/boost")
+SET(BOOST_INCLUDE_DIR "C:/Users/simon/workspace/boost")
+SET(BOOST_LIBRARY_DIR "C:/Users/simon/workspace/boost/lib/x64")
+# Auto detection and validation, leave enabled even for manual override
 find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework regex REQUIRED)
 
 # Include Boost directories.

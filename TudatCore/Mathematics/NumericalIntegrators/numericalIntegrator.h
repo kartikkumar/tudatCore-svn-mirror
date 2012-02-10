@@ -1,17 +1,4 @@
-/*! \file numericalIntegrator.h
- *    Header file that defines the abstract base class for all numerical integrators.
- *
- *    Path              : /Mathematics/NumericalIntegrators/
- *    Version           : 3
- *    Check status      : Checked
- *    Date created      : 27 January, 2012
- *    Last modified     : 7 February, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2012 Delft University of Technology.
+/*!   Copyright (c) 2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -27,6 +14,9 @@
  *      120127    B. Tong Minh      File created.
  *      120128    D. Dirkx          Minor changes during code check.
  *      120207    K. Kumar          Minor comment corrections.
+ *
+ *    References
+ *
  */
 
 #ifndef TUDAT_CORE_NUMERICAL_INTEGRATOR_H

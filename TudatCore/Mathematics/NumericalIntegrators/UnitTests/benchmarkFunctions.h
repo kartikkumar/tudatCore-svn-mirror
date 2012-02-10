@@ -1,23 +1,4 @@
-/*! \file benchmarkFunctions.h
- *    Header file that defines benchmark functions for numerical integrators.
- *
- *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
- *    Version           : 2
- *    Check status      : Checked
- *
- *    Author            : B. Tong Minh
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : b.tongminh@student.tudelft.nl
- *
- *    Date created      : 3 February, 2012
- *    Last modified     : 7 February, 2012
- *
- *    References
- *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2012 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -34,6 +15,10 @@
  *      120207    K. Kumar          Minor comment corrections; changed "NumericalRecipes" to
  *                                  "BurdenAndFaires", "InverseExponential" to
  *                                  "BackwardsExponential".
+ *
+ *    References
+ *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
+ *
  */
 
 #ifndef TUDAT_CORE_BENCHMARK_FUNCTIONS_H

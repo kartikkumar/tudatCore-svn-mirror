@@ -1,23 +1,4 @@
-/*! \file unitTestAstrodynamicsFunctions.cpp
- *    This unit test will test general astrodynamics functions defined in astrodynamicsFunctions.h.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
- *    Version           : 7
- *    Check status      : Checked
- *    Date created      : 11 November, 2011
- *    Last modified     : 28 January, 2012
- *
- *    References
- *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
- *          accessed: 22nd November, 2011.
- *      Keefe, T.J. Synodic Period Calculator, http://www.ccri.edu/physics/keefe/synodic_calc.htm,
- *          last accessed: 6th December, 2011, last modified: 18th November, 2011.
- *
- *    Notes
- *
- *      The tests need to be updated to check benchmark values from literature.
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -39,7 +20,19 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
  *                                  comparisons.
+ *
+ *    References
+ *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
+ *          accessed: 22nd November, 2011.
+ *      Keefe, T.J. Synodic Period Calculator, http://www.ccri.edu/physics/keefe/synodic_calc.htm,
+ *          last accessed: 6th December, 2011, last modified: 18th November, 2011.
+ *
  */
+
+// Temporary notes (move to class/function doxygen):
+// 
+// The tests need to be updated to check benchmark values from literature.
+// 
 
 // Required Boost unit test framework define.
 #define BOOST_TEST_MAIN

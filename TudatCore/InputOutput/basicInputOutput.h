@@ -1,17 +1,4 @@
-/*! \file basicInputOutput.h
- *    Header file that defines the basic input and output functionality contained in Tudat.
- *
- *    Path              : /InputOutput/
- *    Version           : 10
- *    Check status      : Checked
- *    Date created      : 10 August, 2010
- *    Last modified     : 27 January, 2011
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -40,6 +27,9 @@
  *      111117    K. Kumar          Added listAllFilesInDirectory() function.
  *      120127    K. Kumar          Adapted for Tudat Core; moved other functions to Tudat
  *                                  library.
+ *
+ *    References
+ *
  */
 
 #ifndef TUDAT_CORE_BASICINPUTOUTPUT_H

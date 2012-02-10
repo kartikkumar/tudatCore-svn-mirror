@@ -1,4 +1,4 @@
-/*    Copyright (c) 2010-2011 Delft University of Technology.
+/*    Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -12,6 +12,7 @@
  *    Changelog
  *      YYMMDD    Author            Comment
  *      100906    S. Billemont      First creation of code.
+ *
  *
  *    References
  *      Wolfram MathWorld, Constant:

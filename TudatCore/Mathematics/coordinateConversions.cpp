@@ -1,19 +1,4 @@
-/*! \file coordinateConversions.cpp
- *    Source file that implements the coordinate conversion functions contained in Tudat.
- *
- *    Path              : /Mathematics/
- *    Version           : 14
- *    Check status      : Checked
- *    Date created      : 3 September, 2010
- *    Last modified     : 27 January, 2012
- *
- *    References
- *      Press W.H., et al. Numerical Recipes in C++: The Art of
- *          Scientific Computing. Cambridge University Press, February 2002.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -43,6 +28,11 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    D. Dirkx          First version branched from basic mathematics in Tudat Core.
  *      120127    K. Kumar          Minor comment edits.
+ *
+ *    References
+ *      Press W.H., et al. Numerical Recipes in C++: The Art of
+ *          Scientific Computing. Cambridge University Press, February 2002.
+ *
  */
 
 // Include statements.

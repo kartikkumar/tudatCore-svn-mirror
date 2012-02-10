@@ -1,18 +1,4 @@
-/*! \file unitTestNumericalIntegrator.cpp
- *    Source file that defines the unit test for the abstract base class for numerical integrators
- *    in Tudat.
- *
- *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
- *    Version           : 4
- *    Check status      : Checked
- *    Date created      : 27 January, 2012
- *    Last modified     : 7 February, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2012 Delft University of Technology.
+/*!   Copyright (c) 2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -29,6 +15,9 @@
  *      120128    D. Dirkx          Minor changes during code check.
  *      120206    K. Kumar          Minor comment corrections.
  *      120207    K. Kumar          Updated to Boost unit test framework.
+ *
+ *    References
+ *
  */
 
 // Required Boost unit test framework define.

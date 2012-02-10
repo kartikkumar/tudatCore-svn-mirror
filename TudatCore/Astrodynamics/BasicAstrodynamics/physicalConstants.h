@@ -1,25 +1,4 @@
-/*! \file physicalConstants.h
- *    This file contains a namespace with selected constants commonly used in astrodynamics.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/
- *    Version           : 5
- *    Check status      : Checked
- *    Date created      : 3 September, 2010
- *    Last modified     : 3 February, 2012
- *
- *    References
- *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical
- *          Standards", in Highlights of Astronomy (I. Appenzeller, ed.),
- *          Table 1, Kluwer Academic Publishers, Dordrecht.
- *      Standish, E.M. (1998) "JPL Planetary and Lunar Ephemerides,
- *          DE405/LE405", JPL IOM 312.F-98-048.
- *      Anderson, J.D. Jr. Hypersonic and High-Temperature Gas Dynamics
- *          Second Edition, p469.
- *
- *    Notes
- *      The reference for the sidereal day and year should be updated.
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -38,7 +17,21 @@
  *      120127    D. Dirkx          Moved to Tudat core, removed variables related to
  *                                  obliquity of ecliptic.
  *      120203    K. Kumar          Added missing specific gas constant value; need unit test.
+ *
+ *    References
+ *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical
+ *          Standards", in Highlights of Astronomy (I. Appenzeller, ed.),
+ *          Table 1, Kluwer Academic Publishers, Dordrecht.
+ *      Standish, E.M. (1998) "JPL Planetary and Lunar Ephemerides,
+ *          DE405/LE405", JPL IOM 312.F-98-048.
+ *      Anderson, J.D. Jr. Hypersonic and High-Temperature Gas Dynamics
+ *          Second Edition, p469.
+ *
  */
+
+// Temporary notes (move to class/function doxygen):
+// The reference for the sidereal day and year should be updated.
+// 
 
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
 #define TUDAT_CORE_PHYSICAL_CONSTANTS_H

@@ -1,17 +1,4 @@
-/*! \file unitTestPhysicalconstants.cpp
- *    This unit test will test the physical constants that are defined in physicalConstants.h.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
- *    Version           : 7
- *    Check status      : Checked
- *    Date created      : 10 September, 2010
- *    Last modified     : 28 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -33,6 +20,9 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
  *                                  comparisons.
+ *
+ *    References
+ *
  */
 
 // Required Boost unit test framework define.

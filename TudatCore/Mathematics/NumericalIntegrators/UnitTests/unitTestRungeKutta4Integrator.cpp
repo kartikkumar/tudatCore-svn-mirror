@@ -1,19 +1,4 @@
-/*! \file unitTestRungeKutta4Integrator.cpp
- *    Source file that defines the unit test for the 4th-order, fixed stepsize, Runge-Kutta
- *    integrator included in Tudat.
- *
- *    Path              : /Mathematics/NumericalIntegrators/UnitTests/
- *    Version           : 4
- *    Check status      : Checked
- *    Date created      : 17 May, 2011
- *    Last modified     : 7 February, 2012
- *
- *    References
- *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2012 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -31,6 +16,10 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    B. Tong Minh      Adapted for new Tudat core RK4 integrator.
  *      120207    K. Kumar          Adapted to Boost unit test framework.
+ *
+ *    References
+ *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
+ *
  */
 
 // Required Boost unit test framework define.

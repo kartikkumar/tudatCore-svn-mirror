@@ -1,17 +1,4 @@
-/*! \file astrodynamicsFunctions.h
- *    This header file contains general astrodynamics functions.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/
- *    Version           : 2
- *    Check status      : Checked
- *    Date created      : 11 November, 2011
- *    Last modified     : 27 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -27,6 +14,9 @@
  *      100906    K. Kumar          First creation of code.
  *      111115    K. Kumar          Added checker info; corrected Doxygenc comments.
  *      120127    D. Dirkx          Moved file to Tudat core.
+ *
+ *    References
+ *
  */
 
 #ifndef TUDAT_CORE_ASTRODYNAMICS_FUNCTIONS_H

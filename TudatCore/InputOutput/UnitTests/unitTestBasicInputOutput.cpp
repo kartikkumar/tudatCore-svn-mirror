@@ -1,25 +1,4 @@
-/*! \file unitTestBasicInputOutput.cpp
- *
- *    Path              : /InputOutput/
- *    Version           : 2
- *    Check status      : Checked
- *
- *    Author            : S. Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Checker           : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Date created      : 27 January, 2012
- *    Last modified     : 27 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -34,6 +13,9 @@
  *      YYMMDD    Author            Comment
  *      120127    S. Billemont      File created.
  *      120127    K. Kumar          Minor comment modifications.
+ *
+ *    References
+ *
  */
 
 // Required Boost unit test framework define.

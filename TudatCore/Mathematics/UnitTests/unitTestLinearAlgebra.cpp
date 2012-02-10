@@ -1,27 +1,4 @@
-/*! \file unitTestLinearAlgebra.cpp
- *    Source file that executes the unit tests to test all linear algebra functions contained in
- *    Tudat.
- *
- *    Path              : /Mathematics/
- *    Version           : 4
- *    Check status      : Checked
- *
- *    Author            : D.Dirkx
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : d.dirkx@tudelft.nl
- *
- *    Checker           : S. Billemont
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : simon@angelcorp.be
- *
- *    Date created      : 27 January, 2012
- *    Last modified     : 28 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -39,6 +16,9 @@
  *      120128    K. Kumar          Changed some BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
  *                                  BOOST_CHECK_SMALL for unit test comparisons.
  *      120128    K. Kumar          Added test for vectors of length 5.
+ *
+ *    References
+ *
  */
 
 // Required Boost unit test framework define.

@@ -1,25 +1,4 @@
-/*! \file unitConversions.h
- *    This file contains a namespace with selected unit conversions commonly used in astrodynamics.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/
- *    Version           : 8
- *    Check status      : Checked
- *    Date created      : 6 September, 2010
- *    Last modified     : 27 January, 2012
- *
- *    References
- *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
- *          last accessed: 27, January 2012(a).
- *      Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Length,
- *          last accessed: 27, January 2012(b).
- *       Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Pressure_or_mechanical_stress,
- *          last accessed: 27, January 2012(c).
- *
- *    Notes
- *      The behaviour of the template conversion functions has not been tested
- *      for integer data types.
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -44,7 +23,21 @@
  *      120127    K. Kumar          Added references in preparation for commit to Tudat Core.
  *      120127    D. Dirkx          Minor textual changes and made consistent with rewrite of
  *                                  physical constants.
+ *
+ *    References
+ *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
+ *          last accessed: 27, January 2012(a).
+ *      Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Length,
+ *          last accessed: 27, January 2012(b).
+ *       Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Pressure_or_mechanical_stress,
+ *          last accessed: 27, January 2012(c).
+ *
  */
+
+// Temporary notes (move to class/function doxygen):
+// The behaviour of the template conversion functions has not been tested
+// for integer data types.
+// 
 
 #ifndef TUDAT_CORE_UNIT_CONVERSIONS_H
 #define TUDAT_CORE_UNIT_CONVERSIONS_H

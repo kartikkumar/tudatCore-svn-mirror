@@ -1,27 +1,4 @@
-/*! \file unitTestCoordinateConversions.cpp
- *    Source file that executes the unit tests to test all coordinate conversion functions
- *    contained in Tudat.
- *
- *    Path              : /Mathematics/
- *    Version           : 10
- *    Check status      : Checked
- *
- *    Author            : B. Romgens
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : bart.romgens@gmail.com
- *
- *    Author/Checker    : K. Kumar
- *    Affiliation       : Delft University of Technology
- *    E-mail address    : K.Kumar@tudelft.nl
- *
- *    Date created      : 7 February, 2011
- *    Last modified     : 28 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -52,6 +29,9 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
  *                                  BOOST_CHECK_SMALL for unit test comparisons.
+ *
+ *    References
+ *
  */
 
 // Required Boost unit test framework define.

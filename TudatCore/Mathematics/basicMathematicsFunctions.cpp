@@ -1,17 +1,4 @@
-/*! \file basicMathematicsFunctions.cpp
- *    Source file that implements all the basic mathematics functions contained in Tudat.
- *
- *    Path              : /Mathematics/
- *    Version           : 15
- *    Check status      : Checked
- *    Date created      : 3 September, 2010
- *    Last modified     : 30 January, 2012
- *
- *    References
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -44,6 +31,9 @@
  *                                  equality.
  *      120130    K. Kumar          Added missing implementation of
  *                                  getGlobalRandomNumberGenerator().
+ *
+ *    References
+ *
  */
 
 // Include statements.

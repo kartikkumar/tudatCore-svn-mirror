@@ -1,21 +1,4 @@
-/*! \file basicMathematicsFunctions.h
- *    Header file that defines all basic mathematics functions contained in Tudat.
- *
- *    Path              : /Mathematics/
- *    Version           : 15
- *    Check status      : Checked
- *    Date created      : 3 September, 2010
- *    Last modified     : 27 January, 2012
- *
- *    References
- *      Press W.H., et al. Numerical Recipes in C++: The Art of
- *          Scientific Computing. Cambridge University Press, February 2002.
- *      Spiegel, M.R., Stephens, L.J. Statistics, Fourth Edition, Schaum's
- *          Outlines, McGraw-Hill, 2008.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -47,6 +30,13 @@
  *      120127    D. Dirkx          First version of basic mathematics in Tudat Core, coordinate
  *                                  conversions put in separate file.
  *      120127    K. Kumar          Minor comment edits.
+ *
+ *    References
+ *      Press W.H., et al. Numerical Recipes in C++: The Art of
+ *          Scientific Computing. Cambridge University Press, February 2002.
+ *      Spiegel, M.R., Stephens, L.J. Statistics, Fourth Edition, Schaum's
+ *          Outlines, McGraw-Hill, 2008.
+ *
  */
 
 #ifndef TUDAT_CORE_BASIC_MATHEMATICS_FUNCTIONS_H

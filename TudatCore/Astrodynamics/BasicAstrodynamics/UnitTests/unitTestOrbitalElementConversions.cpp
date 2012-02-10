@@ -1,34 +1,4 @@
-/*! \file unitTestOrbitalElementConversions.cpp
- *    The source file that contains the unit tests to test conversion of Keplerian elements to
- *    Cartesian elements and vice-versa, and various other orbital element conversion functions.
- *
- *    Path              : /Astrodynamics/BasicAstrodynamics/UnitTests/
- *    Version           : 18
- *    Check status      : Unchecked
- *    Date created      : 3 December, 2010
- *    Last modified     : 6 February, 2012
- *
- *    References
- *      NASA, Goddard Spaceflight Center. Orbit Determination Toolbox (ODTBX), NASA - GSFC Open
- *          Source Software, http://opensource.gsfc.nasa.gov/projects/ODTBX/, last accessed:
- *          31st January, 2012.
- *      Fortescue, P. W., et al. Spacecraft systems engineering, Third Edition,
- *          Wiley, England, 2003.
- *      Vallado, D. A., McClain, W. D. Fundamentals of astrodynamics and applications, 2nd Edition,
- *          Kluwer Academic Publishers, The Netherlands, 2004.
- *      Harvard. Minor Planet Center.
- *          http://scully.cfa.harvard.edu/cgi-bin/returnprepeph.cgi?d=d&o=02060, last accessed:
- *          1st February, 2012.
- *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
- *      accessed: 1st February, 2012, last modified: 29th January, 2012.
- *      Rocket and Space Technology. Example problems, http://www.braeunig.us/space/problem.htm,
- *          last accessed: 4th February, 2012.
- *      Jenab. http://jenab6.livejournal.com/15054.html, last accessed: 4th February, 2012, last
- *          modified: 6th August, 2008.
- *
- *    Notes
- *
- *    Copyright (c) 2010-2011 Delft University of Technology.
+/*!   Copyright (c) 2010-2012 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -76,6 +46,25 @@
  *      120206    K. Kumar          Added tests for wrapper functions and regrouped existing unit
  *                                  tests. Some tests need to be reviewed since external data
  *                                  hasn't been found.
+ *
+ *    References
+ *      NASA, Goddard Spaceflight Center. Orbit Determination Toolbox (ODTBX), NASA - GSFC Open
+ *          Source Software, http://opensource.gsfc.nasa.gov/projects/ODTBX/, last accessed:
+ *          31st January, 2012.
+ *      Fortescue, P. W., et al. Spacecraft systems engineering, Third Edition,
+ *          Wiley, England, 2003.
+ *      Vallado, D. A., McClain, W. D. Fundamentals of astrodynamics and applications, 2nd Edition,
+ *          Kluwer Academic Publishers, The Netherlands, 2004.
+ *      Harvard. Minor Planet Center.
+ *          http://scully.cfa.harvard.edu/cgi-bin/returnprepeph.cgi?d=d&o=02060, last accessed:
+ *          1st February, 2012.
+ *      Wikipedia. Geostationary orbit, http://en.wikipedia.org/wiki/Geostationary_orbit, last
+ *      accessed: 1st February, 2012, last modified: 29th January, 2012.
+ *      Rocket and Space Technology. Example problems, http://www.braeunig.us/space/problem.htm,
+ *          last accessed: 4th February, 2012.
+ *      Jenab. http://jenab6.livejournal.com/15054.html, last accessed: 4th February, 2012, last
+ *          modified: 6th August, 2008.
+ *
  */
 
 // Required Boost unit test framework define.
