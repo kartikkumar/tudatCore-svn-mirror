@@ -42,7 +42,7 @@ install(DIRECTORY "${EIGEN3_INCLUDE_DIR_NORMALIZED}/"
 install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost"
 )
-install(FILES ${Boost_LIBRARIES}
+install(DIRECTORY ${Boost_LIBRARY_DIRS}
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib"
 )
 # Install the environment file
