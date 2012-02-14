@@ -30,6 +30,7 @@
  */
 
 #include <cmath>
+#include <iostream>
 #include <limits>
 #include "TudatCore/Mathematics/basicMathematicsFunctions.h"
 
