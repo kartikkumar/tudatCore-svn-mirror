@@ -14,6 +14,7 @@
  *      120127    B. Tong Minh      File created.
  *      120128    D. Dirkx          Minor changes during code check.
  *      120207    K. Kumar          Minor comment corrections.
+ *      120213    K. Kumar          Updated getCurrentInterval() to getIndependentVariable().
  *
  *    References
  *
@@ -72,8 +73,8 @@ public:
     RungeKutta4Integrator( const StateDerivativeFunction& stateDerivativeFunction,
                            const IndependentVariableType intervalStart,
                            const StateType& initialState ) :
-        Base( stateDerivativeFunction ), currentInterval_( intervalStart ),
-        currentState_( initialState ), lastInterval_( intervalStart ) { }
+        Base( stateDerivativeFunction ), currentIndependentVariable_( intervalStart ),
+        currentState_( initialState ), lastIndependentVariable_( intervalStart ) { }
 
     //! Get step size of the next step.
     /*!
@@ -84,19 +85,20 @@ public:
 
     //! Get current state.
     /*!
-     * Returns the current state of the integrator. Derived classes should override this and
-     * provide the computed state by performIntegrationStep().
+     * Returns the current state of the integrator.
      * \return Current integrated state,
      */
     virtual StateType getCurrentState( ) const { return currentState_; }
 
-    //! Returns the current interval
+    //! Returns the current independent variable.
     /*!
-     * Returns the current interval of the integrator. Child classes should override this and
-     * provide the computed interval by performIntegrationStep().
-     * \return Current interval
+     * Returns the current value of the independent variable of the integrator.
+     * \return Current independent variable.
      */
-    virtual IndependentVariableType getCurrentInterval( ) const { return currentInterval_; }
+    virtual IndependentVariableType getCurrentIndependentVariable( ) const
+    {
+        return currentIndependentVariable_;
+    }
 
     //! Perform a single integration step.
     /*!
@@ -106,24 +108,27 @@ public:
      */
     virtual StateType performIntegrationStep( const IndependentVariableType stepSize )
     {
-        lastInterval_ = currentInterval_;
+        lastIndependentVariable_ = currentIndependentVariable_;
         lastState_ = currentState_;
 
         // Calculate k1-k4.
         const StateDerivativeType k1 = stepSize * stateDerivativeFunction_(
-                    currentInterval_, currentState_ );
+                    currentIndependentVariable_, currentState_ );
+
         const StateDerivativeType k2 = stepSize * stateDerivativeFunction_(
-                    currentInterval_ + stepSize / 2.0,
+                    currentIndependentVariable_ + stepSize / 2.0,
                     static_cast< StateType >( currentState_ + k1 / 2.0 ) );
+
         const StateDerivativeType k3 = stepSize * stateDerivativeFunction_(
-                    currentInterval_ + stepSize / 2.0,
+                    currentIndependentVariable_ + stepSize / 2.0,
                     static_cast< StateType >( currentState_ + k2 / 2.0 ) );
+
         const StateDerivativeType k4 = stepSize * stateDerivativeFunction_(
-                    currentInterval_ + stepSize,
+                    currentIndependentVariable_ + stepSize,
                     static_cast< StateType >( currentState_ + k3 ) );
 
         stepSize_ = stepSize;
-        currentInterval_ += stepSize_;
+        currentIndependentVariable_ += stepSize_;
         currentState_ += ( k1 + 2.0 * k2 + 2.0 * k3 + k4 ) / 6.0;
 
         // Return the integration result.
@@ -133,19 +138,19 @@ public:
     //! Rollback internal state to the last state.
     /*!
      * Performs rollback of internal state to the last state. This function can only be called once
-     * after calling integrateTo( ) or performIntegrationStep( ) unless specified otherwise by
+     * after calling integrateTo() or performIntegrationStep() unless specified otherwise by
      * implementations, and can not be called before any of these functions have been called. Will
      * return true if the rollback was succesful, and false otherwise.
      * \return True if the rollback was successful.
      */
     virtual bool rollbackToPreviousState( )
     {
-        if ( currentInterval_ == lastInterval_ )
+        if ( currentIndependentVariable_ == lastIndependentVariable_ )
         {
             return false;
         }
 
-        currentInterval_ = lastInterval_;
+        currentIndependentVariable_ = lastIndependentVariable_;
         currentState_ = lastState_;
         return true;
     }
@@ -158,11 +163,11 @@ protected:
      */
     IndependentVariableType stepSize_;
 
-    //! Current interval.
+    //! Current independent variable.
     /*!
-     * Current interval as computed by performIntegrationStep().
+     * Current independent variable as computed by performIntegrationStep().
      */
-    IndependentVariableType currentInterval_;
+    IndependentVariableType currentIndependentVariable_;
 
     //! Current state.
     /*!
@@ -170,23 +175,22 @@ protected:
      */
     StateType currentState_;
 
-    //! Last interval.
+    //! Last independent variable.
     /*!
-     * Last interval as computed by performIntegrationStep().
+     * Last independent variable value as computed by performIntegrationStep().
      */
-    IndependentVariableType lastInterval_;
+    IndependentVariableType lastIndependentVariable_;
 
     //! Last state.
     /*!
      * Last state as computed by performIntegrationStep().
      */
     StateType lastState_;
-
 };
 
 //! Typedef of RK4 integrator (state/state derivative = VectorXd, independent variable = double).
 /*!
- * Typedef of an RK4 integrator with VectorXds as state and state derivative and double as
+ * Typedef of a RK4 integrator with VectorXds as state and state derivative and double as
  * independent variable.
  */
 typedef RungeKutta4Integrator< > RungeKutta4IntegratorXd;

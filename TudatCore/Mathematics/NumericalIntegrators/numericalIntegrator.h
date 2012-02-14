@@ -14,6 +14,7 @@
  *      120127    B. Tong Minh      File created.
  *      120128    D. Dirkx          Minor changes during code check.
  *      120207    K. Kumar          Minor comment corrections.
+ *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable().
  *
  *    References
  *
@@ -86,34 +87,37 @@ public:
      */
     virtual StateType getCurrentState( ) const = 0;
 
-    //! Get current interval.
+    //! Get current independent variable.
     /*!
-     * Returns the current interval of the integrator. Derived classes should override this and
-     * provide the computed interval by performIntegrationStep().
-     * \return Current interval.
+     * Returns the current value of the independent variable of the integrator. Derived classes
+     * should override this and provide the computed independent variable by
+     * performIntegrationStep().
+     * \return Current independent variable.
      */
-    virtual IndependentVariableType getCurrentInterval( ) const = 0;
+    virtual IndependentVariableType getCurrentIndependentVariable( ) const = 0;
 
     //! Rollback internal state to the step performed by performIntegrationStep()
     /*!
      * Performs rollback of internal state to the step performed by performIntegrationStep(). This
-     * is not necessarily equal the initial interval after integrateTo() has been called. This
-     * function can only be called once after calling or performIntegrationStep( ) unless specified
-     * otherwise by implementations, and can not be called before integrateTo() has been called.
+     * is not necessarily equal the start of the integration interval after integrateTo() has been.
+     * called. This function can only be called once after calling or performIntegrationStep()
+     * unless specified otherwise by implementations, and can not be called before integrateTo()
+     * has been called.
      * Will return true if the rollback was successful, and false otherwise.
      * \return True if the rollback was successful.
      */
     virtual bool rollbackToPreviousState( ) = 0;
 
-    //! Perform an integration to a specified interval.
+    //! Perform an integration to a specified independent variable value.
     /*!
-     * Performs an integration to intervalEnd with initial state and interval specified by the
-     * current state of the integrator and the provided initial step size.
-     * This implementation of integrateTo chooses the final step size such that it exactly
-     * coincides with the given intervalEnd.
-     * \param intervalEnd The end of the interval to integrate over.
+     * Performs an integration to independentVariableEnd with initial state and initial independent
+     * variable value specified by the current state of the integrator and the current independent
+     * variable value. This implementation of integrateTo chooses the final step size such that it
+     * exactly coincides with the given independentVariableEnd.
+     * \param intervalEnd The value of the independent variable at the end of the interval to
+     *          integrate over.
      * \param initialStepSize The initial step size to use.
-     * \return The state at intervalEnd.
+     * \return The state at independentVariableEnd.
      */
     virtual StateType integrateTo( const IndependentVariableType intervalEnd,
                                    const IndependentVariableType initialStepSize );
@@ -121,10 +125,11 @@ public:
 
     //! Perform a single integration step.
     /*!
-     * Performs a single integration step from interval and state as specified by
-     * initialStateHistory and specified stepSize. This function should determine the next step
+     * Performs a single integration step from current independent variable and state as specified
+     * by initialStateHistory and specified stepSize. This function should determine the next step
      * and make it available to getNextStepSize(), return the current state and store it for
-     * getCurrentState(), and store the current interval for getCurrentInterval().
+     * getCurrentState(), and store the current independent variable value for
+     * getCurrentIndependentVariable().
      * \param stepSize The step size of this step.
      * \return The state at the end of the interval.
      */
@@ -138,9 +143,9 @@ protected:
      */
     StateDerivativeFunction stateDerivativeFunction_;
 
-}; // class NumericalIntegrator.
+};
 
-//! Perform an integration to a specified interval.
+//! Perform an integration to a specified independent variable value.
 template < typename IndependentVariableType, typename StateType, typename StateDerivativeType >
 StateType NumericalIntegrator< IndependentVariableType, StateType, StateDerivativeType >::
 integrateTo( const IndependentVariableType intervalEnd,
@@ -148,28 +153,30 @@ integrateTo( const IndependentVariableType intervalEnd,
 {
     IndependentVariableType stepSize = initialStepSize;
 
-    // Flag to indicate that the integration interval end has been reached.
-    bool atIntegrationIntervalEnd = ( intervalEnd - getCurrentInterval()   ) *
-            stepSize / std::fabs( stepSize )
+    // Flag to indicate that the integration end value of the independent variable has been
+    // reached.
+    bool atIntegrationIntervalEnd = ( intervalEnd - getCurrentIndependentVariable( ) )
+            * stepSize / std::fabs( stepSize )
             <= std::numeric_limits< IndependentVariableType >::epsilon( );
 
     while ( !atIntegrationIntervalEnd )
     {
         // Check if the remaining interval is smaller than the step size.
-        if ( std::fabs( intervalEnd - getCurrentInterval( ) ) <= std::fabs( stepSize ) *
-             ( 1.0 + std::numeric_limits<IndependentVariableType>::epsilon() ) )
+        if ( std::fabs( intervalEnd - getCurrentIndependentVariable( ) )
+             <= std::fabs( stepSize ) *
+             ( 1.0 + std::numeric_limits< IndependentVariableType >::epsilon( ) ) )
         {
             // The next step is beyond the end of the integration interval, so adjust the
             // step size accordingly.
-            stepSize = intervalEnd - getCurrentInterval( );
+            stepSize = intervalEnd - getCurrentIndependentVariable( );
 
             // Explicitly flag that the integration interval end is reached. Due to rounding
-            // off errors, it may not be possible to use ( currentInterval >= intervalEnd )
-            // in the while condition.
+            // off errors, it may not be possible to use
+            // ( currentIndependentVariable >= independentVariableEnd ) // in the while condition.
             atIntegrationIntervalEnd = true;
         }
 
-        // Perform the step
+        // Perform the step.
         performIntegrationStep( stepSize );
 
         stepSize = getNextStepSize( );

@@ -15,6 +15,7 @@
  *      120128    D. Dirkx          Minor changes during code check.
  *      120206    K. Kumar          Minor comment corrections.
  *      120207    K. Kumar          Updated to Boost unit test framework.
+ *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable().
  *
  *    References
  *
@@ -53,12 +54,10 @@ public:
     /*!
      * Default constructor, setting zeroDerivative as the state derivative function.
      */
-    DummyNumericalIntegrator( const double intervalStart,
-                              const Eigen::VectorXd& initialState ) :
-        NumericalIntegrator< double, Eigen::VectorXd, Eigen::VectorXd >(
-            &computeZeroStateDerivative ),
-        numberOfSteps( 0 ), currentIntegrationIntervalPoint_( intervalStart ),
-        currentState_( initialState ) { }
+    DummyNumericalIntegrator( const double intervalStart, const Eigen::VectorXd& initialState )
+        : NumericalIntegrator< double, Eigen::VectorXd, Eigen::VectorXd >(
+              &computeZeroStateDerivative ),  numberOfSteps( 0 ),
+          currentIndependentVariable_( intervalStart ),  currentState_( initialState ) { }
 
     //! Get step size of the next step.
     /*!
@@ -74,12 +73,12 @@ public:
      */
     virtual Eigen::VectorXd getCurrentState( ) const { return currentState_; }
 
-    //! Get current interval.
+    //! Get current independent variable.
     /*!
-     * Returns the current interval stored interally by the integrator.
-     * \return Current interval.
+     * Returns the current value of the independent variable stored interally by the integrator.
+     * \return Current independent variable.
      */
-    virtual double getCurrentInterval( ) const { return currentIntegrationIntervalPoint_; }
+    virtual double getCurrentIndependentVariable( ) const { return currentIndependentVariable_; }
 
     //! Rollback the internal state to the last state.
     /*!
@@ -105,7 +104,7 @@ public:
         numberOfSteps++;
 
         stepSize_ = stepSize;
-        currentIntegrationIntervalPoint_ += stepSize_;
+        currentIndependentVariable_ += stepSize_;
 
         return currentState_;
     }
@@ -124,11 +123,11 @@ protected:
      */
     double stepSize_;
 
-    //! Current integration interval point.
+    //! Current independent variable value.
     /*!
-     * Current integration interval point stored internally by the integrator.
+     * Current value of independent variable stored internally by the integrator.
      */
-    double currentIntegrationIntervalPoint_;
+    double currentIndependentVariable_;
 
     //! Current state.
     /*!
@@ -140,8 +139,8 @@ protected:
 //! Test the amount of steps that NumericalIntegrator::integrateTo takes.
 /*!
  * Test the amount of steps that NumericalIntegrator::integrateTo takes.
- * \param intervalStart The start of the integration interval
- * \param intervalEnd The end of the integration interval
+ * \param intervalStart The start of the integration interval.
+ * \param intervalEnd The end of the integration interval.
  * \param initialState The initial state.
  * \param stepSize The step size to take.
  * \param expectedNumberOfSteps Number of steps from intervalStart to intervalEnd.

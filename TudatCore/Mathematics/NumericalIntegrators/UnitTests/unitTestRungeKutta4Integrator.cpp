@@ -16,6 +16,7 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    B. Tong Minh      Adapted for new Tudat core RK4 integrator.
  *      120207    K. Kumar          Adapted to Boost unit test framework.
+ *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable().
  *
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
@@ -26,6 +27,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include <limits>
+#include <map>
 #include "TudatCore/Mathematics/NumericalIntegrators/rungeKutta4Integrator.h"
 #include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
 
@@ -39,12 +41,12 @@ BOOST_AUTO_TEST_SUITE( test_runge_kutta_4_integrator )
 //! Using declaration of the RungeKutta4IntegratorXd.
 using tudat::mathematics::numerical_integrators::RungeKutta4IntegratorXd;
 
-//! Test the result of the RK4 integrator.
+//! Test the validity of the RK4 integrator.
 /*!
- * Tests the result of the Runge-Kutta 4 integrator.
+ * Tests the validity of the Runge-Kutta 4 integrator.
  * \param stateDerivativeFunction Function pointer to the state derivative function.
- * \param intervalStart The start of the integration interval..
- * \param intervalEnd The end of the integration interval
+ * \param intervalStart The start of the integration interval.
+ * \param intervalEnd The end of the integration interval.
  * \param stepSize The step size to take.
  * \param initialState The initial state.
  * \param expectedState Expected final state.
@@ -64,16 +66,14 @@ bool testValidityOfRungeKutta4Integrator(
 
         Eigen::VectorXd finalState = integrator.integrateTo( intervalEnd, stepSize );
 
-        // Compute differences between computed and expected interval end and generate
-        // cerr statement if test fails.
-        if ( std::fabs( integrator.getCurrentInterval( ) - intervalEnd ) / intervalEnd >
-             std::numeric_limits< double >::epsilon( ) )
+        // Compute differences between computed and expected interval end.
+        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd )
+            / intervalEnd > std::numeric_limits< double >::epsilon( ) )
         {
             return false;
         }
 
-        // Compute differences between computed and expected results and generate
-        // cerr statement if test fails.
+        // Compute differences between computed and expected results.
         if ( !expectedState.isApprox( finalState, tolerance ) )
         {
             return false;
@@ -84,13 +84,16 @@ bool testValidityOfRungeKutta4Integrator(
     {
         RungeKutta4IntegratorXd integrator( stateDerivativeFunction, intervalStart, initialState );
 
-        const double intermediateInterval = intervalStart + ( intervalEnd - intervalStart ) / 2.0;
+        const double intermediateIndependentVariable
+                = intervalStart + ( intervalEnd - intervalStart ) / 2.0;
 
-        const Eigen::VectorXd intermediateState = integrator.integrateTo( intermediateInterval,
-                                                                          stepSize );
+        const Eigen::VectorXd intermediateState = integrator.integrateTo(
+                    intermediateIndependentVariable, stepSize );
+
         // Compute differences between computed and expected interval end.
-        if ( std::fabs( integrator.getCurrentInterval( ) - intermediateInterval ) /
-             intermediateInterval > std::numeric_limits< double >::epsilon( ) )
+        if ( std::fabs( integrator.getCurrentIndependentVariable( )
+                        - intermediateIndependentVariable ) /
+             intermediateIndependentVariable > std::numeric_limits< double >::epsilon( ) )
         {
             return false;
         }
@@ -99,8 +102,8 @@ bool testValidityOfRungeKutta4Integrator(
         Eigen::VectorXd finalState = integrator.integrateTo( intervalEnd, stepSize );
 
         // Compute differences between computed and expected interval end.
-        if ( std::fabs( integrator.getCurrentInterval() - intervalEnd ) / intervalEnd >
-             std::numeric_limits< double >::epsilon( ) )
+        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd )
+             / intervalEnd > std::numeric_limits< double >::epsilon( ) )
         {
             return false;
         }
@@ -113,23 +116,24 @@ bool testValidityOfRungeKutta4Integrator(
         }
 
         integrator.performIntegrationStep( stepSize );
-        if ( !integrator.rollbackToPreviousState() )
+        if ( !integrator.rollbackToPreviousState( ) )
         {
             return false;
         }
 
-        if ( std::fabs( integrator.getCurrentInterval( ) - intervalEnd ) / intervalEnd >
-             std::numeric_limits<double>::epsilon( ) )
+        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd )
+             / intervalEnd > std::numeric_limits<double>::epsilon( ) )
         {
             return false;
         }
+
         // This result should be exactly the same.
         if ( integrator.getCurrentState( ) != finalState )
         {
             return false;
         }
 
-        if ( integrator.rollbackToPreviousState() )
+        if ( integrator.rollbackToPreviousState () )
         {
             return false;
         }
@@ -138,11 +142,11 @@ bool testValidityOfRungeKutta4Integrator(
     return true;
 }
 
-//! Test different types of states and state derivatives
+//! Test different types of states and state derivatives.
 /*!
  * Test if different types of states and state derivatives work. If something
  * is broken, then a compile time error will be generated.
- * \return Unconditionally true
+ * \return Unconditionally true.
  */
 bool testDifferentStateAndStateDerivativeTypes( )
 {
@@ -167,10 +171,10 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
     {
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
                          benchmarkFunctions[ Zero ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Zero ].initialInterval_,
-                         benchmarkFunctions[ Zero ].endInterval_, 0.2,
+                         benchmarkFunctions[ Zero ].intervalStart_,
+                         benchmarkFunctions[ Zero ].intervalEnd_, 0.2,
                          benchmarkFunctions[ Zero ].initialState_,
-                         benchmarkFunctions[ Zero ].endState_,
+                         benchmarkFunctions[ Zero ].finalState_,
                          std::numeric_limits< double >::epsilon( ) ) );
     }
 
@@ -178,10 +182,10 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
     {
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
                          benchmarkFunctions[ Constant ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Constant ].initialInterval_,
-                         benchmarkFunctions[ Constant ].endInterval_, 0.2,
+                         benchmarkFunctions[ Constant ].intervalStart_,
+                         benchmarkFunctions[ Constant ].intervalEnd_, 0.2,
                          benchmarkFunctions[ Constant ].initialState_,
-                         benchmarkFunctions[ Constant ].endState_,
+                         benchmarkFunctions[ Constant ].finalState_,
                          std::numeric_limits< double >::epsilon( ) ) );
     }
 
@@ -189,10 +193,10 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
     {
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
                          benchmarkFunctions[ Exponential ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Exponential ].initialInterval_,
-                         benchmarkFunctions[ Exponential ].endInterval_, 0.2,
+                         benchmarkFunctions[ Exponential ].intervalStart_,
+                         benchmarkFunctions[ Exponential ].intervalEnd_, 0.2,
                          benchmarkFunctions[ Exponential ].initialState_,
-                         benchmarkFunctions[ Exponential ].endState_, 1.0e-3 ) );
+                         benchmarkFunctions[ Exponential ].finalState_, 1.0e-3 ) );
     }
 
     // Case 4: test with x_dot = x, but integrate backwards.
@@ -200,20 +204,20 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
                          benchmarkFunctions[ BackwardsExponential ]
                          .pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ BackwardsExponential ].initialInterval_,
-                         benchmarkFunctions[ BackwardsExponential ].endInterval_, -0.2,
+                         benchmarkFunctions[ BackwardsExponential ].intervalStart_,
+                         benchmarkFunctions[ BackwardsExponential ].intervalEnd_, -0.2,
                          benchmarkFunctions[ BackwardsExponential ].initialState_,
-                         benchmarkFunctions[ BackwardsExponential ].endState_, 1e-3 ) );
+                         benchmarkFunctions[ BackwardsExponential ].finalState_, 1e-3 ) );
     }
 
-    // Case 5: test with an example from numerical recipes.
+    // Case 5: test with an example from Burden and Faires.
     {
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
                          benchmarkFunctions[ BurdenAndFaires ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ BurdenAndFaires ].initialInterval_,
-                         benchmarkFunctions[ BurdenAndFaires ].endInterval_,  0.2,
+                         benchmarkFunctions[ BurdenAndFaires ].intervalStart_,
+                         benchmarkFunctions[ BurdenAndFaires ].intervalEnd_,  0.2,
                          benchmarkFunctions[ BurdenAndFaires ].initialState_,
-                         benchmarkFunctions[ BurdenAndFaires ].endState_, 1.0e-8 ) );
+                         benchmarkFunctions[ BurdenAndFaires ].finalState_, 1.0e-8 ) );
     }
 
     // Case 6: test if difference in type between state and state derivative works.

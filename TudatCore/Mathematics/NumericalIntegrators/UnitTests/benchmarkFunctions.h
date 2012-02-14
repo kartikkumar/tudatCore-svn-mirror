@@ -15,6 +15,7 @@
  *      120207    K. Kumar          Minor comment corrections; changed "NumericalRecipes" to
  *                                  "BurdenAndFaires", "InverseExponential" to
  *                                  "BackwardsExponential".
+ *      120213    K. Kumar          Updated variable-naming.
  *
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
@@ -56,32 +57,32 @@ public:
     /*!
      * Initializer constructor.
      * \param pointerToStateDerivativeFunction_ Pointer to benchmark function.
-     * \param initialInterval_ Integration interval start.
-     * \param initialState_ Integration initial state.
-     * \param endInterval_ Integration interval end.
-     * \param endState_ Expected end state.
+     * \param intervalStart Integration interval start.
+     * \param initialState Integration initial state.
+     * \param intervalEnd Integration interval end.
+     * \param finalState Expected final state.
      */
     BenchmarkFunction( const StateDerivativeFunction& pointerToStateDerivativeFunction,
-                       const double initialInterval, const Eigen::VectorXd& initialState,
-                       const double endInterval, const Eigen::VectorXd& endState ) :
+                       const double intervalStart, const Eigen::VectorXd& initialState,
+                       const double intervalEnd, const Eigen::VectorXd& finalState ) :
         pointerToStateDerivativeFunction_( pointerToStateDerivativeFunction ),
-        initialInterval_( initialInterval ), initialState_( initialState ),
-        endInterval_( endInterval ), endState_( endState ) { }
+        intervalStart_( intervalStart ), initialState_( initialState ),
+        intervalEnd_( intervalEnd ), finalState_( finalState ) { }
 
     //! Pointer to a benchmark state derivative function.
     StateDerivativeFunction pointerToStateDerivativeFunction_;
 
     //! Integration interval start.
-    double initialInterval_;
+    double intervalStart_;
 
     //! Integration initial state.
     Eigen::VectorXd initialState_;
 
     //! Integration interval end.
-    double endInterval_;
+    double intervalEnd_;
 
     //! Expected end state.
-    Eigen::VectorXd endState_;
+    Eigen::VectorXd finalState_;
 
 protected:
 
