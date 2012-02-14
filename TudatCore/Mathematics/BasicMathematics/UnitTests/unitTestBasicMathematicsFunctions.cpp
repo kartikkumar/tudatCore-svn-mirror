@@ -32,7 +32,7 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
-#include "TudatCore/Mathematics/basicMathematicsFunctions.h"
+#include "TudatCore/Mathematics/BasicMathematics/basicMathematicsFunctions.h"
 
 //! Test implementation of basic mathematics functions.
 int main( )

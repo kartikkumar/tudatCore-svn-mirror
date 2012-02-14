@@ -41,7 +41,7 @@
 #include <cmath>
 #include <Eigen/Core>
 #include <limits>
-#include "TudatCore/Mathematics/coordinateConversions.h"
+#include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
 
 namespace tudat
 {

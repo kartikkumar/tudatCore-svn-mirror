@@ -19,48 +19,27 @@
  #
  #/
 
+# Set the main sub-directories
+set(BASICMATHEMATICSDIR "${MATHEMATICSDIR}/BasicMathematics")
+set(NUMERICALINTEGRATORSDIR "${MATHEMATICSDIR}/NumericalIntegrators")
+
 # Add source files.
 set(MATHEMATICS_SOURCES
-  "${SRCROOT}${MATHEMATICSDIR}/basicMathematicsFunctions.cpp"
-  "${SRCROOT}${MATHEMATICSDIR}/coordinateConversions.cpp"
-  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.cpp"
 )
 
 # Add header files.
-set(MATHEMATICS_HEADERS 
-  "${SRCROOT}${MATHEMATICSDIR}/basicMathematicsFunctions.h"
-  "${SRCROOT}${MATHEMATICSDIR}/coordinateConversions.h"
-  "${SRCROOT}${MATHEMATICSDIR}/linearAlgebra.h"
-  "${SRCROOT}${MATHEMATICSDIR}/mathematicalConstants.h"
+set(MATHEMATICS_HEADERS
 )
 
-
 # Add sub-directories.
-add_subdirectory("${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
+add_subdirectory("${SRCROOT}${BASICMATHEMATICSDIR}")
+add_subdirectory("${SRCROOT}${NUMERICALINTEGRATORSDIR}")
 
 # Get target properties for static libraries.
+get_target_property(BASICMATHEMATICSSOURCES tudat_core_basic_mathematics SOURCES)
 get_target_property(NUMERICALINTEGRATORSSOURCES tudat_core_numerical_integrators SOURCES)
 
-
 # Add static libraries.
-add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS} ${NUMERICALINTEGRATORS_SOURCES} ${NUMERICALINTEGRATORS_HEADERS})
+add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS} ${BASICMATHEMATICSSOURCES} ${NUMERICALINTEGRATORSSOURCES})
 setup_tudat_library_target(tudat_core_mathematics "${SRCROOT}${MATHEMATICSDIR}")
-setup_headers("${ASTRODYNAMICS_HEADERS}" "${MATHEMATICSDIR}")
-
-# Add unit tests.
-add_executable(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp")
-setup_custom_test_program(test_CoordinateConversions "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_CoordinateConversions tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
-
-add_executable(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestLinearAlgebra.cpp")
-setup_custom_test_program(test_LinearAlgebra "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_LinearAlgebra tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
-
-# Add unit tests.
-add_executable(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
-setup_custom_test_program(test_BasicMathematics "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_BasicMathematics tudat_core_mathematics tudat_core_astrodynamics ${Boost_LIBRARIES})
-
-add_executable(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
-setup_custom_test_program(test_MathematicalConstants "${SRCROOT}${MATHEMATICSDIR}")
-target_link_libraries(test_MathematicalConstants tudat_core_mathematics ${Boost_LIBRARIES})
+setup_headers("${MATHEMATICS_HEADERS}" "${MATHEMATICSDIR}")

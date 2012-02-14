@@ -22,7 +22,7 @@
 #include <cmath>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
-#include "TudatCore/Mathematics/mathematicalConstants.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
 using tudat::mathematics::PI;
 

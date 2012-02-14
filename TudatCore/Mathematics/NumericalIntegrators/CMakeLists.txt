@@ -19,26 +19,26 @@
 
 # Add source files.
 set(NUMERICALINTEGRATORS_SOURCES
-  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/numericalIntegrator.cpp"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.cpp"
 )
 
 # Add header files.
 set(NUMERICALINTEGRATORS_HEADERS 
-  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/numericalIntegrator.h"
-  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/rungeKutta4Integrator.h"
-  "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/rungeKutta4Integrator.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/benchmarkFunctions.h"
 )
 
 # Add static libraries.
 add_library(tudat_core_numerical_integrators STATIC ${NUMERICALINTEGRATORS_SOURCES} ${NUMERICALINTEGRATORS_HEADERS})
-setup_tudat_library_target(tudat_core_numerical_integrators "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
-setup_headers("${NUMERICALINTEGRATORS_HEADERS}" "${MATHEMATICSDIR}/NumericalIntegrators")
+setup_tudat_library_target(tudat_core_numerical_integrators "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
+setup_headers("${NUMERICALINTEGRATORS_HEADERS}" "${NUMERICALINTEGRATORSDIR}")
 
 # Add unit tests.
-add_executable(test_NumericalIntegrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestNumericalIntegrator.cpp")
-setup_custom_test_program(test_NumericalIntegrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
+add_executable(test_NumericalIntegrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrator.cpp")
+setup_custom_test_program(test_NumericalIntegrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
 target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
 
-add_executable(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators/UnitTests/unitTestRungeKutta4Integrator.cpp")
-setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${MATHEMATICSDIR}/NumericalIntegrators")
+add_executable(test_RungeKutta4Integrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestRungeKutta4Integrator.cpp")
+setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
 target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators ${Boost_LIBRARIES})

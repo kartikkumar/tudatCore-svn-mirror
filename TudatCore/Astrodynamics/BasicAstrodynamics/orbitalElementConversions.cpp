@@ -57,7 +57,7 @@
 #include <numeric>
 #include <cmath>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
-#include "TudatCore/Mathematics/linearAlgebra.h"
+#include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
 
 namespace tudat
 {

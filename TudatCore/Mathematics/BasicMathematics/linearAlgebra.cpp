@@ -27,7 +27,7 @@
  */
 
 #include <cmath>
-#include "TudatCore/Mathematics/linearAlgebra.h"
+#include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
 
 namespace tudat
 {

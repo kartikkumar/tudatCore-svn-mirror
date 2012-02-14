@@ -26,7 +26,7 @@
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 #include <cmath>
-#include "TudatCore/Mathematics/linearAlgebra.h"
+#include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
 
 namespace tudat
 {

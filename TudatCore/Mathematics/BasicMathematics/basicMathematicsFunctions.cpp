@@ -39,7 +39,7 @@
 #include <cmath>
 #include <ctime>
 #include <limits>
-#include "TudatCore/Mathematics/basicMathematicsFunctions.h"
+#include "TudatCore/Mathematics/BasicMathematics/basicMathematicsFunctions.h"
 
 namespace tudat
 {

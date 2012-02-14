@@ -38,7 +38,7 @@
 #include <cmath>
 #include <limits>
 #include <numeric>
-#include "TudatCore/Mathematics/coordinateConversions.h"
+#include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
 
 namespace tudat
 {

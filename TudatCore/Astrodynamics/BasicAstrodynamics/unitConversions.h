@@ -42,7 +42,7 @@
 #define TUDAT_CORE_UNIT_CONVERSIONS_H
 
 #include <cmath>
-#include "TudatCore/Mathematics/mathematicalConstants.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 namespace tudat
