@@ -96,22 +96,6 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
     return convertedSphericalCoordinates_;
 }
 
-//! Convert cylindrical (radius_, azimuth, z) to Cartesian coordinates (x,y,z), z value unaffected.
-Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates )
-{
-    // Create output VectorXd.
-    Eigen::VectorXd convertedCartesianCoordinates_ = Eigen::VectorXd::Zero( 3 );
-
-    // Perform transformation, z value should be set outside function.
-    double radius_ = cylindricalCoordinates( 0 );
-    double azimuthAngle_ =  cylindricalCoordinates( 1 );
-    convertedCartesianCoordinates_( 0 ) = radius_ * std::cos( azimuthAngle_ );
-    convertedCartesianCoordinates_( 1 ) = radius_ * std::sin( azimuthAngle_ );
-    convertedCartesianCoordinates_( 2 ) = cylindricalCoordinates( 2 );
-
-    return convertedCartesianCoordinates_;
-}
-
 } // namespace coordinate_conversions
 } // namespace mathematics
 } // namespace tudat

@@ -83,23 +83,6 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
 */
 Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates );
 
-//! Convert cylindrical (radius, azimuth, z) to Cartesian coordinates (x,y,z), z value unaffected.
-/*!
- * Converts cylindrical to Cartesian coordinates. Schematic representation can be found on, e.g.,
- * http://mathworld.wolfram.com/CylindricalCoordinates.html.
- * The transformation equations are the following, with \f$ r \f$  the radius and
- * \f$ \theta \f$ the azimuth angle:
- * \f{eqnarray*}{
- *      x &=& r\cos\theta \\
- *      y &=& r\sin\theta \\
- *      z &=& z \\
- * \f}
- * The value of z is left unaffected by this transformation.
- * \param cylindricalCoordinates Vector containing radius, azimuth and z (in that order).
- * \return Vector containing Cartesian coordinates, as calculated from cylindricalCoordinates.
-*/
-Eigen::VectorXd convertCylindricalToCartesian( const Eigen::VectorXd& cylindricalCoordinates );
-
 } // namespace coordinate_conversions
 } // namespace mathematics
 } // namespace tudat
