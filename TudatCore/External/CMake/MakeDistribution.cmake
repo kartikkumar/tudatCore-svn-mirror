@@ -44,6 +44,12 @@ install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
 )
 install(DIRECTORY "${Boost_LIBRARY_DIRS}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib"
+        FILES_MATCHING
+            PATTERN "libboost_*.*"
+            PATTERN "*.dylib" EXCLUDE
+            PATTERN "*.dll" EXCLUDE
+            PATTERN "*.so" EXCLUDE
+            PATTERN "*.so.*" EXCLUDE
 )
 # Install the environment file
 install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
