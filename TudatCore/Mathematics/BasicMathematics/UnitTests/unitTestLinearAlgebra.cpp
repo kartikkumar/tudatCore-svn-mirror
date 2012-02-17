@@ -27,6 +27,7 @@
 #include <boost/test/unit_test.hpp>
 #include <cmath>
 #include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
 namespace tudat
 {
@@ -78,7 +79,7 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
                            std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK( cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_SMALL( cosineOfAngle + 1.0, std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_CLOSE_FRACTION( angle, M_PI, std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( angle, mathematics::PI, std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 3: Test values for two vectors of length 3, benchmark values computed using Matlab.

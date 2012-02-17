@@ -29,7 +29,7 @@
 #define BOOST_TEST_MAIN
 
 #include <boost/test/unit_test.hpp>
-#include "TudatCore/Mathematics/mathematicalConstants.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 #include "boost/math/special_functions/fpclassify.hpp"
 
 namespace unit_test {

@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE( testConversionFromKilometersToMeters )
 BOOST_AUTO_TEST_CASE( testConversionFromDegreesToRadians )
 {
     BOOST_CHECK_CLOSE_FRACTION( tudat::unit_conversions::convertDegreesToRadians( 45.0 ),
-                                M_PI / 4.0, std::numeric_limits< double >::epsilon( ) );
+                                mathematics::PI / 4.0, std::numeric_limits< double >::epsilon( ) );
 }
 
 

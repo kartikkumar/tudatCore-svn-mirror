@@ -76,11 +76,14 @@
 #include <limits>
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h"
 #include "TudatCore/Basics/testMacros.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
 namespace tudat
 {
 namespace unit_tests
 {
+
+using mathematics::PI;
 
 BOOST_AUTO_TEST_SUITE( test_orbital_element_conversions )
 
@@ -100,10 +103,10 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
         Eigen::VectorXd keplerianElements( 6 );
         keplerianElements( semiMajorAxisIndex ) = 8000.0 * 1000.0;
         keplerianElements( eccentricityIndex ) = 0.23;
-        keplerianElements( inclinationIndex ) = 20.6 / 180.0 * M_PI;
-        keplerianElements( argumentOfPeriapsisIndex ) = 274.78 / 180.0 * M_PI;
-        keplerianElements( longitudeOfAscendingNodeIndex ) = 108.77 / 180.0 * M_PI;
-        keplerianElements( trueAnomalyIndex ) = 46.11 / 180.0 * M_PI;
+        keplerianElements( inclinationIndex ) = 20.6 / 180.0 * PI;
+        keplerianElements( argumentOfPeriapsisIndex ) = 274.78 / 180.0 * PI;
+        keplerianElements( longitudeOfAscendingNodeIndex ) = 108.77 / 180.0 * PI;
+        keplerianElements( trueAnomalyIndex ) = 46.11 / 180.0 * PI;
 
         // Set expected Cartesian elements [m,m,m,m/s,m/s,m/s].
         Eigen::VectorXd expectedCartesianElements( 6 );
@@ -139,9 +142,9 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
         keplerianElements( semiMajorAxisIndex ) = 9201.61 * 1000.0;
         keplerianElements( eccentricityIndex ) = 0.0;
         keplerianElements( inclinationIndex ) = 0.0;
-        keplerianElements( argumentOfPeriapsisIndex ) = 12.54 / 180.0 * M_PI;
-        keplerianElements( longitudeOfAscendingNodeIndex ) = 201.55 / 180.0 * M_PI;
-        keplerianElements( trueAnomalyIndex ) = -244.09 / 180.0 * M_PI;
+        keplerianElements( argumentOfPeriapsisIndex ) = 12.54 / 180.0 * PI;
+        keplerianElements( longitudeOfAscendingNodeIndex ) = 201.55 / 180.0 * PI;
+        keplerianElements( trueAnomalyIndex ) = -244.09 / 180.0 * PI;
 
         // Set expected Cartesian elements [m,m,m,m/s,m/s,m/s].
         Eigen::VectorXd expectedCartesianElements( 6 );
@@ -176,10 +179,10 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
         Eigen::VectorXd keplerianElements( 6 );
         keplerianElements( semiMajorAxisIndex ) = -4.5e11;
         keplerianElements( eccentricityIndex ) = 2.3;
-        keplerianElements( inclinationIndex ) = 25.5 / 180.0 * M_PI;
-        keplerianElements( argumentOfPeriapsisIndex ) = 156.11 / 180.0 * M_PI;
-        keplerianElements( longitudeOfAscendingNodeIndex ) = -215.03 / 180.0 * M_PI;
-        keplerianElements( trueAnomalyIndex ) = 123.29 / 180.0 * M_PI;
+        keplerianElements( inclinationIndex ) = 25.5 / 180.0 * PI;
+        keplerianElements( argumentOfPeriapsisIndex ) = 156.11 / 180.0 * PI;
+        keplerianElements( longitudeOfAscendingNodeIndex ) = -215.03 / 180.0 * PI;
+        keplerianElements( trueAnomalyIndex ) = 123.29 / 180.0 * PI;
 
         // Set expected Cartesian elements [m,m,m,m/s,m/s,m/s].
         Eigen::VectorXd expectedCartesianElements( 6 );
@@ -215,7 +218,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
         Eigen::VectorXd keplerianElements( 6 );
         keplerianElements( semiLatusRectum ) = 2.0 * 6678140.0;
         keplerianElements( eccentricityIndex ) = 1.0;
-        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * M_PI;
+        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * PI;
         keplerianElements( argumentOfPeriapsisIndex ) = 0.0;
         keplerianElements( longitudeOfAscendingNodeIndex ) = 0.0;
         keplerianElements( trueAnomalyIndex ) = 0.0;
@@ -301,7 +304,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
         expectedKeplerianElements( inclinationIndex ) = 0.0;
         expectedKeplerianElements( argumentOfPeriapsisIndex ) = 0.0;
         expectedKeplerianElements( longitudeOfAscendingNodeIndex ) = 0.0;
-        expectedKeplerianElements( trueAnomalyIndex ) = 26.78 / 180.0 * M_PI;
+        expectedKeplerianElements( trueAnomalyIndex ) = 26.78 / 180.0 * PI;
 
         // Declare and compute converted Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
@@ -356,10 +359,10 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
         Eigen::VectorXd expectedKeplerianElements( 6 );
         expectedKeplerianElements( semiMajorAxisIndex ) = -6.78e11;
         expectedKeplerianElements( eccentricityIndex ) = 1.89;
-        expectedKeplerianElements( inclinationIndex ) = 167.91 / 180 * M_PI;
-        expectedKeplerianElements( argumentOfPeriapsisIndex ) = 45.78 / 180.0 * M_PI;
-        expectedKeplerianElements( longitudeOfAscendingNodeIndex ) = -17.11 / 180.0 * M_PI;
-        expectedKeplerianElements( trueAnomalyIndex ) = 315.62 / 180.0 * M_PI;
+        expectedKeplerianElements( inclinationIndex ) = 167.91 / 180 * PI;
+        expectedKeplerianElements( argumentOfPeriapsisIndex ) = 45.78 / 180.0 * PI;
+        expectedKeplerianElements( longitudeOfAscendingNodeIndex ) = -17.11 / 180.0 * PI;
+        expectedKeplerianElements( trueAnomalyIndex ) = 315.62 / 180.0 * PI;
 
         // Compute Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
@@ -388,7 +391,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
         Eigen::VectorXd keplerianElements( 6 );
         keplerianElements( semiLatusRectum ) = 2.0 * 6678140.0;
         keplerianElements( eccentricityIndex ) = 1.0;
-        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * M_PI;
+        keplerianElements( inclinationIndex ) = 45.0 / 180.0 * PI;
         keplerianElements( argumentOfPeriapsisIndex ) = 0.0;
         keplerianElements( longitudeOfAscendingNodeIndex ) = 0.0;
         keplerianElements( trueAnomalyIndex ) = 0.0;
@@ -421,7 +424,7 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         double eccentricity = 0.146;
 
         // Set true anomaly.
-        double trueAnomaly = 82.16 / 180.0 * M_PI;
+        double trueAnomaly = 82.16 / 180.0 * PI;
 
         // Set expected elliptic eccentric anomaly.
         double expectedEllipticEccentricAnomaly = 1.290237398010989;
@@ -443,7 +446,7 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         double eccentricity = 0.0;
 
         // Set true anomaly.
-        double trueAnomaly = 160.43 / 180.0 * M_PI;
+        double trueAnomaly = 160.43 / 180.0 * PI;
 
         // Set expected elliptic eccentric anomaly.
         double expectedEllipticEccentricAnomaly = 2.800031718974503;
@@ -508,7 +511,7 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         double eccentricity = 0.146;
 
         // Set true anomaly.
-        double trueAnomaly = 82.16 / 180.0 * M_PI;
+        double trueAnomaly = 82.16 / 180.0 * PI;
 
         // Set expected elliptic eccentric anomaly.
         double expectedEllipticEccentricAnomaly = 1.290237398010989;
@@ -555,7 +558,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         double eccentricity = 0.639;
 
         // Set elliptic eccentric anomaly.
-        double ellipticEccentricAnomaly = 239.45 / 180.0 * M_PI;
+        double ellipticEccentricAnomaly = 239.45 / 180.0 * PI;
 
         // Set expected true anomaly.
         double expectedTrueAnomaly = 3.665218735816221;
@@ -563,7 +566,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Compute true anomaly, modulo 2*pi.
         double convertedTrueAnomaly = tudat::orbital_element_conversions::
                 convertEllipticalEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
-                                                                eccentricity ) + 2.0 * M_PI;
+                                                                eccentricity ) + 2.0 * PI;
 
         // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
@@ -577,7 +580,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         double eccentricity = 0.0;
 
         // Set elliptic eccentric anomaly.
-        double ellipticEccentricAnomaly = -99.54 / 180.0 * M_PI;
+        double ellipticEccentricAnomaly = -99.54 / 180.0 * PI;
 
         // Set expected true anomaly.
         double expectedTrueAnomaly = 4.545884569744431;
@@ -585,7 +588,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Compute true anomaly.
         double convertedTrueAnomaly = tudat::orbital_element_conversions::
                 convertEllipticalEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
-                                                                eccentricity ) + 2.0 * M_PI;
+                                                                eccentricity ) + 2.0 * PI;
 
         // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
@@ -642,7 +645,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         double eccentricity = 0.639;
 
         // Set elliptic eccentric anomaly.
-        double ellipticEccentricAnomaly = 239.45 / 180.0 * M_PI;
+        double ellipticEccentricAnomaly = 239.45 / 180.0 * PI;
 
         // Set expected true anomaly.
         double expectedTrueAnomaly = 3.665218735816221;
@@ -650,7 +653,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         // Compute true anomaly, modulo 2*pi.
         double convertedTrueAnomaly = tudat::orbital_element_conversions::
                 convertEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
-                                                      eccentricity ) + 2.0 * M_PI;
+                                                      eccentricity ) + 2.0 * PI;
 
         // Check if computed true anomaly matches the expected value.
         BOOST_CHECK_CLOSE_FRACTION( expectedTrueAnomaly, convertedTrueAnomaly,
@@ -689,7 +692,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         double eccentricity = 0.541;
 
         // Set elliptical eccentric anomaly.
-        double ellipticalEccentricAnomaly = 176.09 / 180.0 * M_PI;
+        double ellipticalEccentricAnomaly = 176.09 / 180.0 * PI;
 
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 3.036459804491048;
@@ -711,7 +714,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         double eccentricity = 0.0;
 
         // Set elliptical eccentric anomaly.
-        double ellipticalEccentricAnomaly = 320.12 / 180.0 * M_PI;
+        double ellipticalEccentricAnomaly = 320.12 / 180.0 * PI;
 
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 5.587148001484247;
@@ -758,7 +761,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         double hyperbolicEccentricAnomaly = 1.6013761449;
 
         // Set expected mean anomaly.
-        double expectedMeanAnomaly = 235.4 / 180.0 * M_PI;
+        double expectedMeanAnomaly = 235.4 / 180.0 * PI;
 
         // Compute mean anomaly.
         double computedMeanAnomaly = tudat::orbital_element_conversions
@@ -776,7 +779,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         double eccentricity = 0.541;
 
         // Set elliptical eccentric anomaly.
-        double ellipticalEccentricAnomaly = 176.09 / 180.0 * M_PI;
+        double ellipticalEccentricAnomaly = 176.09 / 180.0 * PI;
 
         // Set expected mean anomaly.
         double expectedMeanAnomaly = 3.036459804491048;
@@ -801,7 +804,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         double hyperbolicEccentricAnomaly = 1.6013761449;
 
         // Set expected mean anomaly.
-        double expectedMeanAnomaly = 235.4 / 180.0 * M_PI;
+        double expectedMeanAnomaly = 235.4 / 180.0 * PI;
 
         // Compute mean anomaly.
         double computedMeanAnomaly = tudat::orbital_element_conversions

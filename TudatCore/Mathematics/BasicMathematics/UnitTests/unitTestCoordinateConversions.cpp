@@ -42,6 +42,9 @@
 #include <Eigen/Core>
 #include <limits>
 #include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
+
+using tudat::mathematics::PI;
 
 namespace tudat
 {
@@ -73,7 +76,7 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
     // Test 2: Test conversion of: ( 2.0, 225, 225 ).
     {
         Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d(
-                    2.0, 225.0 / 180.0 * M_PI, 225.0 / 180.0 * M_PI );
+                    2.0, 225.0 / 180.0 * PI, 225.0 / 180.0 * PI );
 
         Eigen::VectorXd cartesianCoordinates_( 3 );
 
@@ -91,7 +94,7 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
     // Test 3: Test conversion of: ( 2.0, -225, -225 ).
     {
         Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d(
-                    2.0, -225.0 / 180.0 * M_PI, -225.0 / 180.0 * M_PI );
+                    2.0, -225.0 / 180.0 * PI, -225.0 / 180.0 * PI );
 
         Eigen::VectorXd cartesianCoordinates_( 3 );
 
@@ -108,7 +111,7 @@ BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 
     // Test 4: Test conversion of: ( 2.0, 180, 180 ).
     {
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d( 2.0, M_PI, M_PI );
+        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d( 2.0, PI, PI );
 
         Eigen::VectorXd cartesianCoordinates_( 3 );
 
