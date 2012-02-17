@@ -28,83 +28,60 @@
  *    References
  *
  */
+// Required Boost unit test framework define.
+#define BOOST_TEST_MAIN
 
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
 #include <cmath>
 #include <iostream>
 #include <limits>
 #include "TudatCore/Mathematics/BasicMathematics/basicMathematicsFunctions.h"
 
-//! Test implementation of basic mathematics functions.
-int main( )
-{
-    // Using declarations.
-    using std::cerr;
-    using std::endl;
-    using tudat::mathematics::computeModuloForSignedValues;
+using std::cerr;
+using std::endl;
+using tudat::mathematics::computeModuloForSignedValues;
 
-    // Declare and initialize test result to false.
-    bool isBasicMathematicsFunctionsErroneous = false;
+namespace tudat
+{
+
+namespace unit_tests
+{
+
+BOOST_AUTO_TEST_SUITE( test_BasicMathematics )
+
+//! Test if tudat modulo function is working
+BOOST_AUTO_TEST_CASE(testComputeModulo )
+{
 
     // Test modulo function.
-    // Test 10: Test 0.0 mod 0.0.
-    // Test 11: Test 2.0 mod 0.0.
-    // Test 12: Test 2.0 mod 2.0.
-    // Test 13: Test 3.0 mod 2.5.
-    // Test 14: Test 3.0 mod -2.5.
-    double resultUsingModuloFunction = computeModuloForSignedValues( 0.0, 0.0 );
+    // Test 1: Test 2.0 mod 2.0.
+    // Test 2: Test 3.0 mod 2.5.
+    // Test 3: Test 3.0 mod -2.5.
+    // Test 4: Test -3.0 mod -2.5.
+    // Test 5: Test -3.0 mod 2.5.
 
-    if ( fabs( resultUsingModuloFunction - 0.0 ) > std::numeric_limits< double >::epsilon( ) )
-    {
-        cerr << "The computeModulo function does not "
-             << "function correctly, as the computed value: "
-             << resultUsingModuloFunction
-             << " does not match the expected value: " << 0.0 << endl;
-        isBasicMathematicsFunctionsErroneous = true;
-    }
 
-    resultUsingModuloFunction = computeModuloForSignedValues( 2.0, 0.0 );
 
-    if ( fabs( resultUsingModuloFunction - 2.0 ) > std::numeric_limits< double >::epsilon( ) )
-    {
-        cerr << "The computeModulo function does not "
-             << "function correctly, as the computed value: "
-             << resultUsingModuloFunction
-             << " does not match the expected value: " << 2.0 << endl;
-        isBasicMathematicsFunctionsErroneous = true;
-    }
-
-    resultUsingModuloFunction = computeModuloForSignedValues( 2.0, 2.0 );
-
-    if ( fabs( resultUsingModuloFunction - 0.0 ) > std::numeric_limits< double >::epsilon( ) )
-    {
-        cerr << "The computeModulo function does not "
-             << "function correctly, as the computed value: "
-             << resultUsingModuloFunction
-             << " does not match the expected value: " << 0.0 << endl;
-        isBasicMathematicsFunctionsErroneous = true;
-    }
+    double resultUsingModuloFunction = computeModuloForSignedValues( 2.0, 2.0 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.0 , std::numeric_limits< double >::epsilon( ) );
 
     resultUsingModuloFunction = computeModuloForSignedValues( 3.0, 2.5 );
-
-    if ( fabs( resultUsingModuloFunction - 0.5 ) > std::numeric_limits< double >::epsilon( ) )
-    {
-        cerr << "The computeModulo function does not "
-             << "function correctly, as the computed value: "
-             << resultUsingModuloFunction
-             << " does not match the expected value: " << -0.5 << endl;
-        isBasicMathematicsFunctionsErroneous = true;
-    }
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.5 , std::numeric_limits< double >::epsilon( ) );
 
     resultUsingModuloFunction = computeModuloForSignedValues( 3.0, -2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -2.0 , std::numeric_limits< double >::epsilon( ) );
 
-    if ( fabs( resultUsingModuloFunction + 2.0 ) > std::numeric_limits< double >::epsilon( ) )
-    {
-        cerr << "The computeModulo function does not "
-             << "function correctly, as the computed value: "
-             << resultUsingModuloFunction
-             << " does not match the expected value: " << -2.0 << endl;
-        isBasicMathematicsFunctionsErroneous = true;
-    }
+    resultUsingModuloFunction = computeModuloForSignedValues( -3.0, -2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -0.5 , std::numeric_limits< double >::epsilon( ) );
 
-    return isBasicMathematicsFunctionsErroneous;
+    resultUsingModuloFunction = computeModuloForSignedValues( -3.0, 2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 2.0 , std::numeric_limits< double >::epsilon( ) );
 }
+
+BOOST_AUTO_TEST_SUITE_END( )
+
+
+} // namespace unit_tests
+
+} // namespace tudat
