@@ -24,36 +24,32 @@
  *      111111    K. Kumar          Strange error with convertCylindricalToCartesian function;
  *                                  achieved precision of results is less than machine precision,
  *                                  fixed by using slightly larger precision tolerance.
+ *      120217    D. Dirkx          Bootified unit tests.
+ *      120217    K. Kumar          Updated computeModuloForSignedValues() to computeModulo().
  *
  *    References
  *
  */
-// Required Boost unit test framework define.
+
 #define BOOST_TEST_MAIN
 
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
-#include <cmath>
-#include <iostream>
 #include <limits>
 #include "TudatCore/Mathematics/BasicMathematics/basicMathematicsFunctions.h"
 
-using std::cerr;
-using std::endl;
-using tudat::mathematics::computeModuloForSignedValues;
-
 namespace tudat
 {
-
 namespace unit_tests
 {
 
+using mathematics::computeModulo;
+
 BOOST_AUTO_TEST_SUITE( test_BasicMathematics )
 
-//! Test if tudat modulo function is working
-BOOST_AUTO_TEST_CASE(testComputeModulo )
+//! Test if tudat modulo function is working.
+BOOST_AUTO_TEST_CASE( testComputeModulo )
 {
-
     // Test modulo function.
     // Test 1: Test 2.0 mod 2.0.
     // Test 2: Test 3.0 mod 2.5.
@@ -61,27 +57,25 @@ BOOST_AUTO_TEST_CASE(testComputeModulo )
     // Test 4: Test -3.0 mod -2.5.
     // Test 5: Test -3.0 mod 2.5.
 
+    double machinePrecision = std::numeric_limits< double >::epsilon( );
 
+    double resultUsingModuloFunction = computeModulo( 2.0, 2.0 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.0 , machinePrecision );
 
-    double resultUsingModuloFunction = computeModuloForSignedValues( 2.0, 2.0 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.0 , std::numeric_limits< double >::epsilon( ) );
+    resultUsingModuloFunction = computeModulo( 3.0, 2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.5 , machinePrecision );
 
-    resultUsingModuloFunction = computeModuloForSignedValues( 3.0, 2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.5 , std::numeric_limits< double >::epsilon( ) );
+    resultUsingModuloFunction = computeModulo( 3.0, -2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -2.0 , machinePrecision );
 
-    resultUsingModuloFunction = computeModuloForSignedValues( 3.0, -2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -2.0 , std::numeric_limits< double >::epsilon( ) );
+    resultUsingModuloFunction = computeModulo( -3.0, -2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -0.5 , machinePrecision );
 
-    resultUsingModuloFunction = computeModuloForSignedValues( -3.0, -2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -0.5 , std::numeric_limits< double >::epsilon( ) );
-
-    resultUsingModuloFunction = computeModuloForSignedValues( -3.0, 2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 2.0 , std::numeric_limits< double >::epsilon( ) );
+    resultUsingModuloFunction = computeModulo( -3.0, 2.5 );
+    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 2.0 , machinePrecision );
 }
 
 BOOST_AUTO_TEST_SUITE_END( )
 
-
 } // namespace unit_tests
-
 } // namespace tudat

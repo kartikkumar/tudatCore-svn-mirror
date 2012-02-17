@@ -31,6 +31,7 @@
  *                                  equality.
  *      120130    K. Kumar          Added missing implementation of
  *                                  getGlobalRandomNumberGenerator().
+ *      120217    K. Kumar          Modified computeModuloForSignedValues() to computeModulo().
  *
  *    References
  *
@@ -38,7 +39,6 @@
 
 #include <cmath>
 #include <ctime>
-#include <limits>
 #include "TudatCore/Mathematics/BasicMathematics/basicMathematicsFunctions.h"
 
 namespace tudat
@@ -55,9 +55,9 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
 }
 
 //! Compute modulo of double.
-double computeModuloForSignedValues( double dividend, double divisor )
+double computeModulo( double dividend, double divisor )
 {
-    return dividend - divisor * floor( dividend / divisor );
+    return dividend - divisor * std::floor( dividend / divisor );
 }
 
 } // namespace mathematics

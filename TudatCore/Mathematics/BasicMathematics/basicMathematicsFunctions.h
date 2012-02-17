@@ -30,6 +30,7 @@
  *      120127    D. Dirkx          First version of basic mathematics in Tudat Core, coordinate
  *                                  conversions put in separate file.
  *      120127    K. Kumar          Minor comment edits.
+ *      120217    K. Kumar          Modified computeModuloForSignedValues() to computeModulo().
  *
  *    References
  *      Press W.H., et al. Numerical Recipes in C++: The Art of
@@ -65,13 +66,16 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
 
 //! Compute modulo of double.
 /*!
- * Computes the remainder of division of one number by another.
- * The remainder is in the range [ 0, divisor ].
+ * Computes the remainder of division of one floating-point number by another. The modulo
+ * computation is based on the mathematical definition of congruence, which is different from the
+ * implementation of std::fmod() in the cmath standard library. For a description of congruence
+ * see: http://mathworld.wolfram.com/Congruence.html.
+ * The remainder is in the range [ 0, divisor ).
  * \param dividend Number to be divided.
  * \param divisor Number that is divided by.
  * \return Remainder of division of dividend by divisor.
  */
-double computeModuloForSignedValues( double dividend, double divisor );
+double computeModulo( double dividend, double divisor );
 
 } // namespace mathematics
 } // namespace tudat
