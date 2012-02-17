@@ -77,13 +77,13 @@ else()
   set(BINROOT "${CODEROOT}/bin")
 endif()
 
-# Load user specific settings. These can overwrite all previus settings.
+# Load user specific settings. These can overwrite all previous settings.
 if (NOT TUDAT_USER_SETTINGS AND NOT DEFINED ENV{TUDAT_USER_SETTINGS})
   # Load from default paths, least important first
   INCLUDE( "../UserSettings.txt" OPTIONAL)
   INCLUDE( "UserSettings.txt" OPTIONAL)
 else()
-	MESSAGE(STATUS "Loading preset")
+  MESSAGE(STATUS "Loading preset")
   # Load the user specified file
   if ( TUDAT_USER_SETTINGS )
     INCLUDE( $TUDAT_USER_SETTINGS OPTIONAL)
