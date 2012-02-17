@@ -50,8 +50,8 @@ namespace input_output
  */
 static std::string getCoreRootPath( )
 {
-#ifdef TUDAT_CUSTOM_ROOT_PATH
-    return std::string( TUDAT_CUSTOM_ROOT_PATH );
+#ifdef TUDAT_CORE_CUSTOM_ROOT_PATH
+    return std::string( TUDAT_CORE_CUSTOM_ROOT_PATH );
 #else
     // Declare file path string assigned to filePath.
     std::string filePath_( __FILE__ );

@@ -36,19 +36,13 @@ project( TudatCore )
 # Set module path to local CMake scripts.
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 
-# Set full-path to Tudat trunk directory.
-# This should be used in case the FILE token does not given the full-path in the getRootPath()
-# function in basicFunctions.cpp.
-#add_definitions(-DTUDAT_CUSTOM_ROOT_PATH="C:\My\Custom\Path\To\Tudat\trunk")
-
 # Set root-directory for code to current source directory.
 set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 # Define the basic input (trunk) and output (lib & include) directories.
 set(SRCROOT "${CODEROOT}/TudatCore")
 
-# Set CMake build-type.
-#set(CMAKE_BUILD_TYPE Debug)
+# Set default CMake build-type.
 set(CMAKE_BUILD_TYPE Release)
 
 # Set testing options based on platform.
@@ -81,6 +75,21 @@ else()
   set(LIBROOT "${CODEROOT}/lib")
   set(INCLUDEROOT "${SRCROOT}/include")
   set(BINROOT "${CODEROOT}/bin")
+endif()
+
+# Load user specific settings. These can overwrite all previus settings.
+if (NOT TUDAT_USER_SETTINGS AND NOT DEFINED ENV{TUDAT_USER_SETTINGS})
+  # Load from default paths, least important first
+  INCLUDE( "../UserSettings.txt" OPTIONAL)
+  INCLUDE( "UserSettings.txt" OPTIONAL)
+else()
+	MESSAGE(STATUS "Loading preset")
+  # Load the user specified file
+  if ( TUDAT_USER_SETTINGS )
+    INCLUDE( $TUDAT_USER_SETTINGS OPTIONAL)
+  else()  
+    INCLUDE( $ENV{TUDAT_USER_SETTINGS} OPTIONAL)
+  endif()
 endif()
 
 # Set the global macros for setting up targets.
@@ -119,9 +128,6 @@ include_directories(AFTER
 )
 
 # Find Eigen3 library on local system.
-# If Eigen3 is not found, use the following to manually set the path to the Eigen3 directory.
-# A default location is given as an example.
-#set(EIGEN3_INCLUDE_DIR "${SRCROOT}/External/eigen3")
 find_package(Eigen3 REQUIRED)
 
 # Include Eigen3 directories.
@@ -138,10 +144,6 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 
 # Find Boost libraries on local system.
-# If Boost is not found, use the following to manually set the path to the Boost include and
-# library directories.
-#SET(Boost_INCLUDE_DIRS "C:\My\Custom\Path\To\Boost\Include\Directory")
-#SET(Boost_LIBRARY_DIRS "C:\My\Custom\Path\To\Boost\Library\Directory")
 find_package(Boost 1.45.0 COMPONENTS thread date_time system filesystem unit_test_framework regex REQUIRED)
 
 # Include Boost directories.

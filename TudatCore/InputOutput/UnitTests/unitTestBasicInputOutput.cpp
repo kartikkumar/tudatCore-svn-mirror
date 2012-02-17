@@ -38,9 +38,9 @@ BOOST_AUTO_TEST_CASE( test_getRootPath )
     BOOST_CHECK( boost::filesystem::is_directory(
                      tudat::input_output::getCoreRootPath( ) + "External" ) );
 
-    // If using a TUDAT_CUSTOM_ROOT_PATH define, check if it matches the macro value.
-    #ifdef TUDAT_CUSTOM_ROOT_PATH
-        BOOST_CHECK(std::string( TUDAT_CUSTOM_ROOT_PATH ).compare( tio::getCoreRootPath( ) == 0 );
+    // If using a TUDAT_CORE_CUSTOM_ROOT_PATH define, check if it matches the macro value.
+    #ifdef TUDAT_CORE_CUSTOM_ROOT_PATH
+        BOOST_CHECK(std::string( TUDAT_CORE_CUSTOM_ROOT_PATH ).compare( tio::getCoreRootPath( ) == 0 );
     #endif
 }
 
