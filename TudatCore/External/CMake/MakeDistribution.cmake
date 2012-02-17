@@ -55,3 +55,9 @@ install(DIRECTORY "${Boost_LIBRARY_DIRS}/"
 install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
 )
+
+# Generate the versions file
+install(CODE "file(WRITE \"${TUDAT_CORE_DISTRIBUTION_PATH}/Versions.txt\"
+    \"Packaged library versions:
+* Boost version: ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}
+* Eigen version: ${EIGEN3_VERSION}\")")
