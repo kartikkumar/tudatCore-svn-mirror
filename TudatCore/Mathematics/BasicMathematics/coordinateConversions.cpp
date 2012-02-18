@@ -69,7 +69,7 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
     return convertedCartesianCoordinates_;
 }
 
-//! Convert Cartesian (x,y,z) to spherical (radius_, zenith, azimuth) coordinates.
+//! Convert Cartesian (x,y,z) to spherical (radius, zenith, azimuth) coordinates.
 Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates )
 {
     // Create output VectorXd.

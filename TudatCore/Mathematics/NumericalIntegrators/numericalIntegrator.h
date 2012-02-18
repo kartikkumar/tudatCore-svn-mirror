@@ -60,7 +60,7 @@ public:
     //! Default constructor.
     /*!
      * Default constructor, taking a state derivative function as argument.
-     * \param stateDerivativeFunction_ State derivative function.
+     * \param stateDerivativeFunction State derivative function.
      */
     NumericalIntegrator( const StateDerivativeFunction& stateDerivativeFunction ) :
         stateDerivativeFunction_( stateDerivativeFunction ) { }

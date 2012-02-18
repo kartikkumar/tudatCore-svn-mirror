@@ -50,7 +50,7 @@ namespace mathematics
 namespace coordinate_conversions
 {
 
-//! Convert spherical (radius, zenith, azimuth) to cartesian (x,y,z) coordinates.
+//! Convert spherical (radius, zenith, azimuth) to Cartesian (x,y,z) coordinates.
 /*!
  * Converts spherical to cartesian coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/SphericalCoordinates.html.

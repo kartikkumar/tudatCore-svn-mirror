@@ -94,7 +94,6 @@ public:
     /*!
      * Performs a single integration step that does not do anything, except incrementing the
      * step counter.
-     * \param initialStateHistory The initial state, as a map of initial time <> initial state.
      * \param stepSize The step size of this step.
      * \return The state history at the end of the interval, which is basically equal to the input.
      */
@@ -143,8 +142,7 @@ protected:
  * \param intervalEnd The end of the integration interval.
  * \param initialState The initial state.
  * \param stepSize The step size to take.
- * \param expectedNumberOfSteps Number of steps from intervalStart to intervalEnd.
- * \returnTtrue if actual number of steps is equal to actual number of steps; false otherwise.
+ * \return True if actual number of steps is equal to actual number of steps; false otherwise.
  */
 bool testIntegrateToFunction( const double intervalStart, const double intervalEnd,
                               const Eigen::VectorXd& initialState,

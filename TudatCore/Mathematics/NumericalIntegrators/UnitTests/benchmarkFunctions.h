@@ -56,7 +56,7 @@ public:
     //! Initializer constructor.
     /*!
      * Initializer constructor.
-     * \param pointerToStateDerivativeFunction_ Pointer to benchmark function.
+     * \param pointerToStateDerivativeFunction Pointer to benchmark function.
      * \param intervalStart Integration interval start.
      * \param initialState Integration initial state.
      * \param intervalEnd Integration interval end.

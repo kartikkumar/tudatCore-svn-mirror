@@ -46,7 +46,7 @@ namespace input_output
 /*!
  * Returns root-path corresponding with root-directory of Tudat Core library as a string with
  * trailing slash included.
- * \param Root-path.
+ * \return Tudat Core root-path.
  */
 static std::string getCoreRootPath( )
 {
