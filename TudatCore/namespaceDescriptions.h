@@ -24,14 +24,16 @@ namespace tudat
 
 //! The input/output namespace.
 /*!
- * The input/output namespace.
+ * The input/output namespace contains the stream filters namespace and a function get the root-
+ * directory of the Tudat Core library.
  */
 namespace input_output
 {
 
 //! The stream filters namespace.
 /*!
- * The stream filters namespace.
+ * The stream filters namespace contains functions to remove comments, skip the first several
+ * lines and search and replace text in a stream.
  */
 namespace stream_filters
 {
@@ -53,7 +55,8 @@ namespace orbital_element_conversions
 
 //! Mathematics namespace.
 /*!
- * The mathematics namespace, containing free functions and classes.
+ * The mathematics namespace, contains the coordinate conversions namespace and functions
+ * to generate random numbers and compute division modulo.
  */
 namespace mathematics
 {
@@ -68,9 +71,31 @@ namespace coordinate_conversions
 
 } // namespace coordinate_conversions
 
+//! Linear algebra namespace.
+/*!
+ * The linear algebra namespace contains functions to compute the angle and the cosine of
+ * the angle between two vectors
+ */
+namespace linear_algebra
+{
+
+} // namespace linear algebra
+
+//! Mathematical constants namespace.
+/*!
+ * The mathematical constants namespace includes selected constants commonly used in mathematical
+ * operations (e, golden ratio, pi, NaN).
+ */
+namespace mathematical_constants
+{
+
+} // namespace mathematical constants
+
 //! Numerical integrators namespace.
 /*!
- * The numerical integrators namespace included in Tudat.
+ * The numerical integrators namespace contains the base class for the numerical integrators,
+ * a function to integrate to an independent variable value and a class that implements the RK4
+ * integrator.
  */
 namespace numerical_integrators
 {
@@ -92,6 +117,28 @@ namespace unit_tests
 {
 
 } // namespace unit_tests
+
+//! Astrodynamics namespace.
+/*!
+ * The astrodynamics namespace contains functions to compute the two-body orbital period, angular
+ * momentum, mean motion, Kepler energy and synodic period.
+ */
+namespace astrodynamics
+{
+
+} // namespace astrodynamics
+
+//! Unit conversions namespace.
+/*!
+ * The unit conversions namespace contains functions to convert angles (rad,deg,arcmin,arcsec),
+ * distance (m,km,ft), time (s,min,hr,JD,JY,sid-day), temperature (K,R) and pressure (lbs/ft2,
+ * N/m2).
+ */
+namespace unit_conversions
+{
+
+} // namespace unit_conversions
+
 } // namespace tudat
 
 #endif // TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
