@@ -23,6 +23,7 @@
 // Include Eigen for the matrix operations, format to generate a fancy error message and unit_test
 // to delegate the actual tests to
 #include <Eigen/Core>
+#include <boost/version.hpp>
 #include <boost/format.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -57,7 +58,7 @@
  * The actual comparison is done element wise using BOOST_CHECK_CLOSE(L, R, T)
  * \see http://www.boost.org/libs/test/doc/html/utf/testing-tools/reference.html
  */
-#ifdef BOOST_TEST_TOOL_IMPL
+#if (BOOST_VERSION && (BOOST_VERSION / 100 % 1000) >= 49)
 #define TUDAT_CHECK_MATRIX_CLOSE( L, R, T ) {                                                   \
     TUDAT_CHECK_MATRIX_BASE( L, R )                                                             \
         BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format( \
@@ -83,7 +84,7 @@
  * The actual comparison is done element wise using BOOST_CHECK_CLOSE_FRACTION(L, R, T)
  * \see http://www.boost.org/libs/test/doc/html/utf/testing-tools/reference.html
  */
-#ifdef BOOST_TEST_TOOL_IMPL
+#if (BOOST_VERSION && (BOOST_VERSION / 100 % 1000) >= 49)
 #define TUDAT_CHECK_MATRIX_CLOSE_FRACTION( L, R, T ) {                                          \
     TUDAT_CHECK_MATRIX_BASE( L, R )                                                             \
         BOOST_TEST_TOOL_IMPL( 0, ::boost::test_tools::check_is_close, boost::str(boost::format( \
