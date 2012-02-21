@@ -34,7 +34,8 @@ namespace tudat
 namespace unit_tests
 {
 
-BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
+//! Test suite for unit conversion functions.
+BOOST_AUTO_TEST_SUITE( test_unit_conversions )
 
 //! Test if angle between vectors is computed correctly.
 BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )

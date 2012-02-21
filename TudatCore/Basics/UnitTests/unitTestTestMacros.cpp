@@ -17,17 +17,17 @@
  *
  */
 
-// Temporary notes (move to class/function doxygen):
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
+// These comments lines are required to make the unit test work, since the pattern matching
+// requires certain line numbers.
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
 
 /* <p>
  * IMPORTANT:

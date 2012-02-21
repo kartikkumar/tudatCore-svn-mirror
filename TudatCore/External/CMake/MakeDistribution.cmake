@@ -1,6 +1,3 @@
-# \file MakeDistribution.cmake
- #    This file defines the install target to create a distribution of Tudat Core, Eigen and Boost
- #
  #    Copyright (c) 2012 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
@@ -15,6 +12,8 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      120210    B. Tong Minh      File created
+ #
+ #    This file defines the install target to create a distribution of Tudat Core, Eigen and Boost.
  #/
 
 if(NOT TUDAT_CORE_DISTRIBUTION_PATH)

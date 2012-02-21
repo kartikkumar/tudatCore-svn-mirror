@@ -31,10 +31,6 @@
  *      120127    K. Kumar          Minor comment edits.
  *
  *    References
- *      Press W.H., et al. Numerical Recipes in C++: The Art of
- *          Scientific Computing. Cambridge University Press, February 2002.
- *      Spiegel, M.R., Stephens, L.J. Statistics, Fourth Edition, Schaum's
- *          Outlines, McGraw-Hill, 2008.
  *
  */
 

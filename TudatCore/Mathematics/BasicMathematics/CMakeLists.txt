@@ -53,4 +53,3 @@ target_link_libraries(test_BasicMathematics tudat_core_basic_mathematics ${Boost
 add_executable(test_MathematicalConstants "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
 setup_custom_test_program(test_MathematicalConstants "${SRCROOT}${BASICMATHEMATICSDIR}")
 target_link_libraries(test_MathematicalConstants tudat_core_basic_mathematics ${Boost_LIBRARIES})
-

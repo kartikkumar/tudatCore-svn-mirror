@@ -34,7 +34,6 @@
 // The tests need to be updated to check benchmark values from literature.
 // 
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 #include <boost/test/floating_point_comparison.hpp>
@@ -49,6 +48,7 @@ namespace tudat
 namespace unit_tests
 {
 
+//! Test suite for astrodynamics functions.
 BOOST_AUTO_TEST_SUITE( test_astrodynamics_functions )
 
 //! Test if the orbital period of a Kepler orbit is computed correctly.

@@ -36,6 +36,7 @@ namespace tudat
 namespace unit_tests
 {
 
+//! Test suit for numerical integrators.
 BOOST_AUTO_TEST_SUITE( test_numerical_integrator )
 
 //! Using declaration of the NumericalIntegrator.

@@ -32,12 +32,10 @@
  *       Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Pressure_or_mechanical_stress,
  *          last accessed: 27, January 2012(c).
  *
+ *    The behaviour of the template conversion functions has not been tested for integer datatypes.
+ *
  */
 
-// Temporary notes (move to class/function doxygen):
-// The behaviour of the template conversion functions has not been tested
-// for integer data types.
-// 
 #ifndef TUDAT_CORE_UNIT_CONVERSIONS_H
 #define TUDAT_CORE_UNIT_CONVERSIONS_H
 

@@ -51,6 +51,7 @@ namespace tudat
 namespace unit_tests
 {
 
+//! Test suite for coordinate conversion functions.
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
 
 //! Test if spherical-to-Cartesian conversion is working correctly.

@@ -36,6 +36,7 @@ namespace tudat
 namespace unit_tests
 {
 
+//! Test suite for Runge-Kutta 4 integrator.
 BOOST_AUTO_TEST_SUITE( test_runge_kutta_4_integrator )
 
 //! Using declaration of the RungeKutta4IntegratorXd.

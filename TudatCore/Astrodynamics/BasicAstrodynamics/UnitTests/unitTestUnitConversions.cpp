@@ -47,7 +47,6 @@
 // true; if the code is correct, the function returns a boolean false.
 // 
 
-// Required Boost unit test framework define.
 #define BOOST_TEST_MAIN
 
 #include <boost/test/floating_point_comparison.hpp>
@@ -62,6 +61,7 @@ namespace tudat
 namespace unit_tests
 {
 
+//! Test suit for unit conversions.
 BOOST_AUTO_TEST_SUITE( test_unit_conversions )
 
 //! Test conversion from kilometers to meters.

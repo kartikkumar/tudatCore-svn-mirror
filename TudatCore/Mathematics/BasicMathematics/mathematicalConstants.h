@@ -16,7 +16,7 @@
  *
  *    References
  *      Wolfram MathWorld, Constant:
- *          http://mathworld.wolfram.com/Constant.html (retrieved 2012/02/08)
+ *          http://mathworld.wolfram.com/Constant.html (retrieved 2012/02/08).
  */
 
 #ifndef TUDAT_CORE_MATHEMATICAL_CONSTANTS_H
@@ -55,7 +55,7 @@ const static double GOLDEN_RATIO = 0.5 * ( 1.0 + std::sqrt( 5.0 ) );
 #ifdef M_PI
     const static double PI = M_PI;
 #else
-    const static double PI = 3.141592653589793238; // 18 digits
+    const static double PI = 3.141592653589793238; // 18 digits.
 #endif
 
 //! Not-a-number (NaN).

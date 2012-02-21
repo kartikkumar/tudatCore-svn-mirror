@@ -21,7 +21,7 @@
 #define TUDAT_CORE_TESTMACROS_H
 
 // Include Eigen for the matrix operations, format to generate a fancy error message and unit_test
-// to delegate the actual tests to
+// to delegate the actual tests to.
 #include <Eigen/Core>
 #include <boost/version.hpp>
 #include <boost/format.hpp>
