@@ -13,6 +13,8 @@
 #      YYMMDD    Author            Comment
 #      120210    S.Billemont       File created.
 #
+#    References
+#
 #    This file contains all the settings that the user can override to allow for the detection
 #    of various required components and customization of the Tudat installation.
 #

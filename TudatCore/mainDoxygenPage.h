@@ -11,8 +11,8 @@
  * This Doxygen website provides an overview of the various code interfaces incorporated in Tudat
  * Core. The Doxygen website is updated regularly.
  *
- * $Rev$
- * $Date$
+ * $Rev: 93 $
+ * $Date: 2012-02-18 15:42:51 +0100 (Sat, 18 Feb 2012) $
  *
  * Please address any queries regarding Tudat Core to tudat-AE@tudelft.nl.
  */
