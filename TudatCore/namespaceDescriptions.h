@@ -19,6 +19,12 @@
 #ifndef TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
 #define TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
 
+//! The Tudat namespace.
+/*!
+ * The Tudat namespace contains all the functionality offered in Tudat Core. Additionally, the
+ * Tudat namespace also contains all the functionality in the Tudat library.
+ * \sa http://tudat.tudelft.nl/doxygen/Tudat/html/index.html.
+ */
 namespace tudat
 {
 
