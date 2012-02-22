@@ -51,6 +51,8 @@
  *
  */
 
+#include <iostream>
+
 #include <boost/exception/all.hpp>
 #include <boost/math/special_functions/atanh.hpp>
 #include <Eigen/Geometry>
@@ -298,7 +300,7 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
 
             // Quadrant check. In the second half of the orbit, the body will be below the
             // xy-plane.
-            if ( cartesianElements( trueAnomalyIndex ) < 0.0 )
+            if ( computedKeplerianElements_( trueAnomalyIndex ) < 0.0 )
             { computedKeplerianElements_( trueAnomalyIndex )
                         = 2.0 * M_PI - computedKeplerianElements_( trueAnomalyIndex ); }
         }
