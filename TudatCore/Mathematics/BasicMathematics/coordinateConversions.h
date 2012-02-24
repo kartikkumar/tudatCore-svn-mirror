@@ -52,11 +52,15 @@ namespace coordinate_conversions
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
  * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the zenith angle:
- * \f{eqnarray*}{
- *      x &=& r\cos\theta\sin\phi \\
- *      y &=& r\sin\theta\sin\phi \\
- *      z &=& r\cos\phi \\
- * \f}
+ * \f[
+ *      x = r\cos\theta\sin\phi
+ * \f]
+ * \f[
+ *      y = r\sin\theta\sin\phi
+ * \f]
+ * \f[
+ *      z = r\cos\phi
+ * \f]
  * \param sphericalCoordinates Vector containing radius, zenith and azimuth (in that order).
  * \return Vector containing Cartesian coordinates, as calculated from sphericalCoordinates.
 */
@@ -68,11 +72,15 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
  * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the azimuth angle:
- * \f{eqnarray*}{
- *      r &=& \sqrt{ x^{ 2 } + y^{ 2 } + z^{ 2 } } \\
- *      \theta &=& \arctan\frac{ y }{ x } \\
- *      \phi &=& \arccos\frac{ z }{ r } \\
- * \f}
+ * \f[
+ *      r = \sqrt{ x^{ 2 } + y^{ 2 } + z^{ 2 } }
+ * \f]
+ * \f[
+ *      \theta = \arctan\frac{ y }{ x }
+ * \f]
+ * \f[
+ *      \phi = \arccos\frac{ z }{ r }
+ * \f]
  * \param cartesianCoordinates Vector containing Cartesian coordinates.
  * \return Vector containing sphericalCoordinates radius, zenith and azimuth (in that
  *          order), as calculated from sphericalCoordinates.
