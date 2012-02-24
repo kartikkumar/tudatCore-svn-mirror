@@ -46,8 +46,8 @@ namespace mathematics
 namespace coordinate_conversions
 {
 
-//! Convert spherical (radius, zenith, azimuth) to Cartesian (x,y,z) coordinates.
-/*!
+/// Convert spherical (radius, zenith, azimuth) to Cartesian (x,y,z) coordinates.
+/**
  * Converts spherical to cartesian coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
@@ -63,7 +63,7 @@ namespace coordinate_conversions
  * \f]
  * \param sphericalCoordinates Vector containing radius, zenith and azimuth (in that order).
  * \return Vector containing Cartesian coordinates, as calculated from sphericalCoordinates.
-*/
+ */
 Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoordinates );
 
 //! Convert Cartesian (x,y,z) to spherical (radius, zenith, azimuth) coordinates.
