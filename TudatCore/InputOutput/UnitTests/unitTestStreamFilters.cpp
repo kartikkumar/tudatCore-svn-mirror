@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE( test_skipFirstLines_noEmptyLines )
 
     // Check if the results match the expected result.
     BOOST_CHECK( filteredData.compare(
-                     "# Complete comment line\n-> odd data <-\n"
+"# Complete comment line\n-> odd data <-\n"
                      ) == 0 );
 }
 
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE( test_skipFirstLines_emptyLines )
 
     // Check if the results match the expected result.
     BOOST_CHECK( filteredData.compare(
-                     "\n\n# Complete comment line\n-> odd data <-\n"
+"\n\n# Complete comment line\n-> odd data <-\n"
                      ) == 0 );
 }
 
@@ -142,7 +142,7 @@ BOOST_AUTO_TEST_CASE( test_removeComment_noEmptyLines )
 
     // Check if the results match the expected result
     BOOST_CHECK( filteredData.compare(
-                     "The first header line\nA line with partial comment \n-> odd data <-\n"
+"The first header line\nA line with partial comment \n-> odd data <-\n"
                      ) == 0 );
 }
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_CASE( test_removeComment_emptyLines )
 
     // Check if the results match the expected result.
     BOOST_CHECK( filteredData.compare(
-                    "The first header line\nA line with partial comment \n\n-> odd data <-\n"
+"The first header line\nA line with partial comment \n\n-> odd data <-\n"
                     ) == 0 );
 }
 
@@ -193,8 +193,8 @@ BOOST_AUTO_TEST_CASE( test_replaceElements_delete_noEmptyLines )
 
     // Check if the results match the expected result.
     BOOST_CHECK( filteredData.compare(
-        // DONT INDENT! all spaces will end up in the test line
-        "The first header line\nA line with partial comment # this is comment\n\
+// DONT INDENT! all spaces will end up in the test line
+"The first header line\nA line with partial comment # this is comment\n\
 # Complete comment line\n\n"
         ) == 0 );
 }
@@ -221,8 +221,8 @@ BOOST_AUTO_TEST_CASE( test_replaceElements_delete_emptyLines )
 
     // Check if the results match the expected result
     BOOST_CHECK( filteredData.compare(
-        // DONT INDENT! all spaces will end up in the test line
-        "The first header line\nA line with partial comment # this is comment\n\
+// DONT INDENT! all spaces will end up in the test line
+"The first header line\nA line with partial comment # this is comment\n\
 # Complete comment line\n\n"
         ) == 0 );
 }
@@ -249,8 +249,8 @@ BOOST_AUTO_TEST_CASE(test_replaceElements_replace)
 
     // Check if the results match the expected result.
     BOOST_CHECK( filteredData.compare(
-        // DONT INDENT! all spaces will end up in the test line
-        "The first header line\nA line with partial comment # this is comment\n\
+// DONT INDENT! all spaces will end up in the test line
+"The first header line\nA line with partial comment # this is comment\n\
 # Complete comment line\n-foobar-\n"
         ) == 0 );
 }
