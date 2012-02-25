@@ -30,10 +30,10 @@ set(BASICSDIR_HEADERS
 
 # Add static libraries.
 add_library(tudat_core_basics STATIC ${BASICSDIR_SOURCES} ${BASICSDIR_HEADERS})
-setup_tudat_library_target(tudatCore_basics "${SRCROOT}${BASICSDIR}")
+setup_tudat_library_target(tudat_core_basics "${SRCROOT}${BASICSDIR}")
 setup_headers("${BASICSDIR_HEADERS}" "${BASICSDIR}")
 
 # Add unit tests.
 add_executable(test_TestMacros "${SRCROOT}${BASICSDIR}/UnitTests/unitTestTestMacros.cpp")
 setup_custom_test_program(test_TestMacros "${SRCROOT}${BASICSDIR}")
-target_link_libraries(test_TestMacros tudatCore_basics ${Boost_LIBRARIES})
+target_link_libraries(test_TestMacros tudat_core_basics ${Boost_LIBRARIES})
