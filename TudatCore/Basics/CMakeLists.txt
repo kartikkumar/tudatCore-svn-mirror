@@ -29,7 +29,7 @@ set(BASICSDIR_HEADERS
 )
 
 # Add static libraries.
-add_library(tudatCore_basics STATIC ${BASICSDIR_SOURCES} ${BASICSDIR_HEADERS})
+add_library(tudat_core_basics STATIC ${BASICSDIR_SOURCES} ${BASICSDIR_HEADERS})
 setup_tudat_library_target(tudatCore_basics "${SRCROOT}${BASICSDIR}")
 setup_headers("${BASICSDIR_HEADERS}" "${BASICSDIR}")
 
