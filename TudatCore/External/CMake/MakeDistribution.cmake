@@ -14,7 +14,7 @@
  #      120210    B. Tong Minh      File created
  #
  #    This file defines the install target to create a distribution of Tudat Core, Eigen and Boost.
- #/
+ #
 
 if(NOT TUDAT_CORE_DISTRIBUTION_PATH)
     set(TUDAT_CORE_DISTRIBUTION_PATH "${CODEROOT}/dist/core")

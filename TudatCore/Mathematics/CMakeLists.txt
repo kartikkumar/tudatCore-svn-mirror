@@ -17,7 +17,7 @@
  #
  #    References
  #
- #/
+ #
 
 # Set the main sub-directories
 set(BASICMATHEMATICSDIR "${MATHEMATICSDIR}/BasicMathematics")
