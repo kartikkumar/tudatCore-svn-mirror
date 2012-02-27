@@ -33,7 +33,7 @@ namespace mathematics
 //! Constant E = exp(1) \f$\approx\f$ 2.71828.
 /*!
  * The constant E is base of the natural logarithm, and is also known as Napier's constant.
- * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/e.html
+ * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/e.html.
  */
 const static double E = std::exp( 1.0 );
 
@@ -42,15 +42,15 @@ const static double E = std::exp( 1.0 );
  * The golden ratio, also known as the divine proportion, golden mean, or golden section, is a 
  * number often encountered when taking the ratios of distances in simple geometric figures such as 
  * the pentagon, pentagram, decagon and dodecahedron.
- * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/GoldenRatio.html
+ * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/GoldenRatio.html.
  */
 const static double GOLDEN_RATIO = 0.5 * ( 1.0 + std::sqrt( 5.0 ) );
 
 //! The constant PI \f$\approx\f$ 3.14159.
 /*!
  * The constant PI, denoted \f$\pi\f$, is a real number defined as the ratio of a circle's circumference
- * C to its diameter, d = 2r
- * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/Pi.html
+ * C to its diameter, d = 2r.
+ * \sa Wolfram MathWorld, Constant: http://mathworld.wolfram.com/Pi.html.
  */
 #ifdef M_PI
     const static double PI = M_PI;

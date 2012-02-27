@@ -26,6 +26,7 @@
  *
  */
 
+#include <cassert>
 #include <cmath>
 #include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
 

@@ -24,13 +24,6 @@
 #ifndef TUDAT_CORE_LINEAR_ALGEBRA_H
 #define TUDAT_CORE_LINEAR_ALGEBRA_H
 
-// Notice that coefficient access methods in Eigen have assertions checking the ranges.
-// So if you do a lot of coefficient access, these assertions can have an important cost.
-// If you want to save cost, define EIGEN_NO_DEBUG, and it won't check assertions.
-//#ifndef EIGEN_NO_DEBUG
-//#define EIGEN_NO_DEBUG
-//#endif
-
 #include <Eigen/Core>
 
 namespace tudat

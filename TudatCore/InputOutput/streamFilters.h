@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef TUDAT_CORE_STREAMFILTERS_H
-#define TUDAT_CORE_STREAMFILTERS_H
+#ifndef TUDAT_CORE_STREAM_FILTERS_H
+#define TUDAT_CORE_STREAM_FILTERS_H
 
 #include <boost/iostreams/filter/line.hpp>
 #include <boost/iostreams/device/back_inserter.hpp>
@@ -229,4 +229,4 @@ private:
 } // namespace input_output
 } // namespace tudat
 
-#endif // TUDAT_CORE_STREAMFILTERS_H
+#endif // TUDAT_CORE_STREAM_FILTERS_H

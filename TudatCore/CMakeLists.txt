@@ -25,7 +25,6 @@
  #
  #    References
  #
- #
 
 # Specify minimum CMake version required to compile Tudat.
 cmake_minimum_required( VERSION 2.6 )

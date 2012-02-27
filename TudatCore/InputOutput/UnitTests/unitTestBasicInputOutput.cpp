@@ -40,7 +40,8 @@ BOOST_AUTO_TEST_CASE( test_getRootPath )
 
     // If using a TUDAT_CORE_CUSTOM_ROOT_PATH define, check if it matches the macro value.
     #ifdef TUDAT_CORE_CUSTOM_ROOT_PATH
-        BOOST_CHECK(std::string( TUDAT_CORE_CUSTOM_ROOT_PATH ).compare( tio::getCoreRootPath( ) == 0 );
+        BOOST_CHECK( std::string( TUDAT_CORE_CUSTOM_ROOT_PATH ).compare(
+                         tio::getCoreRootPath( ) == 0 );
     #endif
 }
 

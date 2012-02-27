@@ -44,12 +44,12 @@
 #include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
 #include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
-using tudat::mathematics::PI;
-
 namespace tudat
 {
 namespace unit_tests
 {
+
+using tudat::mathematics::PI;
 
 //! Test suite for coordinate conversion functions.
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )

@@ -41,11 +41,6 @@
 // Temporary notes (move to class/function doxygen):
 // At the moment, not all conversion routines are test both ways. This
 // should be modified in a next version.
-// 
-// Test runs code and verifies result against expected value.
-// If the tested code is erroneous, the test function returns a boolean
-// true; if the code is correct, the function returns a boolean false.
-// 
 
 #define BOOST_TEST_MAIN
 

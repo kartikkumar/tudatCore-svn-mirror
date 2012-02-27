@@ -36,9 +36,9 @@
 /*!
  * When a declaration is marked as deprecated, it should be avoided, as most likely it performs 
  * something unwanted, superseded by another functionality or marked for removal in a future a 
- * release. The user should check where the deprecation warning comes from in order to get information
- * from the developer on how to resolve the warning. Commonly one should use another, recommended
- * function or alternative code block.
+ * release. The user should check where the deprecation warning comes from in order to get
+ * information from the developer on how to resolve the warning. Commonly one should use another,
+ * recommended function or alternative code block.
  *
  * Snippets:
  * TUDAT_DEPRECATED("Deprecated function!", void f() );
@@ -47,9 +47,10 @@
  *
  * Example:
  * //! Do something. 
- * // Depricated; use Foo::NewFunc(int, float) instead.
+ * // Deprecated; use Foo::NewFunc(int, float) instead.
  * // \see Foo::NewFunc(int, float)
- * TUDAT_DEPRECATED("Depricated, you should use Foo::NewFunc(int, float) instead.", void OldFunc(int a, float b));
+ * TUDAT_DEPRECATED("Deprecated, you should use Foo::NewFunc(int, float) instead.",
+ *                   void OldFunc(int a, float b));
  *
  * //! Do something better
  * void NewFunc(int a, double b);
@@ -59,10 +60,10 @@
  * \param expression The expression which has to be deprecated.
  */
 #ifdef __GNUC__
-#define TUDAT_DEPRECATED(message, expression) expression __attribute__ ((deprecated(message)))
-#elif defined(_MSC_VER)
-#define TUDAT_DEPRECATED(message, expression) __declspec(deprecated(message)) expression
+#define TUDAT_DEPRECATED( message, expression ) expression __attribute__ ( ( deprecated( message ) ) )
+#elif defined( _MSC_VER )
+#define TUDAT_DEPRECATED( message, expression ) __declspec( deprecated( message ) ) expression
 #else
-#pragma message("WARNING: You need to implement DEPRECATED for this compiler")
-#define TUDAT_DEPRECATED(message, expression) expression
+#pragma message( "WARNING: You need to implement DEPRECATED for this compiler" )
+#define TUDAT_DEPRECATED( message, expression ) expression
 #endif

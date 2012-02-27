@@ -216,7 +216,7 @@ test_suite* init_unit_test_suite( int argc, char* argv[] )
 
     // Make sure we have a BOOST_VERSION
     #ifndef BOOST_VERSION
-        // Mark boost version as an old boost version 1_45 or prior
+        // Mark boost version as an old boost version 1_45 or prior.
         #define BOOST_VERSION 104500
     #endif // BOOST_VERSION
 

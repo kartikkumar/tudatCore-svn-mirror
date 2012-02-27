@@ -15,7 +15,6 @@
  #
  #    References
  #
- #
 
 # Add source files.
 set(NUMERICALINTEGRATORS_SOURCES

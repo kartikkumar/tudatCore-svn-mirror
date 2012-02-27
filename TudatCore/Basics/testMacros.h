@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TUDAT_CORE_TESTMACROS_H
-#define TUDAT_CORE_TESTMACROS_H
+#ifndef TUDAT_CORE_TEST_MACROS_H
+#define TUDAT_CORE_TEST_MACROS_H
 
 // Include Eigen for the matrix operations, format to generate a fancy error message and unit_test
 // to delegate the actual tests to.
@@ -103,4 +103,4 @@
 }
 #endif
 
-#endif // TUDAT_CORE_TESTMACROS_H
+#endif // TUDAT_CORE_TEST_MACROS_H

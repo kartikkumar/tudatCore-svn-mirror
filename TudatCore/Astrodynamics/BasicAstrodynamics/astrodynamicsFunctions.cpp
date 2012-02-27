@@ -24,12 +24,12 @@
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 #include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
-using tudat::mathematics::PI;
-
 namespace tudat
 {
 namespace astrodynamics
 {
+
+using tudat::mathematics::PI;
 
 //! Compute Kepler orbital period.
 double computeKeplerOrbitalPeriod( const double semiMajorAxis,

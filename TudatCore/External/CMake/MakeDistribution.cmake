@@ -20,24 +20,24 @@ if(NOT TUDAT_CORE_DISTRIBUTION_PATH)
     set(TUDAT_CORE_DISTRIBUTION_PATH "${CODEROOT}/dist/core")
 endif(NOT TUDAT_CORE_DISTRIBUTION_PATH)
 
-# Slash normalization for Windows
+# Slash normalization for Windows.
 string(REPLACE "\\" "/" EIGEN3_INCLUDE_DIR_NORMALIZED "${EIGEN3_INCLUDE_DIR}")
 string(REPLACE "\\" "/" Boost_INCLUDE_DIRS_NORMALIZED "${Boost_INCLUDE_DIRS}")
 
-# Install the Tudat Core static library
+# Install the Tudat Core static library.
 install(TARGETS tudat_core
     ARCHIVE DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/lib"
 )
-# Install the Tudat Core header files
+# Install the Tudat Core header files.
 install(DIRECTORY "${SRCROOT}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/TudatCore"
         FILES_MATCHING PATTERN "*.h"
 )
-# Install Eigen
+# Install Eigen.
 install(DIRECTORY "${EIGEN3_INCLUDE_DIR_NORMALIZED}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/eigen3"
 )
-# Install Boost
+# Install Boost.
 install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost"
 )
@@ -50,12 +50,12 @@ install(DIRECTORY "${Boost_LIBRARY_DIRS}/"
             PATTERN "*.so" EXCLUDE
             PATTERN "*.so.*" EXCLUDE
 )
-# Install the environment file
+# Install the environment file.
 install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
 )
 
-# Generate the versions file
+# Generate the versions file.
 install(CODE "file(WRITE \"${TUDAT_CORE_DISTRIBUTION_PATH}/Versions.txt\"
     \"Packaged library versions:
 * Boost version: ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}
