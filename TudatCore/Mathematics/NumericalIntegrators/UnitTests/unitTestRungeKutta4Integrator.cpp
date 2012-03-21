@@ -17,6 +17,7 @@
  *      120127    B. Tong Minh      Adapted for new Tudat core RK4 integrator.
  *      120207    K. Kumar          Adapted to Boost unit test framework.
  *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable().
+ *      120321    K. Kumar          Updated to use new Burden and Faires benchmark function.
  *
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
@@ -214,11 +215,12 @@ BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
     // Case 5: test with an example from Burden and Faires.
     {
         BOOST_CHECK( testValidityOfRungeKutta4Integrator(
-                         benchmarkFunctions[ BurdenAndFaires ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ BurdenAndFaires ].intervalStart_,
-                         benchmarkFunctions[ BurdenAndFaires ].intervalEnd_,  0.2,
-                         benchmarkFunctions[ BurdenAndFaires ].initialState_,
-                         benchmarkFunctions[ BurdenAndFaires ].finalState_, 1.0e-8 ) );
+                         benchmarkFunctions[ BurdenAndFairesRungeKutta4 ]
+                         .pointerToStateDerivativeFunction_,
+                         benchmarkFunctions[ BurdenAndFairesRungeKutta4 ].intervalStart_,
+                         benchmarkFunctions[ BurdenAndFairesRungeKutta4 ].intervalEnd_,  0.2,
+                         benchmarkFunctions[ BurdenAndFairesRungeKutta4 ].initialState_,
+                         benchmarkFunctions[ BurdenAndFairesRungeKutta4 ].finalState_, 1.0e-8 ) );
     }
 
     // Case 6: test if difference in type between state and state derivative works.

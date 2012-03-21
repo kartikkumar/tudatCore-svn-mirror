@@ -13,7 +13,6 @@
  *      YYMMDD    Author            Comment
  *      100906    S. Billemont      First creation of code.
  *
- *
  *    References
  *      Wolfram MathWorld, Constant:
  *          http://mathworld.wolfram.com/Constant.html (retrieved 2012/02/08).
