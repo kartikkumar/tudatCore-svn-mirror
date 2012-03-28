@@ -16,8 +16,6 @@
  *                                  "BurdenAndFaires", "InverseExponential" to
  *                                  "BackwardsExponential".
  *      120213    K. Kumar          Updated variable-naming.
- *      120321    K. Kumar          Renamed and added benchmark functions from
- *                                  (Burden and Faires, 2001).
  *
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
@@ -154,17 +152,14 @@ Eigen::VectorXd computeBurdenAndFairesStateDerivative( const double time,
     return stateDerivative;
 }
 
-//! Enum of available benchmark functions.
+//! Enum of available benchmark functions
 enum BenchmarkFunctions
 {
     Zero,
     Constant,
     Exponential,
     BackwardsExponential,
-    BurdenAndFairesEuler,
-    BurdenAndFairesRungeKutta4,
-    BurdenAndFairesRungeKuttaFehlberg,
-    BurdenAndFairesBulirschStoer
+    BurdenAndFaires
 };
 
 //! Get all defined benchmark functions.
@@ -182,7 +177,7 @@ std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
                     &computeConstantStateDerivative, 0.0, Eigen::VectorXd::Constant( 3, 0.6 ),
                     3.0, Eigen::VectorXd::Constant( 3, 3.6 ) );
 
-        benchmarkFunctions[ Exponential ] = BenchmarkFunction(
+        benchmarkFunctions[Exponential] = BenchmarkFunction(
                     &computeExponentialStateDerivative, 0.0, Eigen::VectorXd::Constant( 1, 0.7 ),
                     20.0, std::exp( 20.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ) );
 
@@ -191,25 +186,10 @@ std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
                     std::exp( 4.0 ) * Eigen::VectorXd::Constant( 1, 0.7 ),
                     0.0, Eigen::VectorXd::Constant( 1, 0.7 ) );
 
-        benchmarkFunctions[ BurdenAndFairesEuler ] = BenchmarkFunction(
-                    &computeBurdenAndFairesStateDerivative,
-                    0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
-                    2.0, Eigen::VectorXd::Constant( 1, 4.8657845 ) );
-
-        benchmarkFunctions[ BurdenAndFairesRungeKutta4 ] = BenchmarkFunction(
+        benchmarkFunctions[ BurdenAndFaires ] = BenchmarkFunction(
                     &computeBurdenAndFairesStateDerivative,
                     0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
                     2.0, Eigen::VectorXd::Constant( 1, 5.3053630 ) );
-
-        benchmarkFunctions[ BurdenAndFairesRungeKuttaFehlberg ] = BenchmarkFunction(
-                    &computeBurdenAndFairesStateDerivative,
-                    0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
-                    2.0, Eigen::VectorXd::Constant( 1, 5.3054896 ) );
-
-        benchmarkFunctions[ BurdenAndFairesBulirschStoer ] = BenchmarkFunction(
-                    &computeBurdenAndFairesStateDerivative,
-                    0.0, Eigen::VectorXd::Constant( 1, 0.5 ),
-                    2.0, Eigen::VectorXd::Constant( 1, 5.3054719505 ) );
     }
 
     return benchmarkFunctions;
