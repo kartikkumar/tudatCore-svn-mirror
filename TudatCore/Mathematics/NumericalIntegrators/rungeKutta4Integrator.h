@@ -15,6 +15,8 @@
  *      120128    D. Dirkx          Minor changes during code check.
  *      120207    K. Kumar          Minor comment corrections.
  *      120213    K. Kumar          Updated getCurrentInterval() to getIndependentVariable().
+ *      120424    K. Kumar          Added missing this-pointer, to satisfy requirement for
+ *                                  accessing base class members.
  *
  *    References
  *
@@ -72,9 +74,12 @@ public:
      */
     RungeKutta4Integrator( const StateDerivativeFunction& stateDerivativeFunction,
                            const IndependentVariableType intervalStart,
-                           const StateType& initialState ) :
-        Base( stateDerivativeFunction ), currentIndependentVariable_( intervalStart ),
-        currentState_( initialState ), lastIndependentVariable_( intervalStart ) { }
+                           const StateType& initialState )
+        : Base( stateDerivativeFunction ),
+          currentIndependentVariable_( intervalStart ),
+          currentState_( initialState ),
+          lastIndependentVariable_( intervalStart )
+    { }
 
     //! Get step size of the next step.
     /*!
@@ -112,18 +117,18 @@ public:
         lastState_ = currentState_;
 
         // Calculate k1-k4.
-        const StateDerivativeType k1 = stepSize * stateDerivativeFunction_(
+        const StateDerivativeType k1 = stepSize * this->stateDerivativeFunction_(
                     currentIndependentVariable_, currentState_ );
 
-        const StateDerivativeType k2 = stepSize * stateDerivativeFunction_(
+        const StateDerivativeType k2 = stepSize * this->stateDerivativeFunction_(
                     currentIndependentVariable_ + stepSize / 2.0,
                     static_cast< StateType >( currentState_ + k1 / 2.0 ) );
 
-        const StateDerivativeType k3 = stepSize * stateDerivativeFunction_(
+        const StateDerivativeType k3 = stepSize * this->stateDerivativeFunction_(
                     currentIndependentVariable_ + stepSize / 2.0,
                     static_cast< StateType >( currentState_ + k2 / 2.0 ) );
 
-        const StateDerivativeType k4 = stepSize * stateDerivativeFunction_(
+        const StateDerivativeType k4 = stepSize * this->stateDerivativeFunction_(
                     currentIndependentVariable_ + stepSize,
                     static_cast< StateType >( currentState_ + k3 ) );
 
