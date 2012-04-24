@@ -27,6 +27,7 @@
  *      120206    K. Kumar          Added wrapper functions for orbital element conversions when
  *                                  eccentricity is not known a priori (if-statement to choose
  *                                  between elliptical and hyperbolic orbits).
+ *      120422    K. Kumar          Added Doxygen notes for Cartesian -> Keplerian conversion.
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -34,6 +35,8 @@
  *      Mengali, G., Quarta, A.A. Fondamenti di meccanica del volo spaziale.
  *      Wertz, J.R. Mission Geometry; Orbit and Constellation Design and Management, Spacecraft
  *          Orbit and Attitude Systems, Microcosm Press, Kluwer Academic Publishers, 2001.
+ *      Advanced Concepts Team, ESA. Keplerian Toolbox, http://sourceforge.net/projects/keptoolbox,
+ *          last accessed: 21st April, 2012.
  *
  */
 
@@ -60,7 +63,7 @@ namespace orbital_element_conversions
 enum KeplerianElementVectorIndices
 {
     semiMajorAxisIndex, eccentricityIndex, inclinationIndex, argumentOfPeriapsisIndex,
-    longitudeOfAscendingNodeIndex, trueAnomalyIndex
+    longitudeOfAscendingNodeIndex, trueAnomalyIndex, semiLatusRectumIndex = 0
 };
 
 //! Cartesian element vector indices.
@@ -120,12 +123,23 @@ Eigen::VectorXd convertKeplerianToCartesianElements(
  *          keplerianElements( 3 ) = argument of periapsis,                                   [rad]
  *          keplerianElements( 4 ) = longitude of ascending node,                             [rad]
  *          keplerianElements( 5 ) = true anomaly.                                            [rad]
- *          WARNING: If eccentricity is 1.0 within machine precision,
- *          keplerianElements( 0 ) = semi-latus rectum.
- *          WARNING: If eccentricity is 0.0 within machine precision,
- *          argument of periapsis is set to 0.0.
- *          WARNING: If inclination is 0.0 within machine precision,
- *          longitude of ascending node is set to 0.0.
+ *          WARNING: If eccentricity is 1.0 within 1.0e-15,
+ *          keplerianElements( 0 ) = semi-latus rectum, since the orbit is parabolic.
+ *          WARNING: If eccentricity is 0.0 within 1.0e-15,
+ *          argument of periapsis is set to 0.0, since the orbit is circular.
+ *          WARNING: If inclination is 0.0 within 1.0e-15,
+ *          longitude of ascending node is set to 0.0, since the orbit is equatorial.
+ *          The tolerance 1.0e-15 is hard-coded, as it should not be changed for performance
+ *          reasons, unless required for specific scenarios. In those cases, users are expected
+ *          to update the internal tolerance to the required value. Below these tolerance values
+ *          for eccentricity and inclination, the orbit is considered to be a limit case.
+ *          Essentially, special solutions are then used for parabolic, circular inclined,
+ *          non-circular equatorial, and circular equatorial orbits. These special solutions are
+ *          required because of singularities in the classical Keplerian elements. If high
+ *          precision is required near these singularities, users are encouraged to consider using
+ *          other elements, such as modified equinoctial elements. It should be noted that
+ *          modified equinoctial elements also suffer from singularities, but not for zero
+ *          eccentricity and inclination.
  */
 Eigen::VectorXd convertCartesianToKeplerianElements(
         const Eigen::VectorXd& cartesianElements, const double centralBodyGravitationalParameter );
