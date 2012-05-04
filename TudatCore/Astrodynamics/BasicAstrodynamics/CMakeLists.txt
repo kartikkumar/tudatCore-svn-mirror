@@ -37,7 +37,6 @@ set(BASICASTRODYNAMICS_HEADERS
 # Add static libraries.
 add_library(tudat_core_basic_astrodynamics STATIC ${BASICASTRODYNAMICS_SOURCES} ${BASICASTRODYNAMICS_HEADERS})
 setup_tudat_library_target(tudat_core_basic_astrodynamics "${SRCROOT}${BASICASTRODYNAMICSDIR}")
-setup_headers("${BASICASTRODYNAMICS_HEADERS}" "${BASICASTRODYNAMICSDIR}")
 
 # Add unit tests.
 add_executable(test_PhysicalConstants "${SRCROOT}${BASICASTRODYNAMICSDIR}/UnitTests/unitTestPhysicalConstants.cpp")

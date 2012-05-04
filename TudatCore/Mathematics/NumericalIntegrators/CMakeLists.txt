@@ -31,7 +31,6 @@ set(NUMERICALINTEGRATORS_HEADERS
 # Add static libraries.
 add_library(tudat_core_numerical_integrators STATIC ${NUMERICALINTEGRATORS_SOURCES} ${NUMERICALINTEGRATORS_HEADERS})
 setup_tudat_library_target(tudat_core_numerical_integrators "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
-setup_headers("${NUMERICALINTEGRATORS_HEADERS}" "${NUMERICALINTEGRATORSDIR}")
 
 # Add unit tests.
 add_executable(test_NumericalIntegrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrator.cpp")

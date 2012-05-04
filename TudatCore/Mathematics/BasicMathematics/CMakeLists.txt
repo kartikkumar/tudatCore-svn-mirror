@@ -34,7 +34,6 @@ set(BASICMATHEMATICS_HEADERS
 # Add static libraries.
 add_library(tudat_core_basic_mathematics STATIC ${BASICMATHEMATICS_SOURCES} ${BASICMATHEMATICS_HEADERS})
 setup_tudat_library_target(tudat_core_basic_mathematics "${SRCROOT}${BASICMATHEMATICSDIR}")
-setup_headers("${BASICMATHEMATICS_HEADERS}" "${BASICMATHEMATICSDIR}")
 
 # Add unit tests.
 add_executable(test_CoordinateConversions "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp")

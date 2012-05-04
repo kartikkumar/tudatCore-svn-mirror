@@ -22,6 +22,7 @@
  #      120127    K. Kumar          Adapted for Tudat Core.
  #      120202    K. Kumar          Updated path to TudatCore; added MSVC static runtime fix for
  #                                  use of Boost libraries.
+ #      120504    K. Kumar          Removed superfluous include sub-directory and macro.
  #
  #    References
  #
@@ -51,7 +52,7 @@ if (WIN32)
   if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
     # Because we are using static boost libraries, with static runtime, we need to force MSVC to
-    # also use static runtime: (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace)
+    # also use static runtime: (from http://www.cmake.org/Wiki/CMake_FAQ#Dynamic_Replace).
     foreach(flag_var
           CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
           CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
@@ -61,18 +62,15 @@ if (WIN32)
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
     set(LIBROOT "${CODEROOT}/lib")
-    set(INCLUDEROOT "${SRCROOT}/include")
     set(BINROOT "${CODEROOT}/bin")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
     set(LIBROOT "${CODEROOT}/lib")
-    set(INCLUDEROOT "${SRCROOT}/include")
     set(BINROOT "${CODEROOT}/bin")
   endif()
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
   set(LIBROOT "${CODEROOT}/lib")
-  set(INCLUDEROOT "${SRCROOT}/include")
   set(BINROOT "${CODEROOT}/bin")
 endif()
 
@@ -109,13 +107,7 @@ macro(setup_custom_test_program target_name CUSTOM_OUTPUT_PATH)
   add_test("${target_name}" "${BINROOT}/unit_tests/${target_name}")
 endmacro(setup_custom_test_program)
 
-macro(setup_headers HEADER_FILES HEADER_PATH)
-    foreach(CURRENT_HEADER_FILE ${HEADER_FILES})
-      install(FILES "${CURRENT_HEADER_FILE}" DESTINATION "${INCLUDEROOT}${HEADER_PATH}")
-    endforeach(CURRENT_HEADER_FILE)
-endmacro(setup_headers)
-
-# Set the main sub-directories
+# Set the main sub-directories.
 set(BASICSDIR "/Basics")
 set(INPUTOUTPUTDIR "/InputOutput")
 set(ASTRODYNAMICSDIR "/Astrodynamics")

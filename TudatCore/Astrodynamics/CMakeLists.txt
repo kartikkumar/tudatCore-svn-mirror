@@ -38,4 +38,3 @@ get_target_property(BASICASTRODYNAMICSSOURCES tudat_core_basic_astrodynamics SOU
 # Add static libraries.
 add_library(tudat_core_astrodynamics STATIC ${ASTRODYNAMICS_SOURCES} ${ASTRODYNAMICS_HEADERS} ${BASICASTRODYNAMICSSOURCES})
 setup_tudat_library_target(tudat_core_astrodynamics "${SRCROOT}${ASTRODYNAMICSDIR}")
-setup_headers("${ASTRODYNAMICS_HEADERS}" "${ASTRODYNAMICSDIR}")

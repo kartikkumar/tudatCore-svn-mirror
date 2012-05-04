@@ -41,4 +41,3 @@ get_target_property(NUMERICALINTEGRATORSSOURCES tudat_core_numerical_integrators
 # Add static libraries.
 add_library(tudat_core_mathematics STATIC ${MATHEMATICS_SOURCES} ${MATHEMATICS_HEADERS} ${BASICMATHEMATICSSOURCES} ${NUMERICALINTEGRATORSSOURCES})
 setup_tudat_library_target(tudat_core_mathematics "${SRCROOT}${MATHEMATICSDIR}")
-setup_headers("${MATHEMATICS_HEADERS}" "${MATHEMATICSDIR}")

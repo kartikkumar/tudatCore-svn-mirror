@@ -1,4 +1,4 @@
- #    Copyright (c) 2012 Delft University of Technology.
+ #    Copyright (c) 2010-2012 Delft University of Technology.
  #
  #    This software is protected by national and international copyright.
  #    Any unauthorized use, reproduction or modification is unlawful and
@@ -106,10 +106,12 @@ endif()
 install(TARGETS tudat_core
     ARCHIVE DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/lib"
 )
-# Install the Tudat Core header files.
+
+# Install the Tudat Core project tree.
 install(DIRECTORY "${SRCROOT}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/TudatCore"
-        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".DS_STORE" EXCLUDE
+        PATTERN "CMakeLists.txt.user" EXCLUDE
 )
 # Install Eigen.
 install(DIRECTORY "${EIGEN3_INCLUDE_DIR_NORMALIZED}/"
