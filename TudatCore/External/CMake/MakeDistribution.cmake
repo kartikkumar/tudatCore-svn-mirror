@@ -37,13 +37,12 @@ string(REGEX MATCH "-mt" BOOST_WITH_MT "${BOOST_ABI_STRING}")
 
 # Try extract the version.
 string(REGEX MATCH "([0-9_]*)[.]" BOOST_VERSION "${BOOST_ABI_STRING}")
+set(BOOST_VERSION ${CMAKE_MATCH_1})
 if(NOT BOOST_VERSION)
     # Library name did not contain a version string, so the part before the extension is the ABI tag.
     string(REGEX MATCH "([a-z]*)[.]" BOOST_ABI_TAG "${BOOST_ABI_STRING}")
     set(BOOST_ABI_TAG ${CMAKE_MATCH_1})
 else()
-    set(BOOST_VERSION ${CMAKE_MATCH_1})
-
     # Library name did contain version string, so the part before the version string is the ABI tag.
     string(REGEX MATCH "([a-z]*)-[0-9_]*[.]" BOOST_ABI_TAG "${BOOST_ABI_STRING}")
     set(BOOST_ABI_TAG ${CMAKE_MATCH_1})
