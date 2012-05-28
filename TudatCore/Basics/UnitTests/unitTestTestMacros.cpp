@@ -1,13 +1,26 @@
-/*    Copyright (c) 2010-2012 Delft University of Technology.
+/*    Copyright (c) 2010-2012, Delft University of Technology
+ *    All rights reserved.
  *
- *    This software is protected by national and international copyright.
- *    Any unauthorized use, reproduction or modification is unlawful and
- *    will be prosecuted. Commercial and non-private application of the
- *    software in any form is strictly prohibited unless otherwise granted
- *    by the authors.
+ *    Redistribution and use in source and binary forms, with or without modification, are
+ *    permitted provided that the following conditions are met:
+ *      - Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
+ *      - Redistributions in binary form must reproduce the above copyright notice, this list of
+ *        conditions and the following disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *      - Neither the name of the Delft University of Technology nor the names of its contributors
+ *        may be used to endorse or promote products derived from this software without specific
+ *        prior written permission.
  *
- *    The code is provided without any warranty; without even the implied
- *    warranty of merchantibility or fitness for a particular purpose.
+ *    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+ *    OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *    COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *    GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ *    AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ *    OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *    Changelog
  *      YYMMDD    Author            Comment
@@ -44,6 +57,9 @@
  */
 #define GENERATE_PATTERN 0
 
+#include <fstream>
+#include <iostream>
+
 #include <boost/test/unit_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 #include <boost/test/output_test_stream.hpp>
@@ -52,9 +68,6 @@
 #include <boost/test/output/compiler_log_formatter.hpp>
 #include <boost/test/framework.hpp>
 #include <boost/test/detail/suppress_warnings.hpp>
-
-#include <fstream>
-#include <iostream>
 
 #include <Eigen/Core>
 
@@ -83,7 +96,7 @@ struct logMessageFormatter : public output::compiler_log_formatter
 //! Location of file which contains the exact output which has to be produced for test to succeed.
 std::string match_file_name;
 
-//! Location to save the output of this test
+//! Location to save the output of this test.
 std::string save_file_name( "unitTest_testMacros.pattern" );
 
 //! Get the output test stream, stream of the test output to the test output content file
@@ -231,7 +244,8 @@ test_suite* init_unit_test_suite( int argc, char* argv[ ] )
     match_file_name = tudat::input_output::getCoreRootPath( ) +
             "Basics/UnitTests/unitTestTestMacros.pattern";
 
-    // Macro setting the correct message formatter and output stream for generating the patern file
+    // Macro setting the correct message formatter and output stream for generating the pattern
+    // file.
     #if GENERATE_PATTERN
         // Bind a new log formatter and output the pattern file.
         // TODO, find a nice way without "new".
