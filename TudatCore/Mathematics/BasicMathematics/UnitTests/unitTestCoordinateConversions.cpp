@@ -42,8 +42,12 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
  *                                  BOOST_CHECK_SMALL for unit test comparisons.
+ *      120716    D. Dirkx          Revised and updated unit tests to cover bug in
+ *                                  convertCartesianToSpherical().
  *
  *    References
+ *      Stewart, J. Calculus: Early Transcendentals, Fourth Edition, Brooks/Cole Publishing
+ *          Company, Pacific Grove, CA, USA, 1999.
  *
  */
 
@@ -51,6 +55,7 @@
 
 #include <cmath>
 #include <limits>
+#include <iostream>
 
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
@@ -59,13 +64,13 @@
 
 #include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
 #include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
+#include "TudatCore/Basics/testMacros.h"
 
 namespace tudat
 {
 namespace unit_tests
 {
 
-using tudat::mathematics::PI;
 
 //! Test suite for coordinate conversion functions.
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
@@ -73,73 +78,72 @@ BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
 //! Test if spherical-to-Cartesian conversion is working correctly.
 BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 {
-    using tudat::mathematics::coordinate_conversions::convertSphericalToCartesian;
+    using std::sqrt;
+    using tudat::mathematics::PI;
+    using tudat::mathematics::coordinate_conversions::convertSphericalToCartesian;    
     
-    // Test 1: Test conversion of: ( 0.0, 0.0, 0.0 ).
+    // Test 1: test conversion of: ( 0.0, 0.0, 0.0 ).
     {
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d::Zero( 3 );
-
-        Eigen::VectorXd cartesianCoordinates_( 3 );
+        Eigen::Vector3d sphericalCoordinates( 0.0, 0.0, 0.0 );
 
         // Convert spherical coordinates to Cartesian coordinates.
-        cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
+        Eigen::Vector3d cartesianCoordinates = convertSphericalToCartesian( sphericalCoordinates );
+
+        // Expected cartesian coordinates.
+        Eigen::Vector3d expectedCartesianCoordinates( 0.0, 0.0, 0.0 );
 
         // Check if converted Cartesian coordinates are correct.
-        BOOST_CHECK_SMALL( cartesianCoordinates_( 0 ), std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_SMALL( cartesianCoordinates_( 2 ), std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_BASE( cartesianCoordinates, expectedCartesianCoordinates )
+                BOOST_CHECK_SMALL( cartesianCoordinates.coeff( row, col ),
+                                   std::numeric_limits< double >::min( ) );
     }
 
-    // Test 2: Test conversion of: ( 2.0, 225, 225 ).
+    // Test 2: test conversion of: ( 1.0, pi/6, pi/6 ), from Stewart (2003), Exercise 12.7.15.
     {
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d(
-                    2.0, 225.0 / 180.0 * PI, 225.0 / 180.0 * PI );
-
-        Eigen::VectorXd cartesianCoordinates_( 3 );
+        Eigen::Vector3d sphericalCoordinates( 1.0, PI / 6.0, PI / 6.0 );
 
         // Convert spherical coordinates to Cartesian coordinates.
-        cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
+        Eigen::Vector3d cartesianCoordinates = convertSphericalToCartesian( sphericalCoordinates );
+
+        // Expected cartesian coordinates.
+        Eigen::Vector3d expectedCartesianCoordinates(
+                    sqrt( 3.0 ) / 4.0, 1.0 / 4.0, sqrt( 3.0 ) / 2.0 );
 
         // Check if converted Cartesian coordinates are correct.
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), 1.0,
-                                    std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), 1.0, 1.0e-15 );
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -std::sqrt( 2.0 ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
+                    cartesianCoordinates, expectedCartesianCoordinates, 1.0e-15 );
     }
 
-    // Test 3: Test conversion of: ( 2.0, -225, -225 ).
+    // Test 3: test conversion of: ( 2.0, pi/4, pi/3 ), from Stewart (2003), Exercise 12.7.17.
     {
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d(
-                    2.0, -225.0 / 180.0 * PI, -225.0 / 180.0 * PI );
-
-        Eigen::VectorXd cartesianCoordinates_( 3 );
+        Eigen::Vector3d sphericalCoordinates( 2.0, PI / 4.0, PI / 3.0 );
 
         // Convert spherical coordinates to Cartesian coordinates.
-        cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
+        Eigen::Vector3d cartesianCoordinates = convertSphericalToCartesian( sphericalCoordinates );
+
+        // Expected cartesian coordinates.
+        Eigen::Vector3d expectedCartesianCoordinates(
+                    0.5 * sqrt( 2.0 ), 0.5 * sqrt( 6.0 ), sqrt( 2.0 ) );
 
         // Check if converted Cartesian coordinates are correct.
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 0 ), -1.0,
-                                    std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 1 ), 1.0, 1.0e-15 );
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -std::sqrt( 2.0 ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( cartesianCoordinates, expectedCartesianCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 
-    // Test 4: Test conversion of: ( 2.0, 180, 180 ).
+    // Test 4: test conversion of: ( 2.0, pi/3, pi/4 , from Stewart (2003), Section 12.7,
+    //         Example 4.
     {
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::Vector3d( 2.0, PI, PI );
-
-        Eigen::VectorXd cartesianCoordinates_( 3 );
+        Eigen::Vector3d sphericalCoordinates( 2.0, PI / 3.0, PI / 4.0 );
 
         // Convert spherical coordinates to Cartesian coordinates.
-        cartesianCoordinates_ = convertSphericalToCartesian( sphericalCoordinates_ );
+        Eigen::Vector3d cartesianCoordinates = convertSphericalToCartesian( sphericalCoordinates );
+
+        // Expected cartesian coordinates.
+        Eigen::Vector3d expectedCartesianCoordinates( sqrt( 1.5 ), sqrt( 1.5 ), 1.0 );
 
         // Check if converted Cartesian coordinates are correct.
-        BOOST_CHECK_SMALL( cartesianCoordinates_( 0 ), 1.0e-15 );
-        BOOST_CHECK_SMALL( cartesianCoordinates_( 1 ), std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_CLOSE_FRACTION( cartesianCoordinates_( 2 ), -2.0,
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( cartesianCoordinates, expectedCartesianCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 }
 
@@ -151,95 +155,71 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     using std::pow;
     using std::sqrt;
     using tudat::mathematics::coordinate_conversions::convertCartesianToSpherical;
+    using tudat::mathematics::PI;
 
     // Test 1: Test conversion of: ( 0.0, 0.0, 0.0 ).
     {
-        Eigen::VectorXd cartesianCoordinates_ = Eigen::VectorXd::Zero( 3 );
+        Eigen::Vector3d cartesianCoordinates = Eigen::Vector3d::Zero( );
 
         // Expected vector in spherical coordinates.
-        Eigen::VectorXd expectedSphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
+        Eigen::Vector3d expectedSphericalCoordinates = Eigen::Vector3d::Zero( );
 
         // Result vector in spherical coordinates.
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
-
-        // Compute conversions.
-        sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
+        Eigen::Vector3d sphericalCoordinates = convertCartesianToSpherical( cartesianCoordinates );
 
         // Check if converted spherical coordinates are correct.
-        BOOST_CHECK_SMALL( sphericalCoordinates_.norm( ) - expectedSphericalCoordinates_.norm( ),
-                           std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( sphericalCoordinates, expectedSphericalCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 
-    // Test 2: Test conversion of: ( 2.0, 3.5, -4.1 ).
+    // Test 2: Test conversion of: ( 1.0, sqrt( 3 ), 2 * sqrt(3) ), from Stewart (2003),
+    // Exercise 12.7.19.
     {
-        Eigen::Vector3d cartesianCoordinates_ = Eigen::Vector3d( 2.0, 3.5, -4.1 );
+        Eigen::Vector3d cartesianCoordinates( 1.0, sqrt( 3 ), 2.0 * sqrt( 3 ) );
 
         // Expected vector in spherical coordinates.
-        Eigen::Vector3d expectedSphericalCoordinates_ = Eigen::Vector3d(
-                    sqrt( pow( cartesianCoordinates_( 0 ), 2.0 )
-                          + pow( cartesianCoordinates_( 1 ), 2.0 )
-                          + pow( cartesianCoordinates_( 2 ), 2.0 ) ),
-                    atan2( cartesianCoordinates_( 1 ), cartesianCoordinates_( 0 ) ),
-                    acos( cartesianCoordinates_( 2 ) / cartesianCoordinates_.norm( ) ) );
+        Eigen::Vector3d expectedSphericalCoordinates( 4.0, PI / 6.0, PI / 3.0 );
 
         // Result vector in spherical coordinates.
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
-
-        // Compute conversions.
-        sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
+        Eigen::Vector3d sphericalCoordinates = convertCartesianToSpherical( cartesianCoordinates );
 
         // Check if converted spherical coordinates are correct.
-        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
-                                    expectedSphericalCoordinates_.norm( ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( sphericalCoordinates, expectedSphericalCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 
-    // Test 3: Test conversion of: ( 5.2, -6.3, 0.0 ).
+    // Test 3: Test conversion of: ( 0.0, -1.0, -1.0 ), from Stewart (2003), Exercise 12.7.21.
     {
-        Eigen::Vector3d cartesianCoordinates_ = Eigen::Vector3d( 5.2, -6.3, 0.0 );
+        Eigen::Vector3d cartesianCoordinates( 0.0, -1.0, -1.0 );
 
         // Expected vector in spherical coordinates.
-        Eigen::Vector3d expectedSphericalCoordinates_ = Eigen::Vector3d(
-                    sqrt( pow( cartesianCoordinates_( 0 ), 2.0 )
-                          + pow( cartesianCoordinates_( 1 ), 2.0 )
-                          + pow( cartesianCoordinates_( 2 ), 2.0 ) ),
-                    atan2( cartesianCoordinates_( 1 ), cartesianCoordinates_( 0 ) ),
-                    acos( cartesianCoordinates_( 2 ) / cartesianCoordinates_.norm( ) ) );
+        Eigen::Vector3d expectedSphericalCoordinates( sqrt( 2.0 ), 3.0 * PI / 4.0, -PI / 2.0 );
 
         // Result vector in spherical coordinates.
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
+        Eigen::Vector3d sphericalCoordinates = Eigen::Vector3d::Zero( );
 
         // Compute conversions.
-        sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
+        sphericalCoordinates = convertCartesianToSpherical( cartesianCoordinates );
 
         // Check if converted spherical coordinates are correct.
-        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
-                                    expectedSphericalCoordinates_.norm( ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( sphericalCoordinates, expectedSphericalCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 
-    // Test 4: Test conversion of: ( 0.0, 12.2, -0.9 ).
+    // Test 4: Test conversion of: ( 0.0, 2 sqrt( 3 ), -2.0 ), from Stewart (2003), Section 12.7,
+    // Example 5.
     {
-        Eigen::Vector3d cartesianCoordinates_ = Eigen::Vector3d( 0.0, 12.2, -0.9 );
+        Eigen::Vector3d cartesianCoordinates( 0.0, 2.0 * sqrt( 3 ), -2.0 );
 
         // Expected vector in spherical coordinates.
-        Eigen::Vector3d expectedSphericalCoordinates_ = Eigen::Vector3d(
-                    sqrt( pow( cartesianCoordinates_( 0 ), 2.0 )
-                          + pow( cartesianCoordinates_( 1 ), 2.0 )
-                          + pow( cartesianCoordinates_( 2 ), 2.0 ) ),
-                    atan2( cartesianCoordinates_( 1 ), cartesianCoordinates_( 0 ) ),
-                    acos( cartesianCoordinates_( 2 ) / cartesianCoordinates_.norm( ) ) );
+        Eigen::Vector3d expectedSphericalCoordinates( 4.0, 2.0 * PI / 3.0, PI / 2.0 );
 
         // Result vector in spherical coordinates.
-        Eigen::VectorXd sphericalCoordinates_ = Eigen::VectorXd::Zero( 3 );
-
-        // Compute conversions.
-        sphericalCoordinates_ = convertCartesianToSpherical( cartesianCoordinates_ );
+        Eigen::VectorXd sphericalCoordinates = convertCartesianToSpherical( cartesianCoordinates );
 
         // Check if converted spherical coordinates are correct.
-        BOOST_CHECK_CLOSE_FRACTION( sphericalCoordinates_.norm( ),
-                                    expectedSphericalCoordinates_.norm( ),
-                                    std::numeric_limits< double >::epsilon( ) );
+        TUDAT_CHECK_MATRIX_CLOSE_FRACTION( sphericalCoordinates, expectedSphericalCoordinates,
+                                           std::numeric_limits< double >::epsilon( ) );
     }
 }
 

@@ -41,6 +41,7 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    D. Dirkx          First version branched from basic mathematics in Tudat Core.
  *      120127    K. Kumar          Minor comment edits.
+ *      120716    D. Dirkx          Fixed bug in else-case in convertCartesianToSpherical().
  *
  *    References
  *
@@ -99,10 +100,10 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
     // Else compute coordinates using trigonometric relationships.
     else
     {
-        convertedSphericalCoordinates_( 1 ) = std::atan2( cartesianCoordinates( 1 ),
-                                                          cartesianCoordinates( 0 ) );
-        convertedSphericalCoordinates_( 2 ) = std::acos( cartesianCoordinates( 2 )
+        convertedSphericalCoordinates_( 1 ) = std::acos( cartesianCoordinates( 2 )
                                                          / convertedSphericalCoordinates_( 0 ) );
+        convertedSphericalCoordinates_( 2 ) = std::atan2( cartesianCoordinates( 1 ),
+                                                          cartesianCoordinates( 0 ) );        
     }
 
     return convertedSphericalCoordinates_;
