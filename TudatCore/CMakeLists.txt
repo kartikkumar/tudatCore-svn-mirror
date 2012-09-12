@@ -36,6 +36,8 @@
  #      120202    K. Kumar          Updated path to TudatCore; added MSVC static runtime fix for
  #                                  use of Boost libraries.
  #      120504    K. Kumar          Removed superfluous include sub-directory and macro.
+ #      120913    K. Kumar          Added output message for build type and set default to
+ #                                  "Release".
  #
  #    References
  #
@@ -52,15 +54,17 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/External/CMake)
 # Set root-directory for code to current source directory.
 set(CODEROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
-# Define the basic input (trunk) and output (lib & include) directories.
+# Define the basic input (trunk).
 set(SRCROOT "${CODEROOT}/TudatCore")
 
-# Set default CMake build-type.
-set(CMAKE_BUILD_TYPE Release)
+# Set lib and bin directories where static libraries and unit tests are built.
+set(LIBROOT "${CODEROOT}/lib")
+set(BINROOT "${CODEROOT}/bin")
 
 # Set testing options based on platform.
 enable_testing()
 
+# Set platform-specific compiler flags.
 if (WIN32)
   if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /Ox /W3 /FC -D_SCL_SECURE_NO_WARNINGS")
@@ -74,17 +78,11 @@ if (WIN32)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
       endif(${flag_var} MATCHES "/MD")
     endforeach(flag_var)
-    set(LIBROOT "${CODEROOT}/lib")
-    set(BINROOT "${CODEROOT}/bin")
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-    set(LIBROOT "${CODEROOT}/lib")
-    set(BINROOT "${CODEROOT}/bin")
   endif()
 else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -g -Woverloaded-virtual -Wold-style-cast -Wnon-virtual-dtor")
-  set(LIBROOT "${CODEROOT}/lib")
-  set(BINROOT "${CODEROOT}/bin")
 endif()
 
 # Load user specific settings. These can overwrite all previous settings.
@@ -102,12 +100,18 @@ else()
   endif()
 endif()
 
-# Set the global macros for setting up targets.
-macro(setup_tudat_executable_target target_name CUSTOM_OUTPUT_PATH)
-  set_property(TARGET ${target_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY "${BINROOT}/applications")
-  install(TARGETS ${target_name} RUNTIME DESTINATION "${BINROOT}/applications")
-endmacro(setup_tudat_executable_target)
+# Set CMake build-type. If it not supplied by the user (either directly as an argument of through
+# the "UserSettings.txt" file, the default built type is "Release". NB: It is important this
+# section is placed AFTER the "UserSettings.txt" file is included, to ensure that that the correct
+# indiciation is given for which build type has been selected.
+if((NOT CMAKE_BUILD_TYPE) OR (CMAKE_BUILD_TYPE STREQUAL "Release"))
+    message(STATUS "WARNING: building release version!")
+    set(CMAKE_BUILD_TYPE Release)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "WARNING: building debug version!")
+endif()
 
+# Set the global macros for setting up targets.
 macro(setup_tudat_library_target target_name CUSTOM_OUTPUT_PATH)
   set_property(TARGET ${target_name} PROPERTY LIBRARY_OUTPUT_DIRECTORY "${LIBROOT}")
   set_property(TARGET ${target_name} PROPERTY ARCHIVE_OUTPUT_DIRECTORY "${LIBROOT}")
