@@ -27,8 +27,14 @@
  *      100906    K. Kumar          First creation of code.
  *      111115    K. Kumar          Added checker info; corrected Doxygenc comments.
  *      120127    D. Dirkx          Moved file to Tudat core.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -39,7 +45,7 @@
 
 namespace tudat
 {
-namespace astrodynamics
+namespace basic_astrodynamics
 {
 
 //! Compute two-body orbital period.
@@ -108,6 +114,19 @@ double computeKeplerEnergy( const double semiMajorAxis,
  * \return Synodic period.
  */
 double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbitalPeriodBody2 );
+
+} // namespace basic_astrodynamics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace astrodynamics
+{
+
+using namespace tudat::basic_astrodynamics;
 
 } // namespace astrodynamics
 } // namespace tudat

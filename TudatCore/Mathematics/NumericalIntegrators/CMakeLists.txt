@@ -25,8 +25,11 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      120127    B. Tong Minh      File created.
+ #      121120    S. Billemont      Bundled unit tests to improve performance.
  #
  #    References
+ #
+ #    Notes
  #
 
 # Add source files.
@@ -41,15 +44,18 @@ set(NUMERICALINTEGRATORS_HEADERS
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/benchmarkFunctions.h"
 )
 
+# Add unit test files.
+set(NUMERICALINTEGRATORS_UNITTESTS
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrators.cpp"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrator.cpp"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestRungeKutta4Integrator.cpp"
+)
+
 # Add static libraries.
 add_library(tudat_core_numerical_integrators STATIC ${NUMERICALINTEGRATORS_SOURCES} ${NUMERICALINTEGRATORS_HEADERS})
 setup_tudat_library_target(tudat_core_numerical_integrators "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
 
 # Add unit tests.
-add_executable(test_NumericalIntegrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrator.cpp")
-setup_custom_test_program(test_NumericalIntegrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
-target_link_libraries(test_NumericalIntegrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
-
-add_executable(test_RungeKutta4Integrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestRungeKutta4Integrator.cpp")
-setup_custom_test_program(test_RungeKutta4Integrator "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
-target_link_libraries(test_RungeKutta4Integrator tudat_core_numerical_integrators ${Boost_LIBRARIES})
+add_executable(test_core_NumericalIntegrators ${NUMERICALINTEGRATORS_UNITTESTS})
+setup_custom_test_program(test_core_NumericalIntegrators "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
+target_link_libraries(test_core_NumericalIntegrators tudat_core_numerical_integrators ${Boost_LIBRARIES})

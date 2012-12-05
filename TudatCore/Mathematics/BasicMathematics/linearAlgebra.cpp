@@ -34,8 +34,11 @@
  *      120127    K. Kumar          Minor edits.
  *      120128    K. Kumar          Corrected computeCosineOfAngleBetweenVectors() to work with
  *                                  vectors of arbitrary length.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -45,8 +48,6 @@
 #include "TudatCore/Mathematics/BasicMathematics/linearAlgebra.h"
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace linear_algebra
 {
@@ -88,5 +89,4 @@ double computeAngleBetweenVectors( const Eigen::VectorXd& vector0, const Eigen::
 }
 
 } // namespace linear_algebra
-} // namespace mathematics
 } // namespace tudat

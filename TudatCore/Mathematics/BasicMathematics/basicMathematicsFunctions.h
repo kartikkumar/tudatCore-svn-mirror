@@ -44,12 +44,20 @@
  *                                  conversions put in separate file.
  *      120127    K. Kumar          Minor comment edits.
  *      120217    K. Kumar          Modified computeModuloForSignedValues() to computeModulo().
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
- *      Press W.H., et al. Numerical Recipes in C++: The Art of
- *          Scientific Computing. Cambridge University Press, February 2002.
- *      Spiegel, M.R., Stephens, L.J. Statistics, Fourth Edition, Schaum's
- *          Outlines, McGraw-Hill, 2008.
+ *      Press W.H., et al. Numerical Recipes in C++: The Art of Scientific Computing. Cambridge
+ *          University Press, February 2002.
+ *      Spiegel, M.R., Stephens, L.J. Statistics, Fourth Edition, Schaum's Outlines, McGraw-Hill,
+ *          2008.
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -60,7 +68,7 @@
 
 namespace tudat
 {
-namespace mathematics
+namespace basic_mathematics
 {
 
 //! Random number generator typedef.
@@ -89,6 +97,19 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
  * \return Remainder of division of dividend by divisor.
  */
 double computeModulo( double dividend, double divisor );
+
+} // namespace basic_mathematics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace mathematics
+{
+
+using namespace tudat::basic_mathematics;
 
 } // namespace mathematics
 } // namespace tudat

@@ -29,8 +29,14 @@
  *      100930    J. Melman         Implemented namespace, minor comment changes.
  *      120127    D. Dirkx          Moved to Tudat core, added doxygen param and return.
  *      120127    K. Kumar          Minor edits.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -40,8 +46,6 @@
 #include <Eigen/Core>
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace linear_algebra
 {
@@ -67,7 +71,23 @@ double computeAngleBetweenVectors( const Eigen::VectorXd& vector0,
                                    const Eigen::VectorXd& vector1 );
 
 } // namespace linear_algebra
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace mathematics
+{
+namespace linear_algebra
+{
+
+using namespace tudat::linear_algebra;
+
+} // namespace linear_algebra
 } // namespace mathematics
 } // namespace tudat
+
 
 #endif // TUDAT_CORE_LINEAR_ALGEBRA_H

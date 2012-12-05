@@ -29,6 +29,8 @@
  #
  #    References
  #
+ #    Notes
+ #
 
 # Define the main sub-directories.
 set(BASICASTRODYNAMICSDIR "${ASTRODYNAMICSDIR}/BasicAstrodynamics")

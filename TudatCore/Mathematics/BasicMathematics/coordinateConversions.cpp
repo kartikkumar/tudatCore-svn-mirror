@@ -42,8 +42,11 @@
  *      120127    D. Dirkx          First version branched from basic mathematics in Tudat Core.
  *      120127    K. Kumar          Minor comment edits.
  *      120716    D. Dirkx          Fixed bug in else-case in convertCartesianToSpherical().
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -54,8 +57,6 @@
 #include "TudatCore/Mathematics/BasicMathematics/coordinateConversions.h"
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace coordinate_conversions
 {
@@ -110,5 +111,4 @@ Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoo
 }
 
 } // namespace coordinate_conversions
-} // namespace mathematics
 } // namespace tudat

@@ -1,13 +1,26 @@
-/*!   Copyright (c) 2010-2012 Delft University of Technology.
+/*    Copyright (c) 2010-2012, Delft University of Technology
+ *    All rights reserved.
  *
- *    This software is protected by national and international copyright.
- *    Any unauthorized use, reproduction or modification is unlawful and
- *    will be prosecuted. Commercial and non-private application of the
- *    software in any form is strictly prohibited unless otherwise granted
- *    by the authors.
+ *    Redistribution and use in source and binary forms, with or without modification, are
+ *    permitted provided that the following conditions are met:
+ *      - Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
+ *      - Redistributions in binary form must reproduce the above copyright notice, this list of
+ *        conditions and the following disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *      - Neither the name of the Delft University of Technology nor the names of its contributors
+ *        may be used to endorse or promote products derived from this software without specific
+ *        prior written permission.
  *
- *    The code is provided without any warranty; without even the implied
- *    warranty of merchantibility or fitness for a particular purpose.
+ *    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+ *    OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *    COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *    GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ *    AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ *    OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *    Changelog
  *      YYMMDD    Author            Comment
@@ -20,19 +33,24 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
  *                                  comparisons.
+ *      121205    K. Kumar          Updated license in file header.
  *
  *    References
  *
+ *    Notes
+ *
  */
 
-// Required Boost unit test framework define.
-#define BOOST_TEST_MAIN
-
-#include <boost/test/unit_test.hpp>
-#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 #include "boost/math/special_functions/fpclassify.hpp"
+#include <boost/test/floating_point_comparison.hpp>
+#include <boost/test/unit_test.hpp>
 
-namespace unit_test {
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
+
+namespace tudat
+{
+namespace unit_test
+{
 
 // Define Boost test suite.
 BOOST_AUTO_TEST_SUITE( test_mathematical_constants )
@@ -46,8 +64,8 @@ BOOST_AUTO_TEST_CASE( test_PI )
     // http://www.wolframalpha.com/input/?i=N[10*PI,66]
     double circumference = 31.4159265358979323846264338327950288419716939937510582097494459230; 
     BOOST_CHECK_CLOSE(  tudat::mathematics::PI, 
-                        circumference / (2 * radius) , 
-                        std::numeric_limits<double>::epsilon() );
+                        circumference / ( 2.0 * radius ) ,
+                        std::numeric_limits<double>::epsilon( ) );
 }
 
 //! Check correct E using E Wolfram alpha as reference
@@ -55,9 +73,9 @@ BOOST_AUTO_TEST_CASE( test_E )
 {    
     // Numerical value from:
     // http://www.wolframalpha.com/input/?i=e+72+digits
-    BOOST_CHECK_CLOSE(  tudat::mathematics::E, 
+    BOOST_CHECK_CLOSE( tudat::mathematics::E,
         2.71828182845904523536028747135266249775724709369995957496696762772407663, 
-        std::numeric_limits<double>::epsilon() );
+        std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Check correct GOLDEN_RATIO using GOLDEN_RATIO Wolfram alpha as reference
@@ -67,7 +85,7 @@ BOOST_AUTO_TEST_CASE( test_GOLDEN_RATIO )
     // http://www.wolframalpha.com/input/?i=golden+ratio+72+digits
     BOOST_CHECK_CLOSE(  tudat::mathematics::GOLDEN_RATIO, 
         1.618033988749894848204586834365638117720309179805762862135448622705260463, 
-        std::numeric_limits<double>::epsilon() );
+        std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Check correct NAN using boost Floating Point Classification (fpclassify)
@@ -75,10 +93,11 @@ BOOST_AUTO_TEST_CASE( test_NAN )
 {    
     // Numerical value from:
     // http://www.wolframalpha.com/input/?i=golden+ratio+72+digits
-    BOOST_CHECK(  boost::math::isnan( TUDAT_NAN ) );
+    BOOST_CHECK( boost::math::isnan( TUDAT_NAN ) );
 }
 
 // Close Boost test suite.
 BOOST_AUTO_TEST_SUITE_END( ) // End test_mathematical_constants
 
-}
+} // namespace unit_tests
+} // namespace tudat

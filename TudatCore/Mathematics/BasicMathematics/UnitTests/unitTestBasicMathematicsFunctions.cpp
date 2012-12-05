@@ -42,9 +42,9 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <limits>
 
@@ -60,7 +60,7 @@ namespace unit_tests
 
 using mathematics::computeModulo;
 
-BOOST_AUTO_TEST_SUITE( test_BasicMathematics )
+BOOST_AUTO_TEST_SUITE( test_basic_mathematics )
 
 //! Test if tudat modulo function is working.
 BOOST_AUTO_TEST_CASE( testComputeModulo )

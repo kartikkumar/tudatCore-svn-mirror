@@ -22,9 +22,20 @@
  *    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  *    OF THE POSSIBILITY OF SUCH DAMAGE.
  *
+ *    Changelog
+ *      YYMMDD    Author            Comment
+ *      121120    S. Billemont      Code created.
+ *
  *    References
  *
  *    Notes
- *      This file is intentionally empty.
  *
  */
+
+#define BOOST_TEST_MAIN
+#define BOOST_TEST_MODULE Basics
+
+#include <boost/test/unit_test.hpp>
+
+// Prevents complaining that there are no tests.
+BOOST_AUTO_TEST_CASE( fake_test ) { }

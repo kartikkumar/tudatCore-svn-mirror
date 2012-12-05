@@ -49,11 +49,10 @@
  *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
  *          last accessed: 27, January 2012(d).
  *
- *    At the moment, not all conversion routines are tested both ways. This should be corrected in
- *    an update version.
+ *    Notes
+ *      At the moment, not all conversion routines are tested both ways. This should be corrected
+ *      in an update version.
  */
-
-#define BOOST_TEST_MAIN
 
 #include <cmath>
 #include <limits>

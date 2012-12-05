@@ -45,7 +45,9 @@
  *       Wikipedia. http://en.wikipedia.org/wiki/Conversion_of_units#Pressure_or_mechanical_stress,
  *          last accessed: 27, January 2012(c).
  *
- *    The behaviour of the template conversion functions has not been tested for integer datatypes.
+ *    Notes
+ *      The behaviour of the template conversion functions has not been tested for integer
+ *      datatypes.
  *
  */
 

@@ -42,6 +42,8 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_BASIC_INPUT_OUTPUT_H

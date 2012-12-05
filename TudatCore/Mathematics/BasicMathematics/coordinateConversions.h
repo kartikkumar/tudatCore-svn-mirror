@@ -42,8 +42,14 @@
  *                                  Moved (con/de)structors and getter/setters to header.
  *      120127    D. Dirkx          First version branched from basic mathematics in Tudat Core.
  *      120127    K. Kumar          Minor comment edits.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -53,8 +59,6 @@
 #include <Eigen/Core>
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace coordinate_conversions
 {
@@ -91,6 +95,21 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
  *          order), as calculated from sphericalCoordinates.
 */
 Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates );
+
+} // namespace coordinate_conversions
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace mathematics
+{
+namespace coordinate_conversions
+{
+
+using namespace tudat::coordinate_conversions;
 
 } // namespace coordinate_conversions
 } // namespace mathematics

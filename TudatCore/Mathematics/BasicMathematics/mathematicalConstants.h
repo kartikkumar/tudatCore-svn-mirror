@@ -30,6 +30,8 @@
  *      Wolfram MathWorld, Constant:
  *          http://mathworld.wolfram.com/Constant.html (retrieved 2012/02/08).
  *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_MATHEMATICAL_CONSTANTS_H

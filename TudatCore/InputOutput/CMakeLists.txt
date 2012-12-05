@@ -27,8 +27,11 @@
  #      110820    S.M. Persson      File created.
  #      120127    K. Kumar          Adapted for Tudat Core.
  #      120127    K. Kumar          Added stream filter code and unit test.
+ #      121120    S. Billemont      Bundled unit tests to improve performance.
  #
  #    References
+ #
+ #    Notes
  #
 
 # Add source files.
@@ -42,15 +45,18 @@ set(INPUTOUTPUT_HEADERS
   "${SRCROOT}${INPUTOUTPUTDIR}/streamFilters.h"
 )
 
+# Add unit test files.
+set(INPUTOUTPUT_UNITTESTS 
+  "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestInputOutput.cpp"
+  "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp"
+  "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp"
+)
+
 # Add static libraries.
 add_library(tudat_core_input_output STATIC ${INPUTOUTPUT_SOURCES} ${INPUTOUTPUT_HEADERS})
 setup_tudat_library_target(tudat_core_input_output "${SRCROOT}${INPUTOUTPUTDIR}")
 
 # Add unit tests.
-add_executable(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp")
-setup_custom_test_program(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}")
-target_link_libraries(test_BasicInputOutput tudat_core_input_output ${Boost_LIBRARIES})
-
-add_executable(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp")
-setup_custom_test_program(test_StreamFilters "${SRCROOT}${INPUTOUTPUTDIR}")
-target_link_libraries(test_StreamFilters tudat_core_input_output ${Boost_LIBRARIES})
+add_executable(test_core_InputOutput ${INPUTOUTPUT_UNITTESTS})
+setup_custom_test_program(test_core_InputOutput "${SRCROOT}${INPUTOUTPUTDIR}")
+target_link_libraries(test_core_InputOutput tudat_core_input_output ${Boost_LIBRARIES})

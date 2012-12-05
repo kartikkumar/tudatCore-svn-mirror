@@ -40,11 +40,10 @@
  *      Keefe, T.J. Synodic Period Calculator, http://www.ccri.edu/physics/keefe/synodic_calc.htm,
  *          last accessed: 6th December, 2011, last modified: 18th November, 2011.
  *
- *    The tests need to be updated to check benchmark values from literature.
+ *    Notes
+ *      The tests need to be updated to check benchmark values from literature.
  *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <cmath>
 #include <limits>

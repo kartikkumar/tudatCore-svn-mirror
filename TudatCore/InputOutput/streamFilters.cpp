@@ -26,8 +26,11 @@
  *      YYMMDD    Author            Comment
  *      100902    S. Billemont      File created.
  *      120127    K. Kumar          Added missing comments and clarified variable-naming.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -39,8 +42,6 @@
 #include "TudatCore/InputOutput/streamFilters.h"
 
 namespace tudat
-{
-namespace input_output
 {
 namespace stream_filters
 {
@@ -125,5 +126,4 @@ std::string ReplaceElements::do_filter( const std::string& line )
 }
 
 } // namespace stream_filters
-} // namespace input_output
 } // namespace tudat

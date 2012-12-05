@@ -26,8 +26,13 @@
  *      YYMMDD    Author            Comment
  *      100902    S. Billemont      File created.
  *      120127    K. Kumar          Added missing comments and clarified variable-naming.
- *
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -42,8 +47,6 @@
 #include <boost/regex.hpp>
 
 namespace tudat
-{
-namespace input_output
 {
 namespace stream_filters
 {
@@ -238,6 +241,21 @@ private:
      */
     bool isOmitIfEmpty_;
 };
+
+} // namespace stream_filters
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace input_output
+{
+namespace stream_filters
+{
+
+using namespace tudat::stream_filters;
 
 } // namespace stream_filters
 } // namespace input_output

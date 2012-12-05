@@ -28,6 +28,8 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
 
 //! Suppress compile time unused parameter warnings.

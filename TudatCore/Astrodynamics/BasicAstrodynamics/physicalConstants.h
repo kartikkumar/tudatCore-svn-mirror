@@ -42,6 +42,7 @@
  *      NASA. Astrodynamics Constants, http://ssd.jpl.nasa.gov/?constants#ref, 6th September, 2011,
  *          last accessed: 21st February, 2012.
  *
+ *    Notes
  */
 
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H

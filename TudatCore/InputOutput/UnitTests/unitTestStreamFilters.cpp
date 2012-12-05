@@ -29,9 +29,9 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <iostream>
 #include <sstream>

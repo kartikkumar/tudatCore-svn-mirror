@@ -49,9 +49,9 @@
  *      Stewart, J. Calculus: Early Transcendentals, Fourth Edition, Brooks/Cole Publishing
  *          Company, Pacific Grove, CA, USA, 1999.
  *
+ *    Notes
+ *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <cmath>
 #include <limits>
@@ -70,7 +70,6 @@ namespace tudat
 {
 namespace unit_tests
 {
-
 
 //! Test suite for coordinate conversion functions.
 BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
@@ -175,7 +174,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     // Test 2: Test conversion of: ( 1.0, sqrt( 3 ), 2 * sqrt(3) ), from Stewart (2003),
     // Exercise 12.7.19.
     {
-        Eigen::Vector3d cartesianCoordinates( 1.0, sqrt( 3 ), 2.0 * sqrt( 3 ) );
+        Eigen::Vector3d cartesianCoordinates( 1.0, sqrt( 3. ), 2.0 * sqrt( 3. ) );
 
         // Expected vector in spherical coordinates.
         Eigen::Vector3d expectedSphericalCoordinates( 4.0, PI / 6.0, PI / 3.0 );
@@ -209,7 +208,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     // Test 4: Test conversion of: ( 0.0, 2 sqrt( 3 ), -2.0 ), from Stewart (2003), Section 12.7,
     // Example 5.
     {
-        Eigen::Vector3d cartesianCoordinates( 0.0, 2.0 * sqrt( 3 ), -2.0 );
+        Eigen::Vector3d cartesianCoordinates( 0.0, 2.0 * sqrt( 3. ), -2.0 );
 
         // Expected vector in spherical coordinates.
         Eigen::Vector3d expectedSphericalCoordinates( 4.0, 2.0 * PI / 3.0, PI / 2.0 );

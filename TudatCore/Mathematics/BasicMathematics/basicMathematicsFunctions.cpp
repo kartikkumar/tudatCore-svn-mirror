@@ -45,8 +45,11 @@
  *      120130    K. Kumar          Added missing implementation of
  *                                  getGlobalRandomNumberGenerator().
  *      120217    K. Kumar          Modified computeModuloForSignedValues() to computeModulo().
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -57,7 +60,7 @@
 
 namespace tudat
 {
-namespace mathematics
+namespace basic_mathematics
 {
 
 //! Get global random number generator.
@@ -74,5 +77,5 @@ double computeModulo( double dividend, double divisor )
     return dividend - divisor * std::floor( dividend / divisor );
 }
 
-} // namespace mathematics
+} // namespace basic_mathematics
 } // namespace tudat

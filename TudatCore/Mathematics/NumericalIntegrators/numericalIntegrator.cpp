@@ -24,6 +24,7 @@
  *
  *    References
  *
- *    This file is intentionally empty.
+ *    Notes
+ *      This file is intentionally empty.
  *
  */

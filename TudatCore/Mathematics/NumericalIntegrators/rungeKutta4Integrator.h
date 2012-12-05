@@ -30,8 +30,14 @@
  *      120213    K. Kumar          Updated getCurrentInterval() to getIndependentVariable().
  *      120424    K. Kumar          Added missing this-pointer, to satisfy requirement for
  *                                  accessing base class members.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility; added standardized typedefs.
  *
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -41,8 +47,6 @@
 #include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace numerical_integrators
 {
@@ -215,12 +219,26 @@ typedef RungeKutta4Integrator< > RungeKutta4IntegratorXd;
 
 //! Typedef of a scalar RK4 integrator.
 /*!
- * Typedef of an RK4 integrator with doubles as state and state derivative and independent variable.
+ * Typedef of an RK4 integrator with doubles as state and state derivative and independent
+ * variable.
  */
 typedef RungeKutta4Integrator< double, double, double > RungeKutta4Integratord;
 
+//! Typedef of pointer to default RK4 integrator
+/*!
+ * Typedef of pointer to a RK4 integrator with VectorXds as state and state derivative and double
+ * as independent variable.
+ */
+typedef boost::shared_ptr< RungeKutta4IntegratorXd > RungeKutta4IntegratorXdPointer;
+
+//! Typedef of pointer to a scalar RK4 integrator.
+/*!
+ * Typedef of pointer to an RK4 integrator with doubles as state and state derivative and
+ * independent variable.
+ */
+typedef boost::shared_ptr< RungeKutta4Integratord > RungeKutta4IntegratordPointer;
+
 } // namespace integrators
-} // namespace mathematics
 } // namespace tudat
 
 #endif // TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H

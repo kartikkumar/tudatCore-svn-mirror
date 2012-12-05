@@ -51,6 +51,8 @@
  *      Advanced Concepts Team, ESA. Keplerian Toolbox, http://sourceforge.net/projects/keptoolbox,
  *          last accessed: 21st April, 2012.
  *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_ORBITAL_ELEMENT_CONVERSIONS_H

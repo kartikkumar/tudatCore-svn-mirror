@@ -28,8 +28,14 @@
  *      120128    D. Dirkx          Minor changes during code check.
  *      120207    K. Kumar          Minor comment corrections.
  *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable().
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility; added standardized typedefs.
  *
  *    References
+ *
+ *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -43,8 +49,6 @@
 #include <Eigen/Core>
 
 namespace tudat
-{
-namespace mathematics
 {
 namespace numerical_integrators
 {
@@ -137,7 +141,6 @@ public:
     virtual StateType integrateTo( const IndependentVariableType intervalEnd,
                                    const IndependentVariableType initialStepSize );
 
-
     //! Perform a single integration step.
     /*!
      * Performs a single integration step from current independent variable and state as specified
@@ -199,6 +202,36 @@ integrateTo( const IndependentVariableType intervalEnd,
 
     return getCurrentState( );
 }
+
+//! Typedef for shared-pointer to default numerical integrator.
+/*!
+ * Typedef for shared-pointer to a default numerical integrator (IndependentVariableType = double,
+ * StateType = Eigen::VectorXd, StateDerivativeType = Eigen::VectorXd).
+ */
+typedef boost::shared_ptr< NumericalIntegrator< > > NumericalIntegratorXdPointer;
+
+//! Typedef for a shared-pointer to a scalar numerical integrator.
+/*!
+ * Typedef for shared-pointer to a scalar numerical integrator (IndependentVariableType = double,
+ * StateType = double, StateDerivativeType = double).
+ */
+typedef boost::shared_ptr< NumericalIntegrator< double, double, double > >
+NumericalIntegratordPointer;
+
+} // namespace numerical_integrators
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace mathematics
+{
+namespace numerical_integrators
+{
+
+using namespace tudat::numerical_integrators;
 
 } // namespace numerical_integrators
 } // namespace mathematics

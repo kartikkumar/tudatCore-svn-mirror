@@ -88,9 +88,8 @@
  *      Advanced Concepts Team, ESA. Keplerian Toolbox, http://sourceforge.net/projects/keptoolbox,
  *          last accessed: 21st April, 2012.
  *
+ *    Notes
  */
-
-#define BOOST_TEST_MAIN
 
 #include <cmath>
 #include <limits>

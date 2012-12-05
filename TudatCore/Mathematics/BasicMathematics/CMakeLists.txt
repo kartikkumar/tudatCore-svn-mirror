@@ -25,8 +25,11 @@
  #    Changelog
  #      YYMMDD    Author            Comment
  #      120127    B. Tong Minh      File created.
+ #      121120    S. Billemont      Bundled unit tests to improve performance.
  #
  #    References
+ #
+ #    Notes
  #
 
 # Add source files.
@@ -44,23 +47,20 @@ set(BASICMATHEMATICS_HEADERS
   "${SRCROOT}${BASICMATHEMATICSDIR}/mathematicalConstants.h"
 )
 
+# Add unit test files.
+set(BASICMATHEMATICS_UNITTESTS
+  "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestBasicMathematics.cpp"
+  "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp"
+  "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp"
+  "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestLinearAlgebra.cpp"
+  "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestMathematicalConstants.cpp"
+)
+
 # Add static libraries.
 add_library(tudat_core_basic_mathematics STATIC ${BASICMATHEMATICS_SOURCES} ${BASICMATHEMATICS_HEADERS})
 setup_tudat_library_target(tudat_core_basic_mathematics "${SRCROOT}${BASICMATHEMATICSDIR}")
 
 # Add unit tests.
-add_executable(test_CoordinateConversions "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestCoordinateConversions.cpp")
-setup_custom_test_program(test_CoordinateConversions "${SRCROOT}${BASICMATHEMATICSDIR}")
-target_link_libraries(test_CoordinateConversions tudat_core_basic_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_LinearAlgebra "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestLinearAlgebra.cpp")
-setup_custom_test_program(test_LinearAlgebra "${SRCROOT}${BASICMATHEMATICSDIR}")
-target_link_libraries(test_LinearAlgebra tudat_core_basic_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_BasicMathematics "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
-setup_custom_test_program(test_BasicMathematics "${SRCROOT}${BASICMATHEMATICSDIR}")
-target_link_libraries(test_BasicMathematics tudat_core_basic_mathematics ${Boost_LIBRARIES})
-
-add_executable(test_MathematicalConstants "${SRCROOT}${BASICMATHEMATICSDIR}/UnitTests/unitTestBasicMathematicsFunctions.cpp")
-setup_custom_test_program(test_MathematicalConstants "${SRCROOT}${BASICMATHEMATICSDIR}")
-target_link_libraries(test_MathematicalConstants tudat_core_basic_mathematics ${Boost_LIBRARIES})
+add_executable(test_core_BasicMathematics ${BASICMATHEMATICS_UNITTESTS})
+setup_custom_test_program(test_core_BasicMathematics "${SRCROOT}${BASICMATHEMATICSDIR}")
+target_link_libraries(test_core_BasicMathematics tudat_core_basic_mathematics ${Boost_LIBRARIES})

@@ -34,9 +34,9 @@
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
  *
+ *    Notes
+ *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <limits>
 #include <map>
@@ -149,7 +149,7 @@ bool testValidityOfRungeKutta4Integrator(
             return false;
         }
 
-        if ( integrator.rollbackToPreviousState () )
+        if ( integrator.rollbackToPreviousState( ) )
         {
             return false;
         }

@@ -29,6 +29,8 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_TEST_MACROS_H

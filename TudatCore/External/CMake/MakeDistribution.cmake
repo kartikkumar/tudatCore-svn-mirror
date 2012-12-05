@@ -27,7 +27,11 @@
  #      120210    B. Tong Minh      File created.
  #      120503    B. Tong Minh      Improved Boost detection routines.
  #
- #    This file defines the install target to create a distribution of Tudat Core, Eigen and Boost.
+ #    References
+ #
+ #    Notes
+ #      This file defines the install target to create a distribution of Tudat Core, Eigen and
+ #      Boost.
  #
 
 if(NOT TUDAT_CORE_DISTRIBUTION_PATH)

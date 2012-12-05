@@ -27,8 +27,11 @@
  *      100906    K. Kumar          First creation of code.
  *      111115    K. Kumar          Added checker info.
  *      120127    D. Dirkx          File moved to Tudat core.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -40,7 +43,7 @@
 
 namespace tudat
 {
-namespace astrodynamics
+namespace basic_astrodynamics
 {
 
 using tudat::mathematics::PI;
@@ -88,5 +91,5 @@ double computeSynodicPeriod( const double orbitalPeriodBody1, const double orbit
     return 1.0 / std::fabs( 1.0 / orbitalPeriodBody1 - 1.0 / orbitalPeriodBody2 );
 }
 
-} // namespace astrodynamics
+} // namespace basic_astrodynamics
 } // namespace tudat

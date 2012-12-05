@@ -33,6 +33,8 @@
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
  *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_BENCHMARK_FUNCTIONS_H
@@ -115,7 +117,8 @@ typedef struct BenchmarkFunction BenchmarkFunction;
  * \param state State at which the state derivative needs to be evalated.
  * \return Zero vector with length equal to state.
  */
-Eigen::VectorXd computeZeroStateDerivative( const double time, const Eigen::VectorXd& state )
+static Eigen::VectorXd computeZeroStateDerivative( const double time,
+                                                   const Eigen::VectorXd& state )
 {
     return Eigen::VectorXd::Zero( state.rows( ) );
 }
@@ -127,7 +130,8 @@ Eigen::VectorXd computeZeroStateDerivative( const double time, const Eigen::Vect
  * \param state State at which the state derivative needs to be evalated.
  * \return State derivative, length equal to state, all zeroes.
  */
-Eigen::VectorXd computeConstantStateDerivative( const double time, const Eigen::VectorXd& state )
+static Eigen::VectorXd computeConstantStateDerivative( const double time,
+                                                       const Eigen::VectorXd& state )
 {
     return Eigen::VectorXd::Constant( state.rows( ), 1.0 );
 }
@@ -139,8 +143,8 @@ Eigen::VectorXd computeConstantStateDerivative( const double time, const Eigen::
  * \param state State at which the state derivative needs to be evalated.
  * \return State derivative, length equal to state, all entries equal to state.
  */
-Eigen::VectorXd computeExponentialStateDerivative( const double time,
-                                                   const Eigen::VectorXd& state )
+static Eigen::VectorXd computeExponentialStateDerivative( const double time,
+                                                          const Eigen::VectorXd& state )
 {
     return state;
 }
@@ -159,8 +163,8 @@ Eigen::VectorXd computeExponentialStateDerivative( const double time,
  *          be evaluated.
  * \return State derivative, length equal to stat values according to above expression.
  */
-Eigen::VectorXd computeBurdenAndFairesStateDerivative( const double time,
-                                                       const Eigen::VectorXd& state )
+static Eigen::VectorXd computeBurdenAndFairesStateDerivative( const double time,
+                                                              const Eigen::VectorXd& state )
 {
     Eigen::VectorXd stateDerivative( 1 );
     stateDerivative( 0 ) = state( 0 ) - std::pow( time, 2.0 ) + 1.0;
@@ -178,7 +182,7 @@ enum BenchmarkFunctions
 };
 
 //! Get all defined benchmark functions.
-std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
+static std::map< BenchmarkFunctions, BenchmarkFunction >& getBenchmarkFunctions( )
 {
     static std::map< BenchmarkFunctions, BenchmarkFunction > benchmarkFunctions;
 

@@ -30,6 +30,8 @@
  #
  #    References
  #
+ #    Notes
+ #
 
 # Set the main sub-directories
 set(BASICMATHEMATICSDIR "${MATHEMATICSDIR}/BasicMathematics")

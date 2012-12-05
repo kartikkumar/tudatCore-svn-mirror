@@ -36,9 +36,9 @@
  *
  *    References
  *
+ *    Notes
+ *
  */
-
-#define BOOST_TEST_MAIN
 
 #include <limits>
 
