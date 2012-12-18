@@ -26,6 +26,7 @@
  #      YYMMDD    Author            Comment
  #      120127    B. Tong Minh      File created.
  #      121120    S. Billemont      Bundled unit tests to improve performance.
+ #      121212    K. Kumar          Migrated Euler integrator and unit test from Tudat.
  #
  #    References
  #
@@ -38,7 +39,8 @@ set(NUMERICALINTEGRATORS_SOURCES
 )
 
 # Add header files.
-set(NUMERICALINTEGRATORS_HEADERS 
+set(NUMERICALINTEGRATORS_HEADERS
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/euler.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/reinitializableNumericalIntegrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/rungeKutta4Integrator.h"
@@ -47,6 +49,7 @@ set(NUMERICALINTEGRATORS_HEADERS
 
 # Add unit test files.
 set(NUMERICALINTEGRATORS_UNITTESTS
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestEulerIntegrator.cpp"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrators.cpp"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestNumericalIntegrator.cpp"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/unitTestRungeKutta4Integrator.cpp"
