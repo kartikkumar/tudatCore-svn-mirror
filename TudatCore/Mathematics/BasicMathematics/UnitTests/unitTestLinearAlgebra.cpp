@@ -57,8 +57,8 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
 {
     // Using declarations.
     using std::cos;
-    using tudat::mathematics::linear_algebra::computeAngleBetweenVectors;
-    using tudat::mathematics::linear_algebra::computeCosineOfAngleBetweenVectors;
+    using tudat::basic_mathematics::linear_algebra::computeAngleBetweenVectors;
+    using tudat::basic_mathematics::linear_algebra::computeCosineOfAngleBetweenVectors;
 
     // Four tests are executed. First, the equality of the caluclated cosineOfAngle and the cosine
     // of the calculated angle is checked. Subsequently, the values of the angle and cosineOfAngle
@@ -95,7 +95,8 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
                            std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK( cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_SMALL( cosineOfAngle + 1.0, std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK_CLOSE_FRACTION( angle, mathematics::PI, std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_CLOSE_FRACTION( angle, tudat::basic_mathematics::mathematical_constants::PI,
+                                    std::numeric_limits< double >::epsilon( ) );
     }
 
     // Test 3: Test values for two vectors of length 3, benchmark values computed using Matlab.

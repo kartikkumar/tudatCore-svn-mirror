@@ -36,6 +36,8 @@
  *      120127    K. Kumar          Added references in preparation for commit to Tudat Core.
  *      120127    D. Dirkx          Minor textual changes and made consistent with rewrite of
  *                                  physical constants.
+ *      121212    K. Kumar          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
  *      Wikipedia. http://en.wikipedia.org/wiki/Temperature_conversion_formulas,
@@ -48,6 +50,8 @@
  *    Notes
  *      The behaviour of the template conversion functions has not been tested for integer
  *      datatypes.
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -61,6 +65,8 @@
 
 namespace tudat
 {
+namespace basic_astrodynamics
+{
 namespace unit_conversions
 {
 
@@ -72,7 +78,7 @@ namespace unit_conversions
  */
 template < typename T >
 T convertRadiansToDegrees( T angleInRadians )
-{ return angleInRadians / mathematics::PI * 180.0; }
+{ return angleInRadians / tudat::basic_mathematics::mathematical_constants::PI * 180.0; }
 
 //! Convert angle in degrees to radians.
 /*!
@@ -82,7 +88,7 @@ T convertRadiansToDegrees( T angleInRadians )
  */
 template < typename T >
 T convertDegreesToRadians( T angleInDegrees )
-{ return angleInDegrees / 180.0 * mathematics::PI; }
+{ return angleInDegrees / 180.0 * tudat::basic_mathematics::mathematical_constants::PI; }
 
 //! Convert angle in degrees to arcminutes.
 /*!
@@ -274,6 +280,20 @@ T convertFeetToMeter( T distanceInFeet )
 template < typename T >
 T convertPoundPerSquareFeetToPascal( T pressureInPoundPerSquareFeet )
 { return pressureInPoundPerSquareFeet * 47.880259; }
+
+} // namespace unit_conversions
+} // namespace basic_astrodynamics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace unit_conversions
+{
+
+using namespace tudat::basic_astrodynamics::unit_conversions;
 
 } // namespace unit_conversions
 } // namespace tudat

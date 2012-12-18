@@ -58,7 +58,7 @@ namespace tudat
 namespace unit_tests
 {
 
-using mathematics::computeModulo;
+using tudat::basic_mathematics::computeModulo;
 
 BOOST_AUTO_TEST_SUITE( test_basic_mathematics )
 
@@ -72,22 +72,32 @@ BOOST_AUTO_TEST_CASE( testComputeModulo )
     // Test 4: Test -3.0 mod -2.5.
     // Test 5: Test -3.0 mod 2.5.
 
-    double machinePrecision = std::numeric_limits< double >::epsilon( );
+    const double machinePrecision = std::numeric_limits< double >::epsilon( );
 
-    double resultUsingModuloFunction = computeModulo( 2.0, 2.0 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.0 , machinePrecision );
+    {
+        const double resultUsingModuloFunction = computeModulo( 2.0, 2.0 );
+        BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.0 , machinePrecision );
+    }
 
-    resultUsingModuloFunction = computeModulo( 3.0, 2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.5 , machinePrecision );
+    {
+        const double resultUsingModuloFunction = computeModulo( 3.0, 2.5 );
+        BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 0.5 , machinePrecision );
+    }
 
-    resultUsingModuloFunction = computeModulo( 3.0, -2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -2.0 , machinePrecision );
+    {
+        const double resultUsingModuloFunction = computeModulo( 3.0, -2.5 );
+        BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -2.0 , machinePrecision );
+    }
 
-    resultUsingModuloFunction = computeModulo( -3.0, -2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -0.5 , machinePrecision );
+    {
+        const double resultUsingModuloFunction = computeModulo( -3.0, -2.5 );
+        BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, -0.5 , machinePrecision );
+    }
 
-    resultUsingModuloFunction = computeModulo( -3.0, 2.5 );
-    BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 2.0 , machinePrecision );
+    {
+        const double resultUsingModuloFunction = computeModulo( -3.0, 2.5 );
+        BOOST_CHECK_CLOSE_FRACTION( resultUsingModuloFunction, 2.0 , machinePrecision );
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

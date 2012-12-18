@@ -55,7 +55,7 @@ namespace unit_tests
 BOOST_AUTO_TEST_SUITE( test_runge_kutta_4_integrator )
 
 //! Using declaration of the RungeKutta4IntegratorXd.
-using tudat::mathematics::numerical_integrators::RungeKutta4IntegratorXd;
+using tudat::numerical_integrators::RungeKutta4IntegratorXd;
 
 //! Test the validity of the RK4 integrator.
 /*!
@@ -166,7 +166,7 @@ bool testValidityOfRungeKutta4Integrator(
  */
 bool testDifferentStateAndStateDerivativeTypes( )
 {
-    tudat::mathematics::numerical_integrators::RungeKutta4Integrator
+    tudat::numerical_integrators::RungeKutta4Integrator
             < double, Eigen::Vector3d, Eigen::VectorXd > integrator(
                 &computeZeroStateDerivative, 0.0, Eigen::Vector3d::Zero( ) );
 
@@ -179,7 +179,7 @@ bool testDifferentStateAndStateDerivativeTypes( )
 //! Test if the Runge-Kutta 4 integrator is working correctly.
 BOOST_AUTO_TEST_CASE( testRungeKutta4Integrator )
 {
-    using namespace tudat::mathematics::numerical_integrators;
+    using namespace tudat::numerical_integrators;
     std::map< BenchmarkFunctions, BenchmarkFunction >& benchmarkFunctions =
             getBenchmarkFunctions( );
 

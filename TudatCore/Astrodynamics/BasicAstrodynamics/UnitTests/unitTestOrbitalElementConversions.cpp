@@ -89,6 +89,7 @@
  *          last accessed: 21st April, 2012.
  *
  *    Notes
+ *
  */
 
 #include <cmath>
@@ -108,7 +109,7 @@ namespace tudat
 namespace unit_tests
 {
 
-using mathematics::PI;
+using tudat::basic_mathematics::mathematical_constants::PI;
 
 BOOST_AUTO_TEST_SUITE( test_orbital_element_conversions )
 
@@ -119,7 +120,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Set Earth gravitational parameter [m^3/s^2] .
         const double earthGravitationalParameter = 3.986004415e14;
@@ -144,7 +145,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
 
         // Compute Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
@@ -157,7 +158,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Set Mars gravitational parameter [m^3/s^2].
         const double marsGravitationalParameter = 4.2828018915e13;
@@ -182,7 +183,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
 
         // Compute Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      marsGravitationalParameter );
 
@@ -195,7 +196,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Set Sun gravitational parameter [m^3/s^2].
         const double sunGravitationalParameter = 1.32712440018e20;
@@ -220,7 +221,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
 
         // Compute Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      sunGravitationalParameter );
 
@@ -233,7 +234,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
     // Earth-orbiting satellite example (Rocket and Space Technology, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Set Earth gravitational parameter [m^3/s^2].
         const double earthGravitationalParameter = 3.986005e14;
@@ -252,7 +253,7 @@ BOOST_AUTO_TEST_CASE( testKeplerianToCartesianElementConversion )
 
         // Compute Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
@@ -269,7 +270,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Earth gravitational parameter.
         const double earthGravitationalParameter = 3.986004415e14;
@@ -294,7 +295,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Compute Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
-        computedKeplerianElements = tudat::orbital_element_conversions::
+        computedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      earthGravitationalParameter );
 
@@ -307,7 +308,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Venus gravitational parameter.
         const double venusGravitationalParameter = 3.2485504415e14;
@@ -332,7 +333,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Declare and compute converted Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
-        computedKeplerianElements = tudat::orbital_element_conversions::
+        computedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      venusGravitationalParameter );
 
@@ -366,7 +367,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // The benchmark data is obtained by running ODTBX (NASA, 2012).
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Sun gravitational parameter.
         const double sunGravitationalParameter = 1.32712440018e20;
@@ -391,7 +392,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Compute Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
-        computedKeplerianElements = tudat::orbital_element_conversions::
+        computedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      sunGravitationalParameter );
 
@@ -406,7 +407,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // this test in future.
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Set Earth gravitational parameter [m^3/s^2].
         const double earthGravitationalParameter = 3.986005e14;
@@ -422,13 +423,13 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Compute Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
         // Recompute Keplerian elements.
         Eigen::VectorXd recomputedKeplerianElements( 6 );
-        recomputedKeplerianElements = tudat::orbital_element_conversions::
+        recomputedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( computedCartesianElements,
                                                      earthGravitationalParameter );
 
@@ -447,7 +448,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // issue, the use of Eigen functions will need to be evaluated.
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Uranus gravitational parameter [m^3 s^-2].
         const double uranusGravitationalParameter = 5.793943348799999e15;
@@ -472,7 +473,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Compute Keplerian elements.
         Eigen::VectorXd computedKeplerianElements( 6 );
-        computedKeplerianElements = tudat::orbital_element_conversions::
+        computedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( cartesianElements,
                                                      uranusGravitationalParameter );
 
@@ -508,7 +509,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // converters.
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Earth gravitational parameter [m^3 s^-2].
         const double earthGravitationalParameter = 3.9859383624e14;
@@ -524,13 +525,13 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert Keplerian elements to Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
         // Convert Cartesian elements back to Keplerian elements.
         Eigen::VectorXd recomputedKeplerianElements( 6 );
-        recomputedKeplerianElements = tudat::orbital_element_conversions::
+        recomputedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( computedCartesianElements,
                                                      earthGravitationalParameter );
 
@@ -560,7 +561,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert recomputed Keplerian elements to Cartesian elements.
         Eigen::VectorXd recomputedCartesianElements( 6 );
-        recomputedCartesianElements = tudat::orbital_element_conversions::
+        recomputedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( recomputedKeplerianElements,
                                                      earthGravitationalParameter );
 
@@ -575,7 +576,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // converters.
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Earth gravitational parameter [m^3 s^-2].
         const double earthGravitationalParameter = 3.9859383624e14;
@@ -591,13 +592,13 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert Keplerian elements to Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
         // Convert Cartesian elements back to Keplerian elements.
         Eigen::VectorXd recomputedKeplerianElements( 6 );
-        recomputedKeplerianElements = tudat::orbital_element_conversions::
+        recomputedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( computedCartesianElements,
                                                      earthGravitationalParameter );
 
@@ -624,7 +625,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert recomputed Keplerian elements to Cartesian elements.
         Eigen::VectorXd recomputedCartesianElements( 6 );
-        recomputedCartesianElements = tudat::orbital_element_conversions::
+        recomputedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( recomputedKeplerianElements,
                                                      earthGravitationalParameter );
 
@@ -639,7 +640,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
     // element converters.
     {
         // Using declarations.
-        using namespace tudat::orbital_element_conversions;
+        using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
         // Earth gravitational parameter [m^3 s^-2].
         const double earthGravitationalParameter = 3.9859383624e14;
@@ -655,13 +656,13 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert Keplerian elements to Cartesian elements.
         Eigen::VectorXd computedCartesianElements( 6 );
-        computedCartesianElements = tudat::orbital_element_conversions::
+        computedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( keplerianElements,
                                                      earthGravitationalParameter );
 
         // Convert Cartesian elements back to Keplerian elements.
         Eigen::VectorXd recomputedKeplerianElements( 6 );
-        recomputedKeplerianElements = tudat::orbital_element_conversions::
+        recomputedKeplerianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertCartesianToKeplerianElements( computedCartesianElements,
                                                      earthGravitationalParameter );
 
@@ -692,7 +693,7 @@ BOOST_AUTO_TEST_CASE( testCartesianToKeplerianElementConversion )
 
         // Convert recomputed Keplerian elements to Cartesian elements.
         Eigen::VectorXd recomputedCartesianElements( 6 );
-        recomputedCartesianElements = tudat::orbital_element_conversions::
+        recomputedCartesianElements = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertKeplerianToCartesianElements( recomputedKeplerianElements,
                                                      earthGravitationalParameter );
 
@@ -718,7 +719,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedEllipticEccentricAnomaly = 1.290237398010989;
 
         // Compute elliptic eccentric anomaly.
-        const double computedEllipticEccentricAnomaly = tudat::orbital_element_conversions::
+        const double computedEllipticEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertTrueAnomalyToEllipticalEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed elliptic eccentric anomaly matches the expected value.
@@ -740,7 +742,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedEllipticEccentricAnomaly = 2.800031718974503;
 
         // Compute elliptic eccentric anomaly.
-        const double computedEllipticEccentricAnomaly = tudat::orbital_element_conversions::
+        const double computedEllipticEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertTrueAnomalyToEllipticalEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed elliptic eccentric anomaly matches the expected value.
@@ -762,7 +765,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedEllipticEccentricAnomaly = 0.0;
 
         // Compute elliptic eccentric anomaly.
-        const double computedEllipticEccentricAnomaly = tudat::orbital_element_conversions::
+        const double computedEllipticEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertTrueAnomalyToEllipticalEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed elliptic eccentric anomaly matches the expected value.
@@ -784,7 +788,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedHyperbolicEccentricAnomaly = 0.3879;
 
         // Compute hyperbolic eccentric anomaly.
-        const double convertedHyperbolicEccentricAnomaly = tudat::orbital_element_conversions
+        const double convertedHyperbolicEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertTrueAnomalyToHyperbolicEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed hyperbolic eccentric anomaly matches the expected value.
@@ -805,7 +810,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedEllipticEccentricAnomaly = 1.290237398010989;
 
         // Compute elliptic eccentric anomaly.
-        const double computedEllipticEccentricAnomaly = tudat::orbital_element_conversions::
+        const double computedEllipticEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed elliptic eccentric anomaly matches the expected value.
@@ -827,7 +833,8 @@ BOOST_AUTO_TEST_CASE( testTrueAnomalyToEccentricAnomalyConversion )
         const double expectedHyperbolicEccentricAnomaly = 0.3879;
 
         // Compute hyperbolic eccentric anomaly.
-        const double convertedHyperbolicEccentricAnomaly = tudat::orbital_element_conversions
+        const double convertedHyperbolicEccentricAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertTrueAnomalyToEccentricAnomaly( trueAnomaly, eccentricity );
 
         // Check if computed hyperbolic eccentric anomaly matches the expected value.
@@ -852,7 +859,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 3.665218735816221;
 
         // Compute true anomaly, modulo 2*pi.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions::
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertEllipticalEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
                                                                 eccentricity ) + 2.0 * PI;
 
@@ -874,7 +882,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 4.545884569744431;
 
         // Compute true anomaly.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions::
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertEllipticalEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
                                                                 eccentricity ) + 2.0 * PI;
 
@@ -896,7 +905,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 0.0;
 
         // Compute true anomaly.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions::
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertEllipticalEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
                                                                 eccentricity );
 
@@ -918,7 +928,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 0.5291;
 
         // Compute true anomaly.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertHyperbolicEccentricAnomalyToTrueAnomaly(
                     hyperbolicEccentricAnomaly, eccentricity );
 
@@ -939,7 +950,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 3.665218735816221;
 
         // Compute true anomaly, modulo 2*pi.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions::
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions::
                 convertEccentricAnomalyToTrueAnomaly( ellipticEccentricAnomaly,
                                                       eccentricity ) + 2.0 * PI;
 
@@ -961,7 +973,8 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToTrueAnomalyConversion )
         const double expectedTrueAnomaly = 0.5291;
 
         // Compute true anomaly.
-        const double convertedTrueAnomaly = tudat::orbital_element_conversions
+        const double convertedTrueAnomaly
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEccentricAnomalyToTrueAnomaly(
                     hyperbolicEccentricAnomaly, eccentricity );
 
@@ -986,7 +999,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 3.036459804491048;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalEccentricAnomalyToMeanAnomaly(
                     ellipticalEccentricAnomaly, eccentricity );
 
@@ -1008,7 +1021,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 5.587148001484247;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalEccentricAnomalyToMeanAnomaly(
                     ellipticalEccentricAnomaly, eccentricity );
 
@@ -1030,7 +1043,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 0.0;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalEccentricAnomalyToMeanAnomaly(
                     ellipticalEccentricAnomaly, eccentricity );
 
@@ -1052,7 +1065,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 235.4 / 180.0 * PI;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertHyperbolicEccentricAnomalyToMeanAnomaly( hyperbolicEccentricAnomaly,
                                                                   eccentricity );
 
@@ -1073,7 +1086,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 3.036459804491048;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEccentricAnomalyToMeanAnomaly(
                     ellipticalEccentricAnomaly, eccentricity );
 
@@ -1095,7 +1108,7 @@ BOOST_AUTO_TEST_CASE( testEccentricAnomalyToMeanAnomalyConversion )
         const double expectedMeanAnomaly = 235.4 / 180.0 * PI;
 
         // Compute mean anomaly.
-        const double computedMeanAnomaly = tudat::orbital_element_conversions
+        const double computedMeanAnomaly = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEccentricAnomalyToMeanAnomaly( hyperbolicEccentricAnomaly, eccentricity );
 
         // Check if computed mean anomaly matches the expected value.
@@ -1125,7 +1138,8 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         const double expectedEllipticalMeanAnomalyChange = 2.580579656848906 - 1.950567148859647;
 
         // Compute elliptical mean anomaly change [rad].
-        const double computedEllipticalMeanAnomalyChange = tudat::orbital_element_conversions
+        const double computedEllipticalMeanAnomalyChange
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertElapsedTimeToEllipticalMeanAnomalyChange(
                     elapsedTime, earthGravitationalParameter, semiMajorAxis );
 
@@ -1153,7 +1167,8 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         const double expectedEllipticalMeanAnomalyChange = 0.0;
 
         // Compute elliptical mean anomaly change [rad].
-        const double computedEllipticalMeanAnomalyChange = tudat::orbital_element_conversions
+        const double computedEllipticalMeanAnomalyChange
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertElapsedTimeToEllipticalMeanAnomalyChange(
                     elapsedTime, earthGravitationalParameter, semiMajorAxis );
 
@@ -1180,7 +1195,8 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         const double expectedMeanAnomalyChange = 2.495601869539691e3;
 
         // Compute mean anomaly change [rad].
-        const double computedMeanAnomalyChange = tudat::orbital_element_conversions
+        const double computedMeanAnomalyChange
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertElapsedTimeToHyperbolicMeanAnomalyChange(
                     elapsedTime, sunGravitationalParameter, semiMajorAxis );
 
@@ -1208,7 +1224,8 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         const double expectedEllipticalMeanAnomalyChange = 2.580579656848906 - 1.950567148859647;
 
         // Compute elliptical mean anomaly change [rad].
-        const double computedEllipticalMeanAnomalyChange = tudat::orbital_element_conversions
+        const double computedEllipticalMeanAnomalyChange
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertElapsedTimeToMeanAnomalyChange(
                     elapsedTime, earthGravitationalParameter, semiMajorAxis );
 
@@ -1234,7 +1251,8 @@ BOOST_AUTO_TEST_CASE( testElapsedTimeToMeanAnomalyConversion )
         const double expectedMeanAnomalyChange = 2.495601869539691e3;
 
         // Compute mean anomaly change [rad].
-        const double computedMeanAnomalyChange = tudat::orbital_element_conversions
+        const double computedMeanAnomalyChange
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertElapsedTimeToMeanAnomalyChange(
                     elapsedTime, sunGravitationalParameter, semiMajorAxis );
 
@@ -1266,7 +1284,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         const double expectedElapsedTime = 17280.0;
 
         // Compute elapsed time [s].
-        const double computedElapsedTime = tudat::orbital_element_conversions
+        const double computedElapsedTime = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalMeanAnomalyChangeToElapsedTime(
                     ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
@@ -1293,7 +1311,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         const double expectedElapsedTime = 0.0;
 
         // Compute elapsed time [s].
-        const double computedElapsedTime = tudat::orbital_element_conversions
+        const double computedElapsedTime = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalMeanAnomalyChangeToElapsedTime(
                     ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
@@ -1319,7 +1337,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         const double expectedElapsedTime = 1000.0;
 
         // Compute elapsed time [s].
-        const double computedElapsedTime = tudat::orbital_element_conversions
+        const double computedElapsedTime = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertHyperbolicMeanAnomalyChangeToElapsedTime(
                     hyperbolicMeanAnomaly, sunGravitationalParameter, semiMajorAxis );
 
@@ -1346,7 +1364,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         const double expectedElapsedTime = 17280.0;
 
         // Compute elapsed time [s].
-        const double computedElapsedTime = tudat::orbital_element_conversions
+        const double computedElapsedTime = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertMeanAnomalyChangeToElapsedTime(
                     ellipticalMeanAnomalyChange, earthGravitationalParameter, semiMajorAxis );
 
@@ -1371,7 +1389,7 @@ BOOST_AUTO_TEST_CASE( testMeanAnomalyToElaspedTimeConversion )
         const double expectedElapsedTime = 1000.0;
 
         // Compute elapsed time [s].
-        const double computedElapsedTime = tudat::orbital_element_conversions
+        const double computedElapsedTime = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertMeanAnomalyChangeToElapsedTime(
                     hyperbolicMeanAnomaly, sunGravitationalParameter, semiMajorAxis );
 
@@ -1396,7 +1414,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
         const double expectedSemiMajorAxis = 42164.0e3;
 
         // Compute semi-major axis [s].
-        const double computedSemiMajorAxis = tudat::orbital_element_conversions
+        const double computedSemiMajorAxis
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalMeanMotionToSemiMajorAxis( ellipticalMeanMotion,
                                                               earthGravitationalParameter );
 
@@ -1417,7 +1436,8 @@ BOOST_AUTO_TEST_CASE( testMeanMotionToSemiMajorAxisConversion )
         const double expectedSemiMajorAxis = 20427.0e3;
 
         // Compute semi-major axis [m].
-        const double computedSemiMajorAxis = tudat::orbital_element_conversions
+        const double computedSemiMajorAxis
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertEllipticalMeanMotionToSemiMajorAxis( ellipticalMeanMotion,
                                                               marsGravitationalParameter );
 
@@ -1442,7 +1462,8 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         const double expectedEllipticalMeanMotion = 7.2921e-5;
 
         // Compute elliptical mean motion [rad/s].
-        const double computedEllipticalMeanMotion = tudat::orbital_element_conversions
+        const double computedEllipticalMeanMotion
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertSemiMajorAxisToEllipticalMeanMotion( semiMajorAxis,
                                                               earthGravitationalParameter );
 
@@ -1464,7 +1485,8 @@ BOOST_AUTO_TEST_CASE( testSemiMajorAxisToMeanMotionConversion )
         const double expectedEllipticalMeanMotion = 7.088218e-5;
 
         // Compute mean motion [rad/s].
-        const double computedEllipticalMeanMotion = tudat::orbital_element_conversions
+        const double computedEllipticalMeanMotion
+                = tudat::basic_astrodynamics::orbital_element_conversions
                 ::convertSemiMajorAxisToEllipticalMeanMotion( semiMajorAxis,
                                                               marsGravitationalParameter );
 

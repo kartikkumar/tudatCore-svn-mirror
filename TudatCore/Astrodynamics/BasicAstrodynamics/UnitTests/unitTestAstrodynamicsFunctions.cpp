@@ -70,13 +70,13 @@ BOOST_AUTO_TEST_CASE( testKeplerOrbitalPeriod )
 
     // Declare and set gravitational parameter of Earth [m^3 s^-2].
     double earthGravitationalParameter
-            = tudat::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
+            = tudat::basic_astrodynamics::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
 
     // Declare and set distance between Earth center and satellite.
     double distanceBetweenSatelliteAndEarth = 4.2164e7;
 
     // Compute orbital period of satellite.
-    double orbitalPeriod = tudat::astrodynamics::computeKeplerOrbitalPeriod(
+    double orbitalPeriod = tudat::basic_astrodynamics::computeKeplerOrbitalPeriod(
                 distanceBetweenSatelliteAndEarth, earthGravitationalParameter, satelliteMass );
 
     // Declare and set expected orbital period [s].
@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE( testKeplerAngularMomentum )
 
     // Declare and set gravitational parameter of Earth [m^3 s^-2].
     double earthGravitationalParameter
-            = tudat::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
+            = tudat::basic_astrodynamics::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
 
     // Declare and set distance between Earth center and satellite.
     double distanceBetweenSatelliteAndEarth = 4.2164e7;
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE( testKeplerAngularMomentum )
     double eccentricityOfSatelliteOrbit = 0.0;
 
     // Compute Kepler angular momentum.
-    double angularMomentum = tudat::astrodynamics::computeKeplerAngularMomentum(
+    double angularMomentum = tudat::basic_astrodynamics::computeKeplerAngularMomentum(
                 distanceBetweenSatelliteAndEarth, eccentricityOfSatelliteOrbit,
                 earthGravitationalParameter, satelliteMass );
 
@@ -128,13 +128,13 @@ BOOST_AUTO_TEST_CASE( testMeanMotion )
 
     // Declare and set gravitational parameter of Earth [m^3 s^-2].
     double earthGravitationalParameter
-            = tudat::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
+            = tudat::basic_astrodynamics::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
 
     // Declare and set distance between Earth center and satellite.
     double distanceBetweenSatelliteAndEarth = 4.2164e7;
 
     // Reference: http://en.wikipedia.org/wiki/Geostationary_orbit.
-    double meanMotion = tudat::astrodynamics::computeKeplerMeanMotion(
+    double meanMotion = tudat::basic_astrodynamics::computeKeplerMeanMotion(
                 distanceBetweenSatelliteAndEarth, earthGravitationalParameter, satelliteMass );
 
     // Declare and set expected mean motion [rad/s].
@@ -152,13 +152,13 @@ BOOST_AUTO_TEST_CASE( testKeplerEnergy )
 
     // Declare and set gravitational parameter of Earth [m^3 s^-2].
     double earthGravitationalParameter
-            = tudat::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
+            = tudat::basic_astrodynamics::physical_constants::GRAVITATIONAL_CONSTANT * 5.9736e24;
 
     // Declare and set distance between Earth center and satellite.
     double distanceBetweenSatelliteAndEarth = 4.2164e7;
 
     // Compute Kepler energy.
-    double orbitalEnergy = tudat::astrodynamics::computeKeplerEnergy(
+    double orbitalEnergy = tudat::basic_astrodynamics::computeKeplerEnergy(
                 distanceBetweenSatelliteAndEarth, earthGravitationalParameter, satelliteMass );
 
     // Declare and set expected orbital energy.
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE( testKeplerEnergy )
 BOOST_AUTO_TEST_CASE( testSynodicPeriod )
 {
     // Compute synodic period between Earth and Mars.
-    double synodicPeriod = tudat::astrodynamics::computeSynodicPeriod( 365.256378, 686.95 );
+    double synodicPeriod = tudat::basic_astrodynamics::computeSynodicPeriod( 365.256378, 686.95 );
 
     // Declare and set expected synodic period.
     double expectedSynodicPeriod = 779.9746457736733;

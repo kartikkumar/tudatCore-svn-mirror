@@ -48,6 +48,8 @@
 
 namespace tudat
 {
+namespace input_output
+{
 namespace stream_filters
 {
 
@@ -243,6 +245,7 @@ private:
 };
 
 } // namespace stream_filters
+} // namespace input_output
 } // namespace tudat
 
 // DEPRECATED!
@@ -250,15 +253,12 @@ private:
 // Tudat Core 2. This will be removed in Tudat Core 3.
 namespace tudat
 {
-namespace input_output
-{
 namespace stream_filters
 {
 
-using namespace tudat::stream_filters;
+using namespace tudat::input_output::stream_filters;
 
 } // namespace stream_filters
-} // namespace input_output
 } // namespace tudat
 
 #endif // TUDAT_CORE_STREAM_FILTERS_H

@@ -25,12 +25,16 @@
  *    Changelog
  *      YYMMDD    Author            Comment
  *      100906    S. Billemont      First creation of code.
+ *      121205    K. Kumar          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
  *      Wolfram MathWorld, Constant:
  *          http://mathworld.wolfram.com/Constant.html (retrieved 2012/02/08).
  *
  *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -42,7 +46,9 @@
 
 namespace tudat
 {
-namespace mathematics
+namespace basic_mathematics
+{
+namespace mathematical_constants
 {
 
 //! Constant E = exp(1) \f$\approx\f$ 2.71828.
@@ -81,6 +87,20 @@ const static double GOLDEN_RATIO = 0.5 * ( 1.0 + std::sqrt( 5.0 ) );
  * This is a shorthand notation for std::numeric_limits<double>::signaling_NaN();
  */
 #define TUDAT_NAN std::numeric_limits< double >::signaling_NaN( )
+
+} // namespace mathematical_constants
+} // namespace basic_mathematics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace mathematics
+{
+
+using namespace tudat::basic_mathematics;
 
 } // namespace mathematics
 } // namespace tudat

@@ -57,53 +57,54 @@ BOOST_AUTO_TEST_SUITE( test_physical_constants )
 //! Test if the physical constants have the correct relations (ratios/offsets).
 BOOST_AUTO_TEST_CASE( testRelationsBetweenPhysicalConstant )
 {    
+    using namespace tudat::basic_astrodynamics::physical_constants;
+
     // Test for the number of seconds in a year.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::JULIAN_YEAR,
-                                tudat::physical_constants::JULIAN_DAY
-                                * tudat::physical_constants::JULIAN_YEAR_IN_DAYS,
+    BOOST_CHECK_CLOSE_FRACTION( JULIAN_YEAR, JULIAN_DAY * JULIAN_YEAR_IN_DAYS,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for the number of seconds in a year.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::SIDEREAL_YEAR,
-                                tudat::physical_constants::JULIAN_DAY
-                                * tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS,
+    BOOST_CHECK_CLOSE_FRACTION( SIDEREAL_YEAR, JULIAN_DAY * SIDEREAL_YEAR_IN_DAYS,
                                 std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Test if physical constants have the expected value.
 BOOST_AUTO_TEST_CASE( testOtherConstants )
 {
+    using namespace tudat::basic_astrodynamics::physical_constants;
+
     // Test for gravitational constant.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::GRAVITATIONAL_CONSTANT, 6.67259e-11,
+    BOOST_CHECK_CLOSE_FRACTION( GRAVITATIONAL_CONSTANT, 6.67259e-11,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for astronomical unit.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::SPEED_OF_LIGHT, 299792458.0,
+    BOOST_CHECK_CLOSE_FRACTION( SPEED_OF_LIGHT, 299792458.0,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for astronomical unit.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::ASTRONOMICAL_UNIT,
-                                1.49597870691e11,
+    BOOST_CHECK_CLOSE_FRACTION( ASTRONOMICAL_UNIT, 1.49597870691e11,
                                 std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Check if the time constants have the expected values.
 BOOST_AUTO_TEST_CASE( testTimeConstants )
 {
+    using namespace tudat::basic_astrodynamics::physical_constants;
+
     // Test for the number of Julian days in a year.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::JULIAN_YEAR_IN_DAYS, 365.25,
+    BOOST_CHECK_CLOSE_FRACTION( JULIAN_YEAR_IN_DAYS, 365.25,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for the number of sidereal days in a year.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::SIDEREAL_YEAR_IN_DAYS, 365.25636,
+    BOOST_CHECK_CLOSE_FRACTION( SIDEREAL_YEAR_IN_DAYS, 365.25636,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for the Julian day length.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::SIDEREAL_DAY, 86164.09054,
+    BOOST_CHECK_CLOSE_FRACTION( SIDEREAL_DAY, 86164.09054,
                                 std::numeric_limits< double >::epsilon( ) );
 
     // Test for the sidereal day length.
-    BOOST_CHECK_CLOSE_FRACTION( tudat::physical_constants::JULIAN_DAY, 86400.0,
+    BOOST_CHECK_CLOSE_FRACTION( JULIAN_DAY, 86400.0,
                                 std::numeric_limits< double >::epsilon( ) );
 }
 

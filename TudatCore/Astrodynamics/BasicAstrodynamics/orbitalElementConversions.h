@@ -41,6 +41,8 @@
  *                                  eccentricity is not known a priori (if-statement to choose
  *                                  between elliptical and hyperbolic orbits).
  *      120422    K. Kumar          Added Doxygen notes for Cartesian -> Keplerian conversion.
+ *      121205    K. Kumar          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -52,6 +54,8 @@
  *          last accessed: 21st April, 2012.
  *
  *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *
  */
 
@@ -61,6 +65,8 @@
 #include <Eigen/Core>
 
 namespace tudat
+{
+namespace basic_astrodynamics
 {
 namespace orbital_element_conversions
 {
@@ -382,6 +388,20 @@ double convertEllipticalMeanMotionToSemiMajorAxis(
  */
 double convertSemiMajorAxisToEllipticalMeanMotion(
         const double semiMajorAxis, const double centralBodyGravitationalParameter );
+
+} // namespace orbital_element_conversions
+} // namespace basic_astrodynamics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace orbital_element_conversions
+{
+
+using namespace tudat::basic_astrodynamics::orbital_element_conversions;
 
 } // namespace orbital_element_conversions
 } // namespace tudat

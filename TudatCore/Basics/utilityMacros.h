@@ -25,12 +25,16 @@
  *    Changelog
  *      YYMMDD    Author            Comment
  *      120202    S. Billemont      File created.
+ *      121212    K. Kumar          Added header include guard.
  *
  *    References
  *
  *    Notes
  *
  */
+
+#ifndef TUDAT_CORE_UTILITY_MACROS_H
+#define TUDAT_CORE_UTILITY_MACROS_H
 
 //! Suppress compile time unused parameter warnings.
 /*!
@@ -82,3 +86,5 @@
 #pragma message( "WARNING: You need to implement DEPRECATED for this compiler" )
 #define TUDAT_DEPRECATED( message, expression ) expression
 #endif
+
+#endif // TUDAT_CORE_UTILITY_MACROS_H

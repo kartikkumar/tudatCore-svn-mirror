@@ -56,7 +56,7 @@ namespace unit_tests
 BOOST_AUTO_TEST_SUITE( test_numerical_integrator )
 
 //! Using declaration of the NumericalIntegrator.
-using tudat::mathematics::numerical_integrators::NumericalIntegrator;
+using tudat::numerical_integrators::NumericalIntegrator;
 
 //! Dummy numerical integrator.
 /*!

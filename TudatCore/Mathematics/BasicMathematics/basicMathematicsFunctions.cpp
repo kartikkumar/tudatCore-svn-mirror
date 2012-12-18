@@ -72,7 +72,7 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( )
 }
 
 //! Compute modulo of double.
-double computeModulo( double dividend, double divisor )
+double computeModulo( const double dividend, const double divisor )
 {
     return dividend - divisor * std::floor( dividend / divisor );
 }

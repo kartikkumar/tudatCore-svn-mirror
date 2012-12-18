@@ -169,7 +169,7 @@ BOOST_AUTO_TEST_CASE( test_removeComment_emptyLines )
     boost::iostreams::filtering_ostream filterProcessor;
 
     // Add skip first lines filter.
-    filterProcessor.push(tudat::input_output::stream_filters::RemoveComment( '#', false ) );
+    filterProcessor.push( tudat::input_output::stream_filters::RemoveComment( '#', false ) );
 
     // Last step in the chain; store the resulting string in result
     filterProcessor.push(boost::iostreams::back_inserter( filteredData ) );
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_CASE( test_replaceElements_delete_noEmptyLines )
     boost::iostreams::filtering_ostream filterProcessor;
 
     // Regex '-.*-' is everything between two dashes and replace with nothing.
-    filterProcessor.push(tudat::input_output::stream_filters::ReplaceElements(
+    filterProcessor.push( tudat::input_output::stream_filters::ReplaceElements(
                     boost::regex("-.*-"), "", false) );
 
     // Last step in the chain; store the resulting string in result.

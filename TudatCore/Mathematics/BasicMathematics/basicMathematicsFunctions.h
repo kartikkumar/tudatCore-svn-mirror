@@ -96,7 +96,7 @@ GlobalRandomNumberGeneratorType& getGlobalRandomNumberGenerator( );
  * \param divisor Number that is divided by.
  * \return Remainder of division of dividend by divisor.
  */
-double computeModulo( double dividend, double divisor );
+double computeModulo( const double dividend, const double divisor );
 
 } // namespace basic_mathematics
 } // namespace tudat

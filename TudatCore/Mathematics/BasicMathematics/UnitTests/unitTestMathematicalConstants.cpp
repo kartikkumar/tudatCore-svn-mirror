@@ -41,7 +41,9 @@
  *
  */
 
-#include "boost/math/special_functions/fpclassify.hpp"
+#include <limits>
+
+#include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -58,14 +60,15 @@ BOOST_AUTO_TEST_SUITE( test_mathematical_constants )
 //! Check correct pi using PI = circumference / diameter:
 BOOST_AUTO_TEST_CASE( test_PI )
 {    
-    double radius = 5;
+    const double radius = 5.0;
+
     // Circumference circle with radius 5, 32 digits precision, see
     // http://www.wolframalpha.com/input/?i=Circumference+of+a+circle+with+radius+5
     // http://www.wolframalpha.com/input/?i=N[10*PI,66]
     double circumference = 31.4159265358979323846264338327950288419716939937510582097494459230; 
-    BOOST_CHECK_CLOSE(  tudat::mathematics::PI, 
+    BOOST_CHECK_CLOSE(  tudat::basic_mathematics::mathematical_constants::PI,
                         circumference / ( 2.0 * radius ) ,
-                        std::numeric_limits<double>::epsilon( ) );
+                        std::numeric_limits< double >::epsilon( ) );
 }
 
 //! Check correct E using E Wolfram alpha as reference
@@ -73,7 +76,7 @@ BOOST_AUTO_TEST_CASE( test_E )
 {    
     // Numerical value from:
     // http://www.wolframalpha.com/input/?i=e+72+digits
-    BOOST_CHECK_CLOSE( tudat::mathematics::E,
+    BOOST_CHECK_CLOSE( tudat::basic_mathematics::mathematical_constants::E,
         2.71828182845904523536028747135266249775724709369995957496696762772407663, 
         std::numeric_limits< double >::epsilon( ) );
 }
@@ -83,7 +86,7 @@ BOOST_AUTO_TEST_CASE( test_GOLDEN_RATIO )
 {    
     // Numerical value from:
     // http://www.wolframalpha.com/input/?i=golden+ratio+72+digits
-    BOOST_CHECK_CLOSE(  tudat::mathematics::GOLDEN_RATIO, 
+    BOOST_CHECK_CLOSE(  tudat::basic_mathematics::mathematical_constants::GOLDEN_RATIO,
         1.618033988749894848204586834365638117720309179805762862135448622705260463, 
         std::numeric_limits< double >::epsilon( ) );
 }

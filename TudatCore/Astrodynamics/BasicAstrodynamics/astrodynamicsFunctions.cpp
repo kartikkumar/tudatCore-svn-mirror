@@ -46,7 +46,7 @@ namespace tudat
 namespace basic_astrodynamics
 {
 
-using tudat::mathematics::PI;
+using tudat::basic_mathematics::mathematical_constants::PI;
 
 //! Compute Kepler orbital period.
 double computeKeplerOrbitalPeriod( const double semiMajorAxis,

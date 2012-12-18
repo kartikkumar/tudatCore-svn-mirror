@@ -44,6 +44,7 @@
  *      120127    K. Kumar          Minor comment edits.
  *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
  *                                  backwards compatibility.
+ *      121205    K. Kumar          Fixed incorrect namespace migration.
  *
  *    References
  *
@@ -59,6 +60,8 @@
 #include <Eigen/Core>
 
 namespace tudat
+{
+namespace basic_mathematics
 {
 namespace coordinate_conversions
 {
@@ -97,6 +100,7 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
 Eigen::VectorXd convertCartesianToSpherical( const Eigen::VectorXd& cartesianCoordinates );
 
 } // namespace coordinate_conversions
+} // namespace basic_mathematics
 } // namespace tudat
 
 // DEPRECATED!
@@ -109,7 +113,7 @@ namespace mathematics
 namespace coordinate_conversions
 {
 
-using namespace tudat::coordinate_conversions;
+using namespace tudat::basic_mathematics::coordinate_conversions;
 
 } // namespace coordinate_conversions
 } // namespace mathematics

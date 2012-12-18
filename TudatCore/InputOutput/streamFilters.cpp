@@ -43,6 +43,8 @@
 
 namespace tudat
 {
+namespace input_output
+{
 namespace stream_filters
 {
 
@@ -126,4 +128,5 @@ std::string ReplaceElements::do_filter( const std::string& line )
 }
 
 } // namespace stream_filters
+} // namespace input_output
 } // namespace tudat

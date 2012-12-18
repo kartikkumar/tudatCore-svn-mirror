@@ -58,6 +58,8 @@
  *                                  between elliptical and hyperbolic orbits).
  *      120422    K. Kumar          Rewrote Cartesian -> Keplerian conversion; now handles circular
  *                                  and/or equatorial solutions correctly.
+ *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
+ *
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -85,6 +87,8 @@
 #include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
 namespace tudat
+{
+namespace basic_astrodynamics
 {
 namespace orbital_element_conversions
 {
@@ -254,7 +258,7 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
             = acos( unitAscendingNodeVector_.x( ) );
 
     // Check if the quandrant is correct.
-    using tudat::mathematics::PI;
+    using tudat::basic_mathematics::mathematical_constants::PI;
     if ( unitAscendingNodeVector_.y( ) < 0.0 )
     {
         computedKeplerianElements_( longitudeOfAscendingNodeIndex ) =
@@ -300,7 +304,7 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
                 = std::acos( eccentricityVector_.normalized( ).dot( unitAscendingNodeVector_ ) );
 
         // Check if the quadrant is correct.
-        using tudat::mathematics::PI;
+        using tudat::basic_mathematics::mathematical_constants::PI;
         if ( argumentOfPeriapsisQuandrantCondition < 0.0 )
         {
            computedKeplerianElements_( argumentOfPeriapsisIndex ) =
@@ -739,4 +743,5 @@ double convertSemiMajorAxisToEllipticalMeanMotion(
 }
 
 } // namespace orbital_element_conversions
+} // namespace basic_astrodynamics
 } // namespace tudat

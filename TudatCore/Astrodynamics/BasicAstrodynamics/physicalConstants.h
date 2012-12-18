@@ -30,6 +30,8 @@
  *      120127    D. Dirkx          Moved to Tudat core, removed variables related to
  *                                  obliquity of ecliptic.
  *      120203    K. Kumar          Added missing specific gas constant value; need unit test.
+ *      121212    K. Kumar          Migrated namespace to directory-based protocol and added
+ *                                  backwards compatibility.
  *
  *    References
  *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical Standards",
@@ -43,12 +45,17 @@
  *          last accessed: 21st February, 2012.
  *
  *    Notes
+ *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
+ *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
+ *
  */
 
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
 #define TUDAT_CORE_PHYSICAL_CONSTANTS_H
 
 namespace tudat
+{
+namespace basic_astrodynamics
 {
 namespace physical_constants
 {
@@ -113,6 +120,20 @@ const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
  * The specific gas constant of air in J per kg Kelvin (J/kg K) (Anderson, 2006).
  */
 const static double SPECIFIC_GAS_CONSTANT_AIR = 2.87e2;
+
+} // namespace physical_constants
+} // namespace basic_astrodynamics
+} // namespace tudat
+
+// DEPRECATED!
+// The following namespace declaration ensures backwards compatibility of namespace for release of
+// Tudat Core 2. This will be removed in Tudat Core 3.
+namespace tudat
+{
+namespace physical_constants
+{
+
+using namespace tudat::basic_astrodynamics::physical_constants;
 
 } // namespace physical_constants
 } // namespace tudat

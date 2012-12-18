@@ -78,8 +78,8 @@ BOOST_AUTO_TEST_SUITE( test_coordinate_conversions )
 BOOST_AUTO_TEST_CASE( testSphericalToCartesianConversion )
 {
     using std::sqrt;
-    using tudat::mathematics::PI;
-    using tudat::mathematics::coordinate_conversions::convertSphericalToCartesian;    
+    using tudat::basic_mathematics::mathematical_constants::PI;
+    using tudat::basic_mathematics::coordinate_conversions::convertSphericalToCartesian;
     
     // Test 1: test conversion of: ( 0.0, 0.0, 0.0 ).
     {
@@ -153,8 +153,8 @@ BOOST_AUTO_TEST_CASE( testCartesianToSphericalConversion )
     using std::atan2;
     using std::pow;
     using std::sqrt;
-    using tudat::mathematics::coordinate_conversions::convertCartesianToSpherical;
-    using tudat::mathematics::PI;
+    using tudat::basic_mathematics::coordinate_conversions::convertCartesianToSpherical;
+    using tudat::basic_mathematics::mathematical_constants::PI;
 
     // Test 1: Test conversion of: ( 0.0, 0.0, 0.0 ).
     {
