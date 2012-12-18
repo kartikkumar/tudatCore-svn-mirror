@@ -100,7 +100,7 @@ namespace tudat
 namespace mathematics
 {
 
-using namespace tudat::basic_mathematics;
+using namespace tudat::basic_mathematics::mathematical_constants; 
 
 } // namespace mathematics
 } // namespace tudat
