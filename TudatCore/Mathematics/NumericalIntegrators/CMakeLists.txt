@@ -40,6 +40,7 @@ set(NUMERICALINTEGRATORS_SOURCES
 # Add header files.
 set(NUMERICALINTEGRATORS_HEADERS 
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/reinitializableNumericalIntegrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/rungeKutta4Integrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/benchmarkFunctions.h"
 )

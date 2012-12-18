@@ -30,6 +30,8 @@
  *      120213    K. Kumar          Updated getCurrentInterval() to getIndependentVariable().
  *      120424    K. Kumar          Added missing this-pointer, to satisfy requirement for
  *                                  accessing base class members.
+ *      121128    K. Kumar          Changed base class to ReinitializableNumericalIntegrator, added
+ *                                  implementation of modifyCurrentState() function.
  *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
  *                                  backwards compatibility; added standardized typedefs.
  *
@@ -44,7 +46,11 @@
 #ifndef TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H
 #define TUDAT_CORE_RUNGE_KUTTA_4_INTEGRATOR_H
 
-#include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
+#include <boost/shared_ptr.hpp>
+
+#include <Eigen/Core>
+
+#include "TudatCore/Mathematics/NumericalIntegrators/reinitializableNumericalIntegrator.h"
 
 namespace tudat
 {
@@ -63,23 +69,27 @@ namespace numerical_integrators
  */
 template < typename IndependentVariableType = double, typename StateType = Eigen::VectorXd,
            typename StateDerivativeType = Eigen::VectorXd >
-class RungeKutta4Integrator :
-        public NumericalIntegrator< IndependentVariableType, StateType, StateDerivativeType >
+class RungeKutta4Integrator
+        : public tudat::numerical_integrators::ReinitializableNumericalIntegrator<
+        IndependentVariableType, StateType, StateDerivativeType >
 {
 public:
 
-    //! Typedef of the base class.
+    //! Typedef for the base class.
     /*!
      * Typedef of the base class with all template parameters filled in.
      */
-    typedef NumericalIntegrator< IndependentVariableType, StateType, StateDerivativeType > Base;
+    typedef tudat::numerical_integrators::ReinitializableNumericalIntegrator<
+    IndependentVariableType, StateType,
+    StateDerivativeType > ReinitializableNumericalIntegratorBase;
 
-    //! Typedef to the state derivative function.
+    //! Typedef for the state derivative function.
     /*!
      * Typedef to the state derivative function inherited from the base class.
      * \sa NumericalIntegrator::StateDerivativeFunction.
      */
-    typedef typename Base::StateDerivativeFunction StateDerivativeFunction;
+    typedef typename ReinitializableNumericalIntegratorBase::NumericalIntegratorBase::
+    StateDerivativeFunction StateDerivativeFunction;
 
     //! Default constructor.
     /*!
@@ -92,7 +102,7 @@ public:
     RungeKutta4Integrator( const StateDerivativeFunction& stateDerivativeFunction,
                            const IndependentVariableType intervalStart,
                            const StateType& initialState )
-        : Base( stateDerivativeFunction ),
+        : ReinitializableNumericalIntegratorBase( stateDerivativeFunction ),
           currentIndependentVariable_( intervalStart ),
           currentState_( initialState ),
           lastIndependentVariable_( intervalStart )
@@ -175,6 +185,17 @@ public:
         currentIndependentVariable_ = lastIndependentVariable_;
         currentState_ = lastState_;
         return true;
+    }
+
+    //! Modify the state at the current value of the independent variable.
+    /*!
+     * Modify the state at the current value of the independent variable.
+     * \param newState The new state to set the current state to.
+     */
+    void modifyCurrentState( const StateType& newState )
+    {
+        this->currentState_ = newState;
+        this->lastIndependentVariable_ = currentIndependentVariable_;
     }
 
 protected:
