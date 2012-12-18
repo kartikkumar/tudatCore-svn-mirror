@@ -1,6 +1,6 @@
 Name              : L. Abdulkadir
 Affiliation       : Delft University of Technology
-E-mail address    : L.Abdulkadir@student.tudelft.nl
+E-mail address    : Available upon request
 
 Name              : S. Billemont
 Affiliation       : Delft University of Technology
@@ -12,11 +12,11 @@ E-mail address    : d.dirkx@tudelft.nl
 
 Name              : F. M. Engelen
 Affiliation       : Delft University of Technology
-E-mail address    : F.M.Engelen@student.tudelft.nl
+E-mail address    : Available upon request
 
 Name              : E. Iorfida
 Affiliation       : Delft University of Technology
-E-mail address    : elisabetta_iorfida@yahoo.it
+E-mail address    : Available upon request
 
 Name              : K. Kumar
 Affiliation       : Delft University of Technology
@@ -24,7 +24,7 @@ E-mail address    : K.Kumar@tudelft.nl
 
 Name              : J. Leloux
 Affiliation       : Delft University of Technology
-E-mail address    : J.Leloux@tudelft.nl
+E-mail address    : Available upon request
 
 Name              : J. Melman
 Affiliation       : Delft University of Technology
@@ -36,4 +36,4 @@ E-mail address    : B.TongMinh@student.tudelft.nl
 
 Name              : S.M. Persson
 Affiliation       : McGill University, Department of Mechanical Engineering
-E-mail address    : mikael.s.persson@gmail.com
+E-mail address    : Available upon request
