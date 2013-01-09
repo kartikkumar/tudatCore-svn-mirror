@@ -26,6 +26,7 @@
  *      YYMMDD    Author            Comment
  *      120202    S. Billemont      File created.
  *      120401    S. Billemont      Updated test macros to work with Boost 1.49 and 1.48.
+ *      130108    S. Billemont      Updated test macros to output data in scientific notation.
  *
  *    References
  *
@@ -50,7 +51,7 @@
 //! Default message to display for matrix checks. If you define this, then that format will be used
 #ifndef _TUDAT_CHECK_MATRIX_MESSAGE
 #define _TUDAT_CHECK_MATRIX_MESSAGE                                                             \
-    "Element [%d, %d] not within expected tolerance: expected %f, was %f, tolerance %f %s."
+"Element [%d, %d] not within expected tolerance (delta %e): expected %f, was %f, tolerance %e %s."
 #endif
 
 //! Creates error message used by TUDAT_CHECK_MATRIX_CLOSE and TUDAT_CHECK_MATRIX_CLOSE_FRACTION.
@@ -59,7 +60,13 @@
  */
 #define _TUDAT_CHECK_MESSAGE( L, R, T, additionalString )                                       \
     boost::str( boost::format( _TUDAT_CHECK_MATRIX_MESSAGE )                                    \
-            % row % col % L.coeff( row, col ) % R.coeff( row, col ) % T % additionalString )
+            % row                                                                               \
+            % col                                                                               \
+            % std::abs(L.coeff( row, col ) - R.coeff( row, col ))                               \
+            % L.coeff( row, col )                                                               \
+            % R.coeff( row, col )                                                               \
+            % T                                                                                 \
+            % additionalString )
 
 //! This macro imports the correct boost namespace for percent_tolerance.
 /*!

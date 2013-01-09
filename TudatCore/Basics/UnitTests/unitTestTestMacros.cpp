@@ -26,8 +26,12 @@
  *      YYMMDD    Author            Comment
  *      120202    S. Billemont      File created.
  *      120401    S. Billemont      Adapted unit test to include pattern generation.
+ *      130108    S. Billemont      Adapted unit test to address cross-platform scientific notation
+ *                                  differences.
  *
  *    References
+ *
+ *    Notes
  *
  */
 
@@ -40,9 +44,7 @@
  *    Be sure that all tests behave as they should and do the following:
  *  <ul>
  *    <li>Enable the GENERATE_PATTERN macro (set to 1)</li>
- *    <li>Run the test: ./unitTest_testMacros.exe</li>
- *    <li>Remove the first line from the regenerated pattern file</li>
- *    <li>Overwrite the old unitTest_testMacros.pattern with the new one</li>
+ *    <li>Run the test: ./test_core_TestBasics (This overwrites the test pattern file)</li>
  *    <li>Disable the GENERATE_PATTERN macro (set to 0)</li>
  * </ul>
  */
@@ -60,6 +62,7 @@
 #include <fstream>
 #include <iostream>
 
+#include <boost/regex.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 #include <boost/test/output_test_stream.hpp>
@@ -81,8 +84,11 @@ using namespace boost::unit_test;
 using namespace boost::test_tools;
 
 //! New formatter for the boost test messages.
-struct logMessageFormatter : public output::compiler_log_formatter
+struct LogMessageFormatter : public output::compiler_log_formatter
 {
+    static const boost::regex positive_exponent;
+    static const boost::regex negative_exponent;
+
     // Suppress the file and log level:
     void log_entry_start( std::ostream& output, log_entry_data const& entry_data, log_entry_types )
     {
@@ -90,16 +96,44 @@ struct logMessageFormatter : public output::compiler_log_formatter
         output << entry_data.m_line_num << ": ";
     }
 
+    void log_entry_value( std::ostream& output, boost::unit_test::const_string value )
+    {
+        // Make the exponent notations more platform resistant.
+        std::string new_value( value.begin( ), value.end( ) );
+        new_value = boost::regex_replace( new_value, positive_exponent, "E" );
+        new_value = boost::regex_replace( new_value, negative_exponent, "E-" );
+        
+        // Append new message to the output stream.
+        output << new_value;
+    }
+
+    void log_entry_value( std::ostream& output, lazy_ostream const& value )
+    {
+        // Convert the stream text to a basic string.
+        std::ostringstream stream;
+        stream << value;
+        std::string new_value = stream.str( );
+
+        // Make the exponent notations more platform resistant.
+        new_value = boost::regex_replace( new_value, positive_exponent, "E" );
+        new_value = boost::regex_replace( new_value, negative_exponent, "E-" );
+
+        // Append new message to the output stream
+        output << new_value;
+    }
+
     void print_prefix( std::ostream&, boost::unit_test::const_string, std::size_t ) { }
 };
+
+const boost::regex LogMessageFormatter::positive_exponent( "[eE]\\+?0*(?=\\d)",
+                                                           boost::regex::perl );
+const boost::regex LogMessageFormatter::negative_exponent( "[eE]\\-0*(?=\\d)",
+                                                           boost::regex::perl );
 
 //! Location of file which contains the exact output which has to be produced for test to succeed.
 std::string match_file_name;
 
-//! Location to save the output of this test.
-std::string save_file_name( "unitTest_testMacros.pattern" );
-
-//! Get the output test stream, stream of the test output to the test output content file
+//! Get the output test stream, stream of the test output to the test output content file.
 boost::test_tools::output_test_stream& outputTestStream( )
 {
     // Singleton output stream.
@@ -107,14 +141,23 @@ boost::test_tools::output_test_stream& outputTestStream( )
 
     if( !inst )
     {
+        // Name of the pattern file to check against.
+        match_file_name = tudat::input_output::getCoreRootPath( ) +
+            "Basics/UnitTests/unitTestTestMacros.pattern";
+
+#ifdef GENERATE_PATTERN
+        bool save_pattern = true;
+#else  // GENERATE_PATTERN
+        bool save_pattern = false;
+#endif // GENERATE_PATTERN
+
         // Reinitialize the first time.
         inst.reset( 
-            framework::master_test_suite().argc <= 1
-            ? new output_test_stream( runtime_config::save_pattern( )
-                                      ? save_file_name : match_file_name,
-                                      !runtime_config::save_pattern( ) )
-            : new output_test_stream( framework::master_test_suite( ).argv[ 1 ],
-                                      !runtime_config::save_pattern( ) ) );
+            framework::master_test_suite( ).argc <= 1
+                ? new output_test_stream( match_file_name, !save_pattern )
+                : new output_test_stream( framework::master_test_suite( ).argv[ 1 ],
+                                          !save_pattern )
+        );
     }
 
     return *inst;
@@ -122,45 +165,39 @@ boost::test_tools::output_test_stream& outputTestStream( )
 
 //! Define a new type of test to test the test cases.
 //  see Boost.test: boost/libs/test/test/test_tools_test.cpp
-#if ( !GENERATE_PATTERN )
-    // RUN TEST MODE.
-    #define TEST_CASE( name )                                       \
-    void name ## _impl( );                                          \
-    void name ## _impl_defer( );                                    \
+#define TEST_CASE( name )                                           \
+void name ## _impl( );                                              \
+void name ## _impl_defer( );                                        \
                                                                     \
-    BOOST_AUTO_TEST_CASE( name )                                    \
-    {                                                               \
-        test_case* impl = make_test_case( &name ## _impl, #name );  \
+BOOST_AUTO_TEST_CASE( name )                                        \
+{                                                                   \
+    test_case* impl = make_test_case( &name ## _impl, #name );      \
                                                                     \
-        unit_test_log.set_stream( outputTestStream() );             \
-        unit_test_log.set_threshold_level( log_nothing );           \
-        unit_test_log.set_formatter( new logMessageFormatter );     \
-        framework::run( impl );                                     \
+    unit_test_log.set_stream( outputTestStream( ) );                \
+    unit_test_log.set_threshold_level( log_nothing );               \
+    unit_test_log.set_formatter( new LogMessageFormatter );         \
+    framework::run( impl );                                         \
                                                                     \
-        unit_test_log.set_threshold_level(                          \
-            runtime_config::log_level( ) != invalid_log_level       \
-                ? runtime_config::log_level( )                      \
-                : log_all_errors );                                 \
-        unit_test_log.set_format( runtime_config::log_format( ) );  \
-        unit_test_log.set_stream( std::cout );                      \
-        BOOST_CHECK( outputTestStream( ).match_pattern( ) );        \
-    }                                                               \
+    unit_test_log.set_threshold_level(                              \
+        runtime_config::log_level( ) != invalid_log_level           \
+            ? runtime_config::log_level( )                          \
+            : log_all_errors );                                     \
+    unit_test_log.set_format( runtime_config::log_format( ) );      \
+    unit_test_log.set_stream( std::cout );                          \
+    BOOST_CHECK( outputTestStream( ).match_pattern( ) );            \
+}                                                                   \
                                                                     \
-    void name ## _impl( )                                           \
-    {                                                               \
-        unit_test_log.set_threshold_level( log_all_errors );        \
+void name ## _impl( )                                               \
+{                                                                   \
+    unit_test_log.set_threshold_level( log_all_errors );            \
                                                                     \
-        name ## _impl_defer( );                                     \
+    name ## _impl_defer( );                                         \
                                                                     \
-        unit_test_log.set_threshold_level( log_nothing );           \
-    }                                                               \
+    unit_test_log.set_threshold_level( log_nothing );               \
+}                                                                   \
                                                                     \
-    void name ## _impl_defer( )                                     \
-    /**/
-#else
-    // GENERATE PATTERN MODE.
-    #define TEST_CASE( name )  BOOST_AUTO_TEST_CASE( name )
-#endif
+void name ## _impl_defer( )                                         \
+/**/
 
 /************************************************************************/
 /* ACTUAL TESTS:                                                        */
@@ -214,7 +251,16 @@ TEST_CASE( test_TUDAT_CHECK_MATRIX_CLOSE_elements )
     TUDAT_CHECK_MATRIX_CLOSE_FRACTION( Eigen::Vector2d( 0.0,  1.112e-10 ),
                                        Eigen::Vector2d( -1e-10, 1.111e-10 ),
                                        0.1 );
-    
+
+    // FAIL ON [0,0] and [0,1].
+    TUDAT_CHECK_MATRIX_CLOSE( Eigen::Vector2d( 0.0,  1.112e-10 ),
+                              Eigen::Vector2d( -1e-10, 1.111e-10 ),
+                              0 );
+
+    TUDAT_CHECK_MATRIX_CLOSE_FRACTION( Eigen::Vector2d( 0.0,  1.112e-10 ),
+                                       Eigen::Vector2d( -1e-10, 1.111e-10 ),
+                                       0 );
+
     // FAIL ON [2,0].
     TUDAT_CHECK_MATRIX_CLOSE( Eigen::Vector3d( 1.0, 1.0002, 1.0 ),
                               Eigen::Vector3d( 1.0001, 1.0001, 1.0002 ),
@@ -235,25 +281,4 @@ TEST_CASE( test_TUDAT_CHECK_MATRIX_CLOSE_elements )
         ( Eigen::MatrixXd( 2, 2 ) << 0.123456, 0.123456, 1.23456e28, 1.23456e-10 ).finished( ),
         ( Eigen::MatrixXd( 2, 2 ) << 0.123457, -0.123457, 1.23457e28, 1.23457e-10 ).finished( ),
         1.0e-3 );
-}
-
-// Entry point for the test, like  '#define BOOST_TEST_MAIN' but allows for some additional logic
-test_suite* init_unit_test_suite( int argc, char* argv[ ] )
-{   
-    // Name of the pattern file to check against.
-    match_file_name = tudat::input_output::getCoreRootPath( ) +
-            "Basics/UnitTests/unitTestTestMacros.pattern";
-
-    // Macro setting the correct message formatter and output stream for generating the pattern
-    // file.
-    #if GENERATE_PATTERN
-        // Bind a new log formatter and output the pattern file.
-        // TODO, find a nice way without "new".
-        unit_test_log.set_formatter( new logMessageFormatter );
-        std::fstream* logFile = new std::fstream( );
-        logFile->open( match_file_name.c_str( ) );
-        unit_test_log.set_stream( *logFile );
-    #endif
-
-    return 0;
 }

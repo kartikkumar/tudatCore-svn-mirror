@@ -26,6 +26,7 @@
  #      YYMMDD    Author            Comment
  #      110820    S. Billemont      File created.
  #      121120    S. Billemont      Bundled unit tests to improve performance.
+ #      130108    S. Billemont      Removed "special" case for test macros unit test.
  #
  #    References
  #
@@ -46,6 +47,7 @@ set(BASICSDIR_HEADERS
 # Add unit test files.
 set(BASICSDIR_UNITTESTS
   "${SRCROOT}${BASICSDIR}/UnitTests/unitTestBasics.cpp"
+  "${SRCROOT}${BASICSDIR}/UnitTests/unitTestTestMacros.cpp"
 )
 
 # Add static libraries.
@@ -56,8 +58,3 @@ setup_tudat_library_target(tudat_core_basics "${SRCROOT}${BASICSDIR}")
 add_executable(test_core_TestBasics ${BASICSDIR_UNITTESTS})
 setup_custom_test_program(test_core_TestBasics "${SRCROOT}${BASICSDIR}")
 target_link_libraries(test_core_TestBasics tudat_core_basics ${Boost_LIBRARIES})
-
-# Add TestMacros unit test, this one is special because it requires a bootstapping environment.
-add_executable(test_core_TestMacros "${SRCROOT}${BASICSDIR}/UnitTests/unitTestTestMacros.cpp")
-setup_custom_test_program(test_core_TestMacros "${SRCROOT}${BASICSDIR}")
-target_link_libraries(test_core_TestMacros tudat_core_basics ${Boost_LIBRARIES})
