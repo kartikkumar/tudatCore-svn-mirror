@@ -32,6 +32,7 @@
  *      120203    K. Kumar          Added missing specific gas constant value; need unit test.
  *      121212    K. Kumar          Migrated namespace to directory-based protocol and added
  *                                  backwards compatibility.
+ *      130111    D. Dirkx          Added Planck, Boltzmann, and Stefan-Boltzmann constants.
  *
  *    References
  *      Standish, E.M. (1995) "Report of the IAU WGAS Sub-Group on Numerical Standards",
@@ -43,6 +44,10 @@
  *          2006.
  *      NASA. Astrodynamics Constants, http://ssd.jpl.nasa.gov/?constants#ref, 6th September, 2011,
  *          last accessed: 21st February, 2012.
+ *      NIST. NIST reference on constants, units and uncertainty.
+ *          http://physics.nist.gov/cuu/Constants/index.html, last accessed: 11th January, 2013.
+ *      Wolfram Research, http://scienceworld.wolfram.com/physics/Stefan-BoltzmannLaw.html,
+ *          last accessed: 11th January 2013.
  *
  *    Notes
  *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
@@ -52,6 +57,11 @@
 
 #ifndef TUDAT_CORE_PHYSICAL_CONSTANTS_H
 #define TUDAT_CORE_PHYSICAL_CONSTANTS_H
+
+#include <cmath>
+
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
+
 
 namespace tudat
 {
@@ -117,9 +127,32 @@ const static double ASTRONOMICAL_UNIT = 1.49597870691e11;
 
 //! Specific gas constant of air.
 /*!
- * The specific gas constant of air in J per kg Kelvin (J/kg K) (Anderson, 2006).
+ * The specific gas constant of air in J per kg Kelvin (J/(kg K)) (Anderson, 2006).
  */
 const static double SPECIFIC_GAS_CONSTANT_AIR = 2.87e2;
+
+//! Planck constant.
+/*!
+ * Planck's constant in m^{2} kg/s, (NIST, 2013).
+ */
+const static double PLANCK_CONSTANT = 6.62606957E-34;
+
+//! Boltzmann constant.
+/*!
+ * The Boltzmann constant (gas constant per particle) in  m^{2} kg / ( s^{2} K ), (NIST, 2013).
+ */
+const static double BOLTZMANN_CONSTANT = 1.3806488E-23;
+
+//! Stefan-Boltzmann constant.
+/*!
+ * Stefan-Boltzmann constant, used for calculating black body radiation intensity, (Wolfram, 2013)
+ * in J / (s m^{2} K{4} )
+ */
+const static double STEFAN_BOLTZMANN_CONSTANT = 2.0 *
+        std::pow( basic_mathematics::mathematical_constants::PI, 5.0 ) *
+        std::pow( BOLTZMANN_CONSTANT, 4.0 ) /
+        ( 15.0 * SPEED_OF_LIGHT * SPEED_OF_LIGHT *
+          PLANCK_CONSTANT * PLANCK_CONSTANT * PLANCK_CONSTANT );
 
 } // namespace physical_constants
 } // namespace basic_astrodynamics

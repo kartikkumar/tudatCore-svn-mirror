@@ -33,6 +33,8 @@
  *      120127    K. Kumar          Transferred unit tests over to Boost unit test framework.
  *      120128    K. Kumar          Changed BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION for unit test
  *                                  comparisons.
+ *      130111    D. Dirkx          Added unit tests for Planck, Boltzmann, and Stefan-Boltzmann
+ *                                  constants.
  *
  *    References
  *
@@ -45,6 +47,7 @@
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 #include "TudatCore/Astrodynamics/BasicAstrodynamics/physicalConstants.h"
 
 namespace tudat
@@ -84,6 +87,25 @@ BOOST_AUTO_TEST_CASE( testOtherConstants )
     // Test for astronomical unit.
     BOOST_CHECK_CLOSE_FRACTION( ASTRONOMICAL_UNIT, 1.49597870691e11,
                                 std::numeric_limits< double >::epsilon( ) );
+
+    // Test for Planck constant.
+    BOOST_CHECK_CLOSE_FRACTION( PLANCK_CONSTANT, 6.62606957E-34,
+                                std::numeric_limits< double >::epsilon( ) );
+
+    // Test for Boltzmann constant.
+    BOOST_CHECK_CLOSE_FRACTION( BOLTZMANN_CONSTANT, 1.3806488E-23,
+                                std::numeric_limits< double >::epsilon( ) );
+
+    // Test for Stefan-Boltzmann constant relation (derived from Planck and Boltzmann constants).
+    BOOST_CHECK_CLOSE_FRACTION( STEFAN_BOLTZMANN_CONSTANT, 2.0 * std::pow(
+                                    basic_mathematics::mathematical_constants::PI, 5.0 ) *
+                                std::pow( BOLTZMANN_CONSTANT, 4.0 ) /
+                                ( 15 * SPEED_OF_LIGHT * SPEED_OF_LIGHT *
+                                  PLANCK_CONSTANT * PLANCK_CONSTANT * PLANCK_CONSTANT ),
+                                std::numeric_limits< double >::epsilon( ) );
+
+    // Test for Stefan-boltzmann constant value (NIST, 2013)
+    BOOST_CHECK_CLOSE_FRACTION( STEFAN_BOLTZMANN_CONSTANT, 5.670373E-8, 1.0E-7 );
 }
 
 //! Check if the time constants have the expected values.
