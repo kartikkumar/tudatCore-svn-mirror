@@ -28,6 +28,7 @@
  #      120127    K. Kumar          Adapted for Tudat Core.
  #      120127    K. Kumar          Added stream filter code and unit test.
  #      121120    S. Billemont      Bundled unit tests to improve performance.
+ #      130109    K. Kumar          Ported matrix text file reader from Tudat.
  #
  #    References
  #
@@ -36,12 +37,14 @@
 
 # Add source files.
 set(INPUTOUTPUT_SOURCES
+  "${SRCROOT}${INPUTOUTPUTDIR}/matrixTextFileReader.cpp"
   "${SRCROOT}${INPUTOUTPUTDIR}/streamFilters.cpp"
 )
 
 # Add header files.
 set(INPUTOUTPUT_HEADERS 
   "${SRCROOT}${INPUTOUTPUTDIR}/basicInputOutput.h"
+  "${SRCROOT}${INPUTOUTPUTDIR}/matrixTextFileReader.h"
   "${SRCROOT}${INPUTOUTPUTDIR}/streamFilters.h"
 )
 
@@ -49,6 +52,7 @@ set(INPUTOUTPUT_HEADERS
 set(INPUTOUTPUT_UNITTESTS 
   "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestInputOutput.cpp"
   "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp"
+  "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestMatrixTextFileReader.cpp"
   "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestStreamFilters.cpp"
 )
 
