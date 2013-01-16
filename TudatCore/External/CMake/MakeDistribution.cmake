@@ -26,6 +26,7 @@
  #      YYMMDD    Author            Comment
  #      120210    B. Tong Minh      File created.
  #      120503    B. Tong Minh      Improved Boost detection routines.
+ #      130116    K. Kumar          Removed bundling of Tudat Core static libraries.
  #
  #    References
  #
@@ -117,11 +118,6 @@ else()
 
     install(CODE "message(FATAL_ERROR \"${BOOST_ABI_ERROR}\")")
 endif()
-
-# Install the Tudat Core static library.
-install(TARGETS tudat_core
-    ARCHIVE DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/lib"
-)
 
 # Install the Tudat Core project tree.
 install(DIRECTORY "${SRCROOT}/"
