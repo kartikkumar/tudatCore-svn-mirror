@@ -28,217 +28,146 @@
  *      120207    K. Kumar          Adapted to use modified benchmark functions in Tudat Core.
  *      120213    K. Kumar          Modified getCurrentInterval() to getIndependentVariable();
  *                                  transferred to Boost unit test framework.
- *      121212    K. Kumar          Migrated code from Tudat.
+ *      121106    K. Kumar          Rewrote unit tests to use direct benchmark data instead of
+ *                                  using performance tests.
+ *      130109    K. Kumar          Migrated to Tudat Core.
  *
  *    References
  *      Burden, R.L., Faires, J.D. Numerical Analysis, 7th Edition, Books/Cole, 2001.
+ *      The MathWorks, Inc. Symbolic Math Toolbox, 2012.
  *
  *    Notes
  *
  */
 
-#include <limits>
-#include <map>
+#include <string>
 
+#include <boost/make_shared.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include <Eigen/Core>
+
+#include "TudatCore/InputOutput/basicInputOutput.h"
+#include "TudatCore/InputOutput/matrixTextFileReader.h"
+
 #include "TudatCore/Mathematics/NumericalIntegrators/euler.h"
-#include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
+#include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
+#include "TudatCore/Mathematics/NumericalIntegrators/reinitializableNumericalIntegrator.h"
+#include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/numericalIntegratorTests.h"
+#include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/numericalIntegratorTestFunctions.h"
 
 namespace tudat
 {
 namespace unit_tests
 {
 
+using numerical_integrators::EulerIntegratorXd;
+using numerical_integrators::NumericalIntegratorXdPointer;
+using numerical_integrators::ReinitializableNumericalIntegratorXdPointer;
+
+using numerical_integrator_test_functions::computeNonAutonomousModelStateDerivative;
+
 BOOST_AUTO_TEST_SUITE( test_euler_integrator )
 
-using tudat::numerical_integrators::EulerIntegratorXd;
-
-//! Test the validity of the Euler integrator.
-/*!
- * Tests the validity of the Euler integrator.
- * \param stateDerivativeFunction Function pointer to the state derivative function.
- * \param intervalStart The start of the integration interval.
- * \param intervalEnd The end of the integration interval.
- * \param stepSize The step size to take.
- * \param initialState_ The initial state.
- * \param expectedState Expected final state.
- * \param tolerance Tolerance when comparing.
- * \return True if actual final state equals the expected final state within the specified
- *          tolerance.
- */
-bool testValidityOfEulerIntegrator(
-        const EulerIntegratorXd::StateDerivativeFunction& stateDerivativeFunction,
-        const double intervalStart, const double intervalEnd, const double stepSize,
-        const Eigen::VectorXd& initialState_, const Eigen::VectorXd expectedState,
-        const double tolerance )
+//! Test Euler integrator using benchmark data from (The MathWorks, 2012).
+BOOST_AUTO_TEST_CASE( testEulerIntegratorUsingMatlabData )
 {
-    // Create forward Euler, fixed stepsize integrator.
+    using namespace numerical_integrator_tests;
+
+    // Read in benchmark data (generated using Symbolic Math Toolbox in Matlab
+    // (The MathWorks, 2012)). This data is generated using the EULER1 numerical integrator.
+    const std::string pathToForwardIntegrationOutputFile = input_output::getCoreRootPath( )
+            + "/Mathematics/NumericalIntegrators/UnitTests/matlabOutputEulerForwards.txt";
+    const std::string pathToBackwardIntegrationOutputFile = input_output::getCoreRootPath( )
+            + "/Mathematics/NumericalIntegrators/UnitTests/matlabOutputEulerBackwards.txt";
+    const std::string pathToDiscreteEventIntegrationOutputFile = input_output::getCoreRootPath( )
+            + "/Mathematics/NumericalIntegrators/UnitTests/matlabOutputEulerDiscreteEvent.txt";
+
+    // Store benchmark data in matrix.
+    const Eigen::MatrixXd matlabForwardIntegrationData =
+            input_output::readMatrixFromFile( pathToForwardIntegrationOutputFile, "," );
+    const Eigen::MatrixXd matlabBackwardIntegrationData =
+            input_output::readMatrixFromFile( pathToBackwardIntegrationOutputFile, "," );
+    const Eigen::MatrixXd matlabDiscreteEventIntegrationData =
+            input_output::readMatrixFromFile( pathToDiscreteEventIntegrationOutputFile, "," );
+
+    // Case 1: Execute integrateTo() to integrate one step forward in time.
     {
-        EulerIntegratorXd integrator( stateDerivativeFunction, intervalStart, initialState_ );
+        // Declare integrator with all necessary settings.
+        NumericalIntegratorXdPointer integrator
+                = boost::make_shared< EulerIntegratorXd >(
+                    &computeNonAutonomousModelStateDerivative,
+                    matlabForwardIntegrationData( FIRST_ROW, TIME_COLUMN_INDEX ),
+                    ( Eigen::VectorXd( 1 )
+                      << matlabForwardIntegrationData( FIRST_ROW,
+                                                       STATE_COLUMN_INDEX ) ).finished( ) );
 
-        Eigen::VectorXd finalState = integrator.integrateTo( intervalEnd, stepSize );
-
-        // Compute differences between computed and expected interval end and generate
-        // cerr statement if test fails.
-        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd ) / intervalEnd >
-             std::numeric_limits< double >::epsilon( ) )
-        {
-            return false;
-        }
-
-        // Compute differences between computed and expected results and generate
-        // cerr statement if test fails.
-        if ( !expectedState.isApprox( finalState, tolerance ) )
-        {
-            return false;
-        }
+        executeOneIntegrateToStep( matlabForwardIntegrationData, 1.0e-15, integrator );
     }
 
-    // Try the same again, but in two steps
+    // Case 2: Execute performIntegrationStep() to perform multiple integration steps until final
+    //         time.
     {
-        EulerIntegratorXd integrator( stateDerivativeFunction, intervalStart, initialState_ );
+        // Declare integrator with all necessary settings.
+        NumericalIntegratorXdPointer integrator
+                = boost::make_shared< EulerIntegratorXd >(
+                    &computeNonAutonomousModelStateDerivative,
+                    matlabForwardIntegrationData( FIRST_ROW, TIME_COLUMN_INDEX ),
+                    ( Eigen::VectorXd( 1 )
+                      << matlabForwardIntegrationData( FIRST_ROW,
+                                                       STATE_COLUMN_INDEX ) ).finished( ) );
 
-        const double intermediateIndependentVariable
-                = intervalStart + ( intervalEnd - intervalStart ) / 2.0;
-
-        const Eigen::VectorXd intermediateState = integrator.integrateTo(
-                    intermediateIndependentVariable, stepSize );
-
-        // Compute differences between computed and expected interval end and generate
-        // cerr statement if test fails.
-        if ( std::fabs( integrator.getCurrentIndependentVariable( )
-                        - intermediateIndependentVariable ) /
-             intermediateIndependentVariable > std::numeric_limits< double >::epsilon( ) )
-        {
-            return false;
-        }
-
-        // Integrate to the end.
-        Eigen::VectorXd finalState = integrator.integrateTo( intervalEnd, stepSize );
-
-        // Compute differences between computed and expected interval end and generate
-        // cerr statement if test fails.
-        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd ) / intervalEnd >
-             std::numeric_limits< double >::epsilon( ) )
-        {
-            return false;
-        }
-
-        // Compute differences between computed and expected results and generate
-        // cerr statement if test fails.
-        if ( !expectedState.isApprox( finalState, tolerance ) )
-        {
-            return false;
-        }
-
-        integrator.performIntegrationStep( stepSize );
-        if ( !integrator.rollbackToPreviousState( ) )
-        {
-            return false;
-        }
-
-        if ( std::fabs( integrator.getCurrentIndependentVariable( ) - intervalEnd ) /
-             intervalEnd > std::numeric_limits< double >::epsilon( ) )
-        {
-            return false;
-        }
-        if ( integrator.getCurrentState( ) != finalState )
-        {
-            return false;
-        }
-
-        if ( integrator.rollbackToPreviousState( ) )
-        {
-            return false;
-        }
+        performIntegrationStepToSpecifiedTime( matlabForwardIntegrationData,
+                                               1.0e-15,  1.0e-14, integrator );
     }
 
-    return true;
-}
-
-//! Test different types of states and state derivatives.
-/*!
- * Test if different types of states and state derivatives work. If something
- * is broken, then a compile time error will be generated.
- * \return Unconditionally true.
- */
-bool testDifferentStateAndStateDerivativeTypes( )
-{
-    using tudat::unit_tests::computeZeroStateDerivative;
-    tudat::numerical_integrators::EulerIntegrator
-            < double, Eigen::Vector3d, Eigen::VectorXd > integrator(
-                &computeZeroStateDerivative, 0.0, Eigen::Vector3d::Zero( ) );
-
-    integrator.integrateTo( 1.0, 0.1 );
-
-    // No need to test anything, this is just to check compile time errors.
-    return true;
-}
-
-//! Test if the Euler integrator is working correctly.
-BOOST_AUTO_TEST_CASE( testEulerIntegrator )
-{
-    using namespace tudat::numerical_integrators;
-    std::map< BenchmarkFunctions, BenchmarkFunction >& benchmarkFunctions =
-            getBenchmarkFunctions( );
-
-    // Case 1: test with x_dot = 0, which results in x_f = x_0.
+    // Case 3: Execute performIntegrationStep() to perform multiple integration steps until initial
+    //         time (backwards).
     {
-        BOOST_CHECK( testValidityOfEulerIntegrator(
-                         benchmarkFunctions[ Zero ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Zero ].intervalStart_,
-                         benchmarkFunctions[ Zero ].intervalEnd_, 0.2,
-                         benchmarkFunctions[ Zero ].initialState_,
-                         benchmarkFunctions[ Zero ].finalState_,
-                         std::numeric_limits< double >::epsilon( ) ) );
+        // Declare integrator with all necessary settings.
+        NumericalIntegratorXdPointer integrator
+                = boost::make_shared< EulerIntegratorXd >(
+                    &computeNonAutonomousModelStateDerivative,
+                    matlabBackwardIntegrationData( FIRST_ROW, TIME_COLUMN_INDEX ),
+                    ( Eigen::VectorXd( 1 )
+                      << matlabBackwardIntegrationData( FIRST_ROW,
+                                                        STATE_COLUMN_INDEX ) ).finished( ) );
+
+        performIntegrationStepToSpecifiedTime( matlabBackwardIntegrationData,
+                                               1.0e-15, 1.0e-14, integrator );
     }
 
-    // Case 2: test with x_dot = 1, which results in x_f = x_0 + t_f.
+    // Case 4: Execute integrateTo() to integrate to specified time in one step.
     {
-        BOOST_CHECK( testValidityOfEulerIntegrator(
-                         benchmarkFunctions[ Constant ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Constant ].intervalStart_,
-                         benchmarkFunctions[ Constant ].intervalEnd_, 0.2,
-                         benchmarkFunctions[ Constant ].initialState_,
-                         benchmarkFunctions[ Constant ].finalState_,
-                         std::numeric_limits< double >::epsilon( ) ) );
+        // Declare integrator with all necessary settings.
+        NumericalIntegratorXdPointer integrator
+                = boost::make_shared< EulerIntegratorXd >(
+                    &computeNonAutonomousModelStateDerivative,
+                    matlabForwardIntegrationData( FIRST_ROW, TIME_COLUMN_INDEX ),
+                    ( Eigen::VectorXd( 1 )
+                      << matlabForwardIntegrationData( FIRST_ROW,
+                                                       STATE_COLUMN_INDEX ) ).finished( ) );
+
+        executeIntegrateToToSpecifiedTime( matlabForwardIntegrationData, 1.0e-14, integrator,
+                                           matlabForwardIntegrationData(
+                                               matlabForwardIntegrationData.rows( ) - 1,
+                                               TIME_COLUMN_INDEX ) );
     }
 
-    // Case 3: test with x_dot = x, which results in x_f = x0 * exp( t_f ).
+    // Case 5: Execute performIntegrationstep() to integrate to specified time in multiple steps,
+    //         including discrete events.
     {
-        BOOST_CHECK( testValidityOfEulerIntegrator(
-                         benchmarkFunctions[ Exponential ].pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ Exponential ].intervalStart_,
-                         benchmarkFunctions[ Exponential ].intervalEnd_, 0.0001,
-                         benchmarkFunctions[ Exponential ].initialState_,
-                         benchmarkFunctions[ Exponential ].finalState_, 1.0e-2 ) );
-    }
+        // Declare integrator with all necessary settings.
+        ReinitializableNumericalIntegratorXdPointer integrator
+                = boost::make_shared< EulerIntegratorXd >(
+                    &computeNonAutonomousModelStateDerivative,
+                    matlabDiscreteEventIntegrationData( FIRST_ROW, TIME_COLUMN_INDEX ),
+                    ( Eigen::VectorXd( 1 )
+                      << matlabDiscreteEventIntegrationData( FIRST_ROW,
+                                                             STATE_COLUMN_INDEX ) ).finished( ) );
 
-    // Case 4: test with x_dot = x, but integrate backwards.
-    {
-        BOOST_CHECK( testValidityOfEulerIntegrator(
-                         benchmarkFunctions[ BackwardsExponential ]
-                         .pointerToStateDerivativeFunction_,
-                         benchmarkFunctions[ BackwardsExponential ].intervalStart_,
-                         benchmarkFunctions[ BackwardsExponential ].intervalEnd_, -0.0001,
-                         benchmarkFunctions[ BackwardsExponential ].initialState_,
-                         benchmarkFunctions[ BackwardsExponential ].finalState_, 1.0e-2 ) );
-    }
-
-    // Case 5: test with an example from Burden and Faires.
-    {
-        BOOST_CHECK( testValidityOfEulerIntegrator(
-                    benchmarkFunctions[ BurdenAndFaires ].pointerToStateDerivativeFunction_,
-                    benchmarkFunctions[ BurdenAndFaires ].intervalStart_,
-                    benchmarkFunctions[ BurdenAndFaires ].intervalEnd_, 0.001,
-                    benchmarkFunctions[ BurdenAndFaires ].initialState_,
-                    benchmarkFunctions[ BurdenAndFaires ].finalState_,  1.0e-2 ) );
-    }
-
-    // Case 6: test if difference in type between state and state derivative works.
-    {
-        BOOST_CHECK( testDifferentStateAndStateDerivativeTypes( ) );
+        performIntegrationStepToSpecifiedTimeWithEvents( matlabDiscreteEventIntegrationData,
+                                                         1.0e-15, 1.0e-13, integrator );
     }
 }
 

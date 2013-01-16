@@ -36,6 +36,7 @@
 # Add source files.
 set(NUMERICALINTEGRATORS_SOURCES
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.cpp"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/numericalIntegratorTests.cpp"
 )
 
 # Add header files.
@@ -44,7 +45,8 @@ set(NUMERICALINTEGRATORS_HEADERS
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/numericalIntegrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/reinitializableNumericalIntegrator.h"
   "${SRCROOT}${NUMERICALINTEGRATORSDIR}/rungeKutta4Integrator.h"
-  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/benchmarkFunctions.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/numericalIntegratorTests.h"
+  "${SRCROOT}${NUMERICALINTEGRATORSDIR}/UnitTests/numericalIntegratorTestFunctions.h"
 )
 
 # Add unit test files.
@@ -62,4 +64,4 @@ setup_tudat_library_target(tudat_core_numerical_integrators "${SRCROOT}${NUMERIC
 # Add unit tests.
 add_executable(test_core_NumericalIntegrators ${NUMERICALINTEGRATORS_UNITTESTS})
 setup_custom_test_program(test_core_NumericalIntegrators "${SRCROOT}${NUMERICALINTEGRATORSDIR}")
-target_link_libraries(test_core_NumericalIntegrators tudat_core_numerical_integrators ${Boost_LIBRARIES})
+target_link_libraries(test_core_NumericalIntegrators tudat_core_input_output tudat_core_numerical_integrators ${Boost_LIBRARIES})

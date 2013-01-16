@@ -36,6 +36,7 @@
  *
  */
 
+#include <cmath>
 #include <iostream>
 #include <limits>
 
@@ -44,8 +45,8 @@
 
 #include <Eigen/Core>
 
+#include "TudatCore/Basics/utilityMacros.h"
 #include "TudatCore/Mathematics/NumericalIntegrators/numericalIntegrator.h"
-#include "TudatCore/Mathematics/NumericalIntegrators/UnitTests/benchmarkFunctions.h"
 
 namespace tudat
 {
@@ -57,6 +58,20 @@ BOOST_AUTO_TEST_SUITE( test_numerical_integrator )
 
 //! Using declaration of the NumericalIntegrator.
 using tudat::numerical_integrators::NumericalIntegrator;
+
+//! State derivative function that always returns zero.
+/*!
+ * State derivative function that always returns a zero vector with length equal to the input.
+ * \param time Time at which the state derivative needs to be evaluated.
+ * \param state State at which the state derivative needs to be evalated.
+ * \return Zero vector with length equal to state.
+ */
+Eigen::VectorXd computeZeroStateDerivative( const double time,
+                                            const Eigen::VectorXd& state )
+{
+    TUDAT_UNUSED_PARAMETER( time );
+    return Eigen::VectorXd::Zero( state.rows( ) );
+}
 
 //! Dummy numerical integrator.
 /*!
@@ -72,9 +87,11 @@ public:
      * Default constructor, setting zeroDerivative as the state derivative function.
      */
     DummyNumericalIntegrator( const double intervalStart, const Eigen::VectorXd& initialState )
-        : NumericalIntegrator< double, Eigen::VectorXd, Eigen::VectorXd >(
-              &computeZeroStateDerivative ),  numberOfSteps( 0 ),
-          currentIndependentVariable_( intervalStart ),  currentState_( initialState ) { }
+        : NumericalIntegrator< >( &computeZeroStateDerivative ),
+          numberOfSteps( 0 ),
+          currentIndependentVariable_( intervalStart ),
+          currentState_( initialState )
+    { }
 
     //! Get step size of the next step.
     /*!
@@ -193,8 +210,7 @@ bool testIntegrateToFunction( const double intervalStart, const double intervalE
 BOOST_AUTO_TEST_CASE( testNumberOfStepsUsingNumericalIntegrator )
 {
     // Set random initial state.
-    Eigen::VectorXd initialState( 4 );
-    initialState << 0.34, 0.24, 0.76, 0.10;
+    Eigen::VectorXd initialState = ( Eigen::VectorXd( 4 ) << 0.34, 0.24, 0.76, 0.10 ).finished( );
 
     // Case 1: test number of steps for different start and end times.
     {
