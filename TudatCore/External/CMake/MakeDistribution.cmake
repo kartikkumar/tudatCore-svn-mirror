@@ -69,6 +69,7 @@ endif()
 # Detect the toolset.
 string(REGEX MATCH "-([^.-]*)" BOOST_TOOLSET "${BOOST_ABI_STRING}")
 set(BOOST_TOOLSET ${CMAKE_MATCH_1})
+
 if(BOOST_TOOLSET)
     if("${BOOST_TOOLSET}" STREQUAL "mt" OR "${BOOST_TOOLSET}" STREQUAL "${BOOST_ABI_TAG}")
         set(BOOST_TOOLSET "")
@@ -87,7 +88,7 @@ if(NOT BOOST_WITH_MT)
     install(CODE "message(FATAL_ERROR \"Making single-threaded distribution (ABI string: ${BOOST_ABI_STRING})\")")
 endif()
 
-if((APPLE AND NOT BOOST_ABI_TAG) OR (NOT APPLE AND "${BOOST_ABI_TAG}" STREQUAL "s"))
+if((APPLE AND "${BOOST_ABI_TAG}" STREQUAL "mt" ) OR (NOT APPLE AND "${BOOST_ABI_TAG}" STREQUAL "s"))
 else()
     string(REGEX MATCH "s" BOOST_ABI_STATIC "${BOOST_ABI_TAG}")
     string(REGEX MATCH "g" BOOST_ABI_DEBUG_STANDARD_LIBRARY "${BOOST_ABI_TAG}")
