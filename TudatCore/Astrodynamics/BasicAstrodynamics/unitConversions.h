@@ -1,4 +1,4 @@
-/*    Copyright (c) 2010-2012, Delft University of Technology
+/*    Copyright (c) 2010-2013, Delft University of Technology
  *    All rights reserved.
  *
  *    Redistribution and use in source and binary forms, with or without modification, are
@@ -50,6 +50,7 @@
  *    Notes
  *      The behaviour of the template conversion functions has not been tested for integer
  *      datatypes.
+ *
  *      Backwards compatibility of namespaces is implemented for Tudat Core 2 in this file. The
  *      code block marked "DEPRECATED!" at the end of the file should be removed in Tudat Core 3.
  *

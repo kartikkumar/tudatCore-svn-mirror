@@ -1,4 +1,4 @@
-/*    Copyright (c) 2010-2012 Delft University of Technology.
+/*    Copyright (c) 2010-2013 Delft University of Technology.
  *
  *    This software is protected by national and international copyright.
  *    Any unauthorized use, reproduction or modification is unlawful and
@@ -14,6 +14,9 @@
  *      120209    K. Kumar          File created.
  *
  *    References
+ *
+ *    Notes
+ *
  */
 
 #ifndef TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
@@ -59,14 +62,6 @@ namespace orbital_element_conversions
 
 } // namespace orbital_element_conversions
 
-//! Mathematics namespace.
-/*!
- * The mathematics namespace, contains the coordinate conversions namespace and functions
- * to generate random numbers and compute division modulo.
- */
-namespace mathematics
-{
-
 //! Coordinate conversions namespace.
 /*!
  * The coordinate conversions namespace contains free functions to convert between standard
@@ -108,8 +103,6 @@ namespace numerical_integrators
 
 } // namespace numerical_integrators
 
-} // namespace mathematics
-
 //! Physical constants namespace.
 /*!
  * The physical constants namespace includes selected constants commonly used in astrodynamics.
@@ -119,20 +112,15 @@ namespace physical_constants
 
 } // namespace physical_constants
 
+
+//! Unit tests namespace.
+/*!
+ * The unit tests namespace includes all unit test and associated code.
+ */
 namespace unit_tests
 {
 
 } // namespace unit_tests
-
-//! Astrodynamics namespace.
-/*!
- * The astrodynamics namespace contains functions to compute the two-body orbital period, angular
- * momentum, mean motion, Kepler energy and synodic period.
- */
-namespace astrodynamics
-{
-
-} // namespace astrodynamics
 
 //! Unit conversions namespace.
 /*!
