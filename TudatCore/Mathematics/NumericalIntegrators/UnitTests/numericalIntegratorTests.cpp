@@ -241,7 +241,7 @@ void performIntegrationStepToSpecifiedTimeWithEvents(
              < std::numeric_limits< double >::min( ) )
         {
             BOOST_CHECK_SMALL( integrator->getCurrentIndependentVariable( ),
-                               std::numeric_limits< double >::min( ) );
+                               std::numeric_limits< double >::epsilon( ) );
         }
 
         else
