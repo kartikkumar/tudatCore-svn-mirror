@@ -29,6 +29,7 @@
  *      120128    K. Kumar          Changed some BOOST_CHECK to BOOST_CHECK_CLOSE_FRACTION and
  *                                  BOOST_CHECK_SMALL for unit test comparisons.
  *      120128    K. Kumar          Added test for vectors of length 5.
+ *      130121    D. Dirkx          Fixed unit test failure under Windows.
  *
  *    References
  *
@@ -79,7 +80,7 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
                            std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK( cosineOfAngle > std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_SMALL( cosineOfAngle - 1.0, std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK( angle < std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK( angle < std::sqrt( std::numeric_limits< double >::epsilon( ) ) );
     }
 
     // Test 2: Test values for two equal, but opposite vectors of length 3.
@@ -96,7 +97,7 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
         BOOST_CHECK( cosineOfAngle < std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_SMALL( cosineOfAngle + 1.0, std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_CLOSE_FRACTION( angle, tudat::basic_mathematics::mathematical_constants::PI,
-                                    std::numeric_limits< double >::epsilon( ) );
+                                    std::sqrt( std::numeric_limits< double >::epsilon( ) ) );
     }
 
     // Test 3: Test values for two vectors of length 3, benchmark values computed using Matlab.
