@@ -59,7 +59,8 @@
  *      120422    K. Kumar          Rewrote Cartesian -> Keplerian conversion; now handles circular
  *                                  and/or equatorial solutions correctly.
  *      121205    D. Dirkx          Migrated namespace to directory-based protocol.
- *
+ *      130122    K. Kumar          Debugged true anomaly computation for limit cases in
+ *                                  convertCartesianToKeplerianElements().
  *
  *    References
  *      Chobotov, V.A. Orbital Mechanics, Third Edition, AIAA Education Series, VA, 2002.
@@ -312,9 +313,25 @@ Eigen::VectorXd convertCartesianToKeplerianElements(
         }
     }
 
+    // Compute dot-product of position and eccentricity vectors.
+    double dotProductPositionAndEccentricityVectors
+            = position_.normalized( ).dot( eccentricityVector_.normalized( ) );
+
+    // Check if the dot-product is one of the limiting cases: 0.0 or 1.0
+    // (within prescribed tolerance).
+    if ( std::fabs( 1.0 - dotProductPositionAndEccentricityVectors ) < tolerance )
+    {
+        dotProductPositionAndEccentricityVectors = 1.0;
+    }
+
+    if ( std::fabs( dotProductPositionAndEccentricityVectors ) < tolerance )
+    {
+        dotProductPositionAndEccentricityVectors  = 0.0;
+    }
+
     // Compute and store true anomaly.
     computedKeplerianElements_( trueAnomalyIndex )
-            = std::acos( position_.normalized( ).dot( eccentricityVector_.normalized( ) ) );
+            = std::acos( dotProductPositionAndEccentricityVectors );
 
     // Check if the quandrant is correct.
     if ( trueAnomalyQuandrantCondition < 0.0 )
