@@ -117,7 +117,6 @@ endif()
 macro(setup_tudat_library_target target_name CUSTOM_OUTPUT_PATH)
   set_property(TARGET ${target_name} PROPERTY LIBRARY_OUTPUT_DIRECTORY "${LIBROOT}")
   set_property(TARGET ${target_name} PROPERTY ARCHIVE_OUTPUT_DIRECTORY "${LIBROOT}")
-  install(TARGETS ${target_name} LIBRARY DESTINATION "${BINROOT}" ARCHIVE DESTINATION "${LIBROOT}")
 endmacro(setup_tudat_library_target)
 
 macro(setup_custom_test_program target_name CUSTOM_OUTPUT_PATH)
@@ -181,4 +180,4 @@ add_library(tudat_core STATIC ${BASICSDIR_SOURCES} ${ASTRODYNAMICS_SOURCES} ${IN
 setup_tudat_library_target(tudat_core "${SRCROOT}")
 
 # Add the installer.
-include("${PROJECT_SOURCE_DIR}/External/CMake/MakeDistribution.cmake")
+include("${PROJECT_SOURCE_DIR}/External/CMake/MakeTudatCoreDistribution.cmake")
