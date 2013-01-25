@@ -30,6 +30,8 @@
  *                                  BOOST_CHECK_SMALL for unit test comparisons.
  *      120128    K. Kumar          Added test for vectors of length 5.
  *      130121    D. Dirkx          Fixed unit test failure under Windows.
+ *      130125    D. Dirkx          Fixed unit test failure under Windows by using BOOST_CHECK_LE()
+ *                                  and BOOST_CHECK_GE().
  *
  *    References
  *
@@ -58,6 +60,7 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
 {
     // Using declarations.
     using std::cos;
+    using std::sqrt;
     using tudat::basic_mathematics::linear_algebra::computeAngleBetweenVectors;
     using tudat::basic_mathematics::linear_algebra::computeCosineOfAngleBetweenVectors;
 
@@ -78,9 +81,9 @@ BOOST_AUTO_TEST_CASE( testAngleBetweenVectorFunctions )
         // Check if computed angle and cosine-of-angle are correct.
         BOOST_CHECK_SMALL( cos( angle ) - cosineOfAngle,
                            std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK( cosineOfAngle > std::numeric_limits< double >::epsilon( ) );
+        BOOST_CHECK_GE( cosineOfAngle, std::numeric_limits< double >::epsilon( ) );
         BOOST_CHECK_SMALL( cosineOfAngle - 1.0, std::numeric_limits< double >::epsilon( ) );
-        BOOST_CHECK( angle < std::sqrt( std::numeric_limits< double >::epsilon( ) ) );
+        BOOST_CHECK_LE( angle, std::sqrt( std::numeric_limits< double >::epsilon( ) ) );
     }
 
     // Test 2: Test values for two equal, but opposite vectors of length 3.
