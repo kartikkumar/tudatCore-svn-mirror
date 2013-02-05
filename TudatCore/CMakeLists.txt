@@ -171,7 +171,7 @@ foreach(CURRENT_SUBDIR ${SUBDIRS})
 add_subdirectory("${SRCROOT}${CURRENT_SUBDIR}")
 endforeach(CURRENT_SUBDIR)
 
-# Build the Tudat core library.
+# Build the Tudat Core library.
 get_target_property(ASTRODYNAMICS_SOURCES tudat_core_astrodynamics SOURCES)
 get_target_property(INPUTOUTPUT_SOURCES tudat_core_input_output SOURCES)
 get_target_property(MATHEMATICS_SOURCES tudat_core_mathematics SOURCES)
