@@ -159,11 +159,6 @@ FILE(GLOB boost_shared "${Boost_LIBRARY_DIRS}/libboost_*-${BOOST_SHARED_ABI_STRI
 install(FILES ${boost_shared} DESTINATION  "${TUDAT_CORE_BOOST_SHARED_DISTRIBUTION_PATH}"
 )
 
-# Install the environment file.
-install(FILES "${SRCROOT}/External/CMake/TudatCoreEnvironment.cmake"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
-)
-
 # Generate the versions file.
 install(CODE "file(WRITE \"${TUDAT_CORE_DISTRIBUTION_PATH}/Versions.txt\"
     \"Packaged library versions:
