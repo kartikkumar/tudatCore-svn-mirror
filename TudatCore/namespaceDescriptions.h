@@ -126,7 +126,6 @@ namespace physical_constants
 
 } // namespace physical_constants
 
-
 //! Unit tests namespace.
 /*!
  * The unit tests namespace includes all unit test and associated code.
