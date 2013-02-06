@@ -28,24 +28,24 @@
  #
  #    References
  #
- #    This file contains all the settings that the user can override to allow for the detection
- #    of various required components and customization of the Tudat installation.
+ #    Notes
+ #      This file contains all the settings that the user can override to allow for the detection
+ #      of various required components and customization of the Tudat Core installation.
  #
 
  #--------------------------------------
- # Tudat;
+ # Tudat
  #--------------------------------------
 
- # If TudatCore is not found, use the following to manually set the path to the TudatCore.
+ # If Tudat Core is not found, use the following to manually set the path to the Tudat Core.
 #SET(TUDAT_CORE_BASE_PATH "C:\path\to\TudatCore")
 
- # Enforce a rootpath for either packages or core directory
+ # Enforce a rootpath.
  # This should be used in case the FILE token does not given the full-path in the getRootPath() function in basicFunctions.h.
-#add_definitions(-DTUDAT_CUSTOM_ROOT_PATH="C:\My\Custom\Path\To\Tudat")
 #add_definitions(-DTUDAT_CORE_CUSTOM_ROOT_PATH="C:\My\Custom\Path\To\TudatCore")
 
  #--------------------------------------
- # Boost settings;
+ # Boost
  #--------------------------------------
 
  # Set Boost paths manually:
@@ -62,7 +62,7 @@
 #SET(Boost_DETAILED_FAILURE_MSG "TRUE")
 
  #--------------------------------------
- # Eigen 3;
+ # Eigen 3
  #--------------------------------------
 
  # If Eigen3 is not found, use the following to manually set the path to the Eigen3 directory.
@@ -70,10 +70,9 @@
 #SET(EIGEN3_INCLUDE_DIR "${SRCROOT}/External/eigen3") # Or uncomment this if you extracted eigen in the External/eigen3 folder
 
  #--------------------------------------
- # Other CMakeSettings;
+ # Other CMakeSettings
  #--------------------------------------
 
  # Force build in debug or release mode:
 #SET(CMAKE_BUILD_TYPE Debug)
 #SET(CMAKE_BUILD_TYPE Release)
-

@@ -44,10 +44,10 @@
  #    Notes
  #
 
-# Specify minimum CMake version required to compile Tudat.
+# Specify minimum CMake version required to compile Tudat Core.
 cmake_minimum_required( VERSION 2.6 )
 
-# Specific Tudat project name.
+# Specific Tudat Core project name.
 project( TudatCore )
 
 # Set module path to local CMake scripts.
