@@ -263,8 +263,9 @@ void performIntegrationStepToSpecifiedTimeWithEvents(
 
         // Check if a discrete event is schedule to take place, and execute discrete event
         // if so.
-        if ( std::fabs( benchmarkData( i + 1, TIME_COLUMN_INDEX )
-                        - benchmarkData( i, TIME_COLUMN_INDEX ) )
+        if ( i < benchmarkData.rows( ) - 1
+             && std::fabs( benchmarkData( i + 1, TIME_COLUMN_INDEX )
+                           - benchmarkData( i, TIME_COLUMN_INDEX ) )
              < std::numeric_limits< double >::epsilon( ) )
         {
             // Increment loop to next row in matrix, which contains the discrete event that
