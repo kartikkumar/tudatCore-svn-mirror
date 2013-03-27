@@ -89,13 +89,13 @@ enum KeplerianElementVectorIndices
 
 //! Cartesian element vector indices.
 /*!
- *  Cartesian elements defined by the following indices in VectorXd(6) objects:
- *  x-position = 0,
- *  y-position = 1,
- *  z-position = 2,
- *  x-velocity = 3,
- *  y-velocity = 4,
- *  z-velocity = 5.
+ *  Cartesian elements defined by the following indices in VectorXd(6) objects:                  
+ *          x-position = 0, \n
+ *          y-position = 1, \n
+ *          z-position = 2, \n
+ *          x-velocity = 3, \n
+ *          y-velocity = 4, \n
+ *          z-velocity = 5. \n
  */
 enum CartesianElementVectorIndices
 {
@@ -104,24 +104,37 @@ enum CartesianElementVectorIndices
 
 //! Convert Keplerian to Cartesian orbital elements.
 /*!
- * Converts Keplerian to Cartesian orbital elements.
- * \param keplerianElements Vector containing Keplerian elements. Order of elements is important!
- *          keplerianElements( 0 ) = semiMajorAxis,                                             [m]
- *          keplerianElements( 1 ) = eccentricity,                                              [-]
- *          keplerianElements( 2 ) = inclination,                                             [rad]
- *          keplerianElements( 3 ) = argument of periapsis,                                   [rad]
- *          keplerianElements( 4 ) = longitude of ascending node,                             [rad]
- *          keplerianElements( 5 ) = true anomaly.                                            [rad]
- *          WARNING: If eccentricity is 1.0 within machine precision,
- *          keplerianElements( 0 ) = semi-latus rectum.
- * \param centralBodyGravitationalParameter Gravitational parameter of central body.
- * \return Converted state in Cartesian elements. The order of elements is fixed!
- *          cartesianElements( 0 ) = x-position coordinate,                                     [m]
- *          cartesianElements( 1 ) = y-position coordinate,                                     [m]
- *          cartesianElements( 2 ) = z-position coordinate,                                     [m]
- *          cartesianElements( 3 ) = x-velocity coordinate,                                   [m/s]
- *          cartesianElements( 4 ) = y-velocity coordinate,                                   [m/s]
- *          cartesianElements( 5 ) = z-velocity coordinate.                                   [m/s]
+ * Converts Keplerian to Cartesian orbital elements (Chobotov, 2002). Use the 
+ * CartesianElementVectorIndices enum to access the individual orbital element components in the 
+ * storage vector.
+ *
+ * \param keplerianElements Vector containing Keplerian elements.                         \n
+ *          <em>  
+ *                          Order of elements is important! \n            
+ *                          keplerianElements( 0 ) = semiMajorAxis,                   [m] \n
+ *                          keplerianElements( 1 ) = eccentricity,                    [-] \n
+ *                          keplerianElements( 2 ) = inclination,                   [rad] \n
+ *                          keplerianElements( 3 ) = argument of periapsis,         [rad] \n
+ *                          keplerianElements( 4 ) = longitude of ascending node,   [rad] \n
+ *                          keplerianElements( 5 ) = true anomaly.                  [rad] \n 
+ *          </em>
+ *        WARNING: If eccentricity is 1.0 within machine precision, 
+ *        keplerianElements( 0 ) = semi-latus rectum.      
+ *                                    
+ * \param centralBodyGravitationalParameter Gravitational parameter of central body [m^3 s^-2]. 
+ *   
+ * \return Converted state in Cartesian elements.                         \n
+ *         <em>  
+ *         Order of elements is important!                                \n
+ *         cartesianElements( 0 ) = x-position coordinate,            [m] \n
+ *         cartesianElements( 1 ) = y-position coordinate,            [m] \n
+ *         cartesianElements( 2 ) = z-position coordinate,            [m] \n
+ *         cartesianElements( 3 ) = x-velocity coordinate,          [m/s] \n
+ *         cartesianElements( 4 ) = y-velocity coordinate,          [m/s] \n
+ *         cartesianElements( 5 ) = z-velocity coordinate.          [m/s] \n 
+ *         </em>
+ *
+ * \sa CartesianElementVectorIndices()
  */
 Eigen::VectorXd convertKeplerianToCartesianElements(
         const Eigen::VectorXd& keplerianElements, const double centralBodyGravitationalParameter );

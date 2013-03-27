@@ -27,6 +27,8 @@
  #      120210    B. Tong Minh      File created.
  #      120503    B. Tong Minh      Improved Boost detection routines.
  #      130116    K. Kumar          Removed bundling of Tudat Core static libraries.
+ #      130326    K. Kumar          Added exclusion of .svn, .git, and .bzr directories; added 
+ #                                  install path definitions; added Documentation directory.
  #
  #    References
  #
@@ -35,12 +37,23 @@
  #      Boost.
  #
 
+# Set install paths.
+if(NOT TUDAT_BUNDLE_DISTRIBUTION_PATH)
+    set(TUDAT_BUNDLE_DISTRIBUTION_PATH "${CODEROOT}/tudatBundle")
+endif(NOT TUDAT_BUNDLE_DISTRIBUTION_PATH)
+
 if(NOT TUDAT_CORE_DISTRIBUTION_PATH)
-    set(TUDAT_CORE_DISTRIBUTION_PATH "${CODEROOT}/dist/tudatCore")
+    set(TUDAT_CORE_DISTRIBUTION_PATH "${TUDAT_BUNDLE_DISTRIBUTION_PATH}/tudatCore")
 endif(NOT TUDAT_CORE_DISTRIBUTION_PATH)
-if(NOT TUDAT_CORE_BOOST_SHARED_DISTRIBUTION_PATH)
-    set(TUDAT_CORE_BOOST_SHARED_DISTRIBUTION_PATH "${CODEROOT}/dist/boost-shared")
-endif(NOT TUDAT_CORE_BOOST_SHARED_DISTRIBUTION_PATH)
+
+if(NOT EIGEN_DISTRIBUTION_PATH)
+    set(EIGEN_DISTRIBUTION_PATH "${TUDAT_BUNDLE_DISTRIBUTION_PATH}/eigen")
+endif(NOT EIGEN_DISTRIBUTION_PATH)
+
+if(NOT BOOST_DISTRIBUTION_PATH)
+    set(BOOST_DISTRIBUTION_PATH "${TUDAT_BUNDLE_DISTRIBUTION_PATH}/boost")
+endif(NOT BOOST_DISTRIBUTION_PATH)
+
 
 # Slash normalization for Windows.
 string(REPLACE "\\" "/" EIGEN3_INCLUDE_DIR_NORMALIZED "${EIGEN3_INCLUDE_DIR}")
@@ -57,11 +70,13 @@ string(REGEX MATCH "-mt" BOOST_WITH_MT "${BOOST_ABI_STRING}")
 string(REGEX MATCH "([0-9_]*)[.]" BOOST_VERSION "${BOOST_ABI_STRING}")
 set(BOOST_VERSION ${CMAKE_MATCH_1})
 if(NOT BOOST_VERSION)
-    # Library name did not contain a version string, so the part before the extension is the ABI tag.
+    # Library name did not contain a version string, so the part before the extension is the ABI 
+    # tag.
     string(REGEX MATCH "([a-z]*)[.]" BOOST_ABI_TAG "${BOOST_ABI_STRING}")
     set(BOOST_ABI_TAG ${CMAKE_MATCH_1})
 else()
-    # Library name did contain version string, so the part before the version string is the ABI tag.
+    # Library name did contain version string, so the part before the version string is the ABI 
+    # tag.
     string(REGEX MATCH "([a-z]*)-[0-9_]*[.]" BOOST_ABI_TAG "${BOOST_ABI_STRING}")
     set(BOOST_ABI_TAG ${CMAKE_MATCH_1})
 endif()
@@ -85,10 +100,12 @@ if(BOOST_VERSION)
 endif()
 
 if(NOT BOOST_WITH_MT)
-    install(CODE "message(FATAL_ERROR \"Making single-threaded distribution (ABI string: ${BOOST_ABI_STRING})\")")
+    install(CODE 
+  "message(FATAL_ERROR \"Making single-threaded distribution (ABI string: ${BOOST_ABI_STRING})\")")
 endif()
 
-if((APPLE AND "${BOOST_ABI_TAG}" STREQUAL "mt" ) OR (NOT APPLE AND "${BOOST_ABI_TAG}" STREQUAL "s"))
+if((APPLE AND "${BOOST_ABI_TAG}" STREQUAL "mt" ) 
+    OR (NOT APPLE AND "${BOOST_ABI_TAG}" STREQUAL "s"))
 else()
     string(REGEX MATCH "s" BOOST_ABI_STATIC "${BOOST_ABI_TAG}")
     string(REGEX MATCH "g" BOOST_ABI_DEBUG_STANDARD_LIBRARY "${BOOST_ABI_TAG}")
@@ -114,7 +131,8 @@ else()
         set(BOOST_ABI_ERROR "${BOOST_ABI_ERROR} Boost linked against STLPort standard library.")
     endif()
     if(BOOST_ABI_STLPORT_NATIVE_IOSTREAMS)
-        set(BOOST_ABI_ERROR "${BOOST_ABI_ERROR} Boost linked against STLPort standard library with native iostreams.")
+        set(BOOST_ABI_ERROR 
+        "${BOOST_ABI_ERROR} Boost linked against STLPort standard library with native iostreams.")
     endif()
 
     install(CODE "message(FATAL_ERROR \"${BOOST_ABI_ERROR}\")")
@@ -125,19 +143,30 @@ install(DIRECTORY "${SRCROOT}/"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/TudatCore"
         PATTERN ".DS_STORE" EXCLUDE
         PATTERN "CMakeLists.txt.user" EXCLUDE
+        PATTERN ".svn" EXCLUDE
+        PATTERN ".git" EXCLUDE
+        PATTERN ".bzr" EXCLUDE
 )
 
-install(FILES "${CODEROOT}/LICENSE" "${CODEROOT}/NOTICE" "${CODEROOT}/README" "${CODEROOT}/UserSettings.txt.example"
+install(FILES "${CODEROOT}/LICENSE" 
+              "${CODEROOT}/NOTICE" "${CODEROOT}/README" 
+              "${CODEROOT}/UserSettings.txt.example"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
 )
 
+install(DIRECTORY "${CODEROOT}/Documentation" 
+        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}")
+
 # Install Eigen.
-install(DIRECTORY "${EIGEN3_INCLUDE_DIR_NORMALIZED}/"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/eigen3"
+get_filename_component(RESOLVED_EIGEN3_INCLUDE_DIR "${EIGEN3_INCLUDE_DIR_NORMALIZED}" REALPATH)
+install(DIRECTORY "${RESOLVED_EIGEN3_INCLUDE_DIR}/"
+        DESTINATION "${EIGEN_DISTRIBUTION_PATH}"
 )
+
 # Install Boost.
-install(DIRECTORY "${Boost_INCLUDE_DIRS_NORMALIZED}/boost/"
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/boost"
+get_filename_component(RESOLVED_BOOST_INCLUDE_DIR "${Boost_INCLUDE_DIRS}/boost" REALPATH)
+install(DIRECTORY "${RESOLVED_BOOST_INCLUDE_DIR}/"
+        DESTINATION "${BOOST_DISTRIBUTION_PATH}/boost"
 )
 
 # Match Boost static libraries.
@@ -145,7 +174,13 @@ FILE(GLOB boost_static "${Boost_LIBRARY_DIRS}/libboost_*${BOOST_ABI_STRING}"
 )
 
 # Install Boost static libraries.
-install(FILES ${boost_static} DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}/boost/stage/lib"
+foreach (boost_static_library ${boost_static})
+    get_filename_component(RESOLVE_BOOST_STATIC_LIBRARY_FILE "${boost_static_library}" REALPATH)
+    list(APPEND RESOLVED_BOOST_STATIC_LIBRARY_FILES "${RESOLVE_BOOST_STATIC_LIBRARY_FILE}")
+endforeach()
+
+install(FILES ${RESOLVED_BOOST_STATIC_LIBRARY_FILES} 
+        DESTINATION "${BOOST_DISTRIBUTION_PATH}/stage/lib"
 )
 
 # Match Boost shared libraries.
@@ -155,8 +190,14 @@ FILE(GLOB boost_shared "${Boost_LIBRARY_DIRS}/libboost_*-${BOOST_SHARED_ABI_STRI
                 "${Boost_LIBRARY_DIRS}/libboost_*-${BOOST_SHARED_ABI_STRING}.so.*"
 )
 
-# Install Boost shared libraries
-install(FILES ${boost_shared} DESTINATION  "${TUDAT_CORE_BOOST_SHARED_DISTRIBUTION_PATH}"
+# Install Boost shared libraries.
+foreach (boost_shared_library ${boost_shared})
+    get_filename_component(RESOLVE_BOOST_SHARED_LIBRARY_FILE "${boost_shared_library}" REALPATH)
+    list (APPEND RESOLVED_BOOST_SHARED_LIBRARY_FILES "${RESOLVE_BOOST_SHARED_LIBRARY_FILE}")
+endforeach()
+
+install(FILES ${RESOLVED_BOOST_SHARED_LIBRARY_FILES} 
+        DESTINATION "${BOOST_DISTRIBUTION_PATH}/shared"
 )
 
 # Generate the versions file.

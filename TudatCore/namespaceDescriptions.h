@@ -26,6 +26,7 @@
  *      YYMMDD    Author            Comment
  *      120209    K. Kumar          File created.
  *      130204    K. Kumar          Updated license in file header.
+ *      130326    K. Kumar          Updated namespace descriptions and file layout.
  *
  *    References
  *
@@ -36,7 +37,7 @@
 #ifndef TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
 #define TUDAT_CORE_NAMESPACE_DESCRIPTIONS_H
 
-//! The Tudat namespace.
+//! Tudat namespace.
 /*!
  * The Tudat namespace contains all the functionality offered in Tudat Core. Additionally, the
  * Tudat namespace also contains all the functionality in the Tudat library.
@@ -45,106 +46,95 @@
 namespace tudat
 {
 
-//! The input/output namespace.
-/*!
- * The input/output namespace contains the stream filters namespace and a function get the root-
- * directory of the Tudat Core library.
- */
-namespace input_output
-{
+    //! Basic astrodynamics namespace.
+    /*! 
+     * The basic astrodynamics namespace contains a collection of various basic astrodynamics 
+     * functions, incuding physical constants, unit conversions, and orbital conversions.
+     */
+    namespace basic_astrodynamics   
+    {
 
-//! The stream filters namespace.
-/*!
- * The stream filters namespace contains functions to remove comments, skip the first several
- * lines and search and replace text in a stream.
- */
-namespace stream_filters
-{
+        //! Orbital element conversions namespace.
+        /*!
+         * Orbital element conversions namespace, containing classical Keplerian to Cartesian 
+         * element conversions, and other conversions between classical Keplerian elements, e.g., 
+         * true anomaly to/from eccentric anomaly.
+         */
+        namespace orbital_element_conversions { }
 
-} // namespace stream_filters
+        //! Physical constants namespace.
+        /*!
+         * The physical constants namespace includes selected constants commonly used in 
+         * astrodynamics.
+         */
+        namespace physical_constants { }
 
-} // namespace input_output
+        //! Unit conversions namespace.
+        /*!
+         * The unit conversions namespace contains functions to convert angles 
+         * (rad,deg,arcmin,arcsec), distance (m,km,ft), time (s,min,hr,JD,JY,sid-day), 
+         * temperature (K,R) and pressure (lbs/ft2,N/m2).
+         */
+        namespace unit_conversions { }
 
-//! Orbital element conversions namespace.
-/*!
- * Orbital element conversions namespace, containing classical Keplerian to Cartesian element
- * conversions, and other conversions between classical Keplerian elements, e.g., true anomaly
- * to/from eccentric anomaly.
- */
-namespace orbital_element_conversions
-{
+    } // namespace basic_astrodynamics
 
-} // namespace orbital_element_conversions
+    //! Input/output namespace.
+    /*!
+     * The input/output namespace contains the stream filters namespace and a function get the 
+     * root-directory of the Tudat Core library.
+     */
+    namespace input_output
+    {
 
-//! Coordinate conversions namespace.
-/*!
- * The coordinate conversions namespace contains free functions to convert between standard
- * coordinate frames, e.g, spherical-to-Cartesian, cylindrical-to-Cartesian etc.
- */
-namespace coordinate_conversions
-{
+        //! The stream filters namespace.
+        /*!
+         * The stream filters namespace contains functions to remove comments, skip the first 
+         * several lines and search and replace text in a stream.
+         */
+        namespace stream_filters { }
 
-} // namespace coordinate_conversions
+    } // namespace input_output
 
-//! Linear algebra namespace.
-/*!
- * The linear algebra namespace contains functions to compute the angle and the cosine of
- * the angle between two vectors
- */
-namespace linear_algebra
-{
+     //! The basic mathematics namespace.
+     /*! 
+      * The basic mathematics namespace contains a collection of various basic mathematical 
+      * functions, incuding mathematical constants, coordinate conversions, and linear 
+      * algebra functions.
+      */
+    namespace basic_mathematics
+    {
 
-} // namespace linear algebra
+        //! Coordinate conversions namespace.
+        /*!
+         * The coordinate conversions namespace contains free functions to convert between standard
+         * coordinate frames, e.g, spherical-to-Cartesian, cylindrical-to-Cartesian etc.
+         */
+        namespace coordinate_conversions { }
 
-//! Mathematical constants namespace.
-/*!
- * The mathematical constants namespace includes selected constants commonly used in mathematical
- * operations (e, golden ratio, pi, NaN).
- */
-namespace mathematical_constants
-{
+        //! Linear algebra namespace
+        /*!
+         * The linear algebra namespace contains functions to compute the angle and the cosine of
+         * the angle between two vectors
+         */
+        namespace linear_algebra { }
 
-} // namespace mathematical constants
+        //! Mathematical constants namespace.
+        /*!
+         * The mathematical constants namespace includes selected constants commonly used in 
+         * mathematical operations (e, golden ratio, pi, NaN).
+         */
+        namespace mathematical_constants { }
 
-//! Numerical integrators namespace.
-/*!
- * The numerical integrators namespace contains the base class for the numerical integrators,
- * a function to integrate to an independent variable value and a class that implements the RK4
- * integrator.
- */
-namespace numerical_integrators
-{
+    } // namespace basic_mathematics
 
-} // namespace numerical_integrators
-
-//! Physical constants namespace.
-/*!
- * The physical constants namespace includes selected constants commonly used in astrodynamics.
- */
-namespace physical_constants
-{
-
-} // namespace physical_constants
-
-//! Unit tests namespace.
-/*!
- * The unit tests namespace includes all unit test and associated code.
- */
-namespace unit_tests
-{
-
-} // namespace unit_tests
-
-//! Unit conversions namespace.
-/*!
- * The unit conversions namespace contains functions to convert angles (rad,deg,arcmin,arcsec),
- * distance (m,km,ft), time (s,min,hr,JD,JY,sid-day), temperature (K,R) and pressure (lbs/ft2,
- * N/m2).
- */
-namespace unit_conversions
-{
-
-} // namespace unit_conversions
+    //! Numerical integrators namespace.
+    /*!
+     * The numerical integrators namespace contains the base class for the numerical 
+     * integrators, a function to integrate to an independent variable value and classes that 
+     * implement the Euler and RK4 integrators.
+     */
+    namespace numerical_integrators { }
 
 } // namespace tudat
 
