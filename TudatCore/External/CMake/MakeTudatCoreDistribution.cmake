@@ -154,8 +154,11 @@ install(FILES "${CODEROOT}/LICENSE"
         DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}"
 )
 
-install(DIRECTORY "${CODEROOT}/Documentation" 
-        DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}")
+# Install documentation.
+if(BUILD_DOCUMENTATION)
+  install(DIRECTORY "${CODEROOT}/Documentation" 
+          DESTINATION "${TUDAT_CORE_DISTRIBUTION_PATH}")
+endif()
 
 # Install Eigen.
 get_filename_component(RESOLVED_EIGEN3_INCLUDE_DIR "${EIGEN3_INCLUDE_DIR_NORMALIZED}" REALPATH)
