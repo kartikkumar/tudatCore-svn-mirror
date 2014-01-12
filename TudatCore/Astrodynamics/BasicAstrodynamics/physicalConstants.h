@@ -62,7 +62,6 @@
 
 #include "TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h"
 
-
 namespace tudat
 {
 namespace basic_astrodynamics

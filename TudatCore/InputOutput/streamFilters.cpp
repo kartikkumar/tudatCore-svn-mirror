@@ -90,7 +90,7 @@ ReplaceElements::ReplaceElements( std::string searchFilter, std::string replaceS
                                   bool isOmitIfEmpty )
     // line_filter is set to true, to indicate to Boost not to append newline characters.
     : boost::iostreams::line_filter( true ), 
-      replaceString_(replaceString), isOmitIfEmpty_( isOmitIfEmpty )
+      replaceString_( replaceString ), isOmitIfEmpty_( isOmitIfEmpty )
 {
     // The following are all characters with special meaning in regex, so escape them:
     std::vector< std::string > replaceCharacters_ = boost::assign::list_of
