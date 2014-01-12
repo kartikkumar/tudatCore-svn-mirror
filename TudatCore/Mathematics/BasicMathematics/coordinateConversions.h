@@ -45,6 +45,7 @@
  *      121205    D. Dirkx          Migrated namespace to directory-based protocol and added
  *                                  backwards compatibility.
  *      121205    K. Kumar          Fixed incorrect namespace migration.
+ *      130110    T. Roegiers       Corrected typo in description of convertCartesianToSpherical.
  *
  *    References
  *
@@ -87,7 +88,7 @@ Eigen::VectorXd convertSphericalToCartesian( const Eigen::VectorXd& sphericalCoo
  * Converts Cartesian to spherical coordinates. Schematic representation can be found on, e.g.,
  * http://mathworld.wolfram.com/SphericalCoordinates.html.
  * The transformation equations are the following, with \f$ r \f$ the radius,
- * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the azimuth angle:
+ * \f$ \theta \f$ the azimuth angle and \f$ \phi \f$ the zenith angle:
  * \f{eqnarray*}{
  *      r &=& \sqrt{ x^{ 2 } + y^{ 2 } + z^{ 2 } } \\
  *      \theta &=& \arctan\frac{ y }{ x } \\
