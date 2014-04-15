@@ -51,7 +51,7 @@
 
 namespace tudat
 {
-namespace unit_test
+namespace unit_tests
 {
 
 // Define Boost test suite.
