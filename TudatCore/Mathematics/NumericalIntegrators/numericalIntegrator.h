@@ -198,6 +198,20 @@ integrateTo( const IndependentVariableType intervalEnd,
         performIntegrationStep( stepSize );
 
         stepSize = getNextStepSize( );
+
+	// Only applicable to adaptive step size methods:
+        // Perform additional step(s) to reach intervalEnd exactly, in case the last step was rejected by
+        // the variable step size routine and a new step was used that was too small to get to intervalEnd.
+        if ( atIntegrationIntervalEnd )
+        {
+            // As long as intervalEnd is not reached, perform additional steps with the remaining time
+            // as suggested step size for the variable step size routine.
+            if( intervalEnd - getCurrentIndependentVariable( ) > std::fabs( stepSize ) *
+                    ( 1.0 + std::numeric_limits< IndependentVariableType >::epsilon( ) ) )
+            {
+                atIntegrationIntervalEnd = false;
+            }
+        }
     }
 
     return getCurrentState( );

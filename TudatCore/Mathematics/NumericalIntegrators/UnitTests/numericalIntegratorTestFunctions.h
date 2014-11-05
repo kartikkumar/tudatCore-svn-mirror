@@ -130,6 +130,27 @@ static inline Eigen::VectorXd computeNonAutonomousModelStateDerivative( const do
     return Eigen::VectorXd::Constant( 1, stateDerivative );
 }
 
+//! Compute another non-autonomous model state derivative.
+/*!
+ * Computes the state derivative for a non-autonomous ordinary differential equation, recommended
+ * by R. Hofstenge for testing the integrateTo function of the variable step size integrator
+ *
+ * \f[
+ *      y' = y * ( 2 - t ) * t + t - 1
+ * \f]
+ *
+ * \param time Time at which the state derivative needs to be evaluated.
+ * \param state State, length of which should be 1, at which the state derivative needs to
+ *          be evaluated.
+ * \return State derivative, length equal to state values according to above expression.
+ */
+static inline Eigen::VectorXd computeSecondNonAutonomousModelStateDerivative(
+        const double time, const Eigen::VectorXd& state )
+{
+    const double stateDerivative = state( 0 ) * ( 2.0 - time ) * time + time - 1.0;
+    return Eigen::VectorXd::Constant( 1, stateDerivative );
+}
+
 } // numerical_integrator_test_functions
 } // namespace unit_tests
 } // namespace tudat
