@@ -124,10 +124,18 @@ endif()
 
 # Set lib and bin directories where static libraries and unit tests are built.
 if(NOT LIB_ROOT)
-  set(LIB_ROOT "${PROJECT_BINARY_DIR}/../lib")
+  if( TUDAT_CORE_BUILD_DIR )
+    set(LIB_ROOT "${TUDAT_CORE_BUILD_DIR}/lib")
+  else( )
+    set(LIB_ROOT "${PROJECT_BINARY_DIR}/../lib")
+  endif( )
 endif()
 if(NOT BIN_ROOT)
-  set(BIN_ROOT "${PROJECT_BINARY_DIR}/../bin")
+  if( TUDAT_CORE_BUILD_DIR )
+    set(BIN_ROOT "${TUDAT_CORE_BUILD_DIR}/bin")
+  else( )
+    set(BIN_ROOT "${PROJECT_BINARY_DIR}/../bin")
+  endif( )
 endif()
 
 # Set the global macros for setting up targets.
